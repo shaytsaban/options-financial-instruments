@@ -8,6 +8,15 @@ ups = ''.join(f'<li><span class="un">{n(i)}</span><span>{t}</span><em>בקרוב
 src = open(os.path.join(H, '..', '..', 'finance-for-managers', 'index.html'), encoding='utf8').read()
 css = re.search(r'<style>(.*?)</style>', src, re.S).group(1)
 css += '''
+.live{margin-top:-26px;position:relative;z-index:2;background:linear-gradient(120deg,#ff6a4d,#ff8f5a);color:#fff;border-radius:20px;padding:22px 28px;display:flex;gap:20px;align-items:center;box-shadow:0 14px 34px rgba(255,106,77,.35)}
+.live .ic{font-size:44px;flex:none}
+.live h2{font-size:26px;font-weight:800;line-height:1.2}
+.live p{font-size:16.5px;margin-top:4px;line-height:1.4}
+.live p a{text-decoration:underline;font-weight:700}
+.live .go{flex:none;margin-right:auto;background:#fff;color:#c4421f;font-weight:800;font-size:19px;padding:14px 26px;border-radius:14px;text-align:center;transition:transform .15s}
+.live .go:hover{transform:translateY(-2px)}
+.live .go small{display:block;font-weight:600;font-size:13px;color:#5d6a86}
+@media (max-width:760px){.live{flex-direction:column;align-items:stretch;padding:20px 18px;margin-top:-18px}.live .ic{display:none}.live .go{margin-right:0}}
 .solutions{margin-top:18px;background:#fff;border-radius:20px;padding:24px 28px;display:flex;gap:22px;align-items:flex-start;box-shadow:0 2px 0 var(--line),0 10px 30px rgba(22,33,58,.07);border-right:8px solid #6d4df2}
 .solutions .ic{font-size:44px;flex:none}
 .solutions h3{font-size:22px;font-weight:800;line-height:1.25}
@@ -46,6 +55,11 @@ page = f'''<!doctype html>
 <p class="meta">ד״ר שי צבאן · מתרגל: יהל צרפתי</p>
 </div></header>
 <main class="wrap">
+<section class="live" id="live">
+<div class="ic">🎥</div>
+<div><h2>המפגשים החיים השבועיים ב-Zoom</h2><p>כל המפגשים מתקיימים בקישור הזה. ההקלטות נמצאות למטה, בכרטיס של כל שיעור: <a href="#lesson-1">למעבר להקלטות</a>.</p></div>
+<a class="go" href="https://hdq-colman-ac.zoom.us/j/3160447945" target="_blank" rel="noopener">כניסה למפגש החי<small>Zoom</small></a>
+</section>
 <div class="solutions">
 <div class="ic">📋</div>
 <div><span class="tag">מסמך הקורס</span><h3>סילבוס הקורס</h3>
