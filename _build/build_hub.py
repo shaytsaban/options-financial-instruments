@@ -91,7 +91,7 @@ page = f'''<!doctype html>
 <li>סיכומים ותרגול: תרגילי אקסל קטנים ושאלות רב ברירה</li>
 </ul></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-1/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(58)} שקפים, {n(8)} תרגילי אקסל בתוך השקפים ו-{n(23)} שאלות רב ברירה, עם רמזים ופתרונות</span></span></a>
+<a class="lk p" href="lectures/lecture-1/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(63)} שקפים, {n(13)} תרגילי אקסל בתוך השקפים ו-{n(23)} שאלות רב ברירה, עם רמזים ופתרונות</span></span></a>
 <a class="lk s" href="lectures/lecture-1/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
 <a class="lk x" href="materials/practice-1.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(6)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
 <a class="lk r" href="materials/practice-1-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
@@ -99,8 +99,7 @@ page = f'''<!doctype html>
 </div>
 <div class="rec"><h4>הקלטת השיעור</h4>
 <div class="recbox" id="rec-1">
-<!-- להטמעת ההקלטה: למחוק את recph ולהוסיף כאן iframe עם כתובת הסרטון -->
-<div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div>
+<iframe src="https://www.youtube-nocookie.com/embed/P6cfciT2w8Y" title="הקלטת שיעור 1" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div></div>
 <div class="todo"><h4>📝 תרגול עצמי לשיעור {n(1)}</h4><ol>
 <li>במצגת: חלק הסיכום והתרגול, ובסופה שש שאלות לבית.</li>
