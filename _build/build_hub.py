@@ -2,7 +2,7 @@
 import os, re
 H = os.path.dirname(os.path.abspath(__file__))
 n = lambda s: f'<span class="n">{s}</span>'
-UP = [(2, 'חוזים עתידיים: הרעיון הבסיסי'), (3, 'חוזים עתידיים: יישומים עסקיים'), (4, 'אופציות: מבוא'), (5, 'אופציות: אסטרטגיות הגנה'), (6, 'אסטרטגיות רווח ומסחר'),
+UP = [(3, 'חוזים עתידיים: יישומים עסקיים'), (4, 'אופציות: מבוא'), (5, 'אופציות: אסטרטגיות הגנה'), (6, 'אסטרטגיות רווח ומסחר'),
       (7, 'עקרונות בתמחור'), (8, 'אופציות אירופאיות ואמריקאיות: מימוש מוקדם וחסמים'), (9, 'עסקאות החלפה (Swap)'), (10, 'מכשירים מורכבים'), (11, 'ניהול סיכונים ארגוני'), (12, 'כשלים מפורסמים, השוק הישראלי וקריירה'), (13, 'סיכום וחזרה לקראת המבחן')]
 ups = ''.join(f'<li><span class="un">{n(i)}</span><span>{t}</span><em>בקרוב</em></li>' for i, t in UP)
 src = open(os.path.join(H, '..', '..', 'finance-for-managers', 'index.html'), encoding='utf8').read()
@@ -84,17 +84,16 @@ page = f'''<!doctype html>
 <div class="lec-head"><div class="lec-n">1</div><div><h3>מבוא: למה צריך מכשירים מתוחכמים?</h3><div class="sub">{n('2.11.2026')} · קריאה: Hull, פרק {n(1)}</div></div></div>
 <div class="lec-body">
 <div><h4>מה לומדים בשיעור</h4><ul class="learn">
-<li>מה זה נגזר (Derivative), ולמה נכנסים אליו: גידור, ספקולציה וחיסכון בעלויות</li>
-<li>חשיפה (Exposure) וחשיפה נטו, עם מקרים שלמים</li>
+<li>מה זה נגזר (Derivative): שובר הטיסה, זכות ופרמיה (Premium)</li>
+<li>למה נכנסים לחוזה: גידור, ספקולציה וחיסכון בעלויות</li>
+<li>חשיפה (Exposure) וחשיפה נטו, עם מקרים שלמים וקרן סל מגודרת מט״ח</li>
 <li>חוזה אקדמה (Forward) וחוזה עתידי (Futures)</li>
-<li>אופציות: Call ו-Put, תזרים (Payoff), רווח (P&amp;L), נקודת איזון ומכפיל</li>
-<li>השחקנים והשווקים: שיקגו, תל אביב ושוק מעבר לדלפק (OTC)</li>
-<li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
+<li>סיכומים ותרגול: תרגילי אקסל קטנים ושאלות רב ברירה</li>
 </ul></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-1/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(91)} שקפים, {n(18)} תרגילי אקסל בתוך השקפים ו-{n(6)} תרגילים מסכמים, עם רמזים ופתרונות</span></span></a>
+<a class="lk p" href="lectures/lecture-1/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(58)} שקפים, {n(8)} תרגילי אקסל בתוך השקפים ו-{n(23)} שאלות רב ברירה, עם רמזים ופתרונות</span></span></a>
 <a class="lk s" href="lectures/lecture-1/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
-<a class="lk x" href="materials/practice-1.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(9)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
+<a class="lk x" href="materials/practice-1.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(6)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
 <a class="lk r" href="materials/practice-1-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
 </div></div>
 </div>
@@ -104,15 +103,43 @@ page = f'''<!doctype html>
 <div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div>
 </div></div>
 <div class="todo"><h4>📝 תרגול עצמי לשיעור {n(1)}</h4><ol>
-<li>במצגת: התרגילים המסכמים למפגש 1, ובסופה תשע שאלות לבית.</li>
+<li>במצגת: חלק הסיכום והתרגול, ובסופה שש שאלות לבית.</li>
 <li>בקובץ התרגול ב-Excel: קודם פותרים, ורק אחר כך משווים לקובץ הפתרונות.</li>
-<li>קריאה: Hull, פרק {n(1)}.</li>
+<li>קריאה: Hull, פרק {n(1)}, החלקים על חוזה אקדמה וחוזה עתידי.</li>
+</ol></div>
+</article>
+<article class="lec" id="lesson-2">
+<div class="lec-head"><div class="lec-n">2</div><div><h3>אופציות, שחקנים ושווקים</h3><div class="sub">המשך המבוא משיעור {n(1)} · קריאה: Hull, פרק {n(1)}</div></div></div>
+<div class="lec-body">
+<div><h4>מה לומדים בשיעור</h4><ul class="learn">
+<li>אופציות: Call ו-Put, תזרים (Payoff), רווח (P&amp;L), נקודת איזון ומכפיל</li>
+<li>אירופאית ואמריקאית, ועסקת החלפה (Swap)</li>
+<li>השחקנים: מגדר (Hedger) וספקולנט (Speculator), ומנוף (Leverage)</li>
+<li>השווקים: שיקגו, תל אביב ושוק מעבר לדלפק (OTC)</li>
+<li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
+</ul></div>
+<div><h4>חומרי השיעור</h4><div class="links">
+<a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(64)} שקפים, {n(15)} תרגילי אקסל בתוך השקפים ו-{n(5)} תרגילים מסכמים, עם רמזים ופתרונות</span></span></a>
+<a class="lk s" href="lectures/lecture-2/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
+<a class="lk x" href="materials/practice-2.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(7)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
+<a class="lk r" href="materials/practice-2-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
+</div></div>
+</div>
+<div class="rec"><h4>הקלטת השיעור</h4>
+<div class="recbox" id="rec-2">
+<!-- להטמעת ההקלטה: למחוק את recph ולהוסיף כאן iframe עם כתובת הסרטון -->
+<div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div>
+</div></div>
+<div class="todo"><h4>📝 תרגול עצמי לשיעור {n(2)}</h4><ol>
+<li>במצגת: התרגילים המסכמים למפגש 2, ובסופה תשע שאלות לבית.</li>
+<li>בקובץ התרגול ב-Excel: קודם פותרים, ורק אחר כך משווים לקובץ הפתרונות.</li>
+<li>קריאה: Hull, פרק {n(1)}, החלקים על אופציות ועל סוגי המשתתפים בשוק.</li>
 </ol></div>
 </article>
 <h2 class="sec" style="margin-top:36px">השיעורים הבאים</h2>
 <ul class="ups">{ups}</ul>
 </section>
-<footer>ד״ר שי צבאן · שאלות ותיקונים: <a href="mailto:Shay.tsaban@gmail.com">Shay.tsaban@gmail.com</a></footer>
+<footer>ד״ר שי צבאן · פניות רק במייל: <a href="mailto:shay.tsaban@gmail.com">shay.tsaban@gmail.com</a>, עם שם המוסד ושם הקורס</footer>
 </main>
 </body>
 </html>

@@ -10,11 +10,13 @@ NAVY, YEL, GRN, GIV = '1B2D55', 'FFF4C2', 'DDF5E6', 'EEF2FF'
 thin = Side(style='thin', color='D9D2C3'); BOX = Border(left=thin, right=thin, top=thin, bottom=thin)
 NOTE = 'כל הנתונים בגיליון להמחשה בלבד, ואינם מחירי שוק.'
 SHEETS = []
+BOOKS = {1: [], 2: []}
+CURB = [1]
 
 
 def sheet(name, title, task, cells, widths, chart=None):
     """cells: (addr, value, kind, fmt). kind: h header, l label, g given, a answer (formula), t text."""
-    SHEETS.append(dict(name=name, title=title, task=task, cells=cells, widths=widths, chart=chart))
+    BOOKS[CURB[0]].append(dict(name=name, title=title, task=task, cells=cells, widths=widths, chart=chart))
 
 
 def rows(col_start, row0, vals):
@@ -28,31 +30,62 @@ for i, r in enumerate([3.2, 3.35, 3.5, 3.65, 3.8, 3.9]):
     n = 10 + i
     c += [(f'A{n}', r, 'g', '0.00'), (f'B{n}', f'=$B$5*A{n}', 'a', '#,##0'), (f'C{n}', f'=$B$6-B{n}', 'a', '#,##0'), (f'D{n}', f'=A{n}/$B$7-1', 'a', '0.0%'), (f'E{n}', f'=C{n}/($B$6-$B$5*$B$7)-1', 'a', '0.0%')]
 sheet('1 חשיפה', 'חשיפה: כמה רווח תלוי בשער אחד', 'השלימו את הטבלה. השוו בין השינוי בשער לבין השינוי ברווח.', c, [24, 16, 16, 14, 14])
+# 2 net exposure
+c = [('A5', 'שינוי בשער (ש״ח)', 'l'), ('B5', 0.1, 'g', '0.00'),
+     ('A7', 'חברה', 'h'), ('B7', 'הכנסות (דולר)', 'h'), ('C7', 'הוצאות (דולר)', 'h'), ('D7', 'חשיפה נטו (דולר)', 'h'), ('E7', 'השפעה על הרווח (ש״ח)', 'h'), ('F7', 'מה פוגע בה?', 'h')]
+for i, (nm, inc, exp) in enumerate([('א', 1000000, 900000), ('ב', 2400000, 1600000), ('ג', 600000, 800000), ('ד', 1200000, 1200000), ('ה', 0, 500000)]):
+    n = 8 + i
+    c += [(f'A{n}', nm, 'g'), (f'B{n}', inc, 'g', '#,##0'), (f'C{n}', exp, 'g', '#,##0'), (f'D{n}', f'=B{n}-C{n}', 'a', '#,##0'), (f'E{n}', f'=D{n}*$B$5', 'a', '#,##0'),
+          (f'F{n}', f'=IF(D{n}>0,"ירידה בדולר",IF(D{n}<0,"עלייה בדולר","אף כיוון"))', 'a')]
+sheet('2 חשיפה נטו', 'חשיפה נטו של חמש חברות', 'חשבו חשיפה נטו והשפעה על הרווח אם הדולר עולה ב-0.10. בעמודה F: איזה שינוי בדולר פוגע בחברה? רמז: הפונקציה IF.', c, [16, 16, 16, 18, 20, 16])
+# 3 forward payoff
+c = [('A5', 'מחיר החוזה, K (דולר לחבית)', 'l'), ('B5', 80, 'g'), ('A6', 'כמות (חביות)', 'l'), ('B6', 1000, 'g', '#,##0'),
+     ('A8', 'מחיר בפקיעה', 'h'), ('B8', 'Long לחבית', 'h'), ('C8', 'Short לחבית', 'h'), ('D8', 'Long לכל הכמות', 'h'), ('E8', 'Short לכל הכמות', 'h'), ('F8', 'סך שני הצדדים', 'h')]
+for i, p in enumerate(range(60, 105, 5)):
+    n = 9 + i
+    c += [(f'A{n}', p, 'g'), (f'B{n}', f'=A{n}-$B$5', 'a'), (f'C{n}', f'=$B$5-A{n}', 'a'), (f'D{n}', f'=B{n}*$B$6', 'a', '#,##0'), (f'E{n}', f'=C{n}*$B$6', 'a', '#,##0'), (f'F{n}', f'=D{n}+E{n}', 'a', '#,##0')]
+sheet('3 חוזה אקדמה', 'חוזה אקדמה (Forward) על נפט: שני הצדדים', 'חשבו את התזרים לכל צד, לחבית ולכל הכמות. בנו תרשים: מחיר בפקיעה מול Long ומול Short לחבית.', c, [26, 12, 12, 16, 16, 16], chart=('A', 'BC', 9, 17))
 # 2 forward
 c = [('A5', 'תשלום (דולר)', 'l'), ('B5', 800000, 'g', '#,##0'), ('A6', 'שער חוזה האקדמה', 'l'), ('B6', 3.45, 'g', '0.00'),
      ('A8', 'שער בפקיעה', 'h'), ('B8', 'עלות ללא גידור', 'h'), ('C8', 'תוצאת החוזה', 'h'), ('D8', 'עלות נטו', 'h')]
 for i, r in enumerate([3.1, 3.3, 3.45, 3.6, 3.8]):
     n = 9 + i
     c += [(f'A{n}', r, 'g', '0.00'), (f'B{n}', f'=$B$5*A{n}', 'a', '#,##0'), (f'C{n}', f'=$B$5*(A{n}-$B$6)', 'a', '#,##0'), (f'D{n}', f'=B{n}-C{n}', 'a', '#,##0')]
-sheet('2 חוזה אקדמה', 'יבואן: Long בחוזה אקדמה', 'חשבו עלות, תוצאת חוזה ועלות נטו. מה אתם מצפים לראות בעמודה D?', c, [22, 18, 16, 16])
+sheet('4 יבואן מגדר', 'יבואן: Long בחוזה אקדמה', 'חשבו עלות, תוצאת חוזה ועלות נטו. מה אתם מצפים לראות בעמודה D?', c, [22, 18, 16, 16])
+# 5 exporter
+c = [('A5', 'תקבול (דולר)', 'l'), ('B5', 300000, 'g', '#,##0'), ('A6', 'מחיר החוזה, K', 'l'), ('B6', 3.55, 'g', '0.00'),
+     ('A8', 'שער בפקיעה', 'h'), ('B8', 'תקבול ללא גידור', 'h'), ('C8', 'תוצאת Short', 'h'), ('D8', 'תקבול נטו', 'h')]
+for i, r in enumerate([3.2, 3.35, 3.55, 3.7, 3.9]):
+    n = 9 + i
+    c += [(f'A{n}', r, 'g', '0.00'), (f'B{n}', f'=$B$5*A{n}', 'a', '#,##0'), (f'C{n}', f'=$B$5*($B$6-A{n})', 'a', '#,##0'), (f'D{n}', f'=B{n}+C{n}', 'a', '#,##0')]
+sheet('5 יצואן מגדר', 'יצואן: Short בחוזה אקדמה', 'חשבו תקבול, תוצאת חוזה ותקבול נטו. בנו תרשים של התקבול עם גידור ובלעדיו.', c, [20, 18, 16, 16], chart=('A', 'BD', 9, 13))
+# 6 over-hedge
+c = [('A5', 'תשלום לספק (דולר)', 'l'), ('B5', 100000, 'g', '#,##0'), ('A6', 'חוזה שנקנה (דולר)', 'l'), ('B6', 250000, 'g', '#,##0'), ('A7', 'מחיר החוזה, K', 'l'), ('B7', 3.6, 'g', '0.00'),
+     ('A9', 'שער בפקיעה', 'h'), ('B9', 'תשלום לספק', 'h'), ('C9', 'תוצאת החוזה', 'h'), ('D9', 'עלות נטו', 'h'), ('E9', 'עלות עם גידור מדויק', 'h'), ('F9', 'תוצאת ההימור', 'h')]
+for i, r in enumerate([3.3, 3.45, 3.6, 3.75, 3.9]):
+    n = 10 + i
+    c += [(f'A{n}', r, 'g', '0.00'), (f'B{n}', f'=$B$5*A{n}', 'a', '#,##0'), (f'C{n}', f'=$B$6*(A{n}-$B$7)', 'a', '#,##0'), (f'D{n}', f'=B{n}-C{n}', 'a', '#,##0'), (f'E{n}', '=$B$5*$B$7', 'a', '#,##0'), (f'F{n}', f'=E{n}-D{n}', 'a', '#,##0')]
+sheet('6 גידור עודף', 'חוזה גדול מהחשיפה', 'הגזבר קנה חוזה על 250,000 דולר, והחשיפה 100,000 דולר. השוו לעלות עם גידור מדויק. מה מודדת עמודה F?', c, [20, 14, 14, 14, 20, 14])
+
+CURB[0] = 2
 # 3 long call
 c = [('A5', 'מחיר מימוש, K', 'l'), ('B5', 105, 'g'), ('A6', 'פרמיה', 'l'), ('B6', 4, 'g'), ('A8', 'מחיר בפקיעה', 'h'), ('B8', 'תזרים', 'h'), ('C8', 'רווח או הפסד', 'h')]
 for i, s in enumerate(range(85, 130, 5)):
     n = 9 + i
     c += [(f'A{n}', s, 'g'), (f'B{n}', f'=MAX(A{n}-$B$5,0)', 'a'), (f'C{n}', f'=B{n}-$B$6', 'a')]
 c += [('E5', 'נקודת איזון', 'l'), ('F5', '=B5+B6', 'a'), ('E6', 'הפסד מרבי', 'l'), ('F6', '=-B6', 'a')]
-sheet('3 Long Call', 'Long Call: טבלה ותרשים', 'השלימו טבלה ונקודת איזון. בנו תרשים פיזור עם קווים: מחיר בפקיעה מול רווח או הפסד.', c, [20, 12, 16, 3, 16, 12], chart=('A', 'C', 9, 17))
+sheet('1 Long Call', 'Long Call: טבלה ותרשים', 'השלימו טבלה ונקודת איזון. בנו תרשים פיזור עם קווים: מחיר בפקיעה מול רווח או הפסד.', c, [20, 12, 16, 3, 16, 12], chart=('A', 'C', 9, 17))
 # 4 put, solving
 c = [('A5', 'מחיר מימוש, K', 'l'), ('B5', 70, 'g'), ('A6', 'פרמיה', 'l'), ('B6', 4, 'g'), ('A7', 'מחיר בפקיעה', 'l'), ('B7', 61, 'g'), ('A8', 'רווח יעד', 'l'), ('B8', 10, 'g'),
      ('A10', 'רווח במחיר הנתון', 'l'), ('B10', '=MAX(B5-B7,0)-B6', 'a'), ('A11', 'נקודת איזון', 'l'), ('B11', '=B5-B6', 'a'), ('A12', 'המחיר שנותן את רווח היעד', 'l'), ('B12', '=B5-B6-B8', 'a'), ('A13', 'רווח מרבי', 'l'), ('B13', '=B5-B6', 'a'), ('A14', 'הפסד מרבי', 'l'), ('B14', '=-B6', 'a')]
-sheet('4 Put וחילוץ', 'Long Put: חישוב וחילוץ', 'כתבו נוסחה בכל תא צהוב. בחילוץ, כתבו את המשוואה קודם על דף.', c, [28, 12])
+sheet('2 Put וחילוץ', 'Long Put: חישוב וחילוץ', 'כתבו נוסחה בכל תא צהוב. בחילוץ, כתבו את המשוואה קודם על דף.', c, [28, 12])
 # 5 four positions
 c = [('A5', 'K', 'l'), ('B5', 100, 'g'), ('A6', 'פרמיית Call', 'l'), ('B6', 7, 'g'), ('A7', 'פרמיית Put', 'l'), ('B7', 6, 'g'),
      ('A9', 'מחיר בפקיעה', 'h'), ('B9', 'Long Call', 'h'), ('C9', 'Short Call', 'h'), ('D9', 'Long Put', 'h'), ('E9', 'Short Put', 'h')]
 for i, s in enumerate(range(70, 140, 10)):
     n = 10 + i
     c += [(f'A{n}', s, 'g'), (f'B{n}', f'=MAX(A{n}-$B$5,0)-$B$6', 'a'), (f'C{n}', f'=-B{n}', 'a'), (f'D{n}', f'=MAX($B$5-A{n},0)-$B$7', 'a'), (f'E{n}', f'=-D{n}', 'a')]
-sheet('5 ארבע פוזיציות', 'ארבע פוזיציות על אותו נכס', 'השלימו את הטבלה בנוסחה אחת לכל עמודה, וגררו.', c, [16, 12, 12, 12, 12])
+sheet('3 ארבע פוזיציות', 'ארבע פוזיציות על אותו נכס', 'השלימו את הטבלה בנוסחה אחת לכל עמודה, וגררו.', c, [16, 12, 12, 12, 12])
 # 6 leverage
 c = [('A5', 'רמת המדד', 'l'), ('B5', 3800, 'g', '#,##0'), ('A6', 'מכפיל (ש״ח)', 'l'), ('B6', 50, 'g'), ('A7', 'מספר חוזים', 'l'), ('B7', 4, 'g'), ('A8', 'ביטחונות לחוזה (ש״ח)', 'l'), ('B8', 19000, 'g', '#,##0'),
      ('A10', 'חשיפה (ש״ח)', 'l'), ('B10', '=B5*B6*B7', 'a', '#,##0'), ('A11', 'סך ביטחונות (ש״ח)', 'l'), ('B11', '=B8*B7', 'a', '#,##0'), ('A12', 'מנוף', 'l'), ('B12', '=B10/B11', 'a', '0.0'),
@@ -60,21 +93,21 @@ c = [('A5', 'רמת המדד', 'l'), ('B5', 3800, 'g', '#,##0'), ('A6', 'מכפ�
 for i, d in enumerate([-0.1, -0.05, -0.02, 0, 0.02, 0.05]):
     n = 15 + i
     c += [(f'A{n}', d, 'g', '0%'), (f'B{n}', f'=$B$10*A{n}', 'a', '#,##0'), (f'C{n}', f'=B{n}/$B$11', 'a', '0%')]
-sheet('6 מנוף', 'מנוף בחוזה על מדד', 'חשבו חשיפה, מנוף ותשואה. באיזה שינוי במדד הולכים כל הביטחונות?', c, [26, 20, 22])
+sheet('4 מנוף', 'מנוף בחוזה על מדד', 'חשבו חשיפה, מנוף ותשואה. באיזה שינוי במדד הולכים כל הביטחונות?', c, [26, 20, 22])
 # 7 multiplier
 c = [('A5', 'מחיר מימוש (K)', 'l'), ('B5', 4100, 'g', '#,##0'), ('A6', 'פרמיה (נקודות)', 'l'), ('B6', 60, 'g'), ('A7', 'מכפיל (ש״ח)', 'l'), ('B7', 50, 'g'), ('A8', 'מספר חוזים', 'l'), ('B8', 3, 'g'),
      ('A10', 'מדד בפקיעה', 'h'), ('B10', 'תזרים (נקודות)', 'h'), ('C10', 'רווח (נקודות)', 'h'), ('D10', 'רווח (ש״ח)', 'h')]
 for i, s in enumerate([4000, 4100, 4160, 4200, 4300]):
     n = 11 + i
     c += [(f'A{n}', s, 'g', '#,##0'), (f'B{n}', f'=MAX(A{n}-$B$5,0)', 'a'), (f'C{n}', f'=B{n}-$B$6', 'a'), (f'D{n}', f'=C{n}*$B$7*$B$8', 'a', '#,##0')]
-sheet('7 מכפיל', 'Long Call על מדד: מכפיל (Multiplier)', 'חשבו תזרים ורווח בנקודות, ואז רווח בשקלים. באיזה מדד הרווח אפס?', c, [20, 18, 16, 14])
+sheet('5 מכפיל', 'Long Call על מדד: מכפיל (Multiplier)', 'חשבו תזרים ורווח בנקודות, ואז רווח בשקלים. באיזה מדד הרווח אפס?', c, [20, 18, 16, 14])
 # 8 fuel
 c = [('A5', 'כמות (חביות)', 'l'), ('B5', 2000000, 'g', '#,##0'), ('A6', 'מחיר חוזה אקדמה', 'l'), ('B6', 75, 'g'), ('A9', 'יחס גידור', 'l'), ('B9', 0.75, 'g', '0%'),
      ('A11', 'מחיר החבית', 'h'), ('B11', 'ללא גידור', 'h'), ('C11', 'עם חוזה אקדמה', 'h')]
 for i, s in enumerate(range(50, 130, 10)):
     n = 12 + i
     c += [(f'A{n}', s, 'g'), (f'B{n}', f'=$B$5*A{n}', 'a', '#,##0'), (f'C{n}', f'=$B$5*((1-$B$9)*A{n}+$B$9*$B$6)', 'a', '#,##0')]
-sheet('8 גידור דלק', 'גידור דלק בחוזה אקדמה (Forward)', 'חשבו את ההוצאה ללא גידור ועם גידור. בנו תרשים של שני הקווים.', c, [20, 16, 18], chart=('A', 'BC', 12, 19))
+sheet('6 גידור דלק', 'גידור דלק בחוזה אקדמה (Forward)', 'חשבו את ההוצאה ללא גידור ועם גידור. בנו תרשים של שני הקווים.', c, [20, 16, 18], chart=('A', 'BC', 12, 19))
 # 9 hedge ratio
 c = [('A5', 'כמות (חביות)', 'l'), ('B5', 2000000, 'g', '#,##0'), ('A6', 'מחיר תרחיש קיצון', 'l'), ('B6', 110, 'g'), ('A7', 'תקציב (דולר)', 'l'), ('B7', 180000000, 'g', '#,##0'), ('A8', 'מחיר חוזה אקדמה', 'l'), ('B8', 75, 'g'), ('A9', 'גודל חוזה (חביות)', 'l'), ('B9', 1000, 'g', '#,##0'),
      ('A11', 'יחס גידור', 'h'), ('B11', 'הוצאה בתרחיש', 'h'), ('C11', 'בתוך התקציב?', 'h'), ('D11', 'מספר חוזים', 'h')]
@@ -82,12 +115,12 @@ for i in range(11):
     n = 12 + i
     c += [(f'A{n}', i / 10, 'g', '0%'), (f'B{n}', f'=$B$5*((1-A{n})*$B$6+A{n}*$B$8)', 'a', '#,##0'), (f'C{n}', f'=IF(B{n}<=$B$7,"כן","לא")', 'a'), (f'D{n}', f'=A{n}*$B$5/$B$9', 'a', '#,##0')]
 c += [('F5', 'יחס מזערי בטבלה', 'l'), ('G5', '=INDEX(A12:A22,MATCH("כן",C12:C22,0))', 'a', '0%'), ('F6', 'יחס מדויק', 'l'), ('G6', '=(B6-B7/B5)/(B6-B8)', 'a', '0.0%')]
-sheet('9 יחס גידור', 'יחס הגידור שעומד בתקציב', 'מצאו את יחס הגידור הנמוך ביותר שעומד בתקציב, ואת מספר החוזים הנדרש.', c, [22, 18, 16, 14, 3, 20, 10])
+sheet('7 יחס גידור', 'יחס הגידור שעומד בתקציב', 'מצאו את יחס הגידור הנמוך ביותר שעומד בתקציב, ואת מספר החוזים הנדרש.', c, [22, 18, 16, 14, 3, 20, 10])
 
 
-def build(path, solved):
+def build(path, solved, L, SHEETS):
     wb = Workbook(); w0 = wb.active; w0.title = 'הוראות'; w0.sheet_view.rightToLeft = True; w0.column_dimensions['A'].width = 96
-    lines = ['אופציות ומכשירים פיננסיים, שיעור 1: ' + ('קובץ פתרונות' if solved else 'קובץ תרגול'), 'המסלול האקדמי של המכללה למנהל · ד״ר שי צבאן · 2.11.2026', '',
+    lines = [f'אופציות ומכשירים פיננסיים, שיעור {L}: ' + ('קובץ פתרונות' if solved else 'קובץ תרגול'), 'המסלול האקדמי של המכללה למנהל · ד״ר שי צבאן · סמסטר א׳ תשפ״ז', '',
              ('התאים הירוקים מכילים נוסחאות חיות. שנו נתון בתא כחול, והתוצאות יתעדכנו.' if solved else 'התאים הצהובים ריקים: כתבו בהם נוסחאות. התאים הכחולים הם הנתונים.'),
              'כתבו נוסחאות עם הפניות לתאים, ולא מספרים. השתמשו ב-¤ כדי לקבע תאים לפני גרירה.'.replace('¤', '$'), ('השוו לקובץ שלכם רק אחרי שפתרתם, נוסחה מול נוסחה (Ctrl+`).' if solved else 'רק אחרי שפתרתם: משווים לקובץ הפתרונות.'), NOTE, '',
              'הגיליונות:'] + [s['name'] + ': ' + s['title'] for s in SHEETS]
@@ -119,33 +152,34 @@ def build(path, solved):
     wb.save(path)
 
 
+CHK = {1: {('1 חשיפה', 'C14'): 50000, ('2 חשיפה נטו', 'E9'): 80000, ('2 חשיפה נטו', 'F10'): 'עלייה בדולר', ('2 חשיפה נטו', 'F11'): 'אף כיוון', ('3 חוזה אקדמה', 'D9'): -20000, ('3 חוזה אקדמה', 'F17'): 0,
+          ('4 יבואן מגדר', 'D13'): 2760000, ('5 יצואן מגדר', 'D9'): 1065000, ('5 יצואן מגדר', 'D13'): 1065000, ('6 גידור עודף', 'D10'): 405000, ('6 גידור עודף', 'F14'): 45000},
+       2: {('1 Long Call', 'C17'): 16, ('1 Long Call', 'F5'): 109, ('2 Put וחילוץ', 'B10'): 5, ('2 Put וחילוץ', 'B12'): 56, ('3 ארבע פוזיציות', 'E10'): -24, ('4 מנוף', 'B12'): 10, ('4 מנוף', 'C15'): -1,
+          ('5 מכפיל', 'D13'): 0, ('5 מכפיל', 'D15'): (200 - 60) * 150, ('6 גידור דלק', 'C19'): 2000000 * (0.25 * 120 + 0.75 * 75), ('7 יחס גידור', 'G5'): 0.6, ('7 יחס גידור', 'G6'): (110 - 90) / 35}}
 os.makedirs(OUT, exist_ok=True)
-build(os.path.join(OUT, 'practice-1.xlsx'), False)
-raw = os.path.join(OUT, 'practice-1-solutions.xlsx')
-build(raw, True)
-# recalc with LibreOffice and verify
-d = tempfile.mkdtemp(dir=os.environ.get('TMPDIR'))
-subprocess.run(['soffice', '--headless', f'-env:UserInstallation=file://{d}/lo', '--convert-to', 'xlsx:Calc MS Excel 2007 XML', '--outdir', d, raw], capture_output=True, timeout=180)
-rec = os.path.join(d, 'practice-1-solutions.xlsx')
-V = load_workbook(rec, data_only=True); FM = load_workbook(rec)
-errs = []; nform = 0
-for s in SHEETS:
-    for cell in s['cells']:
-        if cell[2] == 'a':
-            nform += 1; v = V[s['name']][cell[0]].value
-            if v is None or (isinstance(v, str) and v.startswith('#')): errs.append((s['name'], cell[0], v))
-            if not str(FM[s['name']][cell[0]].value).startswith('='): errs.append((s['name'], cell[0], 'lost formula'))
-print('formulas', nform, 'errors', errs)
-g = lambda sh, a: V[sh][a].value
-chk = {('1 חשיפה', 'C14'): 50000, ('2 חוזה אקדמה', 'D13'): 2760000, ('3 Long Call', 'C17'): 16, ('3 Long Call', 'F5'): 109, ('4 Put וחילוץ', 'B10'): 5, ('4 Put וחילוץ', 'B12'): 56, ('5 ארבע פוזיציות', 'E10'): -24, ('6 מנוף', 'B12'): 10, ('6 מנוף', 'C15'): -1,
-       ('7 מכפיל', 'D13'): 0, ('7 מכפיל', 'D15'): (200 - 60) * 150, ('8 גידור דלק', 'C19'): 2000000 * (0.25 * 120 + 0.75 * 75), ('9 יחס גידור', 'G5'): 0.6, ('9 יחס גידור', 'G6'): (110 - 90) / 35}
-for (sh, a), e in chk.items():
-    v = g(sh, a); assert abs(v - e) < 1e-6, (sh, a, v, e)
-print('checked values', len(chk), '| rtl', all(FM[s['name']].sheet_view.rightToLeft for s in SHEETS), '| charts', [len(FM[s['name']]._charts) for s in SHEETS if s['chart']])
-assert not errs
-shutil.copy(rec, raw)   # ship the recalculated copy, so values also show in Protected View
-shutil.rmtree(d, True)
-for f in ('practice-1.xlsx', 'practice-1-solutions.xlsx'):
-    print(f, os.path.getsize(os.path.join(OUT, f)))
-P = load_workbook(os.path.join(OUT, 'practice-1.xlsx'))
-print('practice answers leaked:', sum(1 for s in SHEETS for c in s['cells'] if c[2] == 'a' and P[s['name']][c[0]].value is not None))
+for L, SHEETS in BOOKS.items():
+    pr, so = f'practice-{L}.xlsx', f'practice-{L}-solutions.xlsx'
+    build(os.path.join(OUT, pr), False, L, SHEETS)
+    raw = os.path.join(OUT, so)
+    build(raw, True, L, SHEETS)
+    d = tempfile.mkdtemp(dir=os.environ.get('TMPDIR'))
+    subprocess.run(['soffice', '--headless', f'-env:UserInstallation=file://{d}/lo', '--convert-to', 'xlsx:Calc MS Excel 2007 XML', '--outdir', d, raw], capture_output=True, timeout=180)
+    rec = os.path.join(d, so)
+    V = load_workbook(rec, data_only=True); FM = load_workbook(rec)
+    errs = []; nform = 0
+    for s in SHEETS:
+        for cell in s['cells']:
+            if cell[2] == 'a':
+                nform += 1; v = V[s['name']][cell[0]].value
+                if v is None or (isinstance(v, str) and v.startswith('#')): errs.append((s['name'], cell[0], v))
+                if not str(FM[s['name']][cell[0]].value).startswith('='): errs.append((s['name'], cell[0], 'lost formula'))
+    print(L, 'sheets', len(SHEETS), 'formulas', nform, 'errors', errs)
+    for (sh, a), e in CHK[L].items():
+        v = V[sh][a].value
+        assert (v == e) if isinstance(e, str) else abs(v - e) < 1e-6, (sh, a, v, e)
+    print(L, 'checked values', len(CHK[L]), '| rtl', all(FM[s['name']].sheet_view.rightToLeft for s in SHEETS), '| charts', [len(FM[s['name']]._charts) for s in SHEETS if s['chart']])
+    assert not errs
+    shutil.copy(rec, raw)   # ship the recalculated copy, so values also show in Protected View
+    shutil.rmtree(d, True)
+    P = load_workbook(os.path.join(OUT, pr))
+    print(L, pr, os.path.getsize(os.path.join(OUT, pr)), so, os.path.getsize(raw), 'answers leaked:', sum(1 for s in SHEETS for c in s['cells'] if c[2] == 'a' and P[s['name']][c[0]].value is not None))

@@ -4,7 +4,18 @@ import json, html as _html
 
 COURSE = 'אופציות ומכשירים פיננסיים'
 COURSE_FULL = 'אופציות ומכשירים פיננסיים מתוחכמים'
-TOTAL_PARTS = 7
+LESSON = globals().get('LESSON', 1)
+TOTAL_PARTS = {1: 4, 2: 6}[LESSON]
+# per lesson: deck title, subtitle, chips, cover line and the next meeting
+LMETA = {
+ 1: dict(date='2.11.2026', h1=('למה צריך', 'מכשירים מתוחכמים?'), title='למה צריך מכשירים מתוחכמים',
+         sub='נגזרים, חשיפה, וחוזה אקדמה (Forward) צעד אחר צעד.', chip='מקרים שלמים: מתי לגדר',
+         cover='נגזרים, חשיפה, חשיפה נטו, חוזה אקדמה וחוזה עתידי, עם תרגול מסכם.',
+         next_h='אופציות', next_t='אופציות רכש (Call) ומכר (Put), השחקנים, הבורסות ומקרה בוחן בגידור דלק. קריאה: Hull, פרק 1, החלקים על אופציות.'),
+ 2: dict(date='', h1=('אבני הבניין:', 'אופציות, שחקנים ושווקים'), title='אופציות, שחקנים ושווקים',
+         sub='Call ו-Put צעד אחר צעד, מגדרים וספקולנטים, הבורסות, ומקרה בוחן: גידור דלק בחברת תעופה.', chip='מקרה בוחן: דלק סילוני',
+         cover='אופציות, מכפיל, אירופאית ואמריקאית, עסקת החלפה, שחקנים, בורסות ומקרה בוחן בגידור דלק.',
+         next_h='חוזים עתידיים', next_t='חוזה אקדמה מול חוזה עתידי, מנגנון הביטחונות, סוגי חוזים, וגידור מטבע אצל יצואן ישראלי. קריאה: Hull, פרק 2.')}[LESSON]
 SL = []            # every slide, in order
 CUR = [None]       # current part number
 NACT = [0]
@@ -141,7 +152,7 @@ def SORTER(aid, title, h, task, options, rows):
 def NUMQ(qid, q, ans, tol, unit, why, hint):
     """A checked numeric question, to place inside a slide body."""
     if MODE == 'pdf':
-        return f'<div class="calcp"><b>בדיקה עצמית.</b> {TX(q)} <b>תשובה:</b> <span class="n">{ans:,}</span> {TX(unit)}. {TX(why)}</div>'
+        return f'<div class="calcp"><b>בדיקה עצמית.</b> {TX(q)} <b>תשובה:</b> <span class="n">{f'{ans:,}'.replace('-', '−')}</span> {TX(unit)}. {TX(why)}</div>'
     NACT[0] += 1
     return (f'<div class="act numq" id="{qid}" data-a="{ans}" data-tol="{tol}" data-w="{_html.escape(TX(why), quote=True)}" data-h="{_html.escape(TX(hint), quote=True)}"><div class="q">{TX(q)}</div>'
             f'<div class="numrow"><input dir="ltr" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="תשובה"><span>{TX(unit)}</span>{CHK}</div><div class="fbbar">הקלידו מספר ולחצו ״בדיקה״.</div></div>')
@@ -214,7 +225,7 @@ def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hint
             for c in L:
                 a = f'{c}{r}'
                 x = vals[a] if a in vals else data.get(a, '')
-                cells.append(_fmtv(x) if a in vals else str(x))
+                cells.append(_fmtv(x) if a in vals or isinstance(x, (int, float)) else str(x))
             if any(cells):
                 tag = 'th' if r in head else 'td'
                 t += '<tr>' + ''.join(f'<{tag}>{TX(x)}</{tag}>' for x in cells) + '</tr>'
@@ -274,6 +285,6 @@ def RL(items, start=1):
     return out
 
 
-exec(R('content_b.py'))
-exec(R('content_c.py'))
-exec(R('content_d.py'))
+exec(R('content_g.py'))
+for _f in {1: ['content_b.py', 'content_e.py'], 2: ['content_l2.py', 'content_b2.py', 'content_c.py', 'content_d.py']}[LESSON]:
+    exec(R(_f))
