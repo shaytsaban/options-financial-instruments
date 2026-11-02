@@ -45,7 +45,7 @@ def M(s):
     return ''.join(out)
 
 
-NUM = re.compile(r'(?<![\w.,/])\d[\d,]*(?:\.\d+)*%?')
+NUM = re.compile(r'(?<![\w.,/])\d{1,3}(?:,\d{3})+(?:\.\d+)?%?|(?<![\w.,/])\d+(?:\.\d+)*%?')
 
 
 def _textnum(seg):
@@ -199,7 +199,7 @@ def TL(ticks, flows=None, moves=None, brace=None, marks=None, W=560, fs=17, fh=4
 
 
 # ---------------------------------------------------------------- profit diagrams
-def CHART(series, x0, x1, y0, y1, xt, yt, W=560, H=330, xl='', yl='', fs=16, marks=None, hl=None):
+def CHART(series, x0, x1, y0, y1, xt, yt, W=560, H=330, xl='', yl='', fs=16, marks=None, hl=None, xs=0, ys=0):
     """Line chart in user units. series: dicts pts, c, w, dash, lab (at the last point), s (reveal step).
     marks: dicts x, y, t, c. hl: dicts y, t, c for a horizontal reference line."""
     ml, mr, mt, mb = 56, 18, 30, 44
@@ -212,8 +212,8 @@ def CHART(series, x0, x1, y0, y1, xt, yt, W=560, H=330, xl='', yl='', fs=16, mar
     for t in xt:
         p.append(f'<line x1="{X(t):.1f}" y1="{mt}" x2="{X(t):.1f}" y2="{H - mb}" stroke="#f0ebe0" stroke-width="1"/>')
         p.append(_txt(X(t), H - mb + fs + 3, f'{t:,}', fs, W, fill='#5d6a86', weight=500))
-    if xl: p.append(_txt((ml + W - mr) / 2, H - 5, xl, fs, W, weight=700, fill='#2a3858'))
-    if yl: p.append(_txt(ml - 40, mt - 11, yl, fs - 1, W, anchor='start', weight=700, fill='#2a3858'))
+    if xl: p.append(f'<g{_st(xs)}>' + _txt((ml + W - mr) / 2, H - 5, xl, fs, W, weight=700, fill='#2a3858') + '</g>')
+    if yl: p.append(f'<g{_st(ys)}>' + _txt(ml - 40, mt - 11, yl, fs - 1, W, anchor='start', weight=700, fill='#2a3858') + '</g>')
     for h in hl or []:
         p.append(f'<line x1="{ml}" y1="{Y(h["y"]):.1f}" x2="{W - mr}" y2="{Y(h["y"]):.1f}" stroke="{h.get("c", "#e8960c")}" stroke-width="2" stroke-dasharray="6 5"/>')
         if h.get('t'): p.append(_txt(ml + 8, Y(h['y']) - 6, h['t'], fs, W, anchor='start', weight=700, fill=h.get('c', '#a86703')))

@@ -15,7 +15,7 @@ sup,sub{font-size:.68em;line-height:0}
 .lead{font-size:23px;line-height:1.45;color:var(--ink2);margin:0 0 12px}
 .lg{font-size:23px;line-height:1.5}
 p.lg{margin:0 0 8px}
-ul.lg{padding-inline-start:24px}ul.lg li{margin-bottom:8px}
+ul.lg,ol.lg{padding-inline-start:36px}ul.lg li,ol.lg li{margin-bottom:8px}
 .ct{display:block;font-size:21px;font-weight:800;color:var(--coral);margin-bottom:8px;line-height:1.3}
 .row{display:flex;gap:16px}
 .col{display:flex;flex-direction:column;gap:12px}
@@ -251,3 +251,68 @@ code.xl{direction:ltr;unicode-bidi:isolate;display:inline-block;font:700 20px 'M
 .builder .rd{grid-template-columns:1fr 1fr 1fr}
 .builder .rng{margin-bottom:2px}
 .builder .fbbar{margin-top:6px}
+
+
+/* ===== mini Excel widget ===== */
+.xl{direction:rtl;font-family:'Segoe UI','Arial',sans-serif;user-select:none;-webkit-user-select:none}
+.xl-top{display:flex;align-items:stretch;gap:6px;background:#fff;border:1px solid #c8c8c8;border-radius:8px 8px 0 0;padding:4px 6px}
+.xl-name{width:96px;flex:none;border:1px solid #c8c8c8;border-radius:4px;display:flex;align-items:center;justify-content:center;font:600 14px/1 'Segoe UI',Arial,sans-serif;direction:ltr;background:#fafafa}
+.xl-fx{flex:none;color:#666;font:italic 600 15px/1 Georgia,serif;display:flex;align-items:center;padding:0 4px;border-inline-start:1px solid #ddd}
+.xl-bar{flex:1;border:1px solid #c8c8c8;border-radius:4px;font:15px/1.2 Consolas,'Courier New',monospace;padding:4px 8px;user-select:text;-webkit-user-select:text;text-align:right}
+.xl-bar:focus{outline:2px solid #217346}
+.xl-tools{display:flex;gap:6px;align-items:center;background:#f3f3f3;border:1px solid #c8c8c8;border-top:0;padding:4px 6px;flex-wrap:wrap}
+.xl-tools button{font:600 13px/1 Rubik,Heebo,sans-serif;padding:5px 10px;border-radius:6px;border:1px solid #c8c8c8;background:#fff;cursor:pointer;color:#16213a}
+.xl-tools button:hover{background:#e8f3ec;border-color:#217346}
+.xl-tools button.on{background:#217346;color:#fff;border-color:#217346}
+.xl-tools button.xl-go{background:#217346;color:#fff;border-color:#217346}
+.xl-msg{font:13px Rubik,Heebo,sans-serif;color:#217346;margin-inline-start:6px}
+.xl-wrap{overflow:auto;border:1px solid #c8c8c8;border-top:0;background:#fff;border-radius:0 0 8px 8px;max-height:100%}
+.xl-g{border-collapse:collapse;table-layout:fixed;outline:none;direction:rtl}
+.xl-g th{background:#f3f3f3;color:#444;font:600 13px/1 'Segoe UI',Arial,sans-serif;border:1px solid #d4d4d4;height:24px;text-align:center}
+.xl-g th.xl-rn{width:34px}.xl-g th.xl-c0{width:34px;background:#e6e6e6}
+.xl-g td{border:1px solid #e1e1e1;height:30px;padding:0 6px;font:15px/1 Rubik,Heebo,'Segoe UI',sans-serif;color:#111;white-space:nowrap;overflow:hidden;text-overflow:clip;position:relative;cursor:cell;text-align:right;background:#fff}
+.xl-g td.n{text-align:right}
+.xl-g td.n span,.xl-g td.f span{direction:ltr;unicode-bidi:isolate}
+.xl-g td.f{font-family:Consolas,'Courier New',monospace;font-size:13px;color:#1b2d55;text-align:left}
+.xl-g td.e{color:#c00;font-weight:700}
+.xl-g td.hd{background:#e8eefb;font-weight:700;color:#1b2d55}
+.xl-g td.in{background:#fffbe6}
+.xl-g td.tg{background:#fff4c2}
+.xl-g td.sel{background:#d9ecdf}
+.xl-g td.tg.sel,.xl-g td.in.sel{background:#e6f0c8}
+.xl-g td.act{outline:2.5px solid #217346;outline-offset:-2px;z-index:2}
+.xl-g td.ok{box-shadow:inset 0 0 0 2px #25a65f}
+.xl-g td.bad{box-shadow:inset 0 0 0 2px #e0454f}
+.xl-g td.fillp{outline:2px dashed #217346;outline-offset:-3px}
+.xl-g td.ed{padding:0;outline:2.5px solid #217346;outline-offset:-2px;overflow:visible;z-index:3}
+.xl-in{width:100%;height:100%;border:0;font:15px Consolas,'Courier New',monospace;padding:0 6px;background:#fff;outline:none;user-select:text;-webkit-user-select:text;text-align:right}
+.xl-fh{position:absolute;left:-5px;bottom:-5px;width:10px;height:10px;background:#217346;border:2px solid #fff;cursor:crosshair;z-index:5;touch-action:none}
+.xl-g{touch-action:none}
+.xl-fb{margin-top:6px;font:15px/1.5 Rubik,Heebo,sans-serif}
+.xl-ok{background:#e3f6ea;color:#167a43;border-radius:8px;padding:6px 12px;font-weight:700}
+.xl-no{background:#fde8ea;color:#b3262f;border-radius:8px;padding:6px 12px;font-weight:700}
+.xl-notes{padding:4px 12px;color:#2a3858;font-size:14px}
+
+.xl-g td{font-size:17px;height:32px}.xl-g th{font-size:16.5px;height:26px}.xl-tools button{font-size:16.5px;padding:6px 10px}.xl-name{font-size:16.5px}.xl-bar{font-size:17px}.xl-msg{font-size:16.5px}.xl-fx{font-size:16.5px}.xl-in{font-size:17px}.xl-g td.f{font-size:16.5px}
+.xl-fb{font-size:18px;line-height:1.35}.xl-notes{font-size:17px}.xl-tip{background:#fff7e0;border-radius:8px;padding:6px 12px;color:#4a4130}.xl-tip b{color:#a86703}.xl-sink{position:absolute;opacity:0;width:1px;height:1px;left:0;top:0}
+.xlq .tasktxt{font-size:19.5px;padding:8px 14px;margin-bottom:8px;line-height:1.32}
+.xlrow{display:grid;grid-template-columns:minmax(0,1fr) 450px;gap:12px;align-items:start}
+.xlrow.solo{grid-template-columns:minmax(0,1fr)}
+.xlc{display:block;width:100%;height:auto;background:#fff;border-radius:12px;box-shadow:0 2px 0 var(--line);direction:ltr;unicode-bidi:isolate;font-family:inherit}
+.sv .tasktxt{font-size:20px}
+.svps{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-bottom:6px}
+.svp{display:flex;gap:8px;align-items:center;background:#fff;border-radius:10px;padding:6px 12px;font-size:19px;font-weight:600;justify-content:space-between}
+.svp input{font:700 19px 'Heebo',Arial,sans-serif;width:124px;padding:4px 8px;border:2px solid var(--line);border-radius:8px;background:#fffdf5;text-align:left;flex:none}
+.svp input.good{border-color:#25a65f;background:#e3f6ea}.svp input.badc{border-color:#e0454f;background:#fde8ea}
+.svsol{margin-top:6px;display:grid;gap:3px}.svs{display:none;font-size:18.5px;line-height:1.32;background:#eef7f6;border-radius:8px;padding:4px 10px}.svs.on{display:block}
+.sv .abtn{font-size:17px;padding:7px 12px}.sv .fbbar{font-size:18px;min-height:40px;margin-top:6px;padding:6px 12px}
+.toon{position:absolute;left:52px;bottom:44px;display:flex;align-items:flex-end;gap:6px;pointer-events:none;z-index:1}
+.toon svg{width:112px;height:112px;flex:none;direction:ltr}
+.bub{background:#fff;border:2px solid var(--navy2);border-radius:16px 16px 16px 4px;padding:8px 12px;font-size:18px;font-weight:700;line-height:1.25;max-width:300px;margin-bottom:64px;margin-inline-end:-6px;color:var(--navy2)}
+.steptbl td,.steptbl th{text-align:center}.steptbl td:first-child,.steptbl th:first-child{text-align:center}
+.mathl{display:grid;gap:2px;font-size:20px}.mathl .eq{font-size:20.5px;margin:0;text-align:left}.mathl .sp{margin:0;font-size:19.5px}
+.rl{display:grid;gap:7px}.rl>.st,.rl>div{font-size:19.5px;line-height:1.3}.rl .sp{font-size:19.5px;margin:0}.rl .eq{font-size:21px;margin:0}
+.chartw .pay{display:block}
+.tnote{font-size:18.5px;line-height:1.32}
+.steptbl{margin-top:8px}.steptbl td{padding:6px 8px}.gv{display:block;font-size:21px;font-weight:800;color:var(--navy2)}.gm{display:block;font-size:17px;color:var(--mut);line-height:1.25}.gm .m{color:var(--mut);font-weight:500}
+.tbl2 th .m{color:#fff}

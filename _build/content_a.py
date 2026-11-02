@@ -37,9 +37,9 @@ def TABLE(head, rows, cls=''):
     return f'<table class="tbl2 {cls}"><tr>{h}</tr>{b}</table>'
 
 
-def mc(qid, q, opts, a, why):
+def mc(qid, q, opts, a, why, rot=True):
     # options are written with the right answer first; a fixed rotation per question places it
-    r = sum(map(ord, qid)) % len(opts)
+    r = sum(map(ord, qid)) % len(opts) if rot else 0
     opts = opts[r:] + opts[:r]
     a = (a - r) % len(opts)
     o = ''
@@ -149,6 +149,129 @@ def NUMQ(qid, q, ans, tol, unit, why, hint):
 
 def _txc(s):
     return TX(s)
+
+
+# ---------------------------------------------------------------- cartoons with a punchline
+TOONS = {
+ 'barrel': '<rect x="28" y="20" width="64" height="88" rx="14" fill="#8a5a2b"/><rect x="24" y="38" width="72" height="7" rx="3" fill="#5b3a1a"/><rect x="24" y="84" width="72" height="7" rx="3" fill="#5b3a1a"/><circle cx="48" cy="58" r="6" fill="#fff"/><circle cx="72" cy="58" r="6" fill="#fff"/><circle cx="49" cy="59" r="3" fill="#111"/><circle cx="73" cy="59" r="3" fill="#111"/><path d="M46 72q14 11 28 0" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/><path d="M40 20l40 0-6-12-28 0z" fill="#1b2d55"/>',
+ 'plane': '<path d="M12 62q2-14 22-16l58-4q14 0 18 10-4 10-18 12l-58 4q-20 0-22-6z" fill="#e8eefb" stroke="#1b2d55" stroke-width="3"/><path d="M56 62l-20 34h14l28-36z" fill="#27447f"/><path d="M24 46l-10-22h10l16 20z" fill="#ff6a4d"/><circle cx="88" cy="50" r="5" fill="#111"/><path d="M80 60q8 6 16 1" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round"/><path d="M104 28q6 9 0 13q-6-4 0-13z" fill="#58b8e0"/>',
+ 'seesaw': '<path d="M60 74l-14 26h28z" fill="#1b2d55"/><line x1="10" y1="88" x2="110" y2="52" stroke="#8a5a2b" stroke-width="7" stroke-linecap="round"/><circle cx="22" cy="68" r="13" fill="#ffd37a"/><circle cx="98" cy="34" r="13" fill="#7fe3d6"/><path d="M16 73q6-6 12 0" fill="none" stroke="#111" stroke-width="2.5"/><path d="M92 36q6 6 12 0" fill="none" stroke="#111" stroke-width="2.5"/><circle cx="18" cy="65" r="2" fill="#111"/><circle cx="26" cy="65" r="2" fill="#111"/><circle cx="94" cy="31" r="2" fill="#111"/><circle cx="102" cy="31" r="2" fill="#111"/>',
+ 'umbrella': '<path d="M14 58q46-56 92 0z" fill="#ff6a4d"/><line x1="60" y1="58" x2="60" y2="100" stroke="#1b2d55" stroke-width="5"/><path d="M60 100q0 10-10 8" fill="none" stroke="#1b2d55" stroke-width="5" stroke-linecap="round"/><path d="M26 12q4 6 0 9q-4-3 0-9zM60 4q4 6 0 9q-4-3 0-9zM94 12q4 6 0 9q-4-3 0-9z" fill="#58b8e0"/>',
+ 'lever': '<path d="M46 86l-13 22h26z" fill="#1b2d55"/><line x1="4" y1="50" x2="116" y2="92" stroke="#8a5a2b" stroke-width="6" stroke-linecap="round"/><ellipse cx="18" cy="38" rx="17" ry="15" fill="#8a93aa"/><circle cx="104" cy="74" r="9" fill="#ffd37a" stroke="#a86703" stroke-width="2"/><text x="104" y="79" text-anchor="middle" font-size="20" font-weight="800" fill="#a86703">₪</text>',
+ 'dice': '<rect x="14" y="30" width="60" height="60" rx="12" fill="#fff" stroke="#1b2d55" stroke-width="4" transform="rotate(-12 44 60)"/><circle cx="32" cy="48" r="5" fill="#ff6a4d"/><circle cx="56" cy="44" r="5" fill="#ff6a4d"/><circle cx="44" cy="62" r="5" fill="#ff6a4d"/><circle cx="34" cy="78" r="5" fill="#ff6a4d"/><circle cx="58" cy="74" r="5" fill="#ff6a4d"/><rect x="66" y="58" width="42" height="42" rx="9" fill="#ffd37a" stroke="#1b2d55" stroke-width="4" transform="rotate(14 87 79)"/><circle cx="87" cy="79" r="5" fill="#1b2d55"/>',
+ 'sweat': '<circle cx="58" cy="62" r="40" fill="#ffd37a"/><circle cx="44" cy="54" r="5" fill="#111"/><circle cx="72" cy="54" r="5" fill="#111"/><path d="M42 80q16-12 32 0" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/><path d="M102 30q8 12 0 17q-8-5 0-17z" fill="#58b8e0"/><text x="16" y="28" font-size="28" font-weight="800" fill="#107c41">$</text>',
+ 'hands': '<rect x="36" y="14" width="48" height="58" rx="5" fill="#fff" stroke="#1b2d55" stroke-width="3"/><line x1="44" y1="28" x2="76" y2="28" stroke="#8a93aa" stroke-width="3"/><line x1="44" y1="38" x2="76" y2="38" stroke="#8a93aa" stroke-width="3"/><line x1="44" y1="48" x2="66" y2="48" stroke="#8a93aa" stroke-width="3"/><path d="M6 84l30-4 24 12 24-12 30 4v16H6z" fill="#27447f"/><path d="M42 82q18-12 36 0q-6 14-18 14t-18-14z" fill="#ffd37a" stroke="#a86703" stroke-width="2"/>',
+ 'ref': '<circle cx="60" cy="38" r="26" fill="#ffd37a"/><circle cx="50" cy="34" r="4" fill="#111"/><circle cx="70" cy="34" r="4" fill="#111"/><path d="M48 48q12 8 24 0" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round"/><path d="M26 112q0-46 34-46t34 46z" fill="#fff" stroke="#111" stroke-width="3"/><path d="M42 72v40M60 66v46M78 72v40" stroke="#111" stroke-width="6"/><circle cx="98" cy="52" r="8" fill="#ff6a4d"/>',
+ 'hourglass': '<path d="M30 14h60v8q0 22-22 38q22 16 22 38v8H30v-8q0-22 22-38Q30 44 30 22z" fill="#eef2ff" stroke="#1b2d55" stroke-width="4"/><path d="M42 26h36q-4 16-18 26q-14-10-18-26z" fill="#ffd37a"/><path d="M38 100q6-22 22-30q16 8 22 30z" fill="#ffd37a"/>',
+ 'wheat': '<rect x="20" y="56" width="80" height="50" fill="#e8eefb" stroke="#1b2d55" stroke-width="3"/><path d="M14 56l46-30 46 30z" fill="#27447f"/><path d="M36 64v36M60 64v36M84 64v36" stroke="#1b2d55" stroke-width="5"/><path d="M104 12v50M104 22l-9-7M104 22l9-7M104 34l-9-7M104 34l9-7M104 46l-9-7M104 46l9-7" stroke="#e8960c" stroke-width="4" stroke-linecap="round"/>',
+ 'robot': '<rect x="22" y="26" width="76" height="72" rx="14" fill="#217346"/><text x="60" y="58" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">fx</text><circle cx="44" cy="70" r="6" fill="#fff"/><circle cx="76" cy="70" r="6" fill="#fff"/><circle cx="45" cy="71" r="3" fill="#111"/><circle cx="77" cy="71" r="3" fill="#111"/><path d="M46 84q14 9 28 0" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/><line x1="60" y1="26" x2="60" y2="10" stroke="#217346" stroke-width="4"/><circle cx="60" cy="8" r="5" fill="#ff6a4d"/>',
+ 'voucher': '<rect x="10" y="36" width="100" height="52" rx="8" fill="#fff0d2" stroke="#a86703" stroke-width="3"/><line x1="78" y1="36" x2="78" y2="88" stroke="#a86703" stroke-width="3" stroke-dasharray="4 4"/><path d="M22 62l34-8-6 8 6 8z" fill="#27447f"/><text x="94" y="68" text-anchor="middle" font-size="18" font-weight="800" fill="#a86703">₪</text>',
+}
+
+
+def TOON(key, punch, n=0):
+    """A small cartoon with a punchline, in the empty corner of a slide."""
+    svg = f'<svg viewBox="0 0 120 120" dir="ltr" role="img" aria-hidden="true">{TOONS[key]}</svg>'
+    return ST(n, f'{svg}<div class="bub">{TX(punch)}</div>', cls='toon') if n else f'<div class="toon">{svg}<div class="bub">{TX(punch)}</div></div>'
+
+
+# ---------------------------------------------------------------- embedded Excel
+_REF = re.compile(r'\$?([A-Z])\$?(\d+)')
+
+
+def xl_eval(data, sol):
+    """Evaluate the solution in Python: used in the PDF, and as an independent check of each exercise."""
+    def val(a, seen=()):
+        raw = sol.get(a, data.get(a))
+        if raw is None: return 0
+        raw = str(raw)
+        if raw.startswith('='):
+            e = raw[1:].replace('^', '**').replace('MAX', 'max').replace('MIN', 'min').replace('ABS', 'abs')
+            e = _REF.sub(lambda m: f'({val(m.group(1) + m.group(2))})', e)
+            return eval(e)
+        try: return float(raw.replace('%', '')) / (100 if '%' in raw else 1)
+        except ValueError: return raw
+    return {a: val(a) for a in sol}
+
+
+def _fmtv(v):
+    if isinstance(v, str): return v
+    v = round(v, 4)
+    return f'$-{abs(v):,g}$'.replace('e+', 'e') if v < 0 else f'{v:,.10g}'
+
+
+def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hints=None, remind=None, partial=None, chart=None, values=False, show=None, done='', extra=''):
+    """A question with an embedded sheet. data: given cells; sol: target cell -> formula; chart: drawn from the student's cells."""
+    vals = xl_eval(data, sol)
+    targets = list(sol)
+    rs = rows or max(int(re.sub('[A-Z]', '', a)) for a in list(data) + targets)
+    cs = cols or max(ord(a[0]) - 64 for a in list(data) + targets)
+    if MODE == 'pdf':
+        L = [chr(65 + i) for i in range(cs)]
+        t = ''
+        for r in range(1, rs + 1):
+            cells = []
+            for c in L:
+                a = f'{c}{r}'
+                x = vals[a] if a in vals else data.get(a, '')
+                cells.append(_fmtv(x) if a in vals else str(x))
+            if any(cells):
+                tag = 'th' if r in head else 'td'
+                t += '<tr>' + ''.join(f'<{tag}>{TX(x)}</{tag}>' for x in cells) + '</tr>'
+        f1 = next(iter(sol.values()))
+        fm = f'<p>נוסחה לדוגמה בתא {next(iter(sol))}: ' + XL(f1.replace('$', '¤')) + '</p>'
+        S(sid, title, h, f'<p class="qstem">{TX(task)}</p><table class="tbl2">{t}</table>{fm}')
+        return
+    NACT[0] += 1
+    cfgd = dict(rows=rs, cols=cs, widths=widths, data={k: str(v) for k, v in data.items()}, targets=targets, solution=sol, headRows=head, inputs=[], hints=[TX(x) for x in (hints or ['קראו שוב את כותרת העמודה, וכתבו את החישוב במילים לפני הנוסחה.'])], remind=TX(remind or ''), partial=partial or targets[:1], values=values, done=TX(done))
+    if not remind: cfgd.pop('remind')
+    side = ''
+    if chart:
+        cfgd['chart'] = chart
+        side = f'<svg class="xlc" viewBox="0 0 {chart.get("W", 470)} {chart.get("H", 330)}" role="img" aria-label="תרשים"></svg>'
+    body = f'<div class="act xlq" id="{sid}-x" data-cfg="{_cfg(cfgd)}"><div class="tasktxt">{TX(task)}</div><div class="xlrow{"" if chart else " solo"}"><div class="sheet"></div>{"<div>" + side + "</div>" if chart else ""}</div>{extra}</div>'
+    S(sid, title, h, body, kick=f'חלק {CUR[0]} · אקסל בתוך השקף')
+
+
+def PCH(x, series, xt=None, yt=None, x0=None, x1=None, y0=-40, y1=40, xl='מחיר בפקיעה ($S_{T}$)'.replace('$', '').replace('_{T}', '_T'), yl='ש״ח'):
+    xs0 = x0 if x0 is not None else x[0]
+    return dict(x=x, x0=xs0, x1=x1, y0=y0, y1=y1, xt=xt, yt=yt, xl=xl, yl=yl, series=series)
+
+
+def SOLVE(sid, title, h, story, parts, hints, remind, steps):
+    """A math exercise: parts (label, answer, tolerance). Buttons give a hint, a reminder, a partial or a full solution."""
+    if MODE == 'pdf':
+        p = ''.join(f'<li>{TX(l)} <b>{_fmtv(float(a)) if not isinstance(a, str) else a}</b></li>' for l, a, t in parts)
+        S(sid, title, h, f'<p class="qstem">{TX(story)}</p><ol>{p}</ol>' + ''.join(f'<p>{TX(x)}</p>' for x in steps))
+        return
+    NACT[0] += 1
+    ps = ''.join(f'<label class="svp" data-a="{a}" data-tol="{t}"><span>{TX(l)}</span><input dir="ltr" inputmode="decimal" autocomplete="off" spellcheck="false"></label>' for l, a, t in parts)
+    ss = ''.join(f'<div class="svs">{TX(x)}</div>' for x in steps)
+    cfgd = dict(hints=[TX(x) for x in hints], remind=TX(remind))
+    btn = lambda c, t: f'<button class="abtn ghost {c}">{t}</button>'
+    S(sid, title, h, f'<div class="act sv" id="{sid}-w" data-cfg="{_cfg(cfgd)}"><div class="tasktxt">{TX(story)}</div><div class="svps">{ps}</div><div class="actbar">{CHK}{btn("hnt", "💡 רמז")}{btn("rmd", "📐 תזכורת נוסחה")}{btn("prt", "פתרון חלקי")}{btn("ful", "פתרון מלא")}{RST}</div><div class="fbbar">הקלידו את התשובות, ולחצו ״בדיקה״. הפסד כותבים כמספר שלילי.</div><div class="svsol">{ss}</div></div>', kick=f'חלק {CUR[0]} · תרגיל')
+
+
+def CASE(sid, title, story, qtext, opts, a, why, steps, toon=None):
+    """One situation on its own slide: a question, then a multi step explanation revealed by clicks."""
+    q = mc(sid + '-q', qtext, opts, a, why, rot=False)
+    st = ''.join(ST(i + 1, TX(x), 'p', 'sp') for i, x in enumerate(steps))
+    S(sid, title, title, f'<div class="qg"><div class="qr"><div class="card qstem"><p>{TX(story)}</p></div>{q}</div><div class="solw card">{st}</div></div>', kick=f'חלק {CUR[0]} · מקרה', cls='qslide')
+
+
+def STEPS(chart, items, cls=''):
+    """A chart built click by click beside its explanation. items: prose or '=' + math, in click order."""
+    return f'<div class="qg"><div class="card chartw">{chart}</div><div class="rl">{items}</div></div>'
+
+
+def RL(items, start=1):
+    out = ''
+    for i, x in enumerate(items):
+        n = start + i
+        if isinstance(x, tuple):
+            n, x = x
+        out += ST(n, M(x[1:]), cls='eq').replace('class="st eq"', 'class="st eq" dir="ltr"') if x.startswith('=') else ST(n, TX(x), 'p', 'sp')
+    return out
 
 
 exec(R('content_b.py'))

@@ -4,6 +4,7 @@ H = os.path.dirname(os.path.abspath(__file__))
 SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(H, '..', 'lectures', 'lecture-1', 'presentation.html')
 CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 TEST = r'''
+window.onerror=(m,u,l,c,e)=>{document.documentElement.setAttribute('data-err',m+' @'+l+':'+c+' '+(e&&e.stack||'').slice(0,500));};
 (function(){
 const D=window.__deckT,R={errors:[],overflow:[],small:[],mc:[],act:[],reveal:[],terms:[],chars:[],eqwide:[],abbr:{},bidi:[]};
 window.addEventListener('error',e=>R.errors.push(e.message));
@@ -46,23 +47,27 @@ qq('.draw').forEach(b=>{D.go(b.closest('.slide').id);const C=JSON.parse(b.datase
  const pe=(t,x,y)=>new PointerEvent(t,{bubbles:true,clientX:x,clientY:y,pointerId:1,pointerType:'mouse'});circ().dispatchEvent(pe('pointerdown',cx,cy));svg.dispatchEvent(pe('pointermove',cx,cy+100*k));svg.dispatchEvent(pe('pointerup',cx,cy+100*k));
  const moved=parseFloat(circ().getAttribute('cy'));ok=ok&&Math.abs(moved-(30+(40-0)/(80)*(430-30-46))-100)<12;R.dragY=moved;
  C.tasks.forEach((T,i)=>{const w=T.pts.map(x=>x+2);b.__set(w);q('.chk',b).click();ok=ok&&fb.classList.contains('wrong');b.__set(T.pts);q('.chk',b).click();ok=ok&&fb.classList.contains('good');if(fb.classList.contains('good'))solved++;if(!q('.nxt',b).disabled)q('.nxt',b).click();measure(b.closest('.slide'),99,'draw');});A(b.id,'draw',ok&&solved===C.tasks.length,{solved});});
-// builder
-qq('.builder').forEach(b=>{D.go(b.closest('.slide').id);const C=JSON.parse(b.dataset.cfg),fb=q('.fbbar',b);let ok=true,solved=0;C.missions.forEach(M=>{q(`[data-side="${-M.side}"]`,b).click();q('[data-typ="'+M.typ+'"]',b).click();q('.chk',b).click();ok=ok&&fb.classList.contains('wrong');q(`[data-side="${M.side}"]`,b).click();q('.chk',b).click();ok=ok&&fb.classList.contains('good');if(fb.classList.contains('good'))solved++;q('.nxt',b).click();measure(b.closest('.slide'),99,'builder');});
- // readouts
- q('[data-side="1"]',b).click();q('[data-typ="call"]',b).click();const be=q('.rd',b).textContent;A(b.id,'builder',ok&&solved===C.missions.length&&be.includes('108'),{solved,be:be.slice(0,70)});});
-// carry
-qq('.carry').forEach(b=>{D.go(b.closest('.slide').id);const fb=q('.fbbar',b);let ok=true;const set=(g,f,l)=>{q(`[data-g="${g}"]`,b).click();q(`[data-f="${f}"]`,b).click();q(`[data-l="${l}"]`,b).click();};
- set(-1,1,-1);q('.chk',b).click();ok=ok&&fb.classList.contains('wrong');q('.none',b).click();ok=ok&&fb.classList.contains('wrong');set(1,-1,1);q('.chk',b).click();ok=ok&&fb.classList.contains('good');const tot=q('.tot',b).textContent;ok=ok&&/30/.test(tot);measure(b.closest('.slide'),99,'carry');q('.nxt',b).click();
- set(1,-1,1);q('.chk',b).click();ok=ok&&fb.classList.contains('wrong');set(-1,1,-1);q('.chk',b).click();ok=ok&&fb.classList.contains('good');const t2=q('.tot',b).textContent;ok=ok&&/40/.test(t2);q('.nxt',b).click();
- set(1,-1,1);q('.chk',b).click();ok=ok&&fb.classList.contains('wrong');q('.none',b).click();ok=ok&&fb.classList.contains('good');A(b.id,'carry',ok,{tot,t2});});
-// fuel
-qq('.fuel').forEach(b=>{D.go(b.closest('.slide').id);const C=JSON.parse(b.dataset.cfg),fb=q('.fbbar',b),h=q('input[data-k=h]',b);let ok=true;const seth=v=>{h.value=v;h.dispatchEvent(new Event('input',{bubbles:true}));};
- C.tasks.forEach(T=>{q('[data-ins="none"]',b).click();seth(T.h);q('.chk',b).click();ok=ok&&fb.classList.contains('wrong');q(`[data-ins="${T.ins}"]`,b).click();seth(T.h-5);q('.chk',b).click();ok=ok&&fb.classList.contains('wrong');seth(T.h+5);q('.chk',b).click();ok=ok&&fb.classList.contains('wrong');seth(T.h);q('.chk',b).click();ok=ok&&fb.classList.contains('good');measure(b.closest('.slide'),99,'fuel');q('.nxt',b).click();});A(b.id,'fuel',ok);});
-// fill
-qq('.fill').forEach(b=>{D.go(b.closest('.slide').id);const ins=qq('input',b),fb=q('.fbbar',b);ins.forEach(i=>i.value=+i.dataset.a+1);q('.chk',b).click();let ok=fb.classList.contains('wrong')&&ins.every(i=>i.classList.contains('badc'));ins.forEach(i=>i.value=i.dataset.a);q('.chk',b).click();ok=ok&&fb.classList.contains('good')&&ins.every(i=>i.classList.contains('good'));A(b.id,'fill',ok);});
-// calcs
-const fire=e=>e.dispatchEvent(new Event('input',{bubbles:true}));
-qq('.calc').forEach(b=>{const id=b.dataset.calc,out=document.getElementById('out-'+id),res=()=>{const x=out.querySelector('[data-res]');return x?x.textContent:'';};D.go('c-'+id);const r0=res(),ins=qq('input',b),f=ins[0],v=f.value;f.value=String(parseFloat(v.replace(/,/g,''))*2);fire(f);const r1=res();f.value='abc';fire(f);const bad=!!out.querySelector('.err');f.value=v;fire(f);A('calc-'+id,'calc',r0!==r1&&bad&&res()===r0,{r0});measure(b.closest('.slide'),99,'calc');});
+// embedded Excel: every sheet rejects wrong input, then accepts typed formulas; buttons work
+qq('.xlq').forEach(b=>{D.go(b.closest('.slide').id);const C=JSON.parse(b.dataset.cfg),h=q('.sheet',b),api=h.__api,fb=()=>q('.xl-fb',b).textContent;let ok=true;const btn=x=>q(`[data-x="${x}"]`,b);
+ const clear=()=>btn('reset').click();clear();
+ btn('check').click();ok=ok&&q('.xl-no',b)!==null;
+ if(!C.values){C.targets.forEach(a=>api.put(a,'12345'));btn('check').click();ok=ok&&q('.xl-no',b)!==null&&/ערך ולא נוסחה/.test(fb());}
+ else{C.targets.forEach(a=>api.put(a,'12345'));btn('check').click();ok=ok&&q('.xl-no',b)!==null;}
+ clear();
+ if(C.hints){btn('hint').click();ok=ok&&!!q('.xl-tip',b);measure(b.closest('.slide'),99,'xl-hint');}
+ if(C.remind){btn('remind').click();ok=ok&&!!q('.xl-tip',b);}
+ btn('part').click();ok=ok&&C.partial.every(a=>api.raw(a)===C.solution[a]);clear();
+ C.targets.forEach(a=>api.put(a,C.solution[a]));btn('check').click();ok=ok&&q('.xl-ok',b)!==null&&h.dataset.solved==='1';
+ const errs=qq('td.e',b).length;ok=ok&&!errs;measure(b.closest('.slide'),99,'xl-solved');
+ const svg=q('svg.xlc',b);if(svg)ok=ok&&svg.querySelectorAll('polyline').length>=1;
+ btn('reset').click();btn('solve').click();ok=ok&&q('.xl-ok',b)!==null;measure(b.closest('.slide'),99,'xl-full');
+ // typing through the keyboard path, in the first target cell
+ clear();const t=C.targets[0];api.select(t);const sink=q('.xl-sink',b);sink.focus();sink.dispatchEvent(new KeyboardEvent('keydown',{key:'=',bubbles:true}));const inp=q('.xl-in',b);if(inp){inp.value=C.solution[t];inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));ok=ok&&api.raw(t)===C.solution[t];}else ok=false;
+ clear();A(b.id,'xl',ok,{targets:C.targets.length,errs});});
+// exercises with hints
+qq('.sv').forEach(b=>{D.go(b.closest('.slide').id);const ps=qq('.svp',b),fb=q('.fbbar',b);const fill=f=>ps.forEach(p=>{q('input',p).value=f(+p.dataset.a);});fill(a=>a+9);q('.chk',b).click();let ok=fb.classList.contains('wrong');q('.hnt',b).click();ok=ok&&/רמז/.test(fb.textContent);q('.rmd',b).click();ok=ok&&fb.textContent.length>5;q('.prt',b).click();ok=ok&&qq('.svs.on',b).length===1;q('.ful',b).click();ok=ok&&qq('.svs.on',b).length===qq('.svs',b).length;fill(a=>a);q('.chk',b).click();ok=ok&&fb.classList.contains('good');measure(b.closest('.slide'),99,'sv-full');q('.rst',b).click();ok=ok&&qq('.svs.on',b).length===0;A(b.id,'sv',ok);});
+// a cartoon must not sit on other content
+R.toon=[];D.slides.forEach((s,i)=>{const t=s.querySelector('.toon');if(!t)return;D.show(i);D.setAll(s,true);const T=t.getBoundingClientRect();s.querySelectorAll('.card,table,.band,.mc,.fbbar,.rl .sp,.rl .eq,.lead,.act,.steps').forEach(e=>{if(e.contains(t)||t.contains(e))return;const r=e.getBoundingClientRect();if(r.width&&r.left<T.right-2&&r.right>T.left+2&&r.top<T.bottom-2&&r.bottom>T.top+2)R.toon.push({id:s.id,on:e.className});});D.setAll(s,false);});
 qq('[data-t]').forEach(t=>{if(!D.G[t.dataset.t])R.terms.push(t.dataset.t);});
 R.unusedTerms=Object.keys(D.G).filter(k=>!document.querySelector('.slide [data-t="'+k+'"]'));
 Object.keys(D.G).forEach(k=>{D.openTerm(k);if(document.getElementById('dp').textContent.length<8||document.getElementById('dex').textContent.length<8)R.terms.push('empty '+k);});D.closeOverlays();
@@ -79,7 +84,7 @@ p = os.path.join(d, 't.html'); open(p, 'w', encoding='utf8').write(html)
 out = subprocess.run([CHROME, '--headless=new', '--disable-gpu', '--no-sandbox', f'--user-data-dir={d}/prof', '--window-size=1280,764', '--virtual-time-budget=60000', '--dump-dom', 'file://' + p], capture_output=True, text=True, timeout=300).stdout
 m = re.search(r'<html[^>]*data-test="([^"]*)"', out)
 if not m:
-    print('NO RESULT'); print(out[:600]); sys.exit(1)
+    print('NO RESULT', re.findall(r'data-err="([^"]*)"', out)[:1]); sys.exit(1)
 R = json.loads(hh.unescape(m.group(1)))
 print('slides', R['count'], 'mc', R['mcN'], 'walk', R['walked'], 'dragY', R.get('dragY'))
 print('errors', R['errors'])
@@ -92,5 +97,6 @@ print('reveal problems', R['reveal'])
 bad = [x for x in R['mc'] if x != 1]
 print('mc ok', len(R['mc']) - len(bad), 'bad', bad)
 print('activities', R['actN'], 'failed', [a for a in R['act'] if not a['ok']])
-print(' sample', [a for a in R['act'] if a['kind'] in ('calc', 'carry', 'builder')])
+print('toon overlaps', R['toon'])
+print('counts', {k: sum(1 for a in R['act'] if a['kind'] == k) for k in {a['kind'] for a in R['act']}})
 print('terms', R['terms'], 'unused', R['unusedTerms'], 'bad go', R['go'])

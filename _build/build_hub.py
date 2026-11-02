@@ -3,7 +3,7 @@ import os, re
 H = os.path.dirname(os.path.abspath(__file__))
 n = lambda s: f'<span class="n">{s}</span>'
 UP = [(2, 'חוזים עתידיים: הרעיון הבסיסי'), (3, 'חוזים עתידיים: יישומים עסקיים'), (4, 'אופציות: מבוא'), (5, 'אופציות: אסטרטגיות הגנה'), (6, 'אסטרטגיות רווח ומסחר'),
-      (7, 'אופציות אירופאיות ואמריקאיות: מימוש מוקדם וחסמים'), (8, 'עקרונות בתמחור'), (9, 'עסקאות החלפה (Swap)'), (10, 'מכשירים מורכבים'), (11, 'ניהול סיכונים ארגוני'), (12, 'כשלים מפורסמים, השוק הישראלי וקריירה'), (13, 'סיכום וחזרה לקראת המבחן')]
+      (7, 'עקרונות בתמחור'), (8, 'אופציות אירופאיות ואמריקאיות: מימוש מוקדם וחסמים'), (9, 'עסקאות החלפה (Swap)'), (10, 'מכשירים מורכבים'), (11, 'ניהול סיכונים ארגוני'), (12, 'כשלים מפורסמים, השוק הישראלי וקריירה'), (13, 'סיכום וחזרה לקראת המבחן')]
 ups = ''.join(f'<li><span class="un">{n(i)}</span><span>{t}</span><em>בקרוב</em></li>' for i, t in UP)
 src = open(os.path.join(H, '..', '..', 'finance-for-managers', 'index.html'), encoding='utf8').read()
 css = re.search(r'<style>(.*?)</style>', src, re.S).group(1)
@@ -59,16 +59,16 @@ page = f'''<!doctype html>
 <div class="lec-head"><div class="lec-n">1</div><div><h3>מבוא: למה צריך מכשירים מתוחכמים?</h3><div class="sub">{n('2.11.2026')} · קריאה: Hull, פרק {n(1)}</div></div></div>
 <div class="lec-body">
 <div><h4>מה לומדים בשיעור</h4><ul class="learn">
-<li>חשיפה למחיר: מתי מכשיר מוסיף ערך, ומתי הוא מיותר או מסוכן</li>
-<li>אבני הבניין: חוזה אקדמה, חוזה עתידי, אופציה ועסקת החלפה</li>
-<li>אופציה אירופאית ואמריקאית: הגדרה והדגמה ראשונה</li>
-<li>השחקנים: מגדר, ספקולנט וארביטראז׳יסט</li>
-<li>השווקים: שיקגו, תל אביב ושוק מעבר לדלפק</li>
-<li>מקרה בוחן: גידור דלק בחברת תעופה, עם נתוני אמת מהענף</li>
+<li>מה זה נגזר (Derivative), ולמה נכנסים אליו: גידור, ספקולציה וחיסכון בעלויות</li>
+<li>חשיפה (Exposure) וחשיפה נטו, עם מקרים שלמים</li>
+<li>חוזה אקדמה (Forward) וחוזה עתידי (Futures)</li>
+<li>אופציות: Call ו-Put, תזרים (Payoff), רווח (P&amp;L), נקודת איזון ומכפיל</li>
+<li>השחקנים והשווקים: שיקגו, תל אביב ושוק מעבר לדלפק (OTC)</li>
+<li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
 </ul></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-1/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(70)} שקפים, {n(18)} פעילויות עם בדיקה מיידית: ציור קו רווח, בניית פוזיציה, מעבדת ארביטראז׳ ומעבדת גידור</span></span></a>
-<a class="lk s" href="lectures/lecture-1/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות הפעילויות, שאלות פתורות ומילון מושגים</span></span></a>
+<a class="lk p" href="lectures/lecture-1/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(89)} שקפים, {n(18)} תרגילי אקסל בתוך השקפים ו-{n(6)} תרגילים מסכמים, עם רמזים ופתרונות</span></span></a>
+<a class="lk s" href="lectures/lecture-1/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
 <a class="lk x" href="materials/practice-1.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(9)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
 <a class="lk r" href="materials/practice-1-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
 </div></div>
@@ -79,7 +79,7 @@ page = f'''<!doctype html>
 <div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div>
 </div></div>
 <div class="todo"><h4>📝 תרגול עצמי לשיעור {n(1)}</h4><ol>
-<li>במצגת: הפעילויות, ובסופה תשע שאלות לבית.</li>
+<li>במצגת: התרגילים המסכמים למפגש 1, ובסופה תשע שאלות לבית.</li>
 <li>בקובץ התרגול ב-Excel: קודם פותרים, ורק אחר כך משווים לקובץ הפתרונות.</li>
 <li>קריאה: Hull, פרק {n(1)}.</li>
 </ol></div>

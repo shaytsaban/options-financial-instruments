@@ -101,6 +101,8 @@ tr{break-inside:avoid}
 .src{margin:0;padding-right:5mm;font-size:10.6pt}.src .l{direction:ltr;unicode-bidi:isolate}.nodes{width:150mm;display:block;margin:1mm auto;direction:ltr;unicode-bidi:isolate;font-family:"David"}
 code.xl{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Courier New",monospace;font-size:10.4pt;background:#eef2ff;border-radius:1mm;padding:0 1.2mm;font-weight:700}
 .chartw{padding:1mm}.calcp b{color:#4f33c9}
+.toon{display:flex;align-items:center;gap:2mm;margin:1mm 0;break-inside:avoid}.toon svg{width:13mm;height:13mm;flex:none}.bub{font-weight:700;color:var(--navy);background:#f6f2ea;border-radius:2mm;padding:.8mm 2.4mm}
+.gv{display:block;font-weight:700}.gm{display:block;font-size:9.8pt;color:var(--mut)}.steptbl td,.steptbl th{text-align:center}.rl{display:block}.qg{display:grid;grid-template-columns:1fr 1fr;gap:3mm;align-items:start}.qr{min-width:0}.solw{min-width:0}.pay{width:100%}
 .glc{columns:2;column-gap:5mm}
 .gl{border-right:1mm solid var(--coral);padding:.6mm 2.2mm;margin:0 0 1.6mm;break-inside:avoid;font-size:10.6pt;line-height:1.25}
 .gl .th{font-weight:700;color:var(--navy);font-size:11.4pt}

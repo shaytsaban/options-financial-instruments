@@ -13,7 +13,7 @@ HEAD = f'{COURSE} · קורס 123377 · מפגש 1 · 2.11.2026'
 def render(s, total):
     k = s['kind']
     if k == 'title':
-        chips = [f'{NACT[0]} פעילויות עם בדיקה מיידית', f'{NMC} שאלות רב ברירה', '6 שאלות פתורות', 'מקרה בוחן: דלק סילוני']
+        chips = [f'{NX} תרגילי אקסל בתוך השקפים', f'{NSV} תרגילים עם רמזים', f'{NMC} שאלות רב ברירה', 'מקרה בוחן: דלק סילוני']
         return (f'<section class="slide dark s1 on" id="s-title" data-title="פתיחה">'
                 '<div class="orb" style="width:320px;height:320px;background:radial-gradient(circle at 30% 30%,#58e0cf,#0f9d90 60%,transparent 72%);left:-90px;top:-70px"></div>'
                 '<div class="orb" style="width:180px;height:180px;background:radial-gradient(circle at 30% 30%,#ffd37a,#e8960c 60%,transparent 72%);left:230px;bottom:90px;animation-delay:-3s"></div>'
@@ -41,12 +41,14 @@ def render(s, total):
 
 
 NMC = sum(s['body'].count('class="mc"') for s in SL)
+NX = sum(s['body'].count('act xlq') for s in SL)
+NSV = sum(s['body'].count('act sv') for s in SL)
 slides_html = '\n'.join(render(s, TOTAL_PARTS) for s in SL)
 fonts = R('shell/fonts.css')
 base = R('shell/base.css')
 tail = R('shell/tail.html')
 gj = json.dumps(G, ensure_ascii=False)
-js = f'const COURSE={json.dumps(COURSE, ensure_ascii=False)};\nconst G={gj};\n' + R('deck.js') + '\n' + R('act.js')
+js = f'const COURSE={json.dumps(COURSE, ensure_ascii=False)};\nconst G={gj};\n' + R('deck.js') + '\n' + R('xl.js') + '\n' + R('act.js')
 title = f'{COURSE} | שיעור 1 | למה צריך מכשירים מתוחכמים'
 html = (f'<!doctype html>\n<html lang="he" dir="rtl">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}</title>\n<style>\n'
         + fonts + base + R('deck.css') + '</style>\n</head>\n<body>\n<div class="stage" id="stage">\n' + slides_html + '\n' + tail
@@ -62,5 +64,5 @@ for m in re.finditer(r'class="([^"]+)"', slides_html + tail + R('deck.js') + R('
     for c in m.group(1).split():
         if re.fullmatch(r'[\w-]+', c): used.add(c)
 missing = sorted(c for c in used if not re.search(r'\.' + re.escape(c) + r'(?![\w-])', css))
-print('slides', html.count('<section class="slide'), 'activities', NACT[0], 'mc', NMC, 'bytes', len(html))
+print('slides', html.count('<section class="slide'), 'activities', NACT[0], 'excel', NX, 'solve', NSV, 'mc', NMC, 'bytes', len(html))
 print('classes without a rule:', missing)
