@@ -26,6 +26,9 @@ D.slides.forEach((s,i)=>{D.show(i);D.setAll(s,true);measure(s,i,'open');solveWid
  // a bare minus before a number must stay on the left inside an LTR run
  s.querySelectorAll('.tbl2 td,.m').forEach(e=>{if(/\d\s*−\s*$/.test(e.textContent))R.bidi.push({id:s.id,t:e.textContent});});
  s.querySelectorAll('.mc').forEach(m=>{m.classList.remove('done');m.querySelectorAll('.o').forEach(o=>o.classList.remove('ok','bad'));});D.setAll(s,false);});
+
+// bidi by measurement: inside an LTR run the first character must sit left of the last
+R.bidiM={checked:0,bad:[]};D.slides.forEach((s,i)=>{D.show(i);D.setAll(s,true);s.querySelectorAll('.eq,.m,.n').forEach(e=>{const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);const ts=[];let t;while(t=w.nextNode())if(t.nodeValue.trim())ts.push(t);if(!ts.length)return;const a=ts[0],b=ts[ts.length-1];const ia=a.nodeValue.search(/\S/),ib=b.nodeValue.length-1-b.nodeValue.split('').reverse().join('').search(/\S/);if(a===b&&ia>=ib)return;const r=document.createRange();r.setStart(a,ia);r.setEnd(a,ia+1);const x=r.getBoundingClientRect();r.setStart(b,ib);r.setEnd(b,ib+1);const y=r.getBoundingClientRect();if(x.width===0||y.width===0||e.closest('.frac')||e.querySelector('.frac')&&false)return;R.bidiM.checked++;if(x.left>y.left+0.5&&Math.abs(x.top-y.top)<4)R.bidiM.bad.push({id:s.id,t:e.textContent.slice(0,40)});});D.setAll(s,false);});
 // reveals
 D.slides.forEach((s,i)=>{const g=D.groups(s).length;D.show(i);let c=0;while(D.pending(s).length&&c<60){D.next();c++;}if(c!==g||D.cur()!==i)R.reveal.push({id:s.id,g,c});let b=0;while(D.groups(s).some(x=>x[0].classList.contains('show'))&&b<60){D.prev();b++;}if(b!==g||D.cur()!==i)R.reveal.push({id:s.id,back:b,g});});
 D.show(0);let k=0;while(D.cur()<D.slides.length-1&&k<2000){D.next();k++;}R.walked=[k,D.cur()];
@@ -84,6 +87,7 @@ print('overflow', len(R['overflow']));[print('  ', o) for o in R['overflow']]
 print('eq wider than box', R['eqwide'])
 print('small text', len(R['small']));[print('  ', o) for o in R['small'][:30]]
 print('chars', R['chars']); print('abbr', R['abbr']); print('bidi', R['bidi'])
+print('bidi measured', R['bidiM']['checked'], 'reversed', R['bidiM']['bad'][:12])
 print('reveal problems', R['reveal'])
 bad = [x for x in R['mc'] if x != 1]
 print('mc ok', len(R['mc']) - len(bad), 'bad', bad)
