@@ -37,10 +37,19 @@ $$('.numq').forEach(b=>{const a=+b.dataset.a,t=+b.dataset.tol,i=$('input',b),fb=
 const nCell=a=>{const m=/^([A-Z]+)(\d+)$/.exec(a);return {L:m[1],r:+m[2]};};
 const rangeCells=(a,b)=>{const A=nCell(a),B=nCell(b),o=[];for(let r=A.r;r<=B.r;r++)o.push(A.L+r);return o;};
 $$('.xlq').forEach(b=>{const cfg=cfg0(b),host=$('.sheet',b),svg=$('svg.xlc',b);let api;
- const draw=()=>{if(!svg)return;const c=cfg.chart,xs=rangeCells(...c.x).map(a=>api.get(a));const f=frame({id:b.id,x0:c.x0,x1:c.x1,y0:c.y0,y1:c.y1,xt:c.xt,yt:c.yt,W:c.W||470,H:c.H||330,xl:c.xl,yl:c.yl});let p=f.p+clip(f);
-  c.series.forEach(se=>{const ys=rangeCells(...se.y).map(a=>api.get(a));const pts=[];xs.forEach((x,i)=>{if(typeof x==='number'&&typeof ys[i]==='number')pts.push([x,ys[i]]);});
-   if(pts.length>1)p+=line(f,pts,se.c,4);pts.forEach(([x,y])=>{p+=`<circle cx="${f.X(x)}" cy="${f.Y(y)}" r="5" fill="${se.c}" clip-path="url(#clp${f.id})"/>`;});
-   if(pts.length){const [x,y]=pts[pts.length-1];p+=f.tx(f.X(x)-8,f.Y(y)+(se.dy||-10),se.lab,{a:'end',fill:se.c,w:800,fs:17});}});
+ const nice=(lo,hi,n)=>{const span=hi-lo||Math.abs(hi)||1,raw=span/n,mag=Math.pow(10,Math.floor(Math.log10(raw))),st=[1,2,2.5,5,10].map(m=>m*mag).find(s=>s>=raw);const a=Math.floor(lo/st)*st,b=Math.ceil(hi/st)*st,t=[];for(let v=a;v<=b+st/2;v+=st)t.push(+v.toFixed(8));return t;};
+ const draw=()=>{if(!svg)return;const c=cfg.chart,xs=rangeCells(...c.x).map(a=>api.get(a));
+  // the chart follows the sheet: axes widen to the prices and results the student types
+  const ser=c.series.map(se=>rangeCells(...se.y).map(a=>api.get(a)));const nx=xs.filter(v=>typeof v==='number');const ny=[].concat(...ser.map((ys,k)=>ys.filter((v,i)=>typeof v==='number'&&typeof xs[i]==='number')));
+  let x0=c.x0,x1=c.x1,y0=c.y0,y1=c.y1,xt=c.xt,yt=c.yt;
+  if(nx.length>1){x0=Math.min(...nx);x1=Math.max(...nx);if(x0===x1){x0-=1;x1+=1;}const ux=[...new Set(nx)].sort((a,b)=>a-b);xt=ux.length<=7?ux:nice(x0,x1,5).filter(v=>v>=x0&&v<=x1);}
+  if(ny.length){const lo=Math.min(0,...ny,c.y0),hi=Math.max(0,...ny,c.y1);yt=nice(lo,hi,5);y0=yt[0];y1=yt[yt.length-1];}
+  const f=frame({id:b.id,x0,x1,y0,y1,xt,yt,W:c.W||470,H:c.H||330,xl:c.xl,yl:c.yl});let p=f.p+clip(f);
+  const single=c.series.length===1;
+  c.series.forEach((se,k)=>{const ys=ser[k];const pts=[];xs.forEach((x,i)=>{if(typeof x==='number'&&typeof ys[i]==='number')pts.push([x,ys[i]]);});pts.sort((a,b)=>a[0]-b[0]);
+   if(pts.length>1)p+=line(f,pts,se.c,4);pts.forEach(([x,y])=>{p+=`<circle cx="${f.X(x)}" cy="${f.Y(y)}" r="5.5" fill="${se.c}"/>`;if(single&&pts.length<=7){const X=f.X(x),an=X>f.W-f.mr-40?'end':X<f.ml+40?'start':'middle';p+=f.tx(X+(an==='start'?6:an==='end'?-6:0),f.Y(y)+(y<0?22:-11),fg(y),{fill:se.c,w:800,fs:15,a:an});}});
+   if(pts.length&&!single){const [x,y]=pts[pts.length-1];p+=f.tx(f.X(x)-8,f.Y(y)+(se.dy||-10),se.lab,{a:'end',fill:se.c,w:800,fs:17});}});
+  if(single&&c.series[0].lab)p+=f.tx(f.W-f.mr-4,f.mt+16,c.series[0].lab,{a:'end',fill:c.series[0].c,w:800,fs:16});
   svg.innerHTML=p;};
  cfg.onChange=draw;api=XL.mount(host,cfg);host.__api=api;const fbx=$('.xl-fb',host);if(fbx)$('.xlside',b).appendChild(fbx);draw();});
 
