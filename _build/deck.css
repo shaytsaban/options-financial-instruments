@@ -316,3 +316,9 @@ code.xl{direction:ltr;unicode-bidi:isolate;display:inline-block;font:700 20px 'M
 .tnote{font-size:18.5px;line-height:1.32}
 .steptbl{margin-top:8px}.steptbl td{padding:6px 8px}.gv{display:block;font-size:21px;font-weight:800;color:var(--navy2)}.gm{display:block;font-size:17px;color:var(--mut);line-height:1.25}.gm .m{color:var(--mut);font-weight:500}
 .tbl2 th .m{color:#fff}
+.xl-tools{position:relative}
+.xl-msg{position:absolute;left:8px;top:-34px;background:#217346;color:#fff!important;border-radius:6px;padding:3px 10px;margin:0;z-index:6;pointer-events:none}
+.xl-msg:empty{display:none}
+.xlrow>div:last-child .xl-fb{margin-top:8px}
+.xlrow.solo{grid-template-columns:minmax(0,1fr) 340px}
+.xlside .xl-fb{margin-top:0}.xlside svg+.xl-fb{margin-top:8px}

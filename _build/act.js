@@ -42,7 +42,7 @@ $$('.xlq').forEach(b=>{const cfg=cfg0(b),host=$('.sheet',b),svg=$('svg.xlc',b);l
    if(pts.length>1)p+=line(f,pts,se.c,4);pts.forEach(([x,y])=>{p+=`<circle cx="${f.X(x)}" cy="${f.Y(y)}" r="5" fill="${se.c}" clip-path="url(#clp${f.id})"/>`;});
    if(pts.length){const [x,y]=pts[pts.length-1];p+=f.tx(f.X(x)-8,f.Y(y)+(se.dy||-10),se.lab,{a:'end',fill:se.c,w:800,fs:17});}});
   svg.innerHTML=p;};
- cfg.onChange=draw;api=XL.mount(host,cfg);host.__api=api;draw();});
+ cfg.onChange=draw;api=XL.mount(host,cfg);host.__api=api;const fbx=$('.xl-fb',host);if(fbx)$('.xlside',b).appendChild(fbx);draw();});
 
 /* ---------- worked exercise with hints, reminder, partial and full solution ---------- */
 $$('.sv').forEach(b=>{const parts=$$('.svp',b),fb=$('.fbbar',b),sol=$$('.svs',b);let h=0;const H=cfg0(b);

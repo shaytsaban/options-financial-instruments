@@ -51,8 +51,8 @@ qq('.draw').forEach(b=>{D.go(b.closest('.slide').id);const C=JSON.parse(b.datase
 qq('.xlq').forEach(b=>{D.go(b.closest('.slide').id);const C=JSON.parse(b.dataset.cfg),h=q('.sheet',b),api=h.__api,fb=()=>q('.xl-fb',b).textContent;let ok=true;const btn=x=>q(`[data-x="${x}"]`,b);
  const clear=()=>btn('reset').click();clear();
  btn('check').click();ok=ok&&q('.xl-no',b)!==null;
- if(!C.values){C.targets.forEach(a=>api.put(a,'12345'));btn('check').click();ok=ok&&q('.xl-no',b)!==null&&/ערך ולא נוסחה/.test(fb());}
- else{C.targets.forEach(a=>api.put(a,'12345'));btn('check').click();ok=ok&&q('.xl-no',b)!==null;}
+ if(!C.values){C.targets.forEach(a=>api.put(a,'12345'));btn('check').click();ok=ok&&q('.xl-no',b)!==null&&/ערך ולא נוסחה/.test(fb());measure(b.closest('.slide'),99,'xl-wrong');}
+ else{C.targets.forEach(a=>api.put(a,'12345'));btn('check').click();ok=ok&&q('.xl-no',b)!==null;measure(b.closest('.slide'),99,'xl-wrong');}
  clear();
  if(C.hints){btn('hint').click();ok=ok&&!!q('.xl-tip',b);measure(b.closest('.slide'),99,'xl-hint');}
  if(C.remind){btn('remind').click();ok=ok&&!!q('.xl-tip',b);}

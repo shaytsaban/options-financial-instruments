@@ -229,7 +229,7 @@ def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hint
     if chart:
         cfgd['chart'] = chart
         side = f'<svg class="xlc" viewBox="0 0 {chart.get("W", 470)} {chart.get("H", 330)}" role="img" aria-label="תרשים"></svg>'
-    body = f'<div class="act xlq" id="{sid}-x" data-cfg="{_cfg(cfgd)}"><div class="tasktxt">{TX(task)}</div><div class="xlrow{"" if chart else " solo"}"><div class="sheet"></div>{"<div>" + side + "</div>" if chart else ""}</div>{extra}</div>'
+    body = f'<div class="act xlq" id="{sid}-x" data-cfg="{_cfg(cfgd)}"><div class="tasktxt">{TX(task)}</div><div class="xlrow{"" if chart else " solo"}"><div class="sheet"></div><div class="xlside">{side}</div></div>{extra}</div>'
     S(sid, title, h, body, kick=f'חלק {CUR[0]} · אקסל בתוך השקף')
 
 
