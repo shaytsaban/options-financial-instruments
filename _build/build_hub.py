@@ -8,6 +8,12 @@ ups = ''.join(f'<li><span class="un">{n(i)}</span><span>{t}</span><em>בקרוב
 src = open(os.path.join(H, '..', '..', 'finance-for-managers', 'index.html'), encoding='utf8').read()
 css = re.search(r'<style>(.*?)</style>', src, re.S).group(1)
 css += '''
+.contact{margin-top:14px;background:#fff7e0;border:2px solid #f0b429;border-radius:18px;padding:16px 24px;display:flex;gap:16px;align-items:center}
+.contact .ic{font-size:34px;flex:none}
+.contact h2{font-size:20px;font-weight:800;line-height:1.3;color:var(--navy2)}
+.contact h2 a{direction:ltr;unicode-bidi:isolate;display:inline-block;text-decoration:underline;overflow-wrap:anywhere}
+.contact p{font-size:16.5px;line-height:1.45;margin-top:3px;color:#4a4130}
+@media (max-width:760px){.contact{padding:14px 16px}.contact .ic{display:none}.contact h2{font-size:18px}}
 .live{margin-top:-26px;position:relative;z-index:2;background:linear-gradient(120deg,#ff6a4d,#ff8f5a);color:#fff;border-radius:20px;padding:22px 28px;display:flex;gap:20px;align-items:center;box-shadow:0 14px 34px rgba(255,106,77,.35)}
 .live .ic{font-size:44px;flex:none}
 .live h2{font-size:26px;font-weight:800;line-height:1.2}
@@ -59,6 +65,11 @@ page = f'''<!doctype html>
 <div class="ic">🎥</div>
 <div><h2>המפגשים החיים השבועיים ב-Zoom</h2><p>כל המפגשים מתקיימים בקישור הזה. ההקלטות נמצאות למטה, בכרטיס של כל שיעור: <a href="#lesson-1">למעבר להקלטות</a>.</p></div>
 <a class="go" href="https://hdq-colman-ac.zoom.us/j/3160447945" target="_blank" rel="noopener">כניסה למפגש החי<small>Zoom</small></a>
+</section>
+<section class="contact" id="contact">
+<div class="ic">✉️</div>
+<div><h2>פניות לד״ר שי צבאן רק במייל: <a href="mailto:shay.tsaban@gmail.com">shay.tsaban@gmail.com</a></h2>
+<p>תכתובות בכל ערוץ אחר לא ייענו. <b>חובה לרשום בכל תכתובת את שם המוסד ואת שם הקורס.</b></p></div>
 </section>
 <div class="solutions">
 <div class="ic">📋</div>

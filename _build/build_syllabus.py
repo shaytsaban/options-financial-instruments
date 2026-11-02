@@ -28,7 +28,7 @@ REC = ['Hull, J. C. (2023). Risk Management and Financial Institutions (6th ed.)
 lit = lambda x: ''.join(f'<li><span class="n">{e(t)}</span></li>' for t in x)
 body = f'''
 <div class="hd"><div class="k">המסלול האקדמי של המכללה למנהל · התמחות במימון · סמסטר א׳ תשפ״ז</div><h1 class="t">אופציות ומכשירים פיננסיים מתוחכמים</h1><div class="s">סילבוס הקורס · {n('Financial options and instruments')}</div></div>
-<table class="meta"><tr><td>קוד קורס</td><td>{n('123377')}</td></tr><tr><td>פקולטה</td><td>מנהל עסקים, תואר ראשון</td></tr><tr><td>היקף</td><td>{n('3.00')} נקודות זכות, {n('3.00')} שעות שבועיות, {n('13')} מפגשים</td></tr><tr><td>מרצה</td><td>ד״ר שי צבאן · {n('Shay.tsaban@gmail.com')}</td></tr><tr><td>מתרגל</td><td>יהל צרפתי · {n('yahelzarfati202@gmail.com')} · ב-{n('Zoom')}, בתיאום מראש</td></tr><tr><td>מפגש ראשון</td><td>{n('2.11.2026')}</td></tr><tr><td>שיטת ההוראה</td><td>הרצאות המשולבות בתרגול מעשי</td></tr><tr><td>הרכב הציון</td><td>מבחן {n('100%')}: מבחן פתוח במעבדה, על גבי מחשב</td></tr><tr><td>אתר הקורס</td><td><a class="url" href="{SITE}">{SITE}</a></td></tr></table>
+<table class="meta"><tr><td>קוד קורס</td><td>{n('123377')}</td></tr><tr><td>פקולטה</td><td>מנהל עסקים, תואר ראשון</td></tr><tr><td>היקף</td><td>{n('3.00')} נקודות זכות, {n('3.00')} שעות שבועיות, {n('13')} מפגשים</td></tr><tr><td>מרצה</td><td>ד״ר שי צבאן · {n('shay.tsaban@gmail.com')}</td></tr><tr><td>מתרגל</td><td>יהל צרפתי · {n('yahelzarfati202@gmail.com')} · ב-{n('Zoom')}, בתיאום מראש</td></tr><tr><td>מפגש ראשון</td><td>{n('2.11.2026')}</td></tr><tr><td>שיטת ההוראה</td><td>הרצאות המשולבות בתרגול מעשי</td></tr><tr><td>הרכב הציון</td><td>מבחן {n('100%')}: מבחן פתוח במעבדה, על גבי מחשב</td></tr><tr><td>אתר הקורס</td><td><a class="url" href="{SITE}">{SITE}</a></td></tr></table>
 <h3>תיאור הקורס</h3>
 <p>הקורס עוסק במכשירים פיננסיים מתוחכמים: חוזים עתידיים, אופציות, עסקאות החלפה וחוב מובנה. נלמד איך הם פועלים, כיצד מתמחרים אותם, ומתי הם מוסיפים ערך לעסק ומתי הם מיותרים או מסוכנים. הקורס משלב חישובים ב-Excel, ניתוח דוחות של חברות ציבוריות ומקרי בוחן מהשוק הישראלי והבין לאומי.</p>
 <h3>תוצרי למידה: בסוף הקורס הסטודנטים ידעו</h3>
@@ -47,7 +47,7 @@ body = f'''
 <p><b>להרחבה (לא חובה):</b></p><ul class="lit">{lit(REC)}</ul>
 <p>{n('Hull')}, פרקים {n('11')} ו-{n('13')}, ו-{n('McDonald')}, פרקים {n('9')} ו-{n('10')}, הם הקריאה למפגש {n('8')} על אופציות אירופאיות ואמריקאיות.</p>
 <h3>יצירת קשר</h3>
-<p>שאלות על החומר: מייל למרצה או למתרגל. בפנייה כדאי לציין את שם הקורס.</p>'''
+<p>פניות למרצה רק במייל: {n('shay.tsaban@gmail.com')}. תכתובות בכל ערוץ אחר לא ייענו. חובה לרשום בכל תכתובת את שם המוסד ואת שם הקורס. פניות למתרגל: {n('yahelzarfati202@gmail.com')}.</p>'''
 CSS = '''
 @font-face{font-family:"David";src:url("david.ttf");font-weight:400}
 @font-face{font-family:"David";src:url("davidbd.ttf");font-weight:700}
