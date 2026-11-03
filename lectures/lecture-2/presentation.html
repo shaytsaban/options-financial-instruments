@@ -777,7 +777,7 @@ function mount(host,cfg){
   if(x==='reset'){load();marks={};hintN=0;if(fb)fb.innerHTML='';sel={r:0,c:0};sel2={...sel};render();if(cfg.onChange)cfg.onChange();}
   if(x==='solve'){Object.entries(cfg.solution).forEach(([a,v])=>S.set(a,v));Object.assign(S.fmt,cfg.solFmt||{});render();check(true);if(cfg.onChange)cfg.onChange();}
   if(x==='check')check(false);});
- /* checking: the value must match, the cell must hold a formula with references, and no number from the table may be typed in */
+ /* checking: the value must match, the cell must hold a formula with references (unless the solution has none: =14*12 converts years to months), and no number from the table may be typed in */
  const needOf=a=>cfg.need?(typeof cfg.need==='object'?cfg.need[a]:cfg.need):null;
  function check(silent){const sol=new Sheet(R,C);Object.entries(base).forEach(([a,v])=>sol.set(a,v));Object.entries(cfg.solution).forEach(([a,v])=>sol.set(a,v));sol.recalc();
   S.recalc();marks={};const notes=[];let ok=0;
@@ -786,7 +786,7 @@ function mount(host,cfg){
    const allowed=new Set(lits(sf));let why='';
    if(!raw)why='ריק';else if(raw[0]!=='='&&cfg.values){if(typeof want==='number'&&Math.abs((typeof got==='number'?got:NaN)-want)>1e-6||typeof got!=='number')why='המספר אינו נכון. חשבו שוב לפי ההסבר';}else if(raw[0]!=='=')why='הוקלד ערך ולא נוסחה. נוסחה מתחילה בסימן =';
    else if(isErr(got))why=`שגיאה ${got.err}: בדקו את הכתיב ואת הסוגריים`;
-   else if(raw[0]==='='&&!/[A-Za-z]{1,2}\d/.test(raw.replace(/\$/g,'').replace(/[A-Z]+\(/g,''))&&!cfg.values)why='אין בנוסחה הפניה לתאים. השתמשו בכתובות התאים במקום במספרים';
+   else if(raw[0]==='='&&!/[A-Za-z]{1,2}\d/.test(raw.replace(/\$/g,'').replace(/[A-Z]+\(/g,''))&&/[A-Za-z]{1,2}\d/.test(sf.replace(/\$/g,'').replace(/[A-Z]+\(/g,''))&&!cfg.values)why='אין בנוסחה הפניה לתאים. השתמשו בכתובות התאים במקום במספרים';
    else if(raw[0]==='='&&!cfg.values&&lits(raw).some(x=>!allowed.has(x)))why='הוקלד בנוסחה מספר. כשהנתון קיים בטבלה, מפנים לתא שלו';
    else if(needOf(a)&&!new RegExp(needOf(a),'i').test(raw))why=(/^קבעו/.test(cfg.needMsg||'')?'קיבוע: ':'עבודה יעילה: ')+(cfg.needMsg||'יש פונקציה מתאימה לפעולה הזו');
    else if(typeof want==='number'&&(typeof got!=='number'||Math.abs(got-want)>1e-6))why='התוצאה אינה נכונה. בדקו את סדר הפעולות ואת התאים שבחרתם';
