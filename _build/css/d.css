@@ -1,0 +1,35 @@
+/* section owner: lesson 2, parts 3 and 4 (p-3 to x-f4). Every rule is scoped to a slide id. */
+#s-exch .d-tl{display:block;width:100%;height:auto;font-family:inherit;direction:ltr;unicode-bidi:isolate}
+#s-exch .card .ct{margin-bottom:0}
+#s-exch .d-ex{margin-top:12px}
+#s-exch .d-ex th:first-child{white-space:nowrap}
+#s-exch .d-ex td:nth-child(2){white-space:nowrap;font-size:18px;color:#3d4a66}
+#s-exch .d-ex td{padding:7px 12px}
+#s-tase .d-feat td:first-child{white-space:nowrap}
+#s-clear .d-clr{display:block;width:100%;height:auto}
+#s-clear .mtab td:first-child{white-space:nowrap}
+#s-clear .toon{position:static;align-self:flex-start}
+#s-clear .toon svg{width:86px;height:86px}
+#s-clear .toon .bub{margin-bottom:46px}
+#s-otc .d-otcrow{margin-top:10px}
+#s-otc .mtab td:first-child{white-space:nowrap}
+#s-otc .d-cmp td{font-size:18px;padding:7px 10px;line-height:1.3}
+#s-otc .d-cmp th:first-child{width:50%}
+#s-otc .d-cmp td:nth-child(2),#s-otc .d-cmp td:nth-child(3){font-weight:800;color:#1b2d55;text-align:center}
+#s-otc .d-cmp td:nth-child(3){font-size:19px;color:#b8391f}
+#s-otc .d-cmp th{font-size:17px;line-height:1.25;text-align:center}
+#a-venue .stbl td{padding:9px 14px}
+#s-f-why .toon{position:static;align-self:flex-start}
+#s-f-why .toon svg{width:96px;height:96px}
+#s-f-why .toon .bub{margin-bottom:44px}
+#s-f-why .card .lg{font-size:22px;line-height:1.42;margin:0 0 8px}
+#s-f-why .d-sw .tbl2{margin-top:4px}
+#s-f-why .d-sw .cap{margin-top:6px}
+#s-f-why .d-fm{background:#f4f1ff;border-right:4px solid #6d4df2;border-radius:8px;padding:6px 12px;margin-top:8px;font-size:18px;line-height:1.35;color:#2a2350}
+#s-f-why .d-fm>b{color:#4f33c9}
+#s-f-1 .d-f1row{margin-top:10px;align-items:flex-start}
+#s-f-1 .d-f1row>.col{flex:1.5 1 0;min-width:0}
+#s-f-1 .d-f1row>.d-fch{flex:1 1 0;min-width:0;padding:8px 10px}
+#s-f-1 .d-fch svg{display:block;width:100%;height:auto}
+#x-f1 .xl-pr button,#x-f2 .xl-pr button,#x-f3 .xl-pr button,#x-f4 .xl-pr button{padding:7px 8px}
+#x-f3 .xlrow.solo{grid-template-columns:minmax(0,1fr) 450px}
