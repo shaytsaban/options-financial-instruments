@@ -1,0 +1,139 @@
+
+/* ===== h.css: lesson 1, t-imp to s-end (content_e2.py). Every rule is scoped to a slide id. ===== */
+
+/* --- t-imp: story on top, formulas and letters beside the answer boxes, a solution table that fills row by row --- */
+#t-imp .sv .tasktxt{font-size:20px;line-height:1.38;margin-bottom:8px;padding:8px 16px}
+#t-imp .h-svg{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:14px;align-items:stretch}
+#t-imp .h-svr,#t-imp .h-svl{display:flex;flex-direction:column;gap:8px;min-width:0}
+#t-imp .sv-fm{margin:0;font-size:18px;line-height:1.5;padding:7px 14px}
+#t-imp .sv-fm>b{display:block;margin-bottom:2px}
+#t-imp .h-symt{font-size:17.5px}
+#t-imp .h-symt th{padding:5px 10px;font-size:17px}
+#t-imp .h-symt td{padding:4px 10px;line-height:1.25}
+#t-imp .h-symt td:first-child{text-align:center;width:52px}
+#t-imp .svps{grid-template-columns:1fr;gap:6px;margin:0}
+#t-imp .svp{font-size:19px;padding:5px 14px;box-shadow:0 2px 0 var(--line)}
+#t-imp .svp input{width:150px}
+#t-imp .actbar{margin-top:0;gap:6px}
+#t-imp .sv .abtn{font-size:16.5px;padding:7px 11px}
+#t-imp .sv .fbbar{margin-top:0;flex:1 1 auto;font-size:17.5px}
+#t-imp .h-sol{margin-top:8px;table-layout:fixed;font-size:18px}
+#t-imp .h-sol th{padding:6px 10px;font-size:17.5px}
+#t-imp .h-sol td{padding:5px 10px;line-height:1.28}
+#t-imp .h-sol th:nth-child(1){width:190px}#t-imp .h-sol th:nth-child(2){width:175px}#t-imp .h-sol th:nth-child(3){width:255px}#t-imp .h-sol th:nth-child(4){width:150px}
+#t-imp tr.svs{display:table-row}
+#t-imp tr.svs:not(.on) td:not(:first-child){color:transparent;background:#faf7f0}
+#t-imp tr.svs:not(.on) td:not(:first-child) *{visibility:hidden}
+#t-imp tr.svs.on td{background:#eef7f6}
+#t-imp tr.svs.on td:first-child{background:#fff}
+
+/* --- Excel slides: letters under the formulas, a terms line that opens downward, memes in the free side space --- */
+:is(#x-p5,#x-p6,#x-p7,#x-p8,#x-p9,#x-p10,#x-p11,#hx1-1,#hx1-2,#hx1-3) .h-nw{white-space:nowrap}
+:is(#x-p5,#x-p6,#x-p7,#x-p8,#x-p9,#x-p10,#x-p11,#hx1-1,#hx1-2,#hx1-3) .h-sym{margin-top:4px;padding-top:4px;border-top:1px dashed #b9aef0;color:#3a2f73}
+:is(#x-p5,#x-p6,#x-p7,#x-p8,#x-p9,#x-p10,#x-p11,#hx1-1,#hx1-2,#hx1-3) .tasktxt{position:relative}
+:is(#x-p5,#x-p6,#x-p7,#x-p8,#x-p9,#x-p10,#x-p11,#hx1-1,#hx1-2,#hx1-3) .tasktxt details.more{display:inline;margin:0;position:static}
+:is(#x-p5,#x-p6,#x-p7,#x-p8,#x-p9,#x-p10,#x-p11,#hx1-1,#hx1-2,#hx1-3) .tasktxt details.more summary{font-size:17.5px}
+:is(#x-p5,#x-p6,#x-p7,#x-p8,#x-p9,#x-p10,#x-p11,#hx1-1,#hx1-2,#hx1-3) .tasktxt details.more .more-b{top:calc(100% + 6px);bottom:auto;right:auto;left:16px;width:860px;max-width:none;z-index:20}
+:is(#x-p5,#x-p6,#x-p7,#x-p8,#x-p9,#x-p10,#x-p11,#hx1-1,#hx1-2,#hx1-3) .h-mt{font-size:17.5px}
+:is(#x-p5,#x-p6,#x-p7,#x-p8,#x-p9,#x-p10,#x-p11,#hx1-1,#hx1-2,#hx1-3) .h-mt th{padding:5px 10px}
+:is(#x-p5,#x-p6,#x-p7,#x-p8,#x-p9,#x-p10,#x-p11,#hx1-1,#hx1-2,#hx1-3) .h-mt td{padding:5px 10px;line-height:1.3}
+:is(#x-p5,#x-p8,#hx1-2) .xlrow.solo{grid-template-columns:minmax(0,1fr) 410px}
+:is(#x-p5,#x-p8,#hx1-2) .xlside .toon.meme{width:auto;align-self:stretch;margin-top:auto;padding:10px 12px 12px}
+:is(#x-p5,#x-p8,#hx1-2) .xlside .toon.meme svg{width:84px;height:84px}
+:is(#x-p5,#x-p8,#hx1-2) .mm-t,:is(#x-p5,#x-p8,#hx1-2) .mm-b{font-size:18px}
+:is(#x-p5,#x-p8,#hx1-2) .xlside .xl-fb:not(:empty)~.toon{display:none}
+
+/* --- c-p2, c-p3: three verdict buttons in one row, a legend, and a solution table that opens row by row --- */
+:is(#c-p2,#c-p3) .qstem{padding:12px 18px}
+:is(#c-p2,#c-p3) .qstem p{font-size:20px;line-height:1.38}
+:is(#c-p2,#c-p3) .qr{gap:8px}
+:is(#c-p2,#c-p3) .mc{padding:10px 14px}
+:is(#c-p2,#c-p3) .mc .q{font-size:20px}
+:is(#c-p2,#c-p3) .mc .rem{margin:4px 0 2px}
+:is(#c-p2,#c-p3) .mc .o{display:inline-block;width:calc((100% - 16px) / 3);margin-inline-end:8px;text-align:center}
+:is(#c-p2,#c-p3) .mc .o:nth-of-type(3){margin-inline-end:0}
+:is(#c-p2,#c-p3) .mc .w{font-size:18px}
+:is(#c-p2,#c-p3) .h-leg{padding:10px 14px}
+:is(#c-p2,#c-p3) .h-leg .ct{font-size:18.5px;margin-bottom:4px}
+:is(#c-p2,#c-p3) .h-leg .tbl2{font-size:17px}
+:is(#c-p2,#c-p3) .h-leg .tbl2 td{padding:4px 10px;line-height:1.25}
+:is(#c-p2,#c-p3) .h-leg .tbl2 td:first-child{white-space:nowrap;color:var(--navy2)}
+:is(#c-p2,#c-p3) .h-leg .tbl2 td:last-child{color:var(--mut)}
+:is(#c-p2,#c-p3) .solw.card{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+:is(#c-p2,#c-p3) .h-ct{font-size:18px}
+:is(#c-p2,#c-p3) .h-ct th{padding:7px 10px}
+:is(#c-p2,#c-p3) .h-ct td{padding:7px 10px;line-height:1.32}
+:is(#c-p2,#c-p3) .h-ct td:nth-child(1){width:140px}
+:is(#c-p2,#c-p3) .h-ct td:nth-child(2){width:132px;font-weight:800;color:var(--navy2);white-space:nowrap}
+:is(#c-p2,#c-p3) .solw .band{margin-top:0;font-size:20px}
+:is(#c-p2,#c-p3) .solw .toon.meme{position:static;align-self:center;width:auto;display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:12px;align-items:center;padding:8px 16px}
+:is(#c-p2,#c-p3) .solw .toon.meme svg{width:72px;height:72px;grid-column:2;grid-row:1/3}
+:is(#c-p2,#c-p3) .solw .mm-t{grid-column:1;grid-row:1;text-align:right}
+:is(#c-p2,#c-p3) .solw .mm-b{grid-column:1;grid-row:2;text-align:right}
+
+/* --- s-sum1: six cards, each with a term, one sentence and a small demo --- */
+#s-sum1 .h-sum{list-style:none;counter-reset:hs;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#s-sum1 .h-sum li{counter-increment:hs;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 2px 0 var(--line);display:flex;flex-direction:column;gap:6px}
+#s-sum1 .h-st{display:flex;align-items:center;gap:10px;font-size:21px;color:var(--navy2);line-height:1.25}
+#s-sum1 .h-st:before{content:counter(hs);flex:none;width:34px;height:34px;border-radius:50%;background:var(--navy2);color:#fff;display:grid;place-items:center;font-size:18px}
+#s-sum1 .h-sum p{font-size:19.5px;line-height:1.38;margin:0;flex:1}
+#s-sum1 .h-sum .demo{font-size:18px;line-height:1.38;padding:6px 10px}
+#s-sum1 .h-sumf{display:flex;align-items:flex-end;gap:16px;margin-top:10px}
+#s-sum1 .h-sumf .band{flex:1;margin:0 0 6px;font-size:21px}
+#s-sum1 .h-sumf .toon{position:static;flex:none}
+#s-sum1 .h-sumf .toon svg{width:88px;height:88px}
+#s-sum1 .h-sumf .bub{margin-bottom:44px;max-width:300px}
+
+/* --- h-1, h-2: each question is one row: the story with its formula, the options, then the explanation --- */
+:is(#h-1,#h-2) .mcrow{display:flex;flex-direction:column;align-items:stretch;gap:10px}
+:is(#h-1,#h-2) .mc{display:grid;grid-template-columns:minmax(0,400px) minmax(0,322px) minmax(0,1fr);gap:14px;align-items:stretch;padding:9px 14px}
+:is(#h-1,#h-2) .h-mq{display:flex;flex-direction:column;gap:6px}
+:is(#h-1,#h-2) .mc .q{font-size:18.5px;font-weight:600;line-height:1.36}
+:is(#h-1,#h-2) .mc .q b{font-weight:800}
+:is(#h-1,#h-2) .mc .rem{margin:0;font-size:17px;line-height:1.3}
+:is(#h-1,#h-2) .h-mo{display:flex;flex-direction:column;gap:5px;justify-content:center}
+:is(#h-1,#h-2) .mc .o{margin:0;font-size:17.5px;padding:4px 10px}
+:is(#h-1,#h-2) .h-mw{border:2px dashed var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center}
+:is(#h-1,#h-2) .mc:not(.done) .h-mw:before{content:"ההסבר יופיע כאן, אחרי שתבחרו תשובה.";font-size:17px;color:var(--mut);padding:8px;text-align:center}
+:is(#h-1,#h-2) .mc.done .h-mw{border:0;align-items:stretch}
+:is(#h-1,#h-2) .mc .w{margin:0;font-size:17px;padding:0;background:none;width:100%}
+:is(#h-1,#h-2) .h-wt{font-size:17px;border-radius:8px}
+:is(#h-1,#h-2) .h-wt th{padding:3px 8px;font-size:16.5px}
+:is(#h-1,#h-2) .h-wt td{padding:3px 8px;line-height:1.28;background:#f4f7ff}
+:is(#h-1,#h-2) .h-wt td:first-child{font-weight:700}
+:is(#h-1,#h-2) .h-wt td.v{font-weight:800;color:var(--navy2);white-space:nowrap}
+
+/* --- s-home: the four tasks open one per click, larger --- */
+#s-home .h-home{gap:12px;max-width:1168px}
+#s-home .h-home li{font-size:24px;padding:16px 20px}
+#s-home .h-home li:before{width:42px;height:42px;font-size:20px}
+
+/* --- s-src: sources table and the illustrative list fill the slide; the note and the cartoon share the last row --- */
+#s-src .h-srow{gap:16px}
+#s-src .h-src1{flex:1.25 1 0;min-width:0;padding:16px 20px}
+#s-src .h-src2{flex:1 1 0;min-width:0;padding:16px 20px}
+#s-src .h-srct{font-size:19.5px}
+#s-src .h-srct th{padding:8px 12px}
+#s-src .h-srct td{padding:12px 12px;line-height:1.4}
+#s-src .h-srct td:first-child{width:47%}
+#s-src .h-srct .l{direction:ltr;unicode-bidi:isolate;display:inline-block;text-align:left}
+#s-src .h-ill{margin:4px 0 0;padding-inline-start:26px;font-size:21px;line-height:1.45}
+#s-src .h-ill li{margin-bottom:10px}
+#s-src .h-ilp{font-size:21px;line-height:1.45;margin-top:12px;font-weight:700;color:var(--ink2);background:#fff7e0;border-radius:10px;padding:8px 12px}
+#s-src .h-srcf{display:flex;align-items:flex-end;gap:16px;margin-top:12px}
+#s-src .h-srcf .band{flex:1;margin:0 0 30px;font-size:22px}
+#s-src .h-srcf .toon{position:static;flex:none}
+
+/* --- s-end: the shared end design, with a bridge from this meeting to the next --- */
+#s-end>h2{display:none}
+#s-end .h-end{position:relative;max-width:1060px;margin-top:64px}
+#s-end h1{font-size:60px;font-weight:800;line-height:1.1}
+#s-end .h-end>.sub{font-size:25px;margin-top:18px;color:#c8d4f2;max-width:960px}
+#s-end .h-bridge{display:flex;align-items:stretch;gap:14px;margin-top:28px}
+#s-end .h-bc{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:16px 20px}
+#s-end .h-bc>b{display:block;font-size:23px;color:#7fe3d6;margin-bottom:6px}
+#s-end .h-bc p{font-size:21px;line-height:1.45;color:#e4ebfb}
+#s-end .h-ar{flex:none;align-self:center;width:0;height:0;border-top:16px solid transparent;border-bottom:16px solid transparent;border-right:22px solid #ffb199}
+#s-end .h-mail{font-size:22px;margin-top:26px;color:#c8d4f2}
+#s-end .toon{left:56px;bottom:40px}
+#s-end .bub{max-width:280px}
