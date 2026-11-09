@@ -1,0 +1,61 @@
+/* lesson 2, part 2 (the players): content_c1.py. Every rule is scoped to one slide id of this section. */
+/* s-hedger0: definition, three questions, what the hedger gets */
+#s-hedger0 .def p{font-size:22.5px}
+#s-hedger0 .demo{font-size:20.5px}
+#s-hedger0 .bub{font-size:20px;max-width:330px}
+#s-hedger0 .c-ask p{font-size:21px;line-height:1.42;margin:0 0 7px}
+#s-hedger0 .c-r1>.def{flex:1 1 0;min-width:0}
+#s-hedger0 .c-r2{margin-top:14px}
+#s-hedger0 .c-gv{font-size:19.5px;margin-top:4px}
+#s-hedger0 .c-gv td{padding:7px 10px}
+#s-hedger0 .c-gv td:first-child{white-space:nowrap}
+#s-hedger0 .toon{position:static;flex:none;align-self:center}
+/* s-hedger: the table beside its formulas */
+#s-hedger .c-r2{margin-top:8px;align-items:stretch}
+#s-hedger .band{margin-top:8px}
+#s-hedger .c-tb{flex:1 1 0;min-width:0;margin-top:0}
+#s-hedger .c-tb td{padding:6px 8px}
+#s-hedger .c-tb .gv{font-size:22px}
+#s-hedger .c-tb .gm{font-size:17px}
+#s-hedger .c-fm{width:330px;flex:none}
+#s-hedger .c-fm p{font-size:19.5px;line-height:1.4;margin:0 0 6px}
+#s-hedger .c-fm .c-why{font-size:17.5px;color:var(--mut)}
+/* x-hedge, x-lev: the cartoon in the side column steps aside once there is feedback */
+#x-hedge .xl-fb:not(:empty)~.toon,#x-lev .xl-fb:not(:empty)~.toon{display:none}
+#x-lev .toon svg{width:100px;height:100px}
+#x-lev .toon .bub{margin-bottom:40px}
+/* s-margin: story, the idea and the setup on the right, the daily account on the left */
+#s-margin .c-story p{font-size:19.5px;line-height:1.36}
+#s-margin .c-day td{padding:4px 6px}
+#s-margin .c-day td:first-child{white-space:nowrap}
+#s-margin .c-day .gv{font-size:19.5px}
+#s-margin .c-set td:first-child,#s-margin .c-set td:nth-child(2){white-space:nowrap}
+#s-margin .c-r2{margin-top:8px}
+#s-margin .rl{gap:6px}
+#s-margin .c-set{margin-top:8px}
+#s-margin .c-day{margin-top:0}
+#s-margin .c-rule{margin-top:8px}
+/* s-spec: the solution as a labelled table */
+#s-spec .c-sol td{font-size:18px;padding:5px 9px;line-height:1.3}
+#s-spec .c-sol td:nth-child(3){color:var(--mut)}
+#s-spec .c-sol td:first-child{white-space:nowrap}
+#s-spec .def{margin-top:0}
+/* s-specopt */
+#s-specopt .c-fml{font-size:18.5px;line-height:1.38;color:#2a2350;background:#f4f1ff;border-radius:8px;padding:3px 10px;margin-top:4px}
+#s-specopt .c-opt td{padding:3px 8px}
+#s-specopt .band{margin-top:8px}
+/* s-danger: story, the two buyers side by side, then the test, the failure and the control */
+#s-danger .c-story p{font-size:20.5px;line-height:1.4}
+#s-danger .c-cmp{margin-top:10px;font-size:19.5px}
+#s-danger .c-cmp td{padding:6px 12px;line-height:1.35}
+#s-danger .c-cmp .gv{font-size:20px}
+#s-danger .c-cmp .gm{font-size:18px}
+#s-danger .c-cmp td:first-child{white-space:nowrap}
+#s-danger .c-r3{margin-top:10px}
+#s-danger .c-r3 p,#s-danger .c-r3 li{font-size:20px;line-height:1.42;margin:0}
+#s-danger .c-r3 ul{margin:0;padding-inline-start:24px}
+#s-danger .c-test{background:#fff7e0;border-right:6px solid #f0b429}
+/* a-who: the feedback line and the score share one row */
+#a-who .sorter{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:10px;align-items:center}
+#a-who .sorter>.tasktxt,#a-who .sorter>.stbl{grid-column:1/-1}
+#a-who .sorter>.actbar{margin-top:6px}
