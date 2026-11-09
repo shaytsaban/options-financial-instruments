@@ -46,20 +46,23 @@ NX = sum(s['body'].count('act xlq') for s in SL)
 NSV = sum(s['body'].count('act sv') for s in SL)
 slides_html = '\n'.join(render(s, TOTAL_PARTS) for s in SL)
 fonts = R('shell/fonts.css')
+# per-section styles: every file in css/ is added after deck.css, so sections can be styled without touching the shared sheet
+import glob
+EXTRA_CSS = ''.join(open(p, encoding='utf8').read() for p in sorted(glob.glob(os.path.join(H, 'css', '*.css'))))
 base = R('shell/base.css')
 tail = R('shell/tail.html')
 gj = json.dumps(G, ensure_ascii=False)
 js = f'const COURSE={json.dumps(COURSE, ensure_ascii=False)};const LESSON={LESSON};\nconst G={gj};\n' + R('deck.js') + '\n' + R('xl.js') + '\n' + R('act.js')
 title = f'{COURSE} | שיעור {LESSON} | {LMETA["title"]}'
 html = (f'<!doctype html>\n<html lang="he" dir="rtl">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}</title>\n<style>\n'
-        + fonts + base + R('deck.css') + '</style>\n</head>\n<body>\n<div class="stage" id="stage">\n' + slides_html + '\n' + tail
+        + fonts + base + R('deck.css') + EXTRA_CSS + '</style>\n</head>\n<body>\n<div class="stage" id="stage">\n' + slides_html + '\n' + tail
         + '<script>\n(function(){\n' + js + '\n})();\n</script>\n</body>\n</html>\n').replace('¤', '$')
 for bad in ('—', '־', '–', '…'):
     assert bad not in html.replace(fonts, ''), 'forbidden character ' + bad
 out = os.path.join(H, '..', 'lectures', f'lecture-{LESSON}')
 os.makedirs(out, exist_ok=True)
 open(os.path.join(out, 'presentation.html'), 'w', encoding='utf8').write(html)
-css = fonts + base + R('deck.css')
+css = fonts + base + R('deck.css') + EXTRA_CSS
 used = set()
 for m in re.finditer(r'class="([^"]+)"', slides_html + tail + R('deck.js') + R('act.js')):
     for c in m.group(1).split():

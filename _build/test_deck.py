@@ -17,7 +17,7 @@ function solveWidgets(s){
  s.querySelectorAll('.mc').forEach(m=>{m.classList.add('done');m.querySelectorAll('.o')[+m.dataset.a].classList.add('ok');});}
 function measure(s,i,tag){const foot=s.querySelector('.ft');const limit=foot?720-36:716;let worst=0,who='',wl=0,wr=1280;
  s.querySelectorAll('*').forEach(e=>{if(e.closest('.xl-wrap')&&!e.classList.contains('xl-wrap')||e.closest('.ft')||e.closest('.pd-num')||e.closest('.orb')||e.closest('svg')&&e.tagName!=='svg')return;const c=getComputedStyle(e);if(c.display==='none'||c.visibility==='hidden')return;const r=rel(e);if(r.b-r.t<1)return;if(r.b>worst){worst=r.b;who=e.tagName+'.'+(e.className.baseVal??e.className);}if(r.l<wl)wl=r.l;if(r.r>wr)wr=r.r;});
- if(worst>limit+.5||wl<-.5||wr>1280.5)R.overflow.push({i:i+1,id:s.id,tag,bottom:Math.round(worst),limit,who,l:Math.round(wl),r:Math.round(wr)});}
+ if(tag==='open'&&!s.classList.contains('dark')&&worst<limit-110)(R.sparse=R.sparse||[]).push({id:s.id,empty:Math.round(limit-worst)});if(worst>limit+.5||wl<-.5||wr>1280.5)R.overflow.push({i:i+1,id:s.id,tag,bottom:Math.round(worst),limit,who,l:Math.round(wl),r:Math.round(wr)});}
 D.slides.forEach((s,i)=>{D.show(i);D.setAll(s,true);measure(s,i,'open');solveWidgets(s);measure(s,i,'solved');
  s.querySelectorAll('.eq').forEach(e=>{const box=e.closest('.card,.solw,.cout,.fm,td,.slide');const g=document.createRange();g.selectNodeContents(e);const a=g.getBoundingClientRect(),b=box.getBoundingClientRect();if(a.left<b.left-1||a.right>b.right+1)R.eqwide.push({id:s.id,t:e.textContent.slice(0,50)});});
  const tw=document.createTreeWalker(s,NodeFilter.SHOW_TEXT);let n;const seen={};while((n=tw.nextNode())){if(!n.nodeValue.trim())continue;const p=n.parentElement;if(p.closest('.ft,sup,sub,tspan,.xl-tabs,.xl-ribbon,.xl-foot,.xl-top'))continue;let fs=parseFloat(getComputedStyle(p).fontSize);const svg=p.closest('svg');if(svg){const vb=svg.viewBox.baseVal.width;fs*=svg.getBoundingClientRect().width/(stage.getBoundingClientRect().width/1280)/vb;if(fs<13.5)seen['svg '+fs.toFixed(1)]=n.nodeValue.slice(0,24);}else if(fs<16.5)seen[fs]=n.nodeValue.slice(0,24);}
@@ -100,6 +100,7 @@ print('eq wider than box', R['eqwide'])
 print('small text', len(R['small']));[print('  ', o) for o in R['small'][:30]]
 print('chars', R['chars']); print('abbr', R['abbr']); print('bidi', R['bidi'])
 print('bidi measured', R['bidiM']['checked'], 'reversed', R['bidiM']['bad'][:12])
+print('empty space at the bottom (px, all reveals open)', R.get('sparse', []))
 print('punctuation on the wrong side', len(R['punct']), R['punct'][:15])
 print('reveal problems', R['reveal'])
 bad = [x for x in R['mc'] if x != 1]

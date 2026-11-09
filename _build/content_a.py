@@ -315,5 +315,5 @@ def RL(items, start=1):
 
 
 exec(R('content_g.py'))
-for _f in {1: ['content_b.py', 'content_e.py'], 2: ['content_l2.py', 'content_b2.py', 'content_c.py', 'content_d.py']}[LESSON]:
+for _f in {1: ['content_b1.py', 'content_b1b.py', 'content_e1.py', 'content_e2.py'], 2: ['content_l2.py', 'content_b2a.py', 'content_b2b.py', 'content_c1.py', 'content_c2.py', 'content_d.py']}[LESSON]:
     exec(R(_f))
