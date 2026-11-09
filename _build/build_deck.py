@@ -49,7 +49,7 @@ fonts = R('shell/fonts.css')
 # per-section styles: every file in css/ is added after deck.css, so sections can be styled without touching the shared sheet
 import glob
 # slide ids repeat across lessons (h-1, s-home...), so each lesson loads only its own section files
-CSS_OF = {1: 'fgh', 2: 'abcde'}
+CSS_OF = {1: 'fgh', 2: 'ae', 3: 'bcdei'}
 EXTRA_CSS = ''.join(open(p, encoding='utf8').read() for p in sorted(glob.glob(os.path.join(H, 'css', '*.css'))) if os.path.basename(p)[0] in CSS_OF[LESSON])
 base = R('shell/base.css')
 tail = R('shell/tail.html')

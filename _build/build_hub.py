@@ -2,8 +2,7 @@
 import os, re
 H = os.path.dirname(os.path.abspath(__file__))
 n = lambda s: f'<span class="n">{s}</span>'
-UP = [(3, 'חוזים עתידיים: הרעיון הבסיסי'), (4, 'חוזים עתידיים: יישומים עסקיים'), (5, 'אופציות: מושגי יסוד ואסטרטגיות הגנה'), (6, 'אסטרטגיות רווח ומסחר'),
-      (7, 'עקרונות בתמחור'), (8, 'אופציות אירופאיות ואמריקאיות: מימוש מוקדם וחסמים'), (9, 'עסקאות החלפה (Swap)'), (10, 'מכשירים מורכבים'), (11, 'ניהול סיכונים ארגוני'), (12, 'כשלים מפורסמים, השוק הישראלי וקריירה'), (13, 'סיכום וחזרה לקראת המבחן')]
+UP = [(4, 'חוזים עתידיים: הרעיון הבסיסי'), (5, 'חוזים עתידיים: יישומים עסקיים'), (6, 'אופציות: מושגי יסוד ואסטרטגיות הגנה'), (7, 'אסטרטגיות רווח ומסחר'), (8, 'עקרונות בתמחור'), (9, 'אופציות אירופאיות ואמריקאיות: מימוש מוקדם וחסמים'), (10, 'עסקאות החלפה (Swap)'), (11, 'מכשירים מורכבים'), (12, 'ניהול סיכונים ארגוני'), (13, 'כשלים מפורסמים, השוק הישראלי, וסיכום לקראת המבחן')]
 ups = ''.join(f'<li><span class="un">{n(i)}</span><span>{t}</span><em>בקרוב</em></li>' for i, t in UP)
 src = open(os.path.join(H, '..', '..', 'finance-for-managers', 'index.html'), encoding='utf8').read()
 css = re.search(r'<style>(.*?)</style>', src, re.S).group(1)
@@ -40,6 +39,13 @@ css += '''
 .ups li{display:flex;gap:14px;align-items:center;padding:11px 22px;border-bottom:1px solid var(--line);font-size:16.5px;font-weight:600}
 .ups li:last-child{border:0}
 .ups .un{flex:none;width:34px;height:34px;border-radius:10px;background:#eef0f6;color:var(--navy2);display:grid;place-items:center;font-weight:800}
+
+.todo.hw .hw-how{font-size:15.5px;line-height:1.5;margin:4px 0 8px;color:#4a4130}
+.hw-t{width:100%;border-collapse:collapse;font-size:15px;background:#fff;border-radius:10px;overflow:hidden}
+.hw-t th{background:#1b2d55;color:#fff;text-align:right;padding:6px 10px}
+.hw-t td{padding:6px 10px;border-bottom:1px solid #eadfc6;vertical-align:top}
+.hw-t td:nth-child(2){white-space:nowrap;font-weight:700;color:#a86703}
+@media (max-width:760px){.hw-t{font-size:13.5px}.hw-t td,.hw-t th{padding:5px 6px}}
 .ups em{margin-right:auto;font-style:normal;color:var(--mut);font-size:14px;font-weight:500}
 @media (max-width:760px){.solutions{flex-direction:column;padding:20px 18px}.solutions .btn2{margin-right:0;width:100%}.todo{margin:0 18px 22px;padding:14px 16px}.ups li{padding:10px 14px}}
 '''
@@ -108,19 +114,18 @@ page = f'''<!doctype html>
 </ol></div>
 </article>
 <article class="lec" id="lesson-2">
-<div class="lec-head"><div class="lec-n">2</div><div><h3>אופציות, שחקנים ושווקים</h3><div class="sub">{n('9.11.2026')} · המשך המבוא משיעור {n(1)} · קריאה: Hull, פרק {n(1)}</div></div></div>
+<div class="lec-head"><div class="lec-n">2</div><div><h3>אופציות: זכות, פרמיה וארבע פוזיציות</h3><div class="sub">{n('9.11.2026')} · קריאה: Hull, פרק {n(1)}, החלקים על אופציות</div></div></div>
 <div class="lec-body">
 <div><h4>מה לומדים בשיעור</h4><ul class="learn">
-<li>אופציות: Call ו-Put, תזרים (Payoff), רווח (P&amp;L), נקודת איזון ומכפיל</li>
-<li>אירופאית ואמריקאית, ועסקת החלפה (Swap)</li>
-<li>השחקנים: מגדר (Hedger) וספקולנט (Speculator), ומנוף (Leverage)</li>
-<li>השווקים: שיקגו, תל אביב ושוק מעבר לדלפק (OTC)</li>
-<li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
+<li>חזרה על מפגש 1: חוזה אקדמה, חשיפה נטו, ותרגיל חימום</li>
+<li>אופציה (Option): זכות בלי חובה, תמורת פרמיה</li>
+<li>ארבע פוזיציות: קונה וכותב Call, קונה וכותב Put</li>
+<li>תזרים (Payoff), רווח (P&amp;L) ונקודת איזון, בטבלה, בגרף ובאקסל</li>
 </ul></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(77)} שקפים, {n(20)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(5)} תרגילים מסכמים, עם נוסחאות לצד כל שאלה</span></span></a>
+<a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(44)} שקפים, {n(14)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(3)} שאלות דיון</span></span></a>
 <a class="lk s" href="lectures/lecture-2/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
-<a class="lk x" href="materials/practice-2.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(7)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
+<a class="lk x" href="materials/practice-2.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(3)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
 <a class="lk r" href="materials/practice-2-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
 </div></div>
 </div>
@@ -129,11 +134,43 @@ page = f'''<!doctype html>
 <!-- להטמעת ההקלטה: למחוק את recph ולהוסיף כאן iframe עם כתובת הסרטון -->
 <div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div>
 </div></div>
-<div class="todo"><h4>📝 תרגול עצמי לשיעור {n(2)}</h4><ol>
-<li>במצגת: התרגילים המסכמים למפגש 2, ובסופה ארבעה תרגילי בית באקסל ותשע שאלות רב ברירה.</li>
-<li>בקובץ התרגול ב-Excel: קודם פותרים, ורק אחר כך משווים לקובץ הפתרונות.</li>
-<li>קריאה: Hull, פרק {n(1)}, החלקים על אופציות ועל סוגי המשתתפים בשוק.</li>
-</ol></div>
+<div class="todo hw"><h4>📝 מה פותרים עד מפגש {n(3)}: שיעורי הבית של שיעור {n(2)}</h4>
+<p class="hw-how">כל התרגילים נמצאים בסוף מצגת שיעור 2, בחלק ״לבית״, ואפשר לפתור אותם בתוך השקפים: בגיליון שבשקף, עם רמז, פתרון חלקי ופתרון מלא. מתחילים ברמה 1 ומתקדמים.</p>
+<table class="hw-t"><tr><th>מה</th><th>רמה</th><th>מה מתרגלים</th></tr>
+<tr><td>תרגיל בית 1: Long Call באקסל</td><td>1</td><td>תזרים ורווח של קונה Call, בנוסחת MAX</td></tr>
+<tr><td>תרגיל בית 2: Short Put באקסל</td><td>1</td><td>תזרים ורווח של כותב Put, כולל הסימן</td></tr>
+<tr><td>תרגיל בית 3: Long Put באקסל</td><td>2</td><td>טבלה, נקודת איזון, הפסד מרבי ורווח מרבי</td></tr>
+<tr><td>תרגיל בית 4: ארבע פוזיציות באקסל</td><td>3</td><td>נוסחה אחת לכל עמודה, ותרשים של ארבע הפוזיציות</td></tr>
+<tr><td>תרגיל בית 5: חילוץ פרמיה באקסל</td><td>4, אתגר</td><td>מנקודת האיזון אל הפרמיה, ומחיר שנותן רווח מבוקש</td></tr>
+<tr><td>שאלות דיון 1 עד 3</td><td>דיון</td><td>למה לכתוב Call, האם מיכל טעתה, Long Call מול Short Put. כותבים שלוש שורות, ורק אז פותחים את התשובה לדוגמה</td></tr>
+<tr><td>שאלות רב ברירה 1 עד 6</td><td>1 עד 2</td><td>חישובי רווח, נקודת איזון, הפסד ורווח מרביים</td></tr>
+<tr><td>קובץ התרגול: שלושה גיליונות</td><td>1 עד 3</td><td>Long Call עם תרשים, Put וחילוץ, ארבע פוזיציות</td></tr>
+</table>
+<p class="hw-how">קריאה: Hull, פרק {n(1)}, החלקים על אופציות. מה שלא הספקנו במפגש 2 (מכפיל, אירופאית ואמריקאית, עסקת החלפה והלאה) עבר למפגש 3, ואין בו שיעורי בית כרגע.</p>
+</div>
+</article>
+<article class="lec" id="lesson-3">
+<div class="lec-head"><div class="lec-n">3</div><div><h3>מכפיל, שחקנים ושווקים</h3><div class="sub">{n('16.11.2026')} · המשך משיעור {n(2)} · קריאה: Hull, פרק {n(1)}</div></div></div>
+<div class="lec-body">
+<div><h4>מה לומדים בשיעור</h4><ul class="learn">
+<li>תזכורת קלה: ארבע הפוזיציות של מפגש 2</li>
+<li>נקודות של מדד, מכפיל, אירופאית ואמריקאית, ועסקת החלפה (Swap)</li>
+<li>השחקנים: מגדר (Hedger), ביטחונות (Margin), ספקולנט (Speculator) ומנוף</li>
+<li>השווקים: שיקגו, תל אביב ושוק מעבר לדלפק (OTC)</li>
+<li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
+</ul></div>
+<div><h4>חומרי השיעור</h4><div class="links">
+<a class="lk p" href="lectures/lecture-3/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(51)} שקפים, {n(9)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(3)} תרגילים מסכמים</span></span></a>
+<a class="lk s" href="lectures/lecture-3/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
+<a class="lk x" href="materials/practice-3.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(4)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
+<a class="lk r" href="materials/practice-3-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
+</div></div>
+</div>
+<div class="rec"><h4>הקלטת השיעור</h4>
+<div class="recbox" id="rec-3">
+<!-- להטמעת ההקלטה: למחוק את recph ולהוסיף כאן iframe עם כתובת הסרטון -->
+<div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div>
+</div></div>
 </article>
 <h2 class="sec" style="margin-top:36px">השיעורים הבאים</h2>
 <ul class="ups">{ups}</ul>

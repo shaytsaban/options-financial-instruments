@@ -33,3 +33,4 @@
 #s-f-1 .d-fch svg{display:block;width:100%;height:auto}
 #x-f1 .xl-pr button,#x-f2 .xl-pr button,#x-f3 .xl-pr button,#x-f4 .xl-pr button{padding:7px 8px}
 #x-f3 .xlrow.solo{grid-template-columns:minmax(0,1fr) 450px}
+#x-f3 .xlside:has(.xl-fb .xl-no, .xl-fb .xl-tip, .xl-fb .xl-ok) .toon{display:none}

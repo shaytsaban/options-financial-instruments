@@ -112,3 +112,4 @@
 #s-sp1 .ym-w{text-align:center}
 #s-sp1 .ym{display:block;width:100%;height:auto}
 #s-sp1 .ym-c{display:block;font-size:16.5px;color:#5d6a86;margin-top:2px}
+#s-sum .toon,#s-route .toon,#s-src .toon{position:static}
