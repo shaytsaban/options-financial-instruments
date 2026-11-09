@@ -1,0 +1,104 @@
+/* Lesson 2, slides s-pts to m-2 (reviewer b2b). Every rule is scoped to its slide. */
+/* s-pts: definitions on the right, the story and its table on the left */
+#s-pts .b-cols>.b-defs{flex:0 0 450px;gap:10px}
+#s-pts .b-cols>.b-ex{flex:1 1 0;min-width:0;gap:10px}
+#s-pts .b-defs .card{padding:9px 14px}
+#s-pts .qstem p{font-size:20px;line-height:1.38}
+#s-pts .steptbl{margin-top:0}
+#s-pts .card.fmline{margin-top:0;font-size:19px}
+
+/* s-mult */
+#s-mult .qstem p{font-size:20.5px;line-height:1.38}
+#s-mult .b-cols{margin-top:10px}
+#s-mult .b-cols>.b-main{flex:1.35 1 0;min-width:0}
+#s-mult .b-cols>.b-side{flex:1 1 0;min-width:0;gap:10px}
+#s-mult .b-side .band{margin-top:0;font-size:19.5px}
+#s-mult .mtab td{font-size:18.5px}
+
+/* s-rules */
+#s-rules .b-leg{display:flex;flex-wrap:wrap;gap:6px 30px;align-items:baseline;padding:9px 18px;margin-bottom:10px;font-size:20px}
+#s-rules .b-leg .ct{display:inline;margin:0}
+#s-rules .b-rt{font-size:20.5px}
+#s-rules .b-rt td{padding:11px 12px;white-space:nowrap}
+#s-rules .b-rt th{padding:7px 12px;line-height:1.25}
+#s-rules .b-rt tr:nth-child(even) td:first-child{color:#087469;font-weight:700}
+#s-rules .b-rt tr:nth-child(odd) td:first-child{color:#b8391f;font-weight:700}
+#s-rules .b-rt tr:nth-child(6) td{border-top:3px solid #1b2d55}
+#s-rules .b-bands .band{font-size:20px}
+
+/* s-euro */
+#s-euro .qstem p{font-size:20px;line-height:1.36}
+#s-euro .b-r1,#s-euro .b-r2{margin-top:10px}
+#s-euro .b-r1 .card{padding:9px 14px}
+#s-euro .b-r2>.col{flex:1 1 0;min-width:0;gap:4px}
+#s-euro .b-r2 .ct{margin-bottom:2px}
+#s-euro .b-r2>.b-allow{flex:1.3 1 0}
+#s-euro .qstem{padding:12px 20px}
+#s-euro>.band{font-size:20px;padding:8px 16px}
+#s-euro .b-r2>.b-tv{flex:1 1 0}
+#s-euro .b-ok{color:#1a7f4b}
+#s-euro .b-no{color:#c4221f}
+#s-euro .b-tt td{padding:6px 10px}
+
+/* s-swap and s-swap2: a payment diagram with arrows */
+:is(#s-swap,#s-swap2) .b-fl{display:flex;align-items:center;gap:14px}
+:is(#s-swap,#s-swap2) .b-nd{flex:0 0 auto;background:#1b2d55;color:#fff;border-radius:12px;padding:8px 18px;text-align:center;min-width:120px}
+:is(#s-swap,#s-swap2) .b-nd b{display:block;font-size:21px}
+:is(#s-swap,#s-swap2) .b-nd small{display:block;font-size:16.5px;color:#c8d4f2;font-weight:500}
+:is(#s-swap,#s-swap2) .b-nd.b-me{background:#0f9d90}
+:is(#s-swap,#s-swap2) .b-lk{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:16px}
+:is(#s-swap,#s-swap2) .b-ar{position:relative;text-align:center;font-size:18.5px;font-weight:700;padding:0 16px 4px;border-bottom:3px solid currentColor;line-height:1.3}
+:is(#s-swap,#s-swap2) .b-ar.b-r::after{content:"";position:absolute;right:-6px;bottom:-9.5px;border-style:solid;border-width:8px 0 8px 14px;border-color:transparent transparent transparent currentColor}
+:is(#s-swap,#s-swap2) .b-ar.b-l::after{content:"";position:absolute;left:-6px;bottom:-9.5px;border-style:solid;border-width:8px 14px 8px 0;border-color:transparent currentColor transparent transparent}
+:is(#s-swap,#s-swap2) .b-fx{color:#0b7a70}
+:is(#s-swap,#s-swap2) .b-fv{color:#c4221f}
+:is(#s-swap,#s-swap2) .b-cap{margin:10px 0 0;font-size:19px;line-height:1.35}
+#s-swap .b-g4 .card{padding:9px 14px}
+#s-swap .b-diag{margin-top:10px;padding:10px 20px}
+#s-swap2 .b-rl{align-content:start}
+#s-swap2 .row.eq2>.b-side{flex:1.1 1 0;gap:12px}
+#s-swap2 .b-fl3{gap:8px}
+#s-swap2 .b-fl3 .b-nd{min-width:0;padding:6px 10px}
+#s-swap2 .b-fl3 .b-ar{padding:0 8px 4px}
+#s-swap2 .b-low{flex-direction:column;align-items:center;gap:12px}
+#s-swap2 .b-low>.b-wo-c{align-self:stretch;padding:10px 16px}
+#s-swap2 .b-wo td:first-child{white-space:nowrap}
+#s-swap2 .b-wo td{font-size:19px;text-align:center}
+#s-swap2 .b-wo th{text-align:center}
+#s-swap2 .b-wo tr:last-child td{color:#087469;font-weight:800}
+#s-swap2 .toon{position:static;flex:none}
+#s-swap2 .toon.meme svg{width:70px;height:70px}
+
+/* s-swap3 */
+#s-swap3 .b-cols>.b-q{flex:0 0 370px}
+#s-swap3 .b-q .toon{position:static;align-self:center;margin-top:6px}
+#s-swap3 .b-cols>.b-main{flex:1 1 0;min-width:0}
+#s-swap3 .qstem p{font-size:20px;line-height:1.4}
+#s-swap3 .b-main .band{margin-top:10px;font-size:20px}
+#s-swap3 .b-st{margin-top:0}
+#s-swap3 .b-st td{padding:12px 8px}
+#s-swap3 .b-st td:first-child{width:215px}
+#s-swap3 .b-st td:first-child .gv{font-size:19.5px}
+
+/* s-compare */
+#s-compare .b-cmp{font-size:20.5px}
+#s-compare .b-cmp td{padding:15px 12px}
+#s-compare .b-cmp th{white-space:nowrap}
+#s-compare .b-cmp td:nth-child(-n+2){white-space:nowrap}
+#s-compare .b-cmp td:last-child{color:#3d4a66;white-space:nowrap}
+#s-compare .b-end{margin-top:14px;align-items:center;gap:18px}
+#s-compare .b-end>.band{flex:1 1 0;margin:0;font-size:21px}
+#s-compare .toon{position:static;flex:none}
+
+/* m-2 */
+#m-2 .mc .q{font-size:19.5px;line-height:1.33}
+#m-2 .mc .rem{font-size:17px}
+#m-2 .mc .o{font-size:19px;padding:7px 12px}
+#m-2 .mc .w{font-size:18px}
+/* the explanation keeps its place before the answer, so nothing jumps when it appears */
+#m-2 .mcrow{align-items:stretch}
+#m-2 .mc .w{display:block;visibility:hidden}
+#m-2 .mc.done .w{visibility:visible}
+
+/* x-mult: the buttons on one line leave more room for the chart */
+#x-mult .xl-pr button{padding:6px 8px}
