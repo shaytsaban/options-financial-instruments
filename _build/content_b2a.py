@@ -111,6 +111,20 @@ OPTPAIR('sp', 'כותב אופציית מכר (Short Put)',
          ['<b>הרווח המרבי</b>', '6 ש״ח', 'הפרמיה שקיבל, כשמיכל לא מממשת'],
          ['<b>ההפסד המרבי</b>', '94 ש״ח', 'אם המניה צונחת לאפס: $0 − 100 + 6$']])
 
+# the drawing from the live lesson of 9.11.2026: Yoav (the writer) and Michal (who holds the right), beside the payoff table
+import base64 as _A_b64
+_A_YM = 'data:image/png;base64,' + _A_b64.b64encode(open(os.path.join(H, 'img', 'yoav-michal.png'), 'rb').read()).decode()
+_A_YMH = ST(5.5, f'<img class="ym" src="{_A_YM}" alt="איור מהשיעור: יואב כותב את האופציה ומיכל מחזיקה בזכות למכור לו ב-100"><span class="ym-c">מהלוח, מפגש 2</span>', cls='ym-w')
+for _A_s in SL:
+    if _A_s['id'] == 's-sp1':
+        _b = _A_s['body']; _mk = '<p class="st sp" data-n="60">'
+        if _mk in _b:
+            # the connect step and the rule go beside the drawing, in one row under the price table
+            _i = _b.index(_mk); _k = _b.rindex('</div></div>')
+            _A_s['body'] = _b[:_i] + '<div class="ym-row"><div class="ym-txt">' + _b[_i:_k] + '</div>' + _A_YMH + '</div>' + _b[_k:]
+        else:
+            _A_s['body'] = _b + _A_YMH
+
 _S = lambda t, K='$B$1', pr='$B$2': (lambda r: f'=MAX(A{r}-{K},0)') if t == 'call' else (lambda r: f'=MAX({K}-A{r},0)')
 
 

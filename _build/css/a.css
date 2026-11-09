@@ -106,3 +106,9 @@
 #a-draw .dr-l .toon svg{width:104px;height:104px;background:none;box-shadow:none;border-radius:0}
 #a-draw .dr-l .toon .bub{margin-bottom:50px;max-width:360px}
 #s-recap2 .rc2-b .band.rc2-z{font-size:20.5px;line-height:1.5;padding-top:14px}
+/* the lecturer's drawing on the Short Put payoff slide */
+#s-sp1 .ym-row{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px;align-items:start;margin-top:6px}
+#s-sp1 .ym-txt{display:grid;gap:8px}
+#s-sp1 .ym-w{text-align:center}
+#s-sp1 .ym{display:block;width:100%;height:auto}
+#s-sp1 .ym-c{display:block;font-size:16.5px;color:#5d6a86;margin-top:2px}
