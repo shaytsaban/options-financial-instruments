@@ -7,6 +7,11 @@ ups = ''.join(f'<li><span class="un">{n(i)}</span><span>{t}</span><em>בקרוב
 src = open(os.path.join(H, '..', '..', 'finance-for-managers', 'index.html'), encoding='utf8').read()
 css = re.search(r'<style>(.*?)</style>', src, re.S).group(1)
 css += '''
+.lec-body .rec{padding:0;margin-top:18px}
+.lec-body .rec h4{font-size:18px;margin-bottom:10px;color:var(--navy2)}
+.lec-body .recbox{position:relative;aspect-ratio:16/9;width:100%;max-width:none;border-radius:16px;overflow:hidden;background:#0c1426;box-shadow:0 10px 26px rgba(22,33,58,.18);border:3px solid var(--navy2)}
+.lec-body .recbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lec-body .rec a.yt{display:inline-block;margin-top:8px;font-weight:700;font-size:15px;color:var(--navy2);text-decoration:underline}
 .contact{margin-top:14px;background:#fff7e0;border:2px solid #f0b429;border-radius:18px;padding:16px 24px;display:flex;gap:16px;align-items:center}
 .contact .ic{font-size:34px;flex:none}
 .contact h2{font-size:20px;font-weight:800;line-height:1.3;color:var(--navy2)}
@@ -95,7 +100,7 @@ page = f'''<!doctype html>
 <li>חשיפה (Exposure) וחשיפה נטו, עם מקרים שלמים וקרן סל מגודרת מט״ח</li>
 <li>חוזה אקדמה (Forward) וחוזה עתידי (Futures)</li>
 <li>סיכומים ותרגול: תרגילי אקסל קטנים ושאלות רב ברירה</li>
-</ul></div>
+</ul><div class="rec" id="recording-1"><h4>🎥 הקלטת השיעור · {n('2.11.2026')}</h4><div class="recbox"><iframe src="https://www.youtube.com/embed/P6cfciT2w8Y" title="הקלטת שיעור 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="yt" href="https://youtu.be/P6cfciT2w8Y" target="_blank" rel="noopener">לצפייה ב-YouTube</a></div></div>
 <div><h4>חומרי השיעור</h4><div class="links">
 <a class="lk p" href="lectures/lecture-1/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(66)} שקפים, {n(16)} תרגילי אקסל בתוך השקפים ו-{n(23)} שאלות רב ברירה, עם רמזים ופתרונות</span></span></a>
 <a class="lk s" href="lectures/lecture-1/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
@@ -103,10 +108,6 @@ page = f'''<!doctype html>
 <a class="lk r" href="materials/practice-1-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
 </div></div>
 </div>
-<div class="rec"><h4>הקלטת השיעור</h4>
-<div class="recbox" id="rec-1">
-<iframe src="https://www.youtube-nocookie.com/embed/P6cfciT2w8Y" title="הקלטת שיעור 1" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div></div>
 <div class="todo"><h4>📝 תרגול עצמי לשיעור {n(1)}</h4><ol>
 <li>במצגת: חלק הסיכום והתרגול, ובסופה שלושה תרגילי בית באקסל ושש שאלות רב ברירה.</li>
 <li>בקובץ התרגול ב-Excel: קודם פותרים, ורק אחר כך משווים לקובץ הפתרונות.</li>
@@ -121,7 +122,7 @@ page = f'''<!doctype html>
 <li>אופציה (Option): זכות בלי חובה, תמורת פרמיה</li>
 <li>ארבע פוזיציות: קונה וכותב Call, קונה וכותב Put</li>
 <li>תזרים (Payoff), רווח (P&amp;L) ונקודת איזון, בטבלה, בגרף ובאקסל</li>
-</ul></div>
+</ul><div class="rec" id="recording-2"><h4>🎥 הקלטת השיעור · {n('9.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div></div></div></div>
 <div><h4>חומרי השיעור</h4><div class="links">
 <a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(44)} שקפים, {n(14)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(3)} שאלות דיון</span></span></a>
 <a class="lk s" href="lectures/lecture-2/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
@@ -129,10 +130,6 @@ page = f'''<!doctype html>
 <a class="lk r" href="materials/practice-2-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
 </div></div>
 </div>
-<div class="rec"><h4>הקלטת השיעור</h4>
-<div class="recbox" id="rec-2">
-<!-- להטמעת ההקלטה: למחוק את recph ולהוסיף כאן iframe עם כתובת הסרטון -->
-<div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div>
 </div></div>
 <div class="todo hw"><h4>📝 מה פותרים עד מפגש {n(3)}: שיעורי הבית של שיעור {n(2)}</h4>
 <p class="hw-how">כל התרגילים נמצאים בסוף מצגת שיעור 2, בחלק ״לבית״, ואפשר לפתור אותם בתוך השקפים: בגיליון שבשקף, עם רמז, פתרון חלקי ופתרון מלא. מתחילים ברמה 1 ומתקדמים.</p>
@@ -158,7 +155,7 @@ page = f'''<!doctype html>
 <li>השחקנים: מגדר (Hedger), ביטחונות (Margin), ספקולנט (Speculator) ומנוף</li>
 <li>השווקים: שיקגו, תל אביב ושוק מעבר לדלפק (OTC)</li>
 <li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
-</ul></div>
+</ul><div class="rec" id="recording-3"><h4>🎥 הקלטת השיעור · {n('16.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div></div></div></div>
 <div><h4>חומרי השיעור</h4><div class="links">
 <a class="lk p" href="lectures/lecture-3/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(51)} שקפים, {n(9)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(3)} תרגילים מסכמים</span></span></a>
 <a class="lk s" href="lectures/lecture-3/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
@@ -166,10 +163,6 @@ page = f'''<!doctype html>
 <a class="lk r" href="materials/practice-3-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
 </div></div>
 </div>
-<div class="rec"><h4>הקלטת השיעור</h4>
-<div class="recbox" id="rec-3">
-<!-- להטמעת ההקלטה: למחוק את recph ולהוסיף כאן iframe עם כתובת הסרטון -->
-<div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div>
 </div></div>
 </article>
 <h2 class="sec" style="margin-top:36px">השיעורים הבאים</h2>
