@@ -434,6 +434,120 @@ code.xl{direction:ltr;unicode-bidi:isolate;display:inline-block;font:700 20px 'M
 .xlrow>div:last-child .xl-fb{margin-top:8px}
 .xlrow.solo{grid-template-columns:minmax(0,1fr) 340px}
 .xlside .xl-fb{margin-top:0}.xlside svg+.xl-fb{margin-top:8px}
+/* ===== Excel look, 2026-11-09: tabs, ribbon, formula bar, headers, colored references, status bar ===== */
+.xl{background:#fff;border:1px solid #c8c6c4;border-radius:8px;overflow:hidden;box-shadow:0 2px 0 var(--line);font-family:'Segoe UI',Rubik,Heebo,Arial,sans-serif}
+.xl-tabs{display:flex;align-items:flex-end;gap:2px;background:#217346;padding:3px 6px 0;height:30px;color:#fff}
+.xl-qat{display:flex;gap:2px;margin-inline-end:10px;align-self:center}
+.xl-qat button{background:transparent;border:0;color:#fff;font:700 18px/1 'Segoe UI',Arial,sans-serif;width:26px;height:24px;border-radius:4px;cursor:pointer}
+.xl-qat button:hover{background:rgba(255,255,255,.18)}
+.xl-tabs .xt{font:14px/1 'Segoe UI',Rubik,sans-serif;padding:6px 9px 7px;border-radius:5px 5px 0 0;cursor:default;color:#e8f3ec;white-space:nowrap}
+.xl-tabs .xt.on{background:#f3f2f1;color:#217346;font-weight:700}
+.xl-tt{margin-inline-start:auto;align-self:center;font:13px/1 'Segoe UI',sans-serif;color:#cfe8d9;white-space:nowrap}
+.xl-ribbon{display:flex;align-items:stretch;gap:0;background:#f3f2f1;border:0;border-bottom:1px solid #d2d0ce;padding:3px 4px 0;flex-wrap:nowrap;position:relative;border-radius:0}
+.xg{display:flex;flex-direction:column;align-items:center;padding:0 8px;border-inline-end:1px solid #d2d0ce}
+.xg-b{display:flex;align-items:center;gap:3px;min-height:34px}
+.xg-n{font:12.5px/1 'Segoe UI',Rubik,sans-serif;color:#605e5c;padding:2px 0 4px;white-space:nowrap}
+.xl-ribbon .col{display:flex;flex-direction:column;gap:2px}.xl-ribbon .row{display:flex;gap:3px;align-items:center}
+.xl-ribbon button{font:15px/1 'Segoe UI',Rubik,Heebo,sans-serif;padding:3px 6px;border-radius:4px;border:1px solid transparent;background:transparent;cursor:pointer;color:#323130;white-space:nowrap}
+.xl-ribbon button:hover{background:#e1dfdd;border-color:#c8c6c4}
+.xl-ribbon button.on{background:#c8e6d4;border-color:#217346;color:#14532d}
+.xl-ribbon button.big{display:flex;flex-direction:column;align-items:center;gap:1px;padding:2px 6px}
+.xl-ribbon button.big .xi{font-size:20px}.xl-ribbon button.big small{font-size:13px}
+.xl-font,.xl-size,.xl-numf{display:inline-block;border:1px solid #c8c6c4;background:#fff;border-radius:3px;font:14px/1 'Segoe UI',sans-serif;padding:3px 6px;color:#323130}
+.xl-font{width:78px}.xl-size{width:30px;text-align:center}.xl-numf{width:84px}
+.xl-ribbon .xl-msg{position:absolute;left:8px;top:auto;bottom:-30px}
+.xl-top{border:0;border-bottom:1px solid #d2d0ce;border-radius:0;padding:4px 6px;gap:4px;background:#fff}
+.xl-name{width:92px}
+.xl-xv{display:flex;align-items:center;gap:1px;color:#605e5c}
+.xl-xv button{border:0;background:transparent;font:16px/1 'Segoe UI',sans-serif;color:#8a8886;width:22px;cursor:pointer;padding:0}
+.xl-xv button:hover{color:#217346}
+.xl-barw{position:relative;flex:1;display:flex}
+.xl-bar{width:100%;position:relative;background:transparent}
+.xl-lay{position:absolute;pointer-events:none;white-space:pre;overflow:hidden;color:#111}
+.xl-barw .xl-lay{inset:1px;padding:4px 8px;display:flex;align-items:center;font:17px/1.2 Consolas,'Courier New',monospace}
+.xl-bar.painted,.xl-in.painted{color:transparent;caret-color:#111}
+.xl-bar.ltr,.xl-in.ltr,.xl-lay.ltr{text-align:left;justify-content:flex-start}
+.xl-wrap{border:0;border-radius:0;max-height:none}
+.xl-g th{background:#f3f2f1;color:#605e5c;font-weight:400;border-color:#d2d0ce}
+.xl-g th.hs{background:#d2d0ce;color:#185c37;font-weight:700}
+.xl-g thead th.hs{box-shadow:inset 0 -2px 0 #217346}
+.xl-g tbody th.hs{box-shadow:inset 2px 0 0 #217346}
+.xl-g th.xl-ch,.xl-g th.xl-rn,.xl-g th.xl-c0{cursor:pointer}
+.xl-g td{border-color:#e1dfdd}
+.xl-g td.sel{background-image:linear-gradient(rgba(0,0,0,.09),rgba(0,0,0,.09))}
+.xl-g td.sel.act{background-image:none}
+.xl-g td.bt{box-shadow:inset 0 2px 0 #217346}.xl-g td.bb{box-shadow:inset 0 -2px 0 #217346}
+.xl-g td.bt.bb{box-shadow:inset 0 2px 0 #217346,inset 0 -2px 0 #217346}
+.xl-g td.sel.bs:not(.bt):not(.bb){box-shadow:inset -2px 0 0 #217346}.xl-g td.sel.be:not(.bt):not(.bb){box-shadow:inset 2px 0 0 #217346}
+.xl-g td.sel.bs.bt:not(.bb){box-shadow:inset 0 2px 0 #217346,inset -2px 0 0 #217346}.xl-g td.sel.be.bt:not(.bb){box-shadow:inset 0 2px 0 #217346,inset 2px 0 0 #217346}
+.xl-g td.sel.bs.bb:not(.bt){box-shadow:inset 0 -2px 0 #217346,inset -2px 0 0 #217346}.xl-g td.sel.be.bb:not(.bt){box-shadow:inset 0 -2px 0 #217346,inset 2px 0 0 #217346}
+.xl-g td:not(.sel).bt,.xl-g td:not(.sel).bb{box-shadow:none}
+.xl-g td.act{outline:2.5px solid #217346;outline-offset:-2px}
+.xl-g td.bo{font-weight:700}
+.xl-g td.rf{background-image:linear-gradient(color-mix(in srgb,var(--rc) 13%,transparent),color-mix(in srgb,var(--rc) 13%,transparent))}
+.xl-g td.rf::after{content:'';position:absolute;inset:0;pointer-events:none;border:0 solid var(--rc)}
+.xl-g td.rt::after{border-top-width:2px}.xl-g td.rb::after{border-bottom-width:2px}.xl-g td.rs::after{border-right-width:2px}.xl-g td.re::after{border-left-width:2px}
+.xl-g td.cp::before{content:'';position:absolute;inset:1px;pointer-events:none;border:2px dashed #217346;animation:xlants .6s linear infinite}
+@keyframes xlants{50%{border-color:#7fc59b}}
+.xl-g td.ed{background:#fff}
+.xl-g td.ed .xl-lay{inset:0;padding:0 6px;display:flex;align-items:center;font:17px Consolas,'Courier New',monospace}
+.xl-in{position:relative;background:transparent}
+.xl.tight .xl-g td{height:27px}
+.xl-foot{display:flex;align-items:center;gap:8px;background:#f3f2f1;border-top:1px solid #d2d0ce;height:26px;padding:0 8px;font:13.5px/1 'Segoe UI',Rubik,sans-serif;color:#323130}
+.xl-sheet{background:#fff;border-bottom:3px solid #217346;color:#217346;font-weight:700;padding:4px 12px 3px;align-self:stretch;display:flex;align-items:center}
+.xl-plus{color:#605e5c;font-size:18px}
+.xl-stat{margin-inline-start:auto;color:#323130;white-space:nowrap}
+.xl-pr{display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:#fff;border:1px solid #d9d2c3;border-radius:10px;padding:8px 10px;margin-bottom:8px}
+.xl-prh{width:100%;font:700 16.5px/1 Rubik,Heebo,sans-serif;color:#5d6a86}
+.xl-pr button{font:600 16.5px/1 Rubik,Heebo,sans-serif;padding:7px 11px;border-radius:7px;border:1px solid #c8c8c8;background:#fff;cursor:pointer;color:#16213a}
+.xl-pr button:hover{background:#e8f3ec;border-color:#217346}
+.xl-pr button.xl-go{background:#217346;color:#fff;border-color:#217346}
+.sheet>.xl-pr{margin:8px 0 0}
+.xlside svg.xlc{max-height:272px}
+.xlside .toon{margin-top:10px}
+.xlside .toon{position:static;margin-top:10px}
+.xl-g td.ed .xl-in{position:absolute;right:0;top:0;height:100%;min-width:100%;background:#fff;box-shadow:0 0 0 2px #217346;z-index:4}
+.xl-g td.ed .xl-lay{right:0;left:auto;z-index:5;width:100%}
+.xl-ribbon .xl-msg{left:auto;right:auto;inset-inline-end:8px;bottom:auto;top:4px;z-index:9}
+/* memes: an original picture with a line above and a punchline below */
+.toon.meme{flex-direction:column;align-items:center;gap:2px;background:#16213a;border-radius:12px;padding:8px 12px 10px;width:260px;box-shadow:0 4px 14px rgba(22,33,58,.25)}
+.toon.meme svg{width:84px;height:84px}
+.mm-t,.mm-b{font:900 17px/1.2 Rubik,Heebo,sans-serif;color:#fff;text-align:center;text-shadow:0 2px 0 #000,0 -1px 0 #000,1px 0 0 #000,-1px 0 0 #000}
+.mm-b{color:#ffd37a}
+.xlside .toon.meme{width:auto}
+details.rem{margin:4px 0 8px;font-size:17px}
+details.rem summary{cursor:pointer;color:#4f33c9;font-weight:700;list-style:none;display:inline-block;background:#f4f1ff;border-radius:8px;padding:3px 10px}
+details.rem summary::-webkit-details-marker{display:none}
+details.rem>div{background:#f4f1ff;border-right:4px solid #6d4df2;border-radius:6px;padding:5px 10px;margin-top:4px}
+.xlside{display:flex;flex-direction:column;gap:8px;min-height:0}
+.xlside>*{flex:none}.xlside svg.xlc{flex:1 1 0;min-height:120px;max-height:300px;width:100%;height:auto}
+.xlside .xl-pr{margin-bottom:0}.xlside .xl-fb{margin-top:0}
+.xl-fm{background:#f4f1ff;border-right:5px solid #6d4df2;border-radius:10px;padding:7px 12px;font-size:17px;line-height:1.35;color:#2a2350}
+.xl-fm>b{display:block;color:#4f33c9;margin-bottom:2px}
+.xlq .xl-pr [data-x="remind"]{display:none}
+.sv-fm{background:#f4f1ff;border-right:5px solid #6d4df2;border-radius:10px;padding:6px 12px;margin:6px 0 8px;font-size:18px;line-height:1.35}
+.sv-fm>b{color:#4f33c9}
+.mc .rem{margin:2px 0 8px;font-size:17px;background:#f4f1ff;border-right:4px solid #6d4df2;border-radius:6px;padding:5px 10px}
+.mc .rem>b{color:#4f33c9}
+.tbl2.mtab td{font-size:18px;padding:6px 10px}.tbl2.mtab td:nth-child(2){font-weight:800;white-space:nowrap;color:#1b2d55}.tbl2.mtab td:nth-child(3){color:#3d4a66}
+.legend{margin-top:8px}.legend .ct{display:block;margin-bottom:2px}
+.tbl2.mtab.small td,.tbl2.mtab.small th{font-size:17px;padding:3px 10px}
+.xlside svg.xlc{min-height:60px}
+#s-spec .tbl2.mtab td{font-size:17px;padding:4px 9px}
+.mc .rem{font-size:16.5px;padding:3px 8px}
+.hedgetab .tbl2 th{font-size:17px;padding:6px 8px}.hedgetab .tbl2 td{padding:5px 8px}.hedgetab .gv{font-size:19px}.hedgetab .gm{font-size:16.5px}
+.card.fmline{margin-top:8px;font-size:18px;line-height:1.35}.card.fmline .ct{display:inline}
+#s-hedger .tbl2 td{padding:4px 10px}
+details.more{margin-top:8px}
+details.more summary{cursor:pointer;list-style:none;color:#c4221f;font-weight:700;font-size:18px;border-bottom:2px solid #e0454f;display:inline-block;padding-bottom:1px}
+details.more summary::-webkit-details-marker{display:none}
+details.more[open] summary{color:#8a1a14}
+.more-b{background:#fff;border:1px solid #f0c0bc;border-right:5px solid #e0454f;border-radius:10px;padding:6px 12px;margin-top:6px;font-size:17.5px;line-height:1.35}
+.more-b p{margin:0 0 4px}
+#s-hedger .tbl2 td{padding:3px 10px}#s-hedger .qstem p{margin:0 0 2px}
+#s-pts .tbl2 td,#s-margin .tbl2 td{padding:4px 8px}#s-pts .gm,#s-margin .gm{font-size:16.5px}
+details.more{position:relative;z-index:6}
+details.more .more-b{position:absolute;right:0;bottom:calc(100% + 6px);width:760px;max-width:88vw;box-shadow:0 10px 30px rgba(22,33,58,.25)}
 </style>
 </head>
 <body>
@@ -468,7 +582,7 @@ code.xl{direction:ltr;unicode-bidi:isolate;display:inline-block;font:700 20px 'M
 <section class="slide " id="s-fwdtbl" data-title="תרגיל בסיסי: התזרים לכל צד"><div class="kick"><span>חלק <span class="n">2</span> · תרגיל מודרך</span></div><h2>תרגיל בסיסי: מה התזרים לכל צד?</h2><div class="card qstem"><p>שני צדדים מתקשרים בחוזה אקדמה (Forward) על חבית נפט. מחיר החוזה (K) הוא <span class="n">100</span> דולר. מה יהיה התזרים לכל צד אם המחיר בפקיעה יהיה <span class="n">90</span>, <span class="n">100</span> או <span class="n">110</span> דולר?</p></div><table class="tbl2 steptbl "><tr><th>המחיר בפקיעה (<span class="m" dir="ltr">S<sub>T</sub></span>)</th><th>תזרים ל-Long, מיכל</th><th>תזרים ל-Short, רון</th><th>סך שני הצדדים</th></tr><tr><td><div class="st " data-n="10"><b class="gv"><span class="n">90</span></b></div></td><td><div class="st " data-n="20"><b class="gv"><span class="m" dir="ltr">−10</span></b><span class="gm">קונה ב-<span class="n">100</span> מה ששווה <span class="n">90</span>: <span class="m" dir="ltr">90 − 100</span></span></div></td><td><div class="st " data-n="30"><b class="gv"><span class="n">10</span></b><span class="gm">מוכר ב-<span class="n">100</span> מה ששווה <span class="n">90</span>: <span class="m" dir="ltr">100 − 90</span></span></div></td><td><div class="st " data-n="40"><b class="gv"><span class="n">0</span></b><span class="gm"><span class="m" dir="ltr">−10 + 10</span></span></div></td></tr><tr><td><div class="st " data-n="50"><b class="gv"><span class="n">100</span></b></div></td><td><div class="st " data-n="60"><b class="gv"><span class="n">0</span></b><span class="gm"><span class="m" dir="ltr">100 − 100</span></span></div></td><td><div class="st " data-n="70"><b class="gv"><span class="n">0</span></b><span class="gm"><span class="m" dir="ltr">100 − 100</span></span></div></td><td><div class="st " data-n="80"><b class="gv"><span class="n">0</span></b><span class="gm"><span class="m" dir="ltr">0 + 0</span></span></div></td></tr><tr><td><div class="st " data-n="90"><b class="gv"><span class="n">110</span></b></div></td><td><div class="st " data-n="100"><b class="gv"><span class="n">10</span></b><span class="gm"><span class="m" dir="ltr">110 − 100</span></span></div></td><td><div class="st " data-n="110"><b class="gv"><span class="m" dir="ltr">−10</span></b><span class="gm"><span class="m" dir="ltr">100 − 110</span></span></div></td><td><div class="st " data-n="120"><b class="gv"><span class="n">0</span></b><span class="gm"><span class="m" dir="ltr">10 − 10</span></span></div></td></tr></table><div class="st " data-n="130"><div class="row eq2 top" style="margin-top:10px"><div class="card tnote"><b>Long:</b> התזרים הוא <span class="m" dir="ltr">S<sub>T</sub> − K</span>. <b>Short:</b> התזרים הוא <span class="m" dir="ltr">K − S<sub>T</sub></span>.</div><div class="card tnote"><b><span class="m" dir="ltr">S<sub>T</sub></span>:</b> המחיר בפקיעה. <b>K:</b> מחיר החוזה. <b>סכום אפס (Zero sum):</b> הרווח של האחד הוא הפסד השני.</div></div></div></section>
 <section class="slide " id="s-fwdfut" data-title="Forward מול Futures"><div class="kick"><span>חלק <span class="n">2</span> · השוואה</span></div><h2>חוזה אקדמה (Forward) מול חוזה עתידי (Futures)</h2><div class="card def "><b class="dn"><span class="term" data-t="futures">חוזה עתידי (Futures contract)</span></b><p>אותו רעיון: מחיר עתידי שנקבע היום. אלא שהחוזה סטנדרטי ונסחר בבורסה.</p><div class="demo"><b>דוגמה:</b> חוזה על נפט <span class="term" data-t="wti">WTI</span> מתייחס ל-<span class="n">1,000</span> חביות. המחיר עלה בדולר ביום נתון: הקונה מקבל באותו יום <span class="n">1,000</span> דולר.</div></div><div class="st " data-n="10"><table class="tbl2 "><tr><th>מאפיין</th><th>חוזה אקדמה (Forward)</th><th>חוזה עתידי (Futures)</th></tr><tr><td>היכן</td><td>ישירות מול הצד השני, מעבר לדלפק (<span class="term" data-t="otc">OTC</span>)</td><td>בבורסה (Exchange)</td></tr><tr><td>תנאים</td><td>מותאמים לצדדים</td><td>אחידים: כמות, מועד, איכות</td></tr><tr><td>הסיכון שהצד השני לא ישלם</td><td>קיים</td><td>מצומצם: המסלקה (Clearing house) ערבה</td></tr><tr><td>התחשבנות</td><td>בפקיעה</td><td>בכל יום, דרך חשבון ביטחונות (Margin)</td></tr></table></div><div class="st band note" data-n="20"><b>הערה:</b> התזרים המצטבר דומה בשני החוזים. המנגנון שונה, ונפרט אותו בשיעור <span class="n">2</span>.</div></section>
 <section class="slide " id="s-forward" data-title="חוזה אקדמה: הצגה גרפית"><div class="kick"><span>חלק <span class="n">2</span> · תרשים</span></div><h2>חוזה אקדמה (Forward): הצגה גרפית</h2><div class="qg"><div class="card chartw"><svg class="tl pay" dir="ltr" viewBox="0 0 560 410" role="img"><rect x="56" y="30" width="486" height="336" fill="#fff"/><line x1="56" y1="366.0" x2="542" y2="366.0" stroke="#e8e2d4" stroke-width="1"/><text x="49.0" y="371.0" font-size="16" text-anchor="end" fill="#5d6a86" font-weight="500">−40</text><line x1="56" y1="282.0" x2="542" y2="282.0" stroke="#e8e2d4" stroke-width="1"/><text x="49.0" y="287.0" font-size="16" text-anchor="end" fill="#5d6a86" font-weight="500">−20</text><line x1="56" y1="198.0" x2="542" y2="198.0" stroke="#1b2d55" stroke-width="2.2"/><text x="49.0" y="203.0" font-size="16" text-anchor="end" fill="#5d6a86" font-weight="500">0</text><line x1="56" y1="114.0" x2="542" y2="114.0" stroke="#e8e2d4" stroke-width="1"/><text x="49.0" y="119.0" font-size="16" text-anchor="end" fill="#5d6a86" font-weight="500">20</text><line x1="56" y1="30.0" x2="542" y2="30.0" stroke="#e8e2d4" stroke-width="1"/><text x="49.0" y="35.0" font-size="16" text-anchor="end" fill="#5d6a86" font-weight="500">40</text><line x1="56.0" y1="30" x2="56.0" y2="366" stroke="#f0ebe0" stroke-width="1"/><text x="56.0" y="385.0" font-size="16" text-anchor="middle" fill="#5d6a86" font-weight="500">70</text><line x1="137.0" y1="30" x2="137.0" y2="366" stroke="#f0ebe0" stroke-width="1"/><text x="137.0" y="385.0" font-size="16" text-anchor="middle" fill="#5d6a86" font-weight="500">80</text><line x1="218.0" y1="30" x2="218.0" y2="366" stroke="#f0ebe0" stroke-width="1"/><text x="218.0" y="385.0" font-size="16" text-anchor="middle" fill="#5d6a86" font-weight="500">90</text><line x1="299.0" y1="30" x2="299.0" y2="366" stroke="#f0ebe0" stroke-width="1"/><text x="299.0" y="385.0" font-size="16" text-anchor="middle" fill="#5d6a86" font-weight="500">100</text><line x1="380.0" y1="30" x2="380.0" y2="366" stroke="#f0ebe0" stroke-width="1"/><text x="380.0" y="385.0" font-size="16" text-anchor="middle" fill="#5d6a86" font-weight="500">110</text><line x1="461.0" y1="30" x2="461.0" y2="366" stroke="#f0ebe0" stroke-width="1"/><text x="461.0" y="385.0" font-size="16" text-anchor="middle" fill="#5d6a86" font-weight="500">120</text><line x1="542.0" y1="30" x2="542.0" y2="366" stroke="#f0ebe0" stroke-width="1"/><text x="542.0" y="385.0" font-size="16" text-anchor="middle" fill="#5d6a86" font-weight="500">130</text><g class="st" data-n="20"><text x="299.0" y="405.0" font-size="16" text-anchor="middle" fill="#2a3858" font-weight="700" direction="rtl">מחיר החבית בפקיעה, S_T (דולר)</text></g><g class="st" data-n="30"><text x="16.0" y="19.0" font-size="15" text-anchor="end" fill="#2a3858" font-weight="700" direction="rtl">תזרים (Payoff)</text></g><g class="st" data-n="70"><polyline points="56.0,324.0 299.0,198.0 542.0,72.0" fill="none" stroke="#0f9d90" stroke-width="4" stroke-linejoin="round"/><text x="495.5" y="87.0" font-size="16" text-anchor="end" fill="#0f9d90" font-weight="800">Long</text></g><g class="st" data-n="80"><polyline points="56.0,72.0 299.0,198.0 542.0,324.0" fill="none" stroke="#ff6a4d" stroke-width="4" stroke-linejoin="round"/><text x="495.5" y="323.0" font-size="16" text-anchor="end" fill="#ff6a4d" font-weight="800">Short</text></g><g class="st" data-n="40"><circle cx="218.0" cy="240.0" r="6" fill="#0f9d90"/><text x="218.0" y="262.0" font-size="16" text-anchor="middle" fill="#0f9d90" font-weight="800">−10</text></g><g class="st" data-n="50"><circle cx="299.0" cy="198.0" r="6" fill="#0f9d90"/><text x="299.0" y="186.0" font-size="16" text-anchor="middle" fill="#0f9d90" font-weight="800">0</text></g><g class="st" data-n="60"><circle cx="380.0" cy="156.0" r="6" fill="#0f9d90"/><text x="380.0" y="144.0" font-size="16" text-anchor="middle" fill="#0f9d90" font-weight="800">10</text></g></svg></div><div class="rl"><p class="st sp" data-n="10"><b>הנתון:</b> מחיר החוזה, <span class="m" dir="ltr">K</span>, הוא <b><span class="n">100</span> דולר לחבית</b>. זה המחיר שבו Long יקנה ו-Short ימכור בפקיעה, יהיה מחיר השוק אשר יהיה.</p><p class="st sp" data-n="20"><b>ציר אופקי:</b> המחיר בפקיעה, <span class="m" dir="ltr">S<sub>T</sub></span>. ככל שנלך ימינה בתרשים, החבית יקרה יותר.</p><p class="st sp" data-n="30"><b>ציר אנכי:</b> התזרים (Payoff). הקו הכהה הוא נקודת האפס. מעליו רווח, מתחתיו הפסד.</p><p class="st sp" data-n="40"><b>Long, מחיר <span class="n">90</span>:</b> <span class="m" dir="ltr">90 − 100 = −10</span>.</p><p class="st sp" data-n="50"><b>Long, מחיר <span class="n">100</span>:</b> <span class="m" dir="ltr">100 − 100 = 0</span>. הקו חוצה את האפס ב-<span class="m" dir="ltr">K = 100</span>.</p><p class="st sp" data-n="60"><b>Long, מחיר <span class="n">110</span>:</b> <span class="m" dir="ltr">110 − 100 = 10</span>.</p><p class="st sp" data-n="70"><b>מחברים:</b> קו ישר ועולה. כל דולר מעל <span class="m" dir="ltr">K</span> הוא דולר רווח.</p><p class="st sp" data-n="80"><b>Short:</b> אותו קו בדיוק, הפוך. תמונת ראי ביחס לאפס.</p></div></div></section>
-<section class="slide " id="x-fwd" data-title="אקסל: חוזה אקדמה"><div class="kick"><span>חלק <span class="n">2</span> · אקסל בתוך השקף</span></div><h2>אקסל: חוזה אקדמה (Forward) על חבית נפט</h2><div class="act xlq" id="x-fwd-x" data-cfg="{&quot;rows&quot;: 8, &quot;cols&quot;: 4, &quot;widths&quot;: [160, 90, 90, 90], &quot;data&quot;: {&quot;A1&quot;: &quot;מחיר החוזה (K)&quot;, &quot;B1&quot;: &quot;100&quot;, &quot;A3&quot;: &quot;מחיר בפקיעה&quot;, &quot;B3&quot;: &quot;Long&quot;, &quot;C3&quot;: &quot;Short&quot;, &quot;D3&quot;: &quot;סך הכול&quot;, &quot;A4&quot;: &quot;80&quot;, &quot;A5&quot;: &quot;90&quot;, &quot;A6&quot;: &quot;100&quot;, &quot;A7&quot;: &quot;110&quot;, &quot;A8&quot;: &quot;120&quot;}, &quot;targets&quot;: [&quot;B4&quot;, &quot;C4&quot;, &quot;D4&quot;, &quot;B5&quot;, &quot;C5&quot;, &quot;D5&quot;, &quot;B6&quot;, &quot;C6&quot;, &quot;D6&quot;, &quot;B7&quot;, &quot;C7&quot;, &quot;D7&quot;, &quot;B8&quot;, &quot;C8&quot;, &quot;D8&quot;], &quot;solution&quot;: {&quot;B4&quot;: &quot;=A4-$B$1&quot;, &quot;C4&quot;: &quot;=$B$1-A4&quot;, &quot;D4&quot;: &quot;=B4+C4&quot;, &quot;B5&quot;: &quot;=A5-$B$1&quot;, &quot;C5&quot;: &quot;=$B$1-A5&quot;, &quot;D5&quot;: &quot;=B5+C5&quot;, &quot;B6&quot;: &quot;=A6-$B$1&quot;, &quot;C6&quot;: &quot;=$B$1-A6&quot;, &quot;D6&quot;: &quot;=B6+C6&quot;, &quot;B7&quot;: &quot;=A7-$B$1&quot;, &quot;C7&quot;: &quot;=$B$1-A7&quot;, &quot;D7&quot;: &quot;=B7+C7&quot;, &quot;B8&quot;: &quot;=A8-$B$1&quot;, &quot;C8&quot;: &quot;=$B$1-A8&quot;, &quot;D8&quot;: &quot;=B8+C8&quot;}, &quot;headRows&quot;: [3], &quot;inputs&quot;: [], &quot;hints&quot;: [&quot;Long קונה ב-K: מחיר בפקיעה פחות K.&quot;, &quot;Short מוכר ב-K: הסימן הפוך.&quot;], &quot;remind&quot;: &quot;Long: &lt;span class=\&quot;m\&quot; dir=\&quot;ltr\&quot;&gt;S&lt;sub&gt;T&lt;/sub&gt; − K&lt;/span&gt;. Short: &lt;span class=\&quot;m\&quot; dir=\&quot;ltr\&quot;&gt;K − S&lt;sub&gt;T&lt;/sub&gt;&lt;/span&gt;.&quot;, &quot;partial&quot;: [&quot;B4&quot;, &quot;C4&quot;, &quot;D4&quot;], &quot;values&quot;: true, &quot;done&quot;: &quot;&quot;, &quot;chart&quot;: {&quot;x&quot;: [&quot;A4&quot;, &quot;A8&quot;], &quot;series&quot;: [{&quot;y&quot;: [&quot;B4&quot;, &quot;B8&quot;], &quot;c&quot;: &quot;#0f9d90&quot;, &quot;lab&quot;: &quot;Long&quot;}, {&quot;y&quot;: [&quot;C4&quot;, &quot;C8&quot;], &quot;c&quot;: &quot;#ff6a4d&quot;, &quot;lab&quot;: &quot;Short&quot;, &quot;dy&quot;: 22}], &quot;x0&quot;: 80, &quot;x1&quot;: 120, &quot;y0&quot;: -20, &quot;y1&quot;: 20, &quot;xt&quot;: [80, 90, 100, 110, 120], &quot;yt&quot;: [-20, -10, 0, 10, 20], &quot;xl&quot;: &quot;מחיר בפקיעה (S_T)&quot;, &quot;yl&quot;: &quot;דולר&quot;, &quot;W&quot;: 470, &quot;H&quot;: 330}}"><div class="tasktxt">מלאו את התזרים לכל צד. כאן מותר להקליד מספרים או נוסחאות. התרשים נבנה מהתאים שלכם.</div><div class="xlrow"><div class="sheet"></div><div class="xlside"><svg class="xlc" viewBox="0 0 470 330" role="img" aria-label="תרשים"></svg></div></div></div></section>
+<section class="slide " id="x-fwd" data-title="אקסל: חוזה אקדמה"><div class="kick"><span>חלק <span class="n">2</span> · אקסל בתוך השקף</span></div><h2>אקסל: חוזה אקדמה (Forward) על חבית נפט</h2><div class="act xlq" id="x-fwd-x" data-cfg="{&quot;rows&quot;: 8, &quot;cols&quot;: 4, &quot;widths&quot;: [160, 90, 90, 90], &quot;data&quot;: {&quot;A1&quot;: &quot;מחיר החוזה (K)&quot;, &quot;B1&quot;: &quot;100&quot;, &quot;A3&quot;: &quot;מחיר בפקיעה&quot;, &quot;B3&quot;: &quot;Long&quot;, &quot;C3&quot;: &quot;Short&quot;, &quot;D3&quot;: &quot;סך הכול&quot;, &quot;A4&quot;: &quot;80&quot;, &quot;A5&quot;: &quot;90&quot;, &quot;A6&quot;: &quot;100&quot;, &quot;A7&quot;: &quot;110&quot;, &quot;A8&quot;: &quot;120&quot;}, &quot;targets&quot;: [&quot;B4&quot;, &quot;C4&quot;, &quot;D4&quot;, &quot;B5&quot;, &quot;C5&quot;, &quot;D5&quot;, &quot;B6&quot;, &quot;C6&quot;, &quot;D6&quot;, &quot;B7&quot;, &quot;C7&quot;, &quot;D7&quot;, &quot;B8&quot;, &quot;C8&quot;, &quot;D8&quot;], &quot;solution&quot;: {&quot;B4&quot;: &quot;=A4-$B$1&quot;, &quot;C4&quot;: &quot;=$B$1-A4&quot;, &quot;D4&quot;: &quot;=B4+C4&quot;, &quot;B5&quot;: &quot;=A5-$B$1&quot;, &quot;C5&quot;: &quot;=$B$1-A5&quot;, &quot;D5&quot;: &quot;=B5+C5&quot;, &quot;B6&quot;: &quot;=A6-$B$1&quot;, &quot;C6&quot;: &quot;=$B$1-A6&quot;, &quot;D6&quot;: &quot;=B6+C6&quot;, &quot;B7&quot;: &quot;=A7-$B$1&quot;, &quot;C7&quot;: &quot;=$B$1-A7&quot;, &quot;D7&quot;: &quot;=B7+C7&quot;, &quot;B8&quot;: &quot;=A8-$B$1&quot;, &quot;C8&quot;: &quot;=$B$1-A8&quot;, &quot;D8&quot;: &quot;=B8+C8&quot;}, &quot;headRows&quot;: [3], &quot;inputs&quot;: [], &quot;hints&quot;: [&quot;Long קונה ב-K: מחיר בפקיעה פחות K.&quot;, &quot;Short מוכר ב-K: הסימן הפוך.&quot;], &quot;remind&quot;: &quot;תזרים לקונה, Long = &lt;span class=\&quot;m\&quot; dir=\&quot;ltr\&quot;&gt;S&lt;sub&gt;T&lt;/sub&gt; − K&lt;/span&gt;. תזרים למוכר, Short = &lt;span class=\&quot;m\&quot; dir=\&quot;ltr\&quot;&gt;K − S&lt;sub&gt;T&lt;/sub&gt;&lt;/span&gt;.&quot;, &quot;partial&quot;: [&quot;B4&quot;, &quot;C4&quot;, &quot;D4&quot;], &quot;values&quot;: true, &quot;done&quot;: &quot;&quot;, &quot;chart&quot;: {&quot;x&quot;: [&quot;A4&quot;, &quot;A8&quot;], &quot;series&quot;: [{&quot;y&quot;: [&quot;B4&quot;, &quot;B8&quot;], &quot;c&quot;: &quot;#0f9d90&quot;, &quot;lab&quot;: &quot;Long&quot;}, {&quot;y&quot;: [&quot;C4&quot;, &quot;C8&quot;], &quot;c&quot;: &quot;#ff6a4d&quot;, &quot;lab&quot;: &quot;Short&quot;, &quot;dy&quot;: 22}], &quot;x0&quot;: 80, &quot;x1&quot;: 120, &quot;y0&quot;: -20, &quot;y1&quot;: 20, &quot;xt&quot;: [80, 90, 100, 110, 120], &quot;yt&quot;: [-20, -10, 0, 10, 20], &quot;xl&quot;: &quot;מחיר בפקיעה (S_T)&quot;, &quot;yl&quot;: &quot;דולר&quot;, &quot;W&quot;: 470, &quot;H&quot;: 330}}"><div class="tasktxt">מלאו את התזרים לכל צד. כאן מותר להקליד מספרים או נוסחאות. התרשים נבנה מהתאים שלכם.</div><div class="xlrow"><div class="sheet"></div><div class="xlside"><svg class="xlc" viewBox="0 0 470 330" role="img" aria-label="תרשים"></svg></div></div></div></section>
 <section class="slide dark pd" id="p-3" data-title="פתיחת חלק 3: סיכום ותרגול" style="--pc:#7fe3d6"><div class="pd-num">3</div><div class="pd-in"><div class="kick" style="color:#ffb199"><span>חלק <span class="n">3</span> מתוך <span class="n">4</span> · כ-<span class="n">45</span> דקות</span></div><div class="pd-h">סיכום ותרגול</div><div class="pd-q">שאלת החלק: האם אתם יודעים לעשות את זה לבד?</div><div class="pd-cols"><div class="pd-box"><b>מה נעשה בחלק הזה</b><ul><li>שלושה שקפי סיכום: מושגים, נוסחאות והחלטות</li><li>שאלות רב ברירה ומקרים, עם הסבר בשלבים</li><li>תרגילי אקסל קטנים בתוך השקפים</li><li>בכל תרגיל: רמז, תזכורת נוסחה, פתרון חלקי ופתרון מלא</li></ul></div></div></div></section>
 <section class="slide " id="s-sumA" data-title="סיכום 1: מושגים"><div class="kick"><span>חלק <span class="n">3</span> · סיכום</span></div><h2>סיכום <span class="n">1</span>: המושגים של המפגש</h2><table class="tbl2 "><tr><th>מושג</th><th>בפשטות</th><th>דוגמה מהשיעור</th></tr><tr><td>נגזר (Derivative)</td><td>חוזה ששוויו נגזר ממחיר של נכס אחר</td><td>שובר הטיסה</td></tr><tr><td>נכס בסיס (Underlying)</td><td>הדבר שעל מחירו נכתב החוזה</td><td>כרטיס הטיסה, הדולר, חבית נפט</td></tr><tr><td>פרמיה (Premium)</td><td>המחיר שמשלמים היום על זכות</td><td><span class="n">50</span> דולר על השובר</td></tr><tr><td>גידור (Hedging)</td><td>הקטנת סיכון שכבר קיים</td><td>דנה קובעת היום את שער הדולר</td></tr><tr><td>ספקולציה (Speculation)</td><td>נטילת סיכון כדי להרוויח משינוי מחיר</td><td>משקיע שצופה עלייה בנפט</td></tr><tr><td>חשיפה (Exposure)</td><td>כמה התוצאה זזה כשמחיר זז</td><td><span class="n">0.01</span> בשער הוא <span class="n">5,000</span> ש״ח לדנה</td></tr><tr><td>חשיפה נטו (Net exposure)</td><td>הכנסות פחות הוצאות, באותו מטבע ומועד</td><td><span class="m" dir="ltr">1,000,000 − 900,000 = 100,000</span> דולר</td></tr><tr><td>גידור טבעי (Natural hedge)</td><td>הכנסות והוצאות שמקזזות זו את זו</td><td>הוצאות דולריות מול הכנסות דולריות</td></tr></table></section>
 <section class="slide " id="s-sumB" data-title="סיכום 2: חוזה אקדמה"><div class="kick"><span>חלק <span class="n">3</span> · סיכום</span></div><h2>סיכום <span class="n">2</span>: חוזה אקדמה (Forward) בנוסחאות</h2><div class="row eq2 top"><div class="col"><table class="tbl2 "><tr><th>צד</th><th>מה התחייב</th><th>תזרים בפקיעה (Payoff)</th></tr><tr><td>קונה (Long)</td><td>לקנות ב-<span class="m" dir="ltr">K</span></td><td><span class="m" dir="ltr">S<sub>T</sub> − K</span></td></tr><tr><td>מוכר (Short)</td><td>למכור ב-<span class="m" dir="ltr">K</span></td><td><span class="m" dir="ltr">K − S<sub>T</sub></span></td></tr><tr><td>שניהם יחד</td><td></td><td><span class="m" dir="ltr">0</span>: סכום אפס (Zero sum)</td></tr></table><div class="card" style="margin-top:10px"><b class="ct">הסימנים</b><p class="lg"><span class="m" dir="ltr">K</span>: מחיר החוזה, שנקבע היום. <span class="m" dir="ltr">S<sub>T</sub></span>: מחיר נכס הבסיס בפקיעה. בכסף: כופלים בכמות.</p></div></div><div class="col"><table class="tbl2 "><tr><th></th><th>חוזה אקדמה (Forward)</th><th>חוזה עתידי (Futures)</th></tr><tr><td>היכן</td><td>מול בנק, מעבר לדלפק</td><td>בבורסה</td></tr><tr><td>תנאים</td><td>מותאמים</td><td>אחידים</td></tr><tr><td>התחשבנות</td><td>בפקיעה</td><td>בכל יום</td></tr><tr><td>פרמיה</td><td>אין</td><td>אין, יש ביטחונות (Margin)</td></tr></table><div class="band dg"><b>דגש:</b> יבואן שקונה (Long) חוזה: תשלום לספק פחות תוצאת החוזה שווה כמות כפול <span class="m" dir="ltr">K</span>, בכל שער.</div></div></div></section>
@@ -484,7 +598,7 @@ code.xl{direction:ltr;unicode-bidi:isolate;display:inline-block;font:700 20px 'M
 <section class="slide " id="m-p2" data-title="תרגול: חוזה אקדמה"><div class="kick"><span>חלק <span class="n">3</span> · בדיקת הבנה</span></div><h2>תרגול: חוזה אקדמה (Forward)</h2><div class="mcrow n3"><div class="mc" data-a="0" id="qf1"><div class="q">מה נכון לגבי חוזה אקדמה (Forward)?</div><button class="o" data-i="0">א. שני הצדדים מחויבים, ואין פרמיה (Premium)</button><button class="o" data-i="1">ב. רק הקונה מחויב</button><button class="o" data-i="2">ג. הקונה משלם היום פרמיה למוכר</button><button class="o" data-i="3">ד. בפקיעה אפשר לוותר עליו בלי עלות</button><div class="w"><b>הסבר:</b> זה ההבדל משובר הטיסה: אין זכות לוותר, ולכן אין פרמיה.</div></div><div class="mc" data-a="3" id="qf2"><div class="q">חוזה אקדמה, מחיר החוזה (K) <span class="n">50</span>. המחיר בפקיעה <span class="n">58</span>. מה התזרים?</div><button class="o" data-i="0">א. Long משלם <span class="n">8</span>, Short מקבל <span class="n">8</span></button><button class="o" data-i="1">ב. Long מקבל <span class="n">58</span>, Short משלם <span class="n">50</span></button><button class="o" data-i="2">ג. שניהם מקבלים <span class="n">8</span></button><button class="o" data-i="3">ד. Long מקבל <span class="n">8</span>, Short משלם <span class="n">8</span></button><div class="w"><b>הסבר:</b> Long: <span class="m" dir="ltr">58 − 50 = 8</span>. Short: <span class="m" dir="ltr">50 − 58 = −8</span>. סכום אפס.</div></div><div class="mc" data-a="2" id="qf3"><div class="q">מה ההבדל המרכזי בין חוזה עתידי (Futures) לחוזה אקדמה (Forward)?</div><button class="o" data-i="0">א. חוזה אקדמה נסחר תמיד בבורסה</button><button class="o" data-i="1">ב. בחוזה עתידי משלמים פרמיה</button><button class="o" data-i="2">ג. חוזה עתידי אחיד, נסחר בבורסה ומתחשבן בכל יום</button><button class="o" data-i="3">ד. בחוזה עתידי רק צד אחד מחויב</button><div class="w"><b>הסבר:</b> הרעיון זהה. המנגנון שונה: בורסה, מסלקה והתחשבנות יומית.</div></div></div></section>
 <section class="slide qslide" id="q-oil" data-title="שאלה פתורה: חוזה אקדמה על 1,000 חביות"><div class="kick"><span>חלק <span class="n">3</span> · שאלה פתורה</span></div><h2>שאלה פתורה: חוזה אקדמה על <span class="n">1,000</span> חביות</h2><div class="qg"><div class="qr"><div class="card qstem"><p>חברת תעופה קנתה (Long) חוזה אקדמה (Forward) על <span class="n">1,000</span> חביות נפט, במחיר חוזה (K) של <span class="n">80</span> דולר לחבית.</p><p>המחיר בפקיעה (<span class="m" dir="ltr">S<sub>T</sub></span>) הוא <span class="n">72</span> דולר. מה התוצאה לכל צד?</p></div></div><div class="solw"><p class="st sp" data-n="10"><b>שלב <span class="n">1</span>, חבית אחת, Long:</b></p><div class="st eq" dir="ltr" data-n="20">S<sub>T</sub> − K = 72 − 80 = −8</div><p class="st sp" data-n="30"><b>שלב <span class="n">2</span>, כל הכמות:</b></p><div class="st eq" dir="ltr" data-n="40">1,000 × (−8) = −8,000</div><p class="st sp" data-n="50"><b>שלב <span class="n">3</span>, Short, המוכר:</b></p><div class="st eq" dir="ltr" data-n="60">1,000 × (80 − 72) = 8,000</div><p class="st sp" data-n="70"><b>שלב <span class="n">4</span>, בדיקה: סכום אפס (Zero sum).</b></p><div class="st eq" dir="ltr" data-n="80">−8,000 + 8,000 = 0</div><div class="st band ans" data-n="90"><b>תשובה:</b> חברת התעופה הפסידה <span class="n">8,000</span> דולר על החוזה, והמוכר הרוויח <span class="n">8,000</span> דולר.</div><div class="st band dg" data-n="100"><b>דגש:</b> ההפסד על החוזה איננו כישלון. בשוק היא קונה דלק זול יותר, ובסך הכול שילמה <span class="n">80</span> דולר לחבית, כפי שתכננה.</div></div></div></section>
 <section class="slide " id="x-p4" data-title="אקסל: חוזה אקדמה על דולר"><div class="kick"><span>חלק <span class="n">3</span> · אקסל בתוך השקף</span></div><h2>אקסל קטן <span class="n">4</span>: חוזה אקדמה (Forward) על <span class="n">100,000</span> דולר</h2><div class="act xlq" id="x-p4-x" data-cfg="{&quot;rows&quot;: 9, &quot;cols&quot;: 4, &quot;widths&quot;: [140, 120, 120, 110], &quot;data&quot;: {&quot;A1&quot;: &quot;מחיר החוזה (K)&quot;, &quot;B1&quot;: &quot;3.6&quot;, &quot;A2&quot;: &quot;כמות (דולר)&quot;, &quot;B2&quot;: &quot;100000&quot;, &quot;A4&quot;: &quot;שער בפקיעה&quot;, &quot;B4&quot;: &quot;Long (ש״ח)&quot;, &quot;C4&quot;: &quot;Short (ש״ח)&quot;, &quot;D4&quot;: &quot;סך הכול&quot;, &quot;A5&quot;: &quot;3.4&quot;, &quot;A6&quot;: &quot;3.5&quot;, &quot;A7&quot;: &quot;3.6&quot;, &quot;A8&quot;: &quot;3.7&quot;, &quot;A9&quot;: &quot;3.8&quot;}, &quot;targets&quot;: [&quot;B5&quot;, &quot;C5&quot;, &quot;D5&quot;, &quot;B6&quot;, &quot;C6&quot;, &quot;D6&quot;, &quot;B7&quot;, &quot;C7&quot;, &quot;D7&quot;, &quot;B8&quot;, &quot;C8&quot;, &quot;D8&quot;, &quot;B9&quot;, &quot;C9&quot;, &quot;D9&quot;], &quot;solution&quot;: {&quot;B5&quot;: &quot;=$B$2*(A5-$B$1)&quot;, &quot;C5&quot;: &quot;=$B$2*($B$1-A5)&quot;, &quot;D5&quot;: &quot;=B5+C5&quot;, &quot;B6&quot;: &quot;=$B$2*(A6-$B$1)&quot;, &quot;C6&quot;: &quot;=$B$2*($B$1-A6)&quot;, &quot;D6&quot;: &quot;=B6+C6&quot;, &quot;B7&quot;: &quot;=$B$2*(A7-$B$1)&quot;, &quot;C7&quot;: &quot;=$B$2*($B$1-A7)&quot;, &quot;D7&quot;: &quot;=B7+C7&quot;, &quot;B8&quot;: &quot;=$B$2*(A8-$B$1)&quot;, &quot;C8&quot;: &quot;=$B$2*($B$1-A8)&quot;, &quot;D8&quot;: &quot;=B8+C8&quot;, &quot;B9&quot;: &quot;=$B$2*(A9-$B$1)&quot;, &quot;C9&quot;: &quot;=$B$2*($B$1-A9)&quot;, &quot;D9&quot;: &quot;=B9+C9&quot;}, &quot;headRows&quot;: [4], &quot;inputs&quot;: [], &quot;hints&quot;: [&quot;Long: כמות כפול (שער בפקיעה פחות K).&quot;, &quot;Short: אותו דבר, עם סימן הפוך.&quot;, &quot;קבעו את B1 ואת B2 עם $.&quot;], &quot;remind&quot;: &quot;Long = כמות × (&lt;span class=\&quot;m\&quot; dir=\&quot;ltr\&quot;&gt;S&lt;sub&gt;T&lt;/sub&gt; − K&lt;/span&gt;). Short = כמות × (&lt;span class=\&quot;m\&quot; dir=\&quot;ltr\&quot;&gt;K − S&lt;sub&gt;T&lt;/sub&gt;&lt;/span&gt;).&quot;, &quot;partial&quot;: [&quot;B5&quot;, &quot;C5&quot;, &quot;D5&quot;], &quot;values&quot;: false, &quot;done&quot;: &quot;עמודה D היא אפס בכל שורה: מה שאחד מרוויח, השני מפסיד.&quot;, &quot;chart&quot;: {&quot;x&quot;: [&quot;A5&quot;, &quot;A9&quot;], &quot;series&quot;: [{&quot;y&quot;: [&quot;B5&quot;, &quot;B9&quot;], &quot;c&quot;: &quot;#0f9d90&quot;, &quot;lab&quot;: &quot;Long&quot;}, {&quot;y&quot;: [&quot;C5&quot;, &quot;C9&quot;], &quot;c&quot;: &quot;#ff6a4d&quot;, &quot;lab&quot;: &quot;Short&quot;, &quot;dy&quot;: 22}], &quot;x0&quot;: 3.4, &quot;x1&quot;: 3.8, &quot;y0&quot;: -20000, &quot;y1&quot;: 20000, &quot;xt&quot;: [3.4, 3.5, 3.6, 3.7, 3.8], &quot;yt&quot;: [-20000, -10000, 0, 10000, 20000], &quot;xl&quot;: &quot;שער בפקיעה&quot;, &quot;yl&quot;: &quot;תוצאה (ש״ח)&quot;, &quot;W&quot;: 470, &quot;H&quot;: 330}}"><div class="tasktxt">מחיר החוזה (K) <span class="n">3.60</span> ש״ח לדולר, על <span class="n">100,000</span> דולר. חשבו בשקלים את התוצאה ל-Long, ל-Short ולשניהם יחד. כאן כותבים נוסחאות.</div><div class="xlrow"><div class="sheet"></div><div class="xlside"><svg class="xlc" viewBox="0 0 470 330" role="img" aria-label="תרשים"></svg></div></div></div></section>
-<section class="slide " id="t-imp" data-title="תרגיל: יבואן"><div class="kick"><span>חלק <span class="n">3</span> · תרגיל</span></div><h2>תרגיל: יבואן עם חוזה אקדמה (Forward)</h2><div class="act sv" id="t-imp-w" data-cfg="{&quot;hints&quot;: [&quot;עלות ללא גידור: דולרים × שער בפועל.&quot;, &quot;תוצאת החוזה ל-Long: דולרים × (שער בפועל − K).&quot;, &quot;עלות נטו: העלות פחות הרווח על החוזה.&quot;], &quot;remind&quot;: &quot;תוצאה = כמות × (&lt;span class=\&quot;m\&quot; dir=\&quot;ltr\&quot;&gt;S&lt;sub&gt;T&lt;/sub&gt; − K&lt;/span&gt;). עלות נטו = עלות − תוצאה.&quot;}"><div class="tasktxt">יבואן ישלם <span class="n">800,000</span> דולר בעוד חצי שנה. הוא קונה (Long) חוזה אקדמה (Forward) במחיר חוזה (K) <span class="n">3.62</span>. בפועל השער בעוד חצי שנה (<span class="m" dir="ltr">S<sub>T</sub></span>) הוא <span class="n">3.85</span>.</div><div class="svps"><label class="svp" data-a="3080000" data-tol="1"><span>א. העלות ללא גידור, ש״ח</span><input dir="ltr" inputmode="decimal" autocomplete="off" spellcheck="false"></label><label class="svp" data-a="184000" data-tol="1"><span>ב. תוצאת החוזה, ש״ח</span><input dir="ltr" inputmode="decimal" autocomplete="off" spellcheck="false"></label><label class="svp" data-a="2896000" data-tol="1"><span>ג. העלות נטו, ש״ח</span><input dir="ltr" inputmode="decimal" autocomplete="off" spellcheck="false"></label></div><div class="actbar"><button class="abtn chk">בדיקה</button><button class="abtn ghost hnt">💡 רמז</button><button class="abtn ghost rmd">📐 תזכורת נוסחה</button><button class="abtn ghost prt">פתרון חלקי</button><button class="abtn ghost ful">פתרון מלא</button><button class="abtn ghost rst">איפוס</button></div><div class="fbbar">הקלידו את התשובות, ולחצו ״בדיקה״. הפסד כותבים כמספר שלילי.</div><div class="svsol"><div class="svs"><b>א.</b> <span class="m" dir="ltr">800,000 × 3.85 = 3,080,000</span></div><div class="svs"><b>ב.</b> <span class="m" dir="ltr">800,000 × (3.85 − 3.62) = 184,000</span></div><div class="svs"><b>ג.</b> <span class="m" dir="ltr">3,080,000 − 184,000 = 2,896,000</span></div><div class="svs"><b>בדיקה:</b> <span class="m" dir="ltr">800,000 × 3.62 = 2,896,000</span>. העלות נטו היא בדיוק כמות כפול <span class="m" dir="ltr">K</span>.</div></div></div></section>
+<section class="slide " id="t-imp" data-title="תרגיל: יבואן"><div class="kick"><span>חלק <span class="n">3</span> · תרגיל</span></div><h2>תרגיל: יבואן עם חוזה אקדמה (Forward)</h2><div class="act sv" id="t-imp-w" data-cfg="{&quot;hints&quot;: [&quot;עלות ללא גידור: דולרים × שער בפועל.&quot;, &quot;תוצאת החוזה ל-Long: דולרים × (שער בפועל − K).&quot;, &quot;עלות נטו: העלות פחות הרווח על החוזה.&quot;], &quot;remind&quot;: &quot;תוצאה = כמות × (&lt;span class=\&quot;m\&quot; dir=\&quot;ltr\&quot;&gt;S&lt;sub&gt;T&lt;/sub&gt; − K&lt;/span&gt;). עלות נטו = עלות − תוצאה.&quot;}"><div class="tasktxt">יבואן ישלם <span class="n">800,000</span> דולר בעוד חצי שנה. הוא קונה (Long) חוזה אקדמה (Forward) במחיר חוזה (K) <span class="n">3.62</span>. בפועל השער בעוד חצי שנה (<span class="m" dir="ltr">S<sub>T</sub></span>) הוא <span class="n">3.85</span>.</div><div class="sv-fm"><b>📐 הנוסחאות לתרגיל:</b> תוצאה = כמות × (<span class="m" dir="ltr">S<sub>T</sub> − K</span>). עלות נטו = עלות − תוצאה.</div><div class="svps"><label class="svp" data-a="3080000" data-tol="1"><span>א. העלות ללא גידור, ש״ח</span><input dir="ltr" inputmode="decimal" autocomplete="off" spellcheck="false"></label><label class="svp" data-a="184000" data-tol="1"><span>ב. תוצאת החוזה, ש״ח</span><input dir="ltr" inputmode="decimal" autocomplete="off" spellcheck="false"></label><label class="svp" data-a="2896000" data-tol="1"><span>ג. העלות נטו, ש״ח</span><input dir="ltr" inputmode="decimal" autocomplete="off" spellcheck="false"></label></div><div class="actbar"><button class="abtn chk">בדיקה</button><button class="abtn ghost hnt">💡 רמז</button><button class="abtn ghost rmd">📐 תזכורת נוסחה</button><button class="abtn ghost prt">פתרון חלקי</button><button class="abtn ghost ful">פתרון מלא</button><button class="abtn ghost rst">איפוס</button></div><div class="fbbar">הקלידו את התשובות, ולחצו ״בדיקה״. הפסד כותבים כמספר שלילי.</div><div class="svsol"><div class="svs"><b>א.</b> <span class="m" dir="ltr">800,000 × 3.85 = 3,080,000</span></div><div class="svs"><b>ב.</b> <span class="m" dir="ltr">800,000 × (3.85 − 3.62) = 184,000</span></div><div class="svs"><b>ג.</b> <span class="m" dir="ltr">3,080,000 − 184,000 = 2,896,000</span></div><div class="svs"><b>בדיקה:</b> <span class="m" dir="ltr">800,000 × 3.62 = 2,896,000</span>. העלות נטו היא בדיוק כמות כפול <span class="m" dir="ltr">K</span>.</div></div></div></section>
 <section class="slide " id="x-p5" data-title="אקסל: יצואן מגדר"><div class="kick"><span>חלק <span class="n">3</span> · אקסל בתוך השקף</span></div><h2>אקסל קטן <span class="n">5</span>: יצואן מוכר (Short) חוזה אקדמה (Forward)</h2><div class="act xlq" id="x-p5-x" data-cfg="{&quot;rows&quot;: 9, &quot;cols&quot;: 4, &quot;widths&quot;: [160, 170, 140, 140], &quot;data&quot;: {&quot;A1&quot;: &quot;מחיר החוזה (K)&quot;, &quot;B1&quot;: &quot;3.6&quot;, &quot;A2&quot;: &quot;כמות (דולר)&quot;, &quot;B2&quot;: &quot;200000&quot;, &quot;A4&quot;: &quot;שער בפקיעה&quot;, &quot;B4&quot;: &quot;תקבול ללא גידור&quot;, &quot;C4&quot;: &quot;תוצאת Short&quot;, &quot;D4&quot;: &quot;תקבול נטו&quot;, &quot;A5&quot;: &quot;3.3&quot;, &quot;A6&quot;: &quot;3.45&quot;, &quot;A7&quot;: &quot;3.6&quot;, &quot;A8&quot;: &quot;3.75&quot;, &quot;A9&quot;: &quot;3.9&quot;}, &quot;targets&quot;: [&quot;B5&quot;, &quot;C5&quot;, &quot;D5&quot;, &quot;B6&quot;, &quot;C6&quot;, &quot;D6&quot;, &quot;B7&quot;, &quot;C7&quot;, &quot;D7&quot;, &quot;B8&quot;, &quot;C8&quot;, &quot;D8&quot;, &quot;B9&quot;, &quot;C9&quot;, &quot;D9&quot;], &quot;solution&quot;: {&quot;B5&quot;: &quot;=$B$2*A5&quot;, &quot;C5&quot;: &quot;=$B$2*($B$1-A5)&quot;, &quot;D5&quot;: &quot;=B5+C5&quot;, &quot;B6&quot;: &quot;=$B$2*A6&quot;, &quot;C6&quot;: &quot;=$B$2*($B$1-A6)&quot;, &quot;D6&quot;: &quot;=B6+C6&quot;, &quot;B7&quot;: &quot;=$B$2*A7&quot;, &quot;C7&quot;: &quot;=$B$2*($B$1-A7)&quot;, &quot;D7&quot;: &quot;=B7+C7&quot;, &quot;B8&quot;: &quot;=$B$2*A8&quot;, &quot;C8&quot;: &quot;=$B$2*($B$1-A8)&quot;, &quot;D8&quot;: &quot;=B8+C8&quot;, &quot;B9&quot;: &quot;=$B$2*A9&quot;, &quot;C9&quot;: &quot;=$B$2*($B$1-A9)&quot;, &quot;D9&quot;: &quot;=B9+C9&quot;}, &quot;headRows&quot;: [4], &quot;inputs&quot;: [], &quot;hints&quot;: [&quot;תקבול ללא גידור: דולרים × שער.&quot;, &quot;תוצאת Short: דולרים × (K − שער).&quot;, &quot;תקבול נטו: סכום שתי העמודות.&quot;], &quot;remind&quot;: &quot;Short: תוצאה = כמות × (&lt;span class=\&quot;m\&quot; dir=\&quot;ltr\&quot;&gt;K − S&lt;sub&gt;T&lt;/sub&gt;&lt;/span&gt;).&quot;, &quot;partial&quot;: [&quot;B5&quot;, &quot;C5&quot;, &quot;D5&quot;], &quot;values&quot;: false, &quot;done&quot;: &quot;התקבול נטו קבוע: &lt;span class=\&quot;n\&quot;&gt;720,000&lt;/span&gt; ש״ח, כלומר &lt;span class=\&quot;n\&quot;&gt;200,000&lt;/span&gt; × &lt;span class=\&quot;n\&quot;&gt;3.60&lt;/span&gt;.&quot;}"><div class="tasktxt">יצואן יקבל <span class="n">200,000</span> דולר. הוא מוכר (Short) חוזה אקדמה (Forward) במחיר חוזה (K) <span class="n">3.60</span>. חשבו תקבול, תוצאת חוזה ותקבול נטו.</div><div class="xlrow solo"><div class="sheet"></div><div class="xlside"></div></div></div></section>
 <section class="slide qslide" id="c-p2" data-title="תרגול: יצואנית ותקבול גדול"><div class="kick"><span>חלק <span class="n">3</span> · מקרה</span></div><h2>תרגול: יצואנית ותקבול גדול</h2><div class="qg"><div class="qr"><div class="card qstem"><p>יצואנית תקבל <span class="n">400,000</span> דולר בעוד חודשיים. כל העלויות שלה בשקלים, והרווח הצפוי <span class="n">150,000</span> ש״ח. היא שוקלת למכור (Short) חוזה אקדמה (Forward) על <span class="n">400,000</span> דולר.</p></div><div class="mc" data-a="0" id="c-p2-q"><div class="q">מה החוזה עושה לעסק?</div><button class="o" data-i="0">א. מוסיף ערך</button><button class="o" data-i="1">ב. מיותר</button><button class="o" data-i="2">ג. מסוכן</button><div class="w"><b>הסבר:</b> חשיפה נטו גדולה ביחס לרווח, וחוזה בגודל החשיפה.</div></div></div><div class="solw card"><p class="st sp" data-n="10"><b>שלב <span class="n">1</span>, החשיפה נטו:</b> הכנסות של <span class="n">400,000</span> דולר. אין הוצאות דולריות לקיזוז.</p><p class="st sp" data-n="20"><b>שלב <span class="n">2</span>, הגודל:</b> ירידה של <span class="n">0.40</span> בשער היא <span class="m" dir="ltr">400,000 × 0.40 = 160,000</span> ש״ח: יותר מכל הרווח הצפוי.</p><p class="st sp" data-n="30"><b>שלב <span class="n">3</span>, הכיוון:</b> היא מקבלת דולרים, ולכן מוכרת (Short) חוזה. אם הדולר יורד, החוזה מרוויח את מה שהתקבול מפסיד.</p><p class="st sp" data-n="40"><b>מסקנה:</b> מוסיף ערך. היא חוזרת להרוויח מהמוצר, לא מהשער.</p></div></div></section>
 <section class="slide qslide" id="c-p3" data-title="תרגול: חוזה גדול מהחשיפה"><div class="kick"><span>חלק <span class="n">3</span> · מקרה</span></div><h2>תרגול: חוזה גדול מהחשיפה</h2><div class="qg"><div class="qr"><div class="card qstem"><p>לחברה הכנסות של <span class="n">1,000,000</span> דולר והוצאות של <span class="n">600,000</span> דולר, באותו חודש. הגזבר כבר מכר (Short) חוזה אקדמה (Forward) על <span class="n">1,000,000</span> דולר.</p></div><div class="mc" data-a="2" id="c-p3-q"><div class="q">מה החוזה הזה עושה לעסק?</div><button class="o" data-i="0">א. מוסיף ערך</button><button class="o" data-i="1">ב. מיותר</button><button class="o" data-i="2">ג. מסוכן</button><div class="w"><b>הסבר:</b> רק <span class="n">400,000</span> דולר מהחוזה הם גידור. השאר הוא הימור.</div></div></div><div class="solw card"><p class="st sp" data-n="10"><b>שלב <span class="n">1</span>, החשיפה נטו:</b> <span class="m" dir="ltr">1,000,000 − 600,000 = 400,000</span> דולר.</p><p class="st sp" data-n="20"><b>שלב <span class="n">2</span>, מה מגודר:</b> <span class="n">400,000</span> דולר מהחוזה מכסים את החשיפה נטו. זה גידור.</p><p class="st sp" data-n="30"><b>שלב <span class="n">3</span>, מה עודף:</b> <span class="n">600,000</span> דולר נוספים לא מגינים על שום דבר. החברה מוכרת דולרים שאין לה: הימור על ירידת הדולר.</p><p class="st sp" data-n="40"><b>שלב <span class="n">4</span>, תרחיש:</b> הדולר עולה ב-<span class="n">0.10</span>. על החלק העודף הפסד של <span class="m" dir="ltr">600,000 × 0.10 = 60,000</span> ש״ח.</p><p class="st sp" data-n="50"><b>מסקנה:</b> מסוכן. הגידור המתאים הוא על <span class="n">400,000</span> דולר בלבד.</p></div></div></section>
@@ -549,7 +663,7 @@ $('#gwrap').innerHTML=gk.map(k=>`<button class="gitem" data-t="${k}">${G[k].h}<d
 $('#gpl').innerHTML=gk.map(k=>`<div class="gp"><b>${G[k].h}</b> (${G[k].en})<br>${G[k].p}<br>דוגמה: ${G[k].ex}</div>`).join('');
 
 /* ---------- navigation ---------- */
-function show(i,reveal){if(i<0||i>=slides.length)return;slides[cur].classList.remove('on');cur=i;slides[cur].classList.add('on');setAll(slides[cur],!!reveal);
+function show(i,reveal){if(i<0||i>=slides.length)return;slides[cur].classList.remove('on');cur=i;slides[cur].classList.add('on');setAll(slides[cur],!!reveal);slides[cur].dispatchEvent(new Event('shown'));
  $('#cnt').textContent=(cur+1)+' / '+slides.length;$('#progi').style.width=((cur+1)/slides.length*100)+'%';
  try{history.replaceState(null,'','#'+slides[cur].id);}catch(e){}
  $$('.mcell').forEach((c,j)=>c.classList.toggle('cur',j===cur));stepInfo();}
@@ -673,109 +787,213 @@ function display(S,a){const v=S.val[a];if(v==null)return {t:'',n:false};if(isErr
  if(typeof v==='number'){const raw=S.raw[a]||'';const f=S.fmt[a]||(raw[0]!=='='&&raw.includes('%')?'pct':'');return {t:fmtNum(v,f),n:true};}
  return {t:String(v),n:false};}
 
-/* ---------- the widget ---------- */
+/* ---------- the widget: a window that looks and behaves like Excel in Hebrew ---------- */
 let CLIP=null;
+const RC=['#1f5fd6','#d4321c','#7b3fb3','#14853c','#c06000','#c2185b','#0b8a8a'];  /* reference colors, as Excel paints them while a formula is edited */
+const REFRX=/("[^"]*")|(\$?[A-Za-z]{1,2}\$?\d+)(:\$?[A-Za-z]{1,2}\$?\d+)?(?![\w(])/g;
+const ico=(t,cls)=>`<span class="xi ${cls||''}">${t}</span>`;
 function mount(host,cfg){
- const R=cfg.rows,C=cfg.cols;const S=new Sheet(R,C);let base={...cfg.data};
- const load=()=>{S.raw={};S.fmt={...(cfg.fmt||{})};Object.entries(base).forEach(([a,v])=>S.set(a,v));S.recalc();};load();
+ let R=cfg.rows,C=cfg.cols;const S=new Sheet(R,C);let base={...cfg.data};S.bold={};
+ const load=()=>{S.raw={};S.fmt={...(cfg.fmt||{})};S.bold={};Object.entries(base).forEach(([a,v])=>S.set(a,v));S.recalc();};load();
  const W=cfg.widths||[];
  host.classList.add('xl');
- host.innerHTML=`<div class="xl-top"><div class="xl-name" title="תיבת השם">A1</div><div class="xl-fx">fx</div><input class="xl-bar" dir="auto" spellcheck="false" autocomplete="off"></div>
-  <div class="xl-tools">${cfg.tools===false?'':`<button data-x="formulas" title="הצגת נוסחאות">נוסחאות</button>`}${cfg.targets?`<button data-x="check" class="xl-go">✔ בדיקה</button>${cfg.hints?'<button data-x="hint">💡 רמז</button>':''}${cfg.remind?'<button data-x="remind">📐 תזכורת נוסחה</button>':''}${cfg.partial?'<button data-x="part">פתרון חלקי</button>':''}<button data-x="solve">פתרון מלא</button>`:''}<button data-x="reset">איפוס</button><span class="xl-msg"></span></div>
-  <div class="xl-wrap"><table class="xl-g" tabindex="0"><thead><tr><th class="xl-c0"></th>${Array.from({length:C},(_,c)=>`<th style="width:${W[c]||92}px">${colName(c)}</th>`).join('')}</tr></thead><tbody>${Array.from({length:R},(_,r)=>`<tr><th class="xl-rn">${r+1}</th>${Array.from({length:C},(_,c)=>`<td data-a="${addr(r,c)}"></td>`).join('')}</tr>`).join('')}</tbody></table></div>
-  ${cfg.targets?'<div class="xl-fb"></div>':''}`;
- const g=host.querySelector('.xl-g'),bar=host.querySelector('.xl-bar'),nameB=host.querySelector('.xl-name'),msg=host.querySelector('.xl-msg'),fb=host.querySelector('.xl-fb');
+ const pr=`<div class="xl-pr">${cfg.targets?`<button data-x="check" class="xl-go" title="בדיקת התאים הצהובים">✔ בדיקה</button>${cfg.hints?'<button data-x="hint">💡 רמז</button>':''}${cfg.remind?'<button data-x="remind">📐 תזכורת נוסחה</button>':''}${cfg.partial?'<button data-x="part">פתרון חלקי</button>':''}<button data-x="solve">פתרון מלא</button>`:''}<button data-x="reset" title="חזרה למצב ההתחלה">איפוס</button></div>`;
+ host.innerHTML=`<div class="xl-tabs"><span class="xl-qat"><button data-x="undo" title="ביטול (Ctrl+Z)" aria-label="ביטול">↶</button><button data-x="redo" title="ביצוע מחדש (Ctrl+Y)" aria-label="ביצוע מחדש">↷</button></span><span class="xt">קובץ</span><span class="xt on">בית</span><span class="xt">הוספה</span><span class="xt">פריסת עמוד</span><span class="xt">נוסחאות</span><span class="xt">נתונים</span><span class="xt">סקירה</span><span class="xt">תצוגה</span><span class="xl-tt">חוברת1 · Excel</span></div>
+  <div class="xl-tools xl-ribbon">
+   <div class="xg"><div class="xg-b"><button data-x="paste" class="big" title="הדבקה (Ctrl+V)">${ico('📋')}<small>הדבק</small></button><span class="col"><button data-x="cut" title="גזירה (Ctrl+X)">✂</button><button data-x="copy" title="העתקה (Ctrl+C)">⧉</button></span></div><div class="xg-n">לוח</div></div>
+   <div class="xg"><div class="xg-b"><span class="col"><span class="row"><span class="xl-font" dir="ltr">Calibri</span><span class="xl-size">11</span></span><span class="row"><button data-x="bold" title="מודגש (Ctrl+B)"><b>B</b></button><button data-x="noop" title="נטוי"><i>I</i></button><button data-x="noop" title="קו תחתון"><u>U</u></button></span></span></div><div class="xg-n">גופן</div></div>
+   <div class="xg"><div class="xg-b"><span class="col"><span class="row"><span class="xl-numf">כללי</span></span><span class="row"><button data-x="pct" title="סגנון אחוזים">%</button><button data-x="comma" title="סגנון מפריד אלפים" dir="ltr">000</button><button data-x="incd" title="הוספת מקום עשרוני" dir="ltr">.0<sup>+</sup></button><button data-x="decd" title="הפחתת מקום עשרוני" dir="ltr">.0<sup>−</sup></button></span></span></div><div class="xg-n">מספר</div></div>
+   <div class="xg"><div class="xg-b"><span class="col"><button data-x="sum" title="סכום אוטומטי (Alt+=)">Σ סכום אוטומטי</button>${cfg.tools===false?'':'<button data-x="formulas" title="הצגת נוסחאות (Ctrl+`)">ƒx הצג נוסחאות</button>'}</span></div><div class="xg-n">עריכה</div></div>
+   <span class="xl-msg"></span></div>
+  <div class="xl-top"><div class="xl-name" title="תיבת השם">A1</div><span class="xl-xv"><button data-x="cancel" title="ביטול (Esc)">✕</button><button data-x="enter" title="הזנה (Enter)">✓</button></span><div class="xl-fx">fx</div><div class="xl-barw"><div class="xl-lay"></div><input class="xl-bar" dir="auto" spellcheck="false" autocomplete="off"></div></div>
+  <div class="xl-wrap"><table class="xl-g" tabindex="0"></table></div>
+  <div class="xl-foot"><span class="xl-sheet">גיליון1</span><span class="xl-plus">+</span><span class="xl-stat">מוכן</span></div>
+  ${pr}${cfg.targets?'<div class="xl-fb"></div>':''}`;
+ const g=host.querySelector('.xl-g'),bar=host.querySelector('.xl-bar'),barLay=host.querySelector('.xl-lay'),nameB=host.querySelector('.xl-name'),msg=host.querySelector('.xl-msg'),fb=host.querySelector('.xl-fb'),stat=host.querySelector('.xl-stat');
+ let chs=[],rhs=[];
+ const grid=()=>{g.innerHTML=`<thead><tr><th class="xl-c0"></th>${Array.from({length:C},(_,c)=>`<th class="xl-ch" data-c="${c}" style="width:${W[c]||84}px">${colName(c)}</th>`).join('')}</tr></thead><tbody>${Array.from({length:R},(_,r)=>`<tr><th class="xl-rn" data-r="${r}">${r+1}</th>${Array.from({length:C},(_,c)=>`<td data-a="${addr(r,c)}"></td>`).join('')}</tr>`).join('')}</tbody>`;chs=[...g.querySelectorAll('th.xl-ch')];rhs=[...g.querySelectorAll('th.xl-rn')];};grid();
+ /* like real Excel, the grid runs on past the exercise: extra rows and columns fill the free part of the slide, and the rest scrolls */
+ const wrapEl=host.querySelector('.xl-wrap');
+ /* refit whenever the slide is shown or the fonts finish loading: the height follows the text above the sheet */
+ function fit(){const slide=host.closest('.slide');if(!slide)return;const k=slide.getBoundingClientRect().width/1280;if(!k||!wrapEl.getBoundingClientRect().width)return;
+  const ft=slide.querySelector('.ft');const bottom=(ft?ft.getBoundingClientRect().top:slide.getBoundingClientRect().bottom)/k;const top=wrapEl.getBoundingClientRect().top/k;
+  const foot=host.querySelector('.xl-foot').getBoundingClientRect().height/k;const room=Math.floor(bottom-top-foot-12);
+  const tr=g.querySelector('tbody tr');let rh=tr?tr.getBoundingClientRect().height/k:32;const head=g.querySelector('thead').getBoundingClientRect().height/k;
+  if(room<head+rh*(cfg.rows+1)&&!host.classList.contains('tight')){host.classList.add('tight');rh=tr.getBoundingClientRect().height/k;}
+  if(Math.abs((parseFloat(wrapEl.style.height)||0)-room)>1)wrapEl.style.height=Math.max(120,room)+'px';
+  const wantR=Math.min(99,Math.max(cfg.rows,Math.ceil((room-head)/rh)+6));const free=wrapEl.clientWidth-g.getBoundingClientRect().width/k;const wantC=Math.min(26,C+(free>4?Math.ceil(free/84)+1:0));
+  if(wantR>R||wantC>C){R=Math.max(R,wantR);C=Math.max(C,wantC);S.rows=R;S.cols=C;grid();render();}}
+ if(cfg.fit!==false){const sl=host.closest('.slide');if(sl)sl.addEventListener('shown',fit);}
+ if(cfg.fit!==false&&window.ResizeObserver){new ResizeObserver(()=>fit()).observe(host);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);}
  /* hidden text sink: catches typing from on-screen keyboards and IMEs that send input events without a usable key */
  const sink=document.createElement('textarea');sink.className='xl-sink';sink.setAttribute('aria-hidden','true');sink.tabIndex=-1;sink.spellcheck=false;host.appendChild(sink);
  const focusG=()=>sink.focus({preventScroll:true});
  sink.addEventListener('input',()=>{const v=sink.value;sink.value='';if(!editing&&v)startEdit(v.trim()===''?'':v,false);});
  const td=a=>g.querySelector(`td[data-a="${a}"]`);
- let sel={r:0,c:0},sel2={r:0,c:0},editing=null,showF=false,marks={},hintN=0;
- const inSel=(r,c)=>r>=Math.min(sel.r,sel2.r)&&r<=Math.max(sel.r,sel2.r)&&c>=Math.min(sel.c,sel2.c)&&c<=Math.max(sel.c,sel2.c);
- const selName=()=>sel.r===sel2.r&&sel.c===sel2.c?addr(sel.r,sel.c):addr(Math.min(sel.r,sel2.r),Math.min(sel.c,sel2.c))+':'+addr(Math.max(sel.r,sel2.r),Math.max(sel.c,sel2.c));
+ let sel={r:0,c:0},sel2={r:0,c:0},editing=null,showF=false,marks={},hintN=0,refPaint=[],point=null;
+ /* ---- undo and redo: a snapshot of the sheet before every change ---- */
+ const hist=[],fut=[];
+ const snap=()=>({raw:{...S.raw},fmt:{...S.fmt},bold:{...S.bold}});
+ const push=()=>{hist.push(snap());if(hist.length>100)hist.shift();fut.length=0;};
+ const restore=s=>{S.raw={...s.raw};S.fmt={...s.fmt};S.bold={...s.bold};marks={};};
+ function undo(){if(editing)cancel();if(!hist.length){toastX('אין פעולה לביטול');return;}fut.push(snap());restore(hist.pop());render();toastX('בוטלה הפעולה האחרונה (Ctrl+Z)');if(cfg.onChange)cfg.onChange();}
+ function redo(){if(!fut.length){toastX('אין פעולה לביצוע מחדש');return;}hist.push(snap());restore(fut.pop());render();toastX('בוצע מחדש (Ctrl+Y)');if(cfg.onChange)cfg.onChange();}
+ const r0=()=>Math.min(sel.r,sel2.r),r1=()=>Math.max(sel.r,sel2.r),c0=()=>Math.min(sel.c,sel2.c),c1=()=>Math.max(sel.c,sel2.c);
+ const inSel=(r,c)=>r>=r0()&&r<=r1()&&c>=c0()&&c<=c1();
+ const eachSel=fn=>{for(let r=r0();r<=r1();r++)for(let c=c0();c<=c1();c++)fn(addr(r,c),r,c);};
+ const selName=()=>sel.r===sel2.r&&sel.c===sel2.c?addr(sel.r,sel.c):addr(r0(),c0())+':'+addr(r1(),c1());
+ const fmtStat=v=>fmtNum(v,'');
+ function status(){if(editing){stat.textContent=editing.mode==='edit'?'עריכה':'הזנה';return;}
+  const nums=[];let cnt=0;eachSel(a=>{const v=S.val[a];if(v!=null&&v!=='')cnt++;if(typeof v==='number')nums.push(v);});
+  if(cnt>1){const s=nums.reduce((x,y)=>x+y,0);stat.innerHTML=nums.length?`ממוצע: <span dir="ltr">${fmtStat(s/nums.length)}</span>&emsp;ספירה: <span dir="ltr">${cnt}</span>&emsp;סכום: <span dir="ltr">${fmtStat(s)}</span>`:`ספירה: <span dir="ltr">${cnt}</span>`;}
+  else stat.textContent='מוכן';}
  function render(){S.recalc();
-  g.querySelectorAll('td').forEach(el=>{const a=el.dataset.a;if(editing&&editing.a===a)return;const p=parseAddr(a);
-   const raw=S.raw[a];let d=display(S,a);if(showF&&raw&&raw[0]==='=')d={t:raw,n:false,f:true};
-   el.className=(d.n?'n':'')+(d.f?' f':'')+(d.e?' e':'')+(inSel(p.r,p.c)?' sel':'')+(p.r===sel.r&&p.c===sel.c?' act':'')+(cfg.inputs&&cfg.inputs.includes(a)?' in':'')+(cfg.targets&&cfg.targets.includes(a)?' tg':'')+(marks[a]?' '+marks[a]:'')+(cfg.headRows&&cfg.headRows.includes(p.r+1)?' hd':'');
-   el.innerHTML=(d.n||d.f?`<span dir="ltr">${esc(d.t)}</span>`:esc(d.t))+(p.r===Math.max(sel.r,sel2.r)&&p.c===Math.max(sel.c,sel2.c)&&!editing?'<i class="xl-fh"></i>':'');});
-  nameB.textContent=selName();if(!editing||editing.where!=='bar')bar.value=S.raw[addr(sel.r,sel.c)]||'';
-  if(cfg.onSelect)cfg.onSelect(selName());}
- function startEdit(initial,keep){const a=addr(sel.r,sel.c);sel2={...sel};editing={a,where:'cell',orig:S.raw[a]||''};const el=td(a);
-  el.className+=' ed';el.innerHTML=`<input class="xl-in" dir="auto" spellcheck="false" autocomplete="off">`;const inp=el.querySelector('input');inp.value=keep?(S.raw[a]||''):initial;bar.value=inp.value;
+  const sR=r0(),eR=r1(),sC=c0(),eC=c1(),multi=sR!==eR||sC!==eC;
+  g.querySelectorAll('td').forEach(el=>{const a=el.dataset.a;if(editing&&editing.where==='cell'&&editing.a===a)return;const p=parseAddr(a);
+   const raw=S.raw[a];let d=display(S,a);if(showF&&raw&&raw[0]==='=')d={t:raw,n:false,f:true};const s=inSel(p.r,p.c);
+   el.className=(d.n?'n':'')+(d.f?' f':'')+(d.e?' e':'')+(s&&multi?' sel':'')+(s&&p.r===sR?' bt':'')+(s&&p.r===eR?' bb':'')+(s&&p.c===sC?' bs':'')+(s&&p.c===eC?' be':'')+(p.r===sel.r&&p.c===sel.c?' act':'')+(cfg.inputs&&cfg.inputs.includes(a)?' in':'')+(cfg.targets&&cfg.targets.includes(a)?' tg':'')+(marks[a]?' '+marks[a]:'')+(cfg.headRows&&cfg.headRows.includes(p.r+1)?' hd':'')+(S.bold[a]?' bo':'')+(CLIP&&CLIP.host===host&&CLIP.a===a?' cp':'');
+   el.innerHTML=(d.n||d.f?`<span dir="ltr">${esc(d.t)}</span>`:esc(d.t))+(p.r===eR&&p.c===eC&&!editing?'<i class="xl-fh"></i>':'');});
+  chs.forEach(h=>{const c=+h.dataset.c;h.classList.toggle('hs',c>=sC&&c<=eC);});rhs.forEach(h=>{const r=+h.dataset.r;h.classList.toggle('hs',r>=sR&&r<=eR);});
+  nameB.textContent=editing?addr(sel.r,sel.c):selName();if(!editing||editing.where!=='bar'){bar.value=S.raw[addr(sel.r,sel.c)]||'';paint(bar,barLay);}
+  status();if(cfg.onSelect)cfg.onSelect(selName());}
+ /* ---- colored references: the formula text and the cells it points to share a color ---- */
+ function refsOf(v){const out=[];if(!v||v[0]!=='=')return out;let m,k=0;REFRX.lastIndex=0;const seen={};
+  while((m=REFRX.exec(v))){if(m[1])continue;const key=(m[2]+(m[3]||'')).replace(/\$/g,'').toUpperCase();if(!(key in seen))seen[key]=k++;out.push({i:m.index,len:m[0].length,a:m[2].replace(/\$/g,'').toUpperCase(),b:m[3]?m[3].slice(1).replace(/\$/g,'').toUpperCase():null,col:RC[seen[key]%RC.length]});}
+  return out;}
+ function paint(inp,lay){const v=inp.value;const isF=v[0]==='=';inp.dir=isF?'ltr':'auto';lay.dir=inp.dir;lay.classList.toggle('ltr',isF);inp.classList.toggle('ltr',isF);
+  if(!isF){lay.textContent='';inp.classList.remove('painted');return;}
+  inp.classList.add('painted');const rs=refsOf(v);let h='',p=0;rs.forEach(x=>{h+=esc(v.slice(p,x.i))+`<span style="color:${x.col}">${esc(v.substr(x.i,x.len))}</span>`;p=x.i+x.len;});h+=esc(v.slice(p));lay.innerHTML=h+' ';lay.scrollLeft=inp.scrollLeft;}
+ function paintRefs(v){refPaint.forEach(el=>{el.style.removeProperty('--rc');el.classList.remove('rf','rt','rb','rs','re');});refPaint=[];
+  refsOf(v).forEach(x=>{const A=parseAddr(x.a),B=x.b?parseAddr(x.b):A;if(!A||!B)return;const a0=Math.min(A.r,B.r),a1=Math.max(A.r,B.r),b0=Math.min(A.c,B.c),b1=Math.max(A.c,B.c);
+   for(let r=a0;r<=a1;r++)for(let c=b0;c<=b1;c++){if(r>=R||c>=C)continue;const el=td(addr(r,c));if(!el)continue;el.style.setProperty('--rc',x.col);el.classList.add('rf');if(r===a0)el.classList.add('rt');if(r===a1)el.classList.add('rb');if(c===b0)el.classList.add('rs');if(c===b1)el.classList.add('re');refPaint.push(el);}});}
+ function onEditInput(){const inp=curInput();if(!inp)return;if(editing.where==='cell'){bar.value=inp.value;inp.style.width='';const w=Math.max(inp.parentElement.clientWidth,inp.scrollWidth+14);inp.style.width=w+'px';editing.lay.style.width=w+'px';paint(inp,editing.lay);}paint(bar,barLay);paintRefs(inp.value);status();}
+ function startEdit(initial,keep){if(editing)return;const a=addr(sel.r,sel.c);sel2={...sel};editing={a,where:'cell',orig:S.raw[a]||'',mode:keep?'edit':'enter'};point=null;const el=td(a);render();
+  el.className+=' ed';el.innerHTML=`<div class="xl-lay"></div><input class="xl-in" dir="auto" spellcheck="false" autocomplete="off">`;const inp=el.querySelector('input');editing.lay=el.querySelector('.xl-lay');inp.value=keep?(S.raw[a]||''):initial;bar.value=inp.value;
   inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length);
-  inp.oninput=()=>{bar.value=inp.value;};inp.onkeydown=keyEdit;}
+  inp.oninput=()=>{point=null;onEditInput();};inp.onkeydown=keyEdit;inp.onscroll=()=>{editing&&(editing.lay.scrollLeft=inp.scrollLeft);};onEditInput();}
  function curInput(){return editing?(editing.where==='bar'?bar:td(editing.a).querySelector('input')):null;}
- function commit(dr,dc){if(!editing)return;const v=curInput().value.trim();S.set(editing.a,v);editing=null;move(dr,dc);render();focusG();if(cfg.onChange)cfg.onChange();}
- function cancel(){editing=null;render();focusG();}
+ function commit(dr,dc){if(!editing)return;const v=curInput().value.trim();const a=editing.a;const changed=(S.raw[a]||'')!==v;if(changed)push();S.set(a,v);editing=null;point=null;paintRefs('');move(dr,dc);render();focusG();if(changed&&cfg.onChange)cfg.onChange();}
+ function cancel(){if(!editing)return;editing=null;point=null;paintRefs('');render();focusG();}
  function move(dr,dc){sel={r:Math.max(0,Math.min(R-1,sel.r+dr)),c:Math.max(0,Math.min(C-1,sel.c+dc))};sel2={...sel};}
- function keyEdit(e){e.stopPropagation();
+ const ARW={ArrowDown:[1,0],ArrowUp:[-1,0],ArrowLeft:[0,1],ArrowRight:[0,-1]};
+ function keyEdit(e){e.stopPropagation();const inp=e.target;
   if(e.key==='Enter'){e.preventDefault();commit(e.shiftKey?-1:1,0);}
   else if(e.key==='Tab'){e.preventDefault();commit(0,e.shiftKey?-1:1);}
   else if(e.key==='Escape'){e.preventDefault();cancel();}
-  else if(e.key==='F4'){e.preventDefault();const inp=e.target,v=inp.value,p=inp.selectionStart,rx=/\$?[A-Za-z]{1,2}\$?\d+/g;let m,hit=null;
+  else if(ARW[e.key]&&editing&&editing.mode==='enter'&&(point||pointable())){e.preventDefault();
+   /* point mode: the arrows walk a reference through the sheet, as in Excel */
+   const from=point?{r:point.r,c:point.c}:{...sel};const r=Math.max(0,Math.min(R-1,from.r+ARW[e.key][0])),c=Math.max(0,Math.min(C-1,from.c+ARW[e.key][1]));const ref=addr(r,c);
+   let v=inp.value,at=point?point.i:inp.selectionStart;if(point)v=v.slice(0,point.i)+v.slice(point.i+point.len);
+   inp.value=v.slice(0,at)+ref+v.slice(at);point={i:at,len:ref.length,r,c};inp.setSelectionRange(at+ref.length,at+ref.length);onEditInput();}
+  else if(ARW[e.key]&&editing&&editing.mode==='enter'){e.preventDefault();commit(...ARW[e.key]);}
+  else if(e.key==='F2'){e.preventDefault();if(editing){editing.mode=editing.mode==='edit'?'enter':'edit';status();}}
+  else if(e.key==='F4'){e.preventDefault();const v=inp.value,p=inp.selectionStart,rx=/\$?[A-Za-z]{1,2}\$?\d+/g;let m,hit=null;
    while((m=rx.exec(v)))if(m.index<=p&&p<=m.index+m[0].length)hit=m;
    if(hit){const q=/^(\$?)([A-Za-z]{1,2})(\$?)(\d+)$/.exec(hit[0]),st=(q[1]?2:0)+(q[3]?1:0),nx={0:3,3:1,1:2,2:0}[st];
     const nr=(nx&2?'$':'')+q[2]+(nx&1?'$':'')+q[4];inp.value=v.slice(0,hit.index)+nr+v.slice(hit.index+hit[0].length);
-    const np=hit.index+nr.length;inp.setSelectionRange(np,np);inp.dispatchEvent(new Event('input',{bubbles:true}));}}}
- const pointable=()=>{const inp=curInput();if(!inp)return false;const v=inp.value.slice(0,inp.selectionStart).trimEnd();return v[0]==='='&&/[=+\-*/^(,:;]$/.test(v);};
- function insertRef(a){const inp=curInput();const s=inp.selectionStart;inp.value=inp.value.slice(0,s)+a+inp.value.slice(inp.selectionEnd);inp.setSelectionRange(s+a.length,s+a.length);bar.value=inp.value;inp.focus();toastX(`נוספה הפניה לתא ${a}`);}
+    const np=hit.index+nr.length;inp.setSelectionRange(np,np);point=null;onEditInput();}}
+  else{point=null;}}
+ const pointable=()=>{const inp=curInput();if(!inp)return false;const v=inp.value.slice(0,inp.selectionStart).trimEnd();return v[0]==='='&&/[=+\-*/^(,:;<>]$/.test(v);};
+ function insertRef(a,ext){const inp=curInput();let s=inp.selectionStart;if(point&&ext){inp.value=inp.value.slice(0,point.i)+inp.value.slice(point.i+point.len);s=point.i;}
+  inp.value=inp.value.slice(0,s)+a+inp.value.slice(inp.selectionEnd>s?inp.selectionEnd:s);inp.setSelectionRange(s+a.length,s+a.length);const p=parseAddr(a.split(':').pop());point={i:s,len:a.length,r:p.r,c:p.c};inp.focus();onEditInput();}
  function toastX(t){msg.textContent=t;clearTimeout(toastX.t);toastX.t=setTimeout(()=>{if(msg.textContent===t)msg.textContent='';},1800);}
  /* pointer: select, drag a range, insert a reference while writing a formula, or drag the fill handle */
  let drag=null;
- g.addEventListener('pointerdown',e=>{const cell=e.target.closest('td');
+ g.addEventListener('pointerdown',e=>{const hc=e.target.closest('th');
+  if(hc&&!editing){e.preventDefault();if(hc.classList.contains('xl-ch')){const c=+hc.dataset.c;sel={r:0,c};sel2={r:R-1,c};}else if(hc.classList.contains('xl-rn')){const r=+hc.dataset.r;sel={r,c:0};sel2={r,c:C-1};}else{sel={r:0,c:0};sel2={r:R-1,c:C-1};}render();focusG();return;}
+  const cell=e.target.closest('td');
   if(e.target.classList.contains('xl-fh')){e.preventDefault();drag={k:'fill',b:blk(),to:null};try{g.setPointerCapture(e.pointerId);}catch(_){}return;}
   if(!cell)return;const p=parseAddr(cell.dataset.a);
-  if(editing&&editing.a===cell.dataset.a)return;
-  if(editing&&pointable()){e.preventDefault();insertRef(cell.dataset.a);return;}
+  if(editing&&editing.where==='cell'&&editing.a===cell.dataset.a)return;
+  if(editing&&(pointable()||point)){e.preventDefault();insertRef(cell.dataset.a,!!point&&!pointable());drag={k:'ref',a:cell.dataset.a};try{g.setPointerCapture(e.pointerId);}catch(_){}return;}
   if(editing)commit(0,0);
-  e.preventDefault();sel={...p};sel2={...p};drag={k:'sel'};try{g.setPointerCapture(e.pointerId);}catch(_){}render();focusG();});
+  e.preventDefault();if(e.shiftKey){sel2={...p};}else{sel={...p};sel2={...p};}drag={k:'sel'};try{g.setPointerCapture(e.pointerId);}catch(_){}render();focusG();});
  g.addEventListener('pointermove',e=>{if(!drag)return;const el=document.elementFromPoint(e.clientX,e.clientY);const cell=el&&el.closest&&el.closest('td');if(!cell||!g.contains(cell))return;const p=parseAddr(cell.dataset.a);
-  if(drag.k==='sel'){sel2=p;render();}
+  if(drag.k==='sel'){if(p.r!==sel2.r||p.c!==sel2.c){sel2=p;render();}}
+  else if(drag.k==='ref'){const A=parseAddr(drag.a);const a0=addr(Math.min(A.r,p.r),Math.min(A.c,p.c)),a1=addr(Math.max(A.r,p.r),Math.max(A.c,p.c));const ref=a0===a1?a0:a0+':'+a1;
+   const inp=curInput();if(point&&inp.value.substr(point.i,point.len)!==ref){inp.value=inp.value.slice(0,point.i)+ref+inp.value.slice(point.i+point.len);point.len=ref.length;inp.setSelectionRange(point.i+ref.length,point.i+ref.length);onEditInput();}}
   else{const b=drag.b;const dv=p.r>b.r1?p.r-b.r1:p.r<b.r0?b.r0-p.r:0,dh=p.c>b.c1?p.c-b.c1:p.c<b.c0?b.c0-p.c:0;
    const to=!dv&&!dh?null:dv>=dh?{r0:Math.min(b.r0,p.r),r1:Math.max(b.r1,p.r),c0:b.c0,c1:b.c1,v:1}:{r0:b.r0,r1:b.r1,c0:Math.min(b.c0,p.c),c1:Math.max(b.c1,p.c),v:0};drag.to=to;
    g.querySelectorAll('td.fillp').forEach(x=>x.classList.remove('fillp'));
    if(to)for(let r=to.r0;r<=to.r1;r++)for(let c=to.c0;c<=to.c1;c++)td(addr(r,c)).classList.add('fillp');}});
  g.addEventListener('pointerup',e=>{if(!drag)return;const d=drag;drag=null;try{g.releasePointerCapture(e.pointerId);}catch(_){}
+  if(d.k==='ref'){const inp=curInput();inp&&inp.focus();}
   if(d.k==='fill'){g.querySelectorAll('td.fillp').forEach(x=>x.classList.remove('fillp'));if(d.to)fill(d.b,d.to);}});
  /* fill a selected block (one cell or several) down/up or sideways, repeating the block like Excel */
- function blk(){return{r0:Math.min(sel.r,sel2.r),r1:Math.max(sel.r,sel2.r),c0:Math.min(sel.c,sel2.c),c1:Math.max(sel.c,sel2.c)};}
+ function blk(){return{r0:r0(),r1:r1(),c0:c0(),c1:c1()};}
  const md=(a,n)=>((a%n)+n)%n;
- function fill(b,to){const h=b.r1-b.r0+1,w=b.c1-b.c0+1;
+ function fill(b,to){push();const h=b.r1-b.r0+1,w=b.c1-b.c0+1;
   for(let r=to.r0;r<=to.r1;r++)for(let c=to.c0;c<=to.c1;c++){if(r>=b.r0&&r<=b.r1&&c>=b.c0&&c<=b.c1)continue;
    const sr=to.v?b.r0+md(r-b.r0,h):r,sc=to.v?c:b.c0+md(c-b.c0,w);const src=addr(sr,sc),raw=S.raw[src],a=addr(r,c);
-   S.set(a,raw==null?'':shift(raw,r-sr,c-sc));if(S.fmt[src])S.fmt[a]=S.fmt[src];else delete S.fmt[a];}
+   S.set(a,raw==null?'':shift(raw,r-sr,c-sc));if(S.fmt[src])S.fmt[a]=S.fmt[src];else delete S.fmt[a];if(S.bold[src])S.bold[a]=1;else delete S.bold[a];}
   sel={r:to.r0,c:to.c0};sel2={r:to.r1,c:to.c1};render();toastX('הנוסחה שוכפלה, וההפניות התעדכנו בכל תא');if(cfg.onChange)cfg.onChange();}
- g.addEventListener('dblclick',e=>{if(e.target.classList.contains('xl-fh')){const b=blk();
+ g.addEventListener('dblclick',e=>{const pt0=document.elementFromPoint(e.clientX,e.clientY);if(e.target.classList.contains('xl-fh')||pt0&&pt0.classList&&pt0.classList.contains('xl-fh')){const b=blk();
    let last=b.r1;for(let r=b.r1+1;r<R;r++){const nb=[b.c0-1,b.c1+1].some(c=>c>=0&&c<C&&S.raw[addr(r,c)]!=null);if(nb)last=r;else break;}
    if(last>b.r1)fill(b,{r0:b.r0,r1:last,c0:b.c0,c1:b.c1,v:1});return;}
-  const cell=e.target.closest('td');if(!cell)return;sel=parseAddr(cell.dataset.a);sel2={...sel};startEdit('',true);});
- const gKey=e=>{if(editing)return;const k=e.key;
+  const pt=document.elementFromPoint(e.clientX,e.clientY);const cell=e.target.closest('td')||(pt&&pt.closest&&pt.closest('td'));if(!cell||!g.contains(cell)||editing)return;sel=parseAddr(cell.dataset.a);sel2={...sel};startEdit('',true);});
+ /* clipboard and formats */
+ function copy(cut){CLIP={host,a:addr(sel.r,sel.c),raw:S.raw[addr(sel.r,sel.c)],r:sel.r,c:sel.c,fmt:S.fmt[addr(sel.r,sel.c)],bold:S.bold[addr(sel.r,sel.c)],cut};render();toastX(cut?'נגזר. סמנו תא, והדביקו ב-Ctrl+V':'הועתק. סמנו תא או טווח, והדביקו ב-Ctrl+V');}
+ function paste(){if(!CLIP||CLIP.raw==null){toastX('אין מה להדביק. קודם העתיקו תא (Ctrl+C)');return;}push();
+  eachSel((a,r,c)=>{S.set(a,CLIP.cut?CLIP.raw:shift(CLIP.raw,r-CLIP.r,c-CLIP.c));if(CLIP.fmt)S.fmt[a]=CLIP.fmt;if(CLIP.bold)S.bold[a]=1;});
+  if(CLIP.cut&&CLIP.host===host&&!inSel(CLIP.r,CLIP.c)){S.set(CLIP.a,'');delete S.fmt[CLIP.a];delete S.bold[CLIP.a];CLIP=null;}render();if(cfg.onChange)cfg.onChange();}
+ function decs(a){const f=S.fmt[a]||'';const m=/^(pct|num)(\d)$/.exec(f);if(m)return [m[1],+m[2]];const t=display(S,a).t.replace(/[^\d.%]/g,'');const pc=f==='pct'||t.includes('%');const d=(t.split('.')[1]||'').replace('%','').length;return [pc?'pct':'num',d];}
+ function fmtAll(fn){push();eachSel(a=>{const f=fn(a);if(f)S.fmt[a]=f;else delete S.fmt[a];});render();if(cfg.onChange)cfg.onChange();}
+ function autoSum(){const c=sel.c;let r=sel.r-1,top=-1;while(r>=0&&typeof S.val[addr(r,c)]==='number'){top=r;r--;}
+  let f;if(top>=0)f=`=SUM(${addr(top,c)}:${addr(sel.r-1,c)})`;else{let cc=sel.c-1,st=-1;while(cc>=0&&typeof S.val[addr(sel.r,cc)]==='number'){st=cc;cc--;}f=st>=0?`=SUM(${addr(sel.r,st)}:${addr(sel.r,sel.c-1)})`:'=SUM()';}
+  startEdit(f,false);const inp=curInput();if(f==='=SUM()')inp.setSelectionRange(5,5);}
+ const gKey=e=>{if(editing)return;const k=e.key,code=e.code||'';
   const mod=e.ctrlKey||e.metaKey;
-  if(mod&&(k==='c'||k==='C'||k==='ג')){e.preventDefault();e.stopPropagation();CLIP={raw:S.raw[addr(sel.r,sel.c)],r:sel.r,c:sel.c,fmt:S.fmt[addr(sel.r,sel.c)]};toastX('הועתק. סמנו תא או טווח, והדביקו ב-Ctrl+V');return;}
-  if(mod&&(k==='v'||k==='V'||k==='ה')){e.preventDefault();e.stopPropagation();if(!CLIP||CLIP.raw==null)return;
-   for(let r=Math.min(sel.r,sel2.r);r<=Math.max(sel.r,sel2.r);r++)for(let c=Math.min(sel.c,sel2.c);c<=Math.max(sel.c,sel2.c);c++){S.set(addr(r,c),shift(CLIP.raw,r-CLIP.r,c-CLIP.c));if(CLIP.fmt)S.fmt[addr(r,c)]=CLIP.fmt;}
-   render();if(cfg.onChange)cfg.onChange();return;}
-  if(mod&&(k==='`'||k===';')){e.preventDefault();e.stopPropagation();toggleF();return;}
-  const nav={ArrowDown:[1,0],ArrowUp:[-1,0],ArrowLeft:[0,1],ArrowRight:[0,-1],Enter:[e.shiftKey?-1:1,0],Tab:[0,e.shiftKey?-1:1]};
+  if(mod&&(code==='KeyZ'||k==='z'||k==='Z'||k==='ז')){e.preventDefault();e.stopPropagation();if(e.shiftKey)redo();else undo();return;}
+  if(mod&&(code==='KeyY'||k==='y'||k==='Y'||k==='ט')){e.preventDefault();e.stopPropagation();redo();return;}
+  if(mod&&(code==='KeyC'||k==='c'||k==='C'||k==='ב')){e.preventDefault();e.stopPropagation();copy(false);return;}
+  if(mod&&(code==='KeyX'||k==='x'||k==='X'||k==='ס')){e.preventDefault();e.stopPropagation();copy(true);return;}
+  if(mod&&(code==='KeyV'||k==='v'||k==='V'||k==='ה')){e.preventDefault();e.stopPropagation();paste();return;}
+  if(mod&&(code==='KeyB'||k==='b'||k==='B'||k==='נ')){e.preventDefault();e.stopPropagation();toggleBold();return;}
+  if(mod&&(code==='Backquote'||k==='`'||k===';')){e.preventDefault();e.stopPropagation();toggleF();return;}
+  if(mod&&k==='Home'){e.preventDefault();e.stopPropagation();sel={r:0,c:0};sel2={...sel};render();return;}
+  if(e.altKey&&(k==='='||code==='Equal')){e.preventDefault();e.stopPropagation();autoSum();return;}
+  const nav={...ARW,Enter:[e.shiftKey?-1:1,0],Tab:[0,e.shiftKey?-1:1]};
   if(nav[k]){e.preventDefault();e.stopPropagation();if(e.shiftKey&&k.startsWith('Arrow')){sel2={r:Math.max(0,Math.min(R-1,sel2.r+nav[k][0])),c:Math.max(0,Math.min(C-1,sel2.c+nav[k][1]))};}else move(...nav[k]);render();return;}
+  if(k==='Home'){e.preventDefault();e.stopPropagation();sel={r:sel.r,c:0};sel2={...sel};render();return;}
   if(k==='F2'){e.preventDefault();e.stopPropagation();startEdit('',true);return;}
-  if(k==='Delete'||k==='Backspace'){e.preventDefault();e.stopPropagation();for(let r=Math.min(sel.r,sel2.r);r<=Math.max(sel.r,sel2.r);r++)for(let c=Math.min(sel.c,sel2.c);c<=Math.max(sel.c,sel2.c);c++)S.set(addr(r,c),'');render();if(cfg.onChange)cfg.onChange();return;}
+  if(k==='Escape'){e.stopPropagation();if(CLIP&&CLIP.host===host){CLIP=null;render();}return;}
+  if(k==='Delete'||k==='Backspace'){e.preventDefault();e.stopPropagation();let any=false;eachSel(a=>{if(S.raw[a]!=null)any=true;});if(!any)return;push();eachSel(a=>S.set(a,''));render();if(cfg.onChange)cfg.onChange();return;}
   if(k===' '||k.length===1&&!mod){e.preventDefault();e.stopPropagation();startEdit(k===' '?'':k,false);return;}
-  if(k==='Escape'||k==='PageDown'||k==='PageUp'||k==='Home'||k==='End')e.stopPropagation();};
+  if(k==='PageDown'||k==='PageUp'||k==='End')e.stopPropagation();};
  g.addEventListener('keydown',gKey);sink.addEventListener('keydown',gKey);
- bar.addEventListener('focus',()=>{if(!editing){editing={a:addr(sel.r,sel.c),where:'bar',orig:S.raw[addr(sel.r,sel.c)]||''};}});
+ bar.addEventListener('focus',()=>{if(!editing){editing={a:addr(sel.r,sel.c),where:'bar',orig:S.raw[addr(sel.r,sel.c)]||'',mode:'edit'};point=null;onEditInput();}});
+ bar.addEventListener('input',()=>{point=null;onEditInput();});bar.addEventListener('scroll',()=>{barLay.scrollLeft=bar.scrollLeft;});
  bar.addEventListener('keydown',keyEdit);
  bar.addEventListener('blur',()=>{if(editing&&editing.where==='bar')setTimeout(()=>{if(editing&&editing.where==='bar'&&document.activeElement!==bar)commit(0,0);},120);});
- function toggleF(){showF=!showF;host.querySelector('[data-x="formulas"]')&&host.querySelector('[data-x="formulas"]').classList.toggle('on',showF);render();}
- host.querySelector('.xl-tools').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const x=b.dataset.x;
-  if(x==='pct'){for(let r=Math.min(sel.r,sel2.r);r<=Math.max(sel.r,sel2.r);r++)for(let c=Math.min(sel.c,sel2.c);c<=Math.max(sel.c,sel2.c);c++){const a=addr(r,c);S.fmt[a]=/^pct/.test(S.fmt[a]||'')?'':'pct';}render();}
+ function toggleF(){showF=!showF;const b=host.querySelector('[data-x="formulas"]');b&&b.classList.toggle('on',showF);render();}
+ function toggleBold(){const on=!S.bold[addr(sel.r,sel.c)];push();eachSel(a=>{if(on)S.bold[a]=1;else delete S.bold[a];});render();}
+ host.querySelector('.xl-tabs').addEventListener('click',e=>{const t=e.target.closest('.xt');if(t&&!t.classList.contains('on'))toastX('בתרגול עובדים בכרטיסייה ״בית״');});
+ host.addEventListener('mousedown',e=>{const b=e.target.closest('.xl-tools button,.xl-qat button,.xl-xv button,.xl-pr button');if(b&&editing)e.preventDefault();});
+ const onBtn=e=>{const b=e.target.closest('.xl-tools button,.xl-qat button,.xl-xv button,.xl-pr button');if(!b)return;const x=b.dataset.x;
+  if(x==='undo')undo();if(x==='redo')redo();if(x==='enter')commit(0,0);if(x==='cancel')cancel();
+  if(x==='copy')copy(false);if(x==='cut')copy(true);if(x==='paste')paste();if(x==='bold')toggleBold();if(x==='noop')toastX('בתרגול הזה אין צורך בעיצוב');
+  if(x==='pct')fmtAll(a=>/^pct/.test(S.fmt[a]||'')?'':'pct');
+  if(x==='comma')fmtAll(a=>'num'+Math.max(0,Math.min(2,decs(a)[1]||0)));
+  if(x==='incd')fmtAll(a=>{const [t,d]=decs(a);return t+Math.min(6,d+1);});
+  if(x==='decd')fmtAll(a=>{const [t,d]=decs(a);return t+Math.max(0,d-1);});
+  if(x==='sum'){if(editing)commit(0,0);autoSum();}
   if(x==='formulas')toggleF();
   if(x==='hint'&&fb){const i=hintN%cfg.hints.length;hintN++;fb.innerHTML=`<div class="xl-tip"><b>רמז ${i+1} מתוך ${cfg.hints.length}:</b> ${cfg.hints[i]}</div>`;}
   if(x==='remind'&&fb){fb.innerHTML=`<div class="xl-tip">${cfg.remind}</div>`;}
-  if(x==='part'){cfg.partial.forEach(a=>{S.set(a,cfg.solution[a]);});render();if(fb)fb.innerHTML='<div class="xl-tip">השורה הראשונה מולאה. המשיכו מכאן: גררו את ידית המילוי או כתבו לבד.</div>';if(cfg.onChange)cfg.onChange();}
-  if(x==='reset'){load();marks={};hintN=0;if(fb)fb.innerHTML='';sel={r:0,c:0};sel2={...sel};render();if(cfg.onChange)cfg.onChange();}
-  if(x==='solve'){Object.entries(cfg.solution).forEach(([a,v])=>S.set(a,v));Object.assign(S.fmt,cfg.solFmt||{});render();check(true);if(cfg.onChange)cfg.onChange();}
-  if(x==='check')check(false);});
+  if(x==='part'){push();cfg.partial.forEach(a=>{S.set(a,cfg.solution[a]);});render();if(fb)fb.innerHTML='<div class="xl-tip">השורה הראשונה מולאה. המשיכו מכאן: גררו את ידית המילוי או כתבו לבד. התחרטתם? Ctrl+Z.</div>';if(cfg.onChange)cfg.onChange();}
+  if(x==='reset'){if(editing)cancel();push();load();marks={};hintN=0;if(fb)fb.innerHTML='';sel={r:0,c:0};sel2={...sel};render();toastX('הגיליון חזר להתחלה. Ctrl+Z מחזיר את מה שהיה');if(cfg.onChange)cfg.onChange();}
+  if(x==='solve'){const rows=[...new Set(cfg.targets.map(a=>parseAddr(a).r))].sort((p,q)=>p-q);const todo=rows.find(r=>cfg.targets.some(a=>parseAddr(a).r===r&&(S.raw[a]||'')!==cfg.solution[a]));
+   if(todo==null){check(true);return;}push();const now=cfg.targets.filter(a=>parseAddr(a).r===todo);now.forEach(a=>S.set(a,cfg.solution[a]));Object.assign(S.fmt,cfg.solFmt||{});
+   const left=rows.filter(r=>r>todo&&cfg.targets.some(a=>parseAddr(a).r===r&&(S.raw[a]||'')!==cfg.solution[a])).length;
+   sel=parseAddr(now[0]);sel2={...sel};render();
+   if(left){if(fb)fb.innerHTML=`<div class="xl-tip"><b>פתרון, צעד אחר צעד:</b> מולאה שורה ${todo+1}: ${now.map(a=>`<code class="xl" dir="ltr">${esc(a)}: ${esc(cfg.solution[a])}</code>`).join(' ')}. לחצו שוב לשורה הבאה (נשארו ${left}).</div>`;}
+   else check(true);if(cfg.onChange)cfg.onChange();}
+  if(x==='check')check(false);
+  if(!editing&&x!=='enter'&&x!=='cancel')focusG();};
+ host.addEventListener('click',onBtn);
+ /* the practice panel and the feedback may be moved beside the sheet: they keep working */
+ const prEl=host.querySelector('.xl-pr');prEl.addEventListener('click',e=>{if(!host.contains(prEl))onBtn(e);});
+ prEl.addEventListener('mousedown',e=>{if(editing&&!host.contains(prEl))e.preventDefault();});
  /* checking: the value must match, the cell must hold a formula with references (unless the solution has none: =14*12 converts years to months), and no number from the table may be typed in */
  const needOf=a=>cfg.need?(typeof cfg.need==='object'?cfg.need[a]:cfg.need):null;
  function check(silent){const sol=new Sheet(R,C);Object.entries(base).forEach(([a,v])=>sol.set(a,v));Object.entries(cfg.solution).forEach(([a,v])=>sol.set(a,v));sol.recalc();
@@ -794,8 +1012,8 @@ function mount(host,cfg){
   if(fb)fb.innerHTML=all?`<div class="xl-ok">✔ כל ${ok} התאים נכונים${silent?' (פתרון לדוגמה)':''}.${cfg.done?' '+cfg.done:''}</div>`:`<div class="xl-no">נכונים ${ok} מתוך ${cfg.targets.length}.</div><div class="xl-notes">${notes.slice(0,2).join('<br>')}${notes.length>2?' ועוד '+(notes.length-2)+' תאים.':''}</div>`;
   if(all&&!silent)host.dataset.solved='1';if(cfg.onChange)cfg.onChange();}
  render();
- return {sheet:S,render,select:(a)=>{sel=parseAddr(a);sel2={...sel};render();},put:(a,v)=>{S.set(a,v);render();if(cfg.onChange)cfg.onChange();},get:a=>S.val[a],raw:a=>S.raw[a],check,reset:()=>host.querySelector('[data-x="reset"]').click(),showFormulas:v=>{if(showF!==!!v)toggleF();},
-  fmtSel:fn=>{for(let r=Math.min(sel.r,sel2.r);r<=Math.max(sel.r,sel2.r);r++)for(let c=Math.min(sel.c,sel2.c);c<=Math.max(sel.c,sel2.c);c++){const a=addr(r,c),f=fn(S.fmt[a]||'',S.val[a],display(S,a).t);if(f)S.fmt[a]=f;else delete S.fmt[a];}render();},
+ return {sheet:S,render,fit,select:(a)=>{sel=parseAddr(a);sel2={...sel};render();},put:(a,v)=>{push();S.set(a,v);render();if(cfg.onChange)cfg.onChange();},get:a=>S.val[a],raw:a=>S.raw[a],check,reset:()=>host.querySelector('[data-x="reset"]').click(),showFormulas:v=>{if(showF!==!!v)toggleF();},undo,redo,
+  fmtSel:fn=>{eachSel(a=>{const f=fn(S.fmt[a]||'',S.val[a],display(S,a).t);if(f)S.fmt[a]=f;else delete S.fmt[a];});render();},
   fmtAt:a=>S.fmt[a]||'',active:()=>addr(sel.r,sel.c),onSel:fn=>{cfg.onSelect=fn;}};}
 return {mount,shift,Sheet,addr,parseAddr,colName,tokenize,parse};
 })();
@@ -853,7 +1071,8 @@ $$('.xlq').forEach(b=>{const cfg=cfg0(b),host=$('.sheet',b),svg=$('svg.xlc',b);l
    if(pts.length&&!single){const [x,y]=pts[pts.length-1];p+=f.tx(f.X(x)-8,f.Y(y)+(se.dy||-10),se.lab,{a:'end',fill:se.c,w:800,fs:17});}});
   if(single&&c.series[0].lab)p+=f.tx(f.W-f.mr-4,f.mt+16,c.series[0].lab,{a:'end',fill:c.series[0].c,w:800,fs:16});
   svg.innerHTML=p;};
- cfg.onChange=draw;api=XL.mount(host,cfg);host.__api=api;const fbx=$('.xl-fb',host);if(fbx)$('.xlside',b).appendChild(fbx);draw();});
+ cfg.onChange=draw;api=XL.mount(host,cfg);host.__api=api;const side=$('.xlside',b),prx=$('.xl-pr',host),fbx=$('.xl-fb',host);if(prx)side.insertBefore(prx,side.firstChild);if(cfg.remind){const fm=document.createElement('div');fm.className='xl-fm';fm.innerHTML='<b>📐 הנוסחאות לתרגיל</b><div>'+cfg.remind+'</div>';side.insertBefore(fm,side.firstChild);}if(fbx)side.appendChild(fbx);b.querySelectorAll('.toon').forEach(t=>side.appendChild(t));draw();
+ const fitSide=()=>{const sl=b.closest('.slide');const k=sl.getBoundingClientRect().width/1280;if(!k||!side.getBoundingClientRect().width)return false;const ft=sl.querySelector('.ft');const bottom=(ft?ft.getBoundingClientRect().top:sl.getBoundingClientRect().bottom)/k;const hh=Math.floor(bottom-side.getBoundingClientRect().top/k-10);if(Math.abs((parseFloat(side.style.height)||0)-hh)>1)side.style.height=hh+'px';return true;};b.closest('.slide').addEventListener('shown',()=>{if(host.__api&&host.__api.fit)host.__api.fit();fitSide();});if(window.ResizeObserver)new ResizeObserver(()=>fitSide()).observe(b);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitSide);});
 
 /* ---------- worked exercise with hints, reminder, partial and full solution ---------- */
 $$('.sv').forEach(b=>{const parts=$$('.svp',b),fb=$('.fbbar',b),sol=$$('.svs',b);let h=0;const H=cfg0(b);
@@ -862,7 +1081,7 @@ $$('.sv').forEach(b=>{const parts=$$('.svp',b),fb=$('.fbbar',b),sol=$$('.svs',b)
  $('.hnt',b).addEventListener('click',()=>{say(fb,null,`<b>רמז ${n(h%H.hints.length+1)} מתוך ${n(H.hints.length)}:</b> ${H.hints[h%H.hints.length]}`);h++;});
  $('.rmd',b).addEventListener('click',()=>say(fb,null,H.remind));
  $('.prt',b).addEventListener('click',()=>{sol.forEach((s,i)=>s.classList.toggle('on',i===0));say(fb,null,'הסעיף הראשון פתור למטה. המשיכו לבד.');});
- $('.ful',b).addEventListener('click',()=>{sol.forEach(s=>s.classList.add('on'));say(fb,null,'הפתרון המלא מוצג למטה.');});
+ $('.ful',b).addEventListener('click',()=>{const nx=sol.find(s=>!s.classList.contains('on'));if(nx)nx.classList.add('on');const left=sol.filter(s=>!s.classList.contains('on')).length;say(fb,null,left?`פתרון צעד אחר צעד: לחצו שוב לצעד הבא (נשארו ${left}).`:'זה הפתרון המלא.');});
  $('.rst',b).addEventListener('click',()=>{parts.forEach(p=>{const i=$('input',p);i.value='';i.classList.remove('good','badc');});sol.forEach(s=>s.classList.remove('on'));b.classList.remove('solved');h=0;say(fb,null,'הקלידו את התשובות, ולחצו ״בדיקה״.');});});
 /* ---------- draw the profit line by dragging three points ---------- */
 $$('.draw').forEach(b=>{const C=cfg(b),svg=$('svg',b),fb=$('.fbbar',b),tt=$('.tasktxt',b),xs=C.xs;let k=0,v=[],done=false,drag=-1;

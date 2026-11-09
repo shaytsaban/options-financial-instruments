@@ -16,11 +16,11 @@ function solveWidgets(s){
  s.querySelectorAll('.srow').forEach(r=>{r.querySelectorAll('.so')[+r.dataset.a].click();});
  s.querySelectorAll('.mc').forEach(m=>{m.classList.add('done');m.querySelectorAll('.o')[+m.dataset.a].classList.add('ok');});}
 function measure(s,i,tag){const foot=s.querySelector('.ft');const limit=foot?720-36:716;let worst=0,who='',wl=0,wr=1280;
- s.querySelectorAll('*').forEach(e=>{if(e.closest('.ft')||e.closest('.pd-num')||e.closest('.orb')||e.closest('svg')&&e.tagName!=='svg')return;const c=getComputedStyle(e);if(c.display==='none'||c.visibility==='hidden')return;const r=rel(e);if(r.b-r.t<1)return;if(r.b>worst){worst=r.b;who=e.tagName+'.'+(e.className.baseVal??e.className);}if(r.l<wl)wl=r.l;if(r.r>wr)wr=r.r;});
+ s.querySelectorAll('*').forEach(e=>{if(e.closest('.xl-wrap')&&!e.classList.contains('xl-wrap')||e.closest('.ft')||e.closest('.pd-num')||e.closest('.orb')||e.closest('svg')&&e.tagName!=='svg')return;const c=getComputedStyle(e);if(c.display==='none'||c.visibility==='hidden')return;const r=rel(e);if(r.b-r.t<1)return;if(r.b>worst){worst=r.b;who=e.tagName+'.'+(e.className.baseVal??e.className);}if(r.l<wl)wl=r.l;if(r.r>wr)wr=r.r;});
  if(worst>limit+.5||wl<-.5||wr>1280.5)R.overflow.push({i:i+1,id:s.id,tag,bottom:Math.round(worst),limit,who,l:Math.round(wl),r:Math.round(wr)});}
 D.slides.forEach((s,i)=>{D.show(i);D.setAll(s,true);measure(s,i,'open');solveWidgets(s);measure(s,i,'solved');
  s.querySelectorAll('.eq').forEach(e=>{const box=e.closest('.card,.solw,.cout,.fm,td,.slide');const g=document.createRange();g.selectNodeContents(e);const a=g.getBoundingClientRect(),b=box.getBoundingClientRect();if(a.left<b.left-1||a.right>b.right+1)R.eqwide.push({id:s.id,t:e.textContent.slice(0,50)});});
- const tw=document.createTreeWalker(s,NodeFilter.SHOW_TEXT);let n;const seen={};while((n=tw.nextNode())){if(!n.nodeValue.trim())continue;const p=n.parentElement;if(p.closest('.ft,sup,sub,tspan'))continue;let fs=parseFloat(getComputedStyle(p).fontSize);const svg=p.closest('svg');if(svg){const vb=svg.viewBox.baseVal.width;fs*=svg.getBoundingClientRect().width/(stage.getBoundingClientRect().width/1280)/vb;if(fs<13.5)seen['svg '+fs.toFixed(1)]=n.nodeValue.slice(0,24);}else if(fs<16.5)seen[fs]=n.nodeValue.slice(0,24);}
+ const tw=document.createTreeWalker(s,NodeFilter.SHOW_TEXT);let n;const seen={};while((n=tw.nextNode())){if(!n.nodeValue.trim())continue;const p=n.parentElement;if(p.closest('.ft,sup,sub,tspan,.xl-tabs,.xl-ribbon,.xl-foot,.xl-top'))continue;let fs=parseFloat(getComputedStyle(p).fontSize);const svg=p.closest('svg');if(svg){const vb=svg.viewBox.baseVal.width;fs*=svg.getBoundingClientRect().width/(stage.getBoundingClientRect().width/1280)/vb;if(fs<13.5)seen['svg '+fs.toFixed(1)]=n.nodeValue.slice(0,24);}else if(fs<16.5)seen[fs]=n.nodeValue.slice(0,24);}
  if(Object.keys(seen).length)R.small.push({id:s.id,seen});
  const txt=s.textContent;[['em','—'],['maqaf','־'],['en','–'],['ell','…'],['arrow','→'],['arrow2','⇒'],['q1','“'],['q2','”'],['cur','¤']].forEach(([k,c])=>{if(txt.includes(c))R.chars.push({id:s.id,k});});
  ['OTC','CME','CBOT','CBOE','TASE','BIS','WTI'].forEach(a=>{if(!(a in R.abbr)&&txt.includes(a)){const lk=[...s.querySelectorAll('.term')].some(t=>t.textContent.includes(a));R.abbr[a]=s.id+(lk?' linked':' NOT LINKED');}});
@@ -30,6 +30,13 @@ D.slides.forEach((s,i)=>{D.show(i);D.setAll(s,true);measure(s,i,'open');solveWid
 
 // bidi by measurement: inside an LTR run the first character must sit left of the last
 R.bidiM={checked:0,bad:[]};D.slides.forEach((s,i)=>{D.show(i);D.setAll(s,true);s.querySelectorAll('.eq,.m,.n').forEach(e=>{const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);const ts=[];let t;while(t=w.nextNode())if(t.nodeValue.trim())ts.push(t);if(!ts.length)return;const a=ts[0],b=ts[ts.length-1];const ia=a.nodeValue.search(/\S/),ib=b.nodeValue.length-1-b.nodeValue.split('').reverse().join('').search(/\S/);if(a===b&&ia>=ib)return;const r=document.createRange();r.setStart(a,ia);r.setEnd(a,ia+1);const x=r.getBoundingClientRect();r.setStart(b,ib);r.setEnd(b,ib+1);const y=r.getBoundingClientRect();if(x.width===0||y.width===0||e.closest('.frac')||e.querySelector('.frac')&&false)return;R.bidiM.checked++;if(x.left>y.left+0.5&&Math.abs(x.top-y.top)<4)R.bidiM.bad.push({id:s.id,t:e.textContent.slice(0,40)});});D.setAll(s,false);});
+// punctuation after a Latin word or a number, in Hebrew text, must sit on its left
+R.punct=[];D.slides.forEach((s,i)=>{D.show(i);D.setAll(s,true);const tw=document.createTreeWalker(s,NodeFilter.SHOW_TEXT);let t;
+ while((t=tw.nextNode())){const p=t.parentElement;if(!p||p.closest('.n,.m,code,.eq,svg,.xl,input,.ft,[dir="ltr"],.frac'))continue;if(getComputedStyle(p).direction!=='rtl')continue;
+  const v=t.nodeValue,rx=/[A-Za-z0-9)]([.,:;?!])(?=\s|$)/g;let m;while((m=rx.exec(v))){const k=m.index+1;const rest=v.slice(k+1);const nx=/[A-Za-zא-ת]/.exec(rest);if(nx&&/[A-Za-z]/.test(nx[0]))continue;
+   const r=document.createRange();r.setStart(t,k-1);r.setEnd(t,k);const a=r.getBoundingClientRect();r.setStart(t,k);r.setEnd(t,k+1);const b=r.getBoundingClientRect();
+   if(!a.width||!b.width||Math.abs(a.top-b.top)>4)continue;if(b.left>=a.right-1)R.punct.push({id:s.id,t:v.slice(Math.max(0,k-18),k+2)});}}
+ D.setAll(s,false);});
 // reveals
 D.slides.forEach((s,i)=>{const g=D.groups(s).length;D.show(i);let c=0;while(D.pending(s).length&&c<60){D.next();c++;}if(c!==g||D.cur()!==i)R.reveal.push({id:s.id,g,c});let b=0;while(D.groups(s).some(x=>x[0].classList.contains('show'))&&b<60){D.prev();b++;}if(b!==g||D.cur()!==i)R.reveal.push({id:s.id,back:b,g});});
 D.show(0);let k=0;while(D.cur()<D.slides.length-1&&k<2000){D.next();k++;}R.walked=[k,D.cur()];
@@ -60,12 +67,12 @@ qq('.xlq').forEach(b=>{D.go(b.closest('.slide').id);const C=JSON.parse(b.dataset
  C.targets.forEach(a=>api.put(a,C.solution[a]));btn('check').click();ok=ok&&q('.xl-ok',b)!==null&&h.dataset.solved==='1';
  const errs=qq('td.e',b).length;ok=ok&&!errs;measure(b.closest('.slide'),99,'xl-solved');
  const svg=q('svg.xlc',b);if(svg)ok=ok&&svg.querySelectorAll('polyline').length>=1;
- btn('reset').click();btn('solve').click();ok=ok&&q('.xl-ok',b)!==null;measure(b.closest('.slide'),99,'xl-full');
+ btn('reset').click();for(let z=0;z<30&&!q('.xl-ok',b);z++)btn('solve').click();ok=ok&&q('.xl-ok',b)!==null;measure(b.closest('.slide'),99,'xl-full');
  // typing through the keyboard path, in the first target cell
  clear();const t=C.targets[0];api.select(t);const sink=q('.xl-sink',b);sink.focus();sink.dispatchEvent(new KeyboardEvent('keydown',{key:'=',bubbles:true}));const inp=q('.xl-in',b);if(inp){inp.value=C.solution[t];inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));ok=ok&&api.raw(t)===C.solution[t];}else ok=false;
  clear();A(b.id,'xl',ok,{targets:C.targets.length,errs});});
 // exercises with hints
-qq('.sv').forEach(b=>{D.go(b.closest('.slide').id);const ps=qq('.svp',b),fb=q('.fbbar',b);const fill=f=>ps.forEach(p=>{q('input',p).value=f(+p.dataset.a);});fill(a=>a+9);q('.chk',b).click();let ok=fb.classList.contains('wrong');q('.hnt',b).click();ok=ok&&/רמז/.test(fb.textContent);q('.rmd',b).click();ok=ok&&fb.textContent.length>5;q('.prt',b).click();ok=ok&&qq('.svs.on',b).length===1;q('.ful',b).click();ok=ok&&qq('.svs.on',b).length===qq('.svs',b).length;fill(a=>a);q('.chk',b).click();ok=ok&&fb.classList.contains('good');measure(b.closest('.slide'),99,'sv-full');q('.rst',b).click();ok=ok&&qq('.svs.on',b).length===0;A(b.id,'sv',ok);});
+qq('.sv').forEach(b=>{D.go(b.closest('.slide').id);const ps=qq('.svp',b),fb=q('.fbbar',b);const fill=f=>ps.forEach(p=>{q('input',p).value=f(+p.dataset.a);});fill(a=>a+9);q('.chk',b).click();let ok=fb.classList.contains('wrong');q('.hnt',b).click();ok=ok&&/רמז/.test(fb.textContent);q('.rmd',b).click();ok=ok&&fb.textContent.length>5;q('.prt',b).click();ok=ok&&qq('.svs.on',b).length===1;for(let z=0;z<20;z++)q('.ful',b).click();ok=ok&&qq('.svs.on',b).length===qq('.svs',b).length;fill(a=>a);q('.chk',b).click();ok=ok&&fb.classList.contains('good');measure(b.closest('.slide'),99,'sv-full');q('.rst',b).click();ok=ok&&qq('.svs.on',b).length===0;A(b.id,'sv',ok);});
 // a cartoon must not sit on other content
 R.toon=[];D.slides.forEach((s,i)=>{const t=s.querySelector('.toon');if(!t)return;D.show(i);D.setAll(s,true);const T=t.getBoundingClientRect();s.querySelectorAll('.card,table,.band,.mc,.fbbar,.rl .sp,.rl .eq,.lead,.act,.steps').forEach(e=>{if(e.contains(t)||t.contains(e))return;const r=e.getBoundingClientRect();if(r.width&&r.left<T.right-2&&r.right>T.left+2&&r.top<T.bottom-2&&r.bottom>T.top+2)R.toon.push({id:s.id,on:e.className});});D.setAll(s,false);});
 qq('[data-t]').forEach(t=>{if(!D.G[t.dataset.t])R.terms.push(t.dataset.t);});
@@ -93,6 +100,7 @@ print('eq wider than box', R['eqwide'])
 print('small text', len(R['small']));[print('  ', o) for o in R['small'][:30]]
 print('chars', R['chars']); print('abbr', R['abbr']); print('bidi', R['bidi'])
 print('bidi measured', R['bidiM']['checked'], 'reversed', R['bidiM']['bad'][:12])
+print('punctuation on the wrong side', len(R['punct']), R['punct'][:15])
 print('reveal problems', R['reveal'])
 bad = [x for x in R['mc'] if x != 1]
 print('mc ok', len(R['mc']) - len(bad), 'bad', bad)

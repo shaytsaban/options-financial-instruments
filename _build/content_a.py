@@ -12,7 +12,7 @@ LMETA = {
          sub='נגזרים, חשיפה, וחוזה אקדמה (Forward) צעד אחר צעד.', chip='מקרים שלמים: מתי לגדר',
          cover='נגזרים, חשיפה, חשיפה נטו, חוזה אקדמה וחוזה עתידי, עם תרגול מסכם.',
          next_h='אופציות', next_t='אופציות רכש (Call) ומכר (Put), השחקנים, הבורסות ומקרה בוחן בגידור דלק. קריאה: Hull, פרק 1, החלקים על אופציות.'),
- 2: dict(date='', h1=('אבני הבניין:', 'אופציות, שחקנים ושווקים'), title='אופציות, שחקנים ושווקים',
+ 2: dict(date='9.11.2026', h1=('אבני הבניין:', 'אופציות, שחקנים ושווקים'), title='אופציות, שחקנים ושווקים',
          sub='Call ו-Put צעד אחר צעד, מגדרים וספקולנטים, הבורסות, ומקרה בוחן: גידור דלק בחברת תעופה.', chip='מקרה בוחן: דלק סילוני',
          cover='אופציות, מכפיל, אירופאית ואמריקאית, עסקת החלפה, שחקנים, בורסות ומקרה בוחן בגידור דלק.',
          next_h='חוזים עתידיים', next_t='חוזה אקדמה מול חוזה עתידי, מנגנון הביטחונות, סוגי חוזים, וגידור מטבע אצל יצואן ישראלי. קריאה: Hull, פרק 2.')}[LESSON]
@@ -22,6 +22,8 @@ NACT = [0]
 
 
 def S(sid, title, h, body, kick=None, cls='', kind='slide'):
+    if kick and kick.startswith('חלק None'):
+        kick = 'לפני שמתחילים · חימום'
     SL.append(dict(id=sid, title=title, h=h, body=link_terms(body), kick=kick, cls=cls, kind=kind, part=CUR[0]))
 
 
@@ -48,7 +50,7 @@ def TABLE(head, rows, cls=''):
     return f'<table class="tbl2 {cls}"><tr>{h}</tr>{b}</table>'
 
 
-def mc(qid, q, opts, a, why, rot=True):
+def mc(qid, q, opts, a, why, rot=True, rem=''):
     # options are written with the right answer first; a fixed rotation per question places it
     r = sum(map(ord, qid)) % len(opts) if rot else 0
     opts = opts[r:] + opts[:r]
@@ -57,7 +59,29 @@ def mc(qid, q, opts, a, why, rot=True):
     for i, t in enumerate(opts):
         mark = ' correct' if MODE == 'pdf' and i == a else ''
         o += f'<button class="o{mark}" data-i="{i}">{"אבגדה"[i]}. {TX(t)}</button>'
-    return f'<div class="mc" data-a="{a}" id="{qid}"><div class="q">{TX(q)}</div>{o}<div class="w"><b>הסבר:</b> {TX(why)}</div></div>'
+    r = f'<div class="rem"><b>📐 נוסחה:</b> {TX(rem)}</div>' if rem else ''
+    return f'<div class="mc" data-a="{a}" id="{qid}"><div class="q">{TX(q)}</div>{r}{o}<div class="w"><b>הסבר:</b> {TX(why)}</div></div>'
+
+
+def TABLES(head, rows, cls='', start=1):
+    """A table whose rows appear one click at a time."""
+    h = ''.join(f'<th>{TX(x)}</th>' for x in head)
+    b = ''.join(ST(start + i, ''.join(f'<td>{TX(c)}</td>' for c in r), 'tr') for i, r in enumerate(rows))
+    return f'<table class="tbl2 {cls}"><tr>{h}</tr>{b}</table>'
+
+
+def MEME(face, top, bottom, n=0):
+    """An original meme in the classic format: a picture, a line above it and a punchline below."""
+    svg = f'<svg viewBox="0 0 120 120" dir="ltr" role="img" aria-hidden="true">{TOONS[face]}</svg>'
+    inner = f'<div class="mm-t">{TX(top)}</div>{svg}<div class="mm-b">{TX(bottom)}</div>'
+    return ST(n, inner, cls='toon meme') if n else f'<div class="toon meme">{inner}</div>'
+
+
+def MORE(label, body):
+    """A red line to click when there is no room on the slide for the full explanation."""
+    if MODE == 'pdf':
+        return f'<div class="band note"><b>{TX(label)}</b> {body}</div>'
+    return f'<details class="more"><summary>{TX(label)}</summary><div class="more-b">{body}</div></details>'
 
 
 def MCS(sid, title, h, items):
@@ -176,6 +200,9 @@ TOONS = {
  'hourglass': '<path d="M30 14h60v8q0 22-22 38q22 16 22 38v8H30v-8q0-22 22-38Q30 44 30 22z" fill="#eef2ff" stroke="#1b2d55" stroke-width="4"/><path d="M42 26h36q-4 16-18 26q-14-10-18-26z" fill="#ffd37a"/><path d="M38 100q6-22 22-30q16 8 22 30z" fill="#ffd37a"/>',
  'wheat': '<rect x="20" y="56" width="80" height="50" fill="#e8eefb" stroke="#1b2d55" stroke-width="3"/><path d="M14 56l46-30 46 30z" fill="#27447f"/><path d="M36 64v36M60 64v36M84 64v36" stroke="#1b2d55" stroke-width="5"/><path d="M104 12v50M104 22l-9-7M104 22l9-7M104 34l-9-7M104 34l9-7M104 46l-9-7M104 46l9-7" stroke="#e8960c" stroke-width="4" stroke-linecap="round"/>',
  'robot': '<rect x="22" y="26" width="76" height="72" rx="14" fill="#217346"/><text x="60" y="58" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">fx</text><circle cx="44" cy="70" r="6" fill="#fff"/><circle cx="76" cy="70" r="6" fill="#fff"/><circle cx="45" cy="71" r="3" fill="#111"/><circle cx="77" cy="71" r="3" fill="#111"/><path d="M46 84q14 9 28 0" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/><line x1="60" y1="26" x2="60" y2="10" stroke="#217346" stroke-width="4"/><circle cx="60" cy="8" r="5" fill="#ff6a4d"/>',
+ 'cool': '<circle cx="60" cy="62" r="40" fill="#ffd37a"/><path d="M26 50h68v6q-2 14-16 14t-16-12h-4q-2 12-16 12t-16-14z" fill="#16213a"/><path d="M44 84q16 12 32 0" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>',
+ 'shock': '<circle cx="60" cy="62" r="40" fill="#ffd37a"/><circle cx="45" cy="52" r="8" fill="#fff" stroke="#111" stroke-width="2"/><circle cx="75" cy="52" r="8" fill="#fff" stroke="#111" stroke-width="2"/><circle cx="45" cy="52" r="3" fill="#111"/><circle cx="75" cy="52" r="3" fill="#111"/><ellipse cx="60" cy="84" rx="9" ry="12" fill="#5b1a1a"/><path d="M98 22l6-12M106 34l12-4M90 14l0-12" stroke="#e0454f" stroke-width="4" stroke-linecap="round"/>',
+ 'sleep': '<circle cx="58" cy="64" r="40" fill="#ffd37a"/><path d="M38 58q7 6 14 0M64 58q7 6 14 0" fill="none" stroke="#111" stroke-width="3.5" stroke-linecap="round"/><path d="M48 82q10 6 20 0" fill="none" stroke="#111" stroke-width="3.5" stroke-linecap="round"/><text x="84" y="34" font-size="30" font-weight="800" fill="#27447f">z</text><text x="100" y="16" font-size="26" font-weight="800" fill="#27447f">z</text>',
  'voucher': '<rect x="10" y="36" width="100" height="52" rx="8" fill="#fff0d2" stroke="#a86703" stroke-width="3"/><line x1="78" y1="36" x2="78" y2="88" stroke="#a86703" stroke-width="3" stroke-dasharray="4 4"/><path d="M22 62l34-8-6 8 6 8z" fill="#27447f"/><text x="94" y="68" text-anchor="middle" font-size="18" font-weight="800" fill="#a86703">₪</text>',
 }
 
@@ -260,7 +287,7 @@ def SOLVE(sid, title, h, story, parts, hints, remind, steps):
     ss = ''.join(f'<div class="svs">{TX(x)}</div>' for x in steps)
     cfgd = dict(hints=[TX(x) for x in hints], remind=TX(remind))
     btn = lambda c, t: f'<button class="abtn ghost {c}">{t}</button>'
-    S(sid, title, h, f'<div class="act sv" id="{sid}-w" data-cfg="{_cfg(cfgd)}"><div class="tasktxt">{TX(story)}</div><div class="svps">{ps}</div><div class="actbar">{CHK}{btn("hnt", "💡 רמז")}{btn("rmd", "📐 תזכורת נוסחה")}{btn("prt", "פתרון חלקי")}{btn("ful", "פתרון מלא")}{RST}</div><div class="fbbar">הקלידו את התשובות, ולחצו ״בדיקה״. הפסד כותבים כמספר שלילי.</div><div class="svsol">{ss}</div></div>', kick=f'חלק {CUR[0]} · תרגיל')
+    S(sid, title, h, f'<div class="act sv" id="{sid}-w" data-cfg="{_cfg(cfgd)}"><div class="tasktxt">{TX(story)}</div><div class="sv-fm"><b>📐 הנוסחאות לתרגיל:</b> {TX(remind)}</div><div class="svps">{ps}</div><div class="actbar">{CHK}{btn("hnt", "💡 רמז")}{btn("rmd", "📐 תזכורת נוסחה")}{btn("prt", "פתרון חלקי")}{btn("ful", "פתרון מלא")}{RST}</div><div class="fbbar">הקלידו את התשובות, ולחצו ״בדיקה״. הפסד כותבים כמספר שלילי.</div><div class="svsol">{ss}</div></div>', kick=f'חלק {CUR[0]} · תרגיל')
 
 
 def CASE(sid, title, story, qtext, opts, a, why, steps, toon=None):

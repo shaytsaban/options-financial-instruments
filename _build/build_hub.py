@@ -108,7 +108,7 @@ page = f'''<!doctype html>
 </ol></div>
 </article>
 <article class="lec" id="lesson-2">
-<div class="lec-head"><div class="lec-n">2</div><div><h3>אופציות, שחקנים ושווקים</h3><div class="sub">המשך המבוא משיעור {n(1)} · קריאה: Hull, פרק {n(1)}</div></div></div>
+<div class="lec-head"><div class="lec-n">2</div><div><h3>אופציות, שחקנים ושווקים</h3><div class="sub">{n('9.11.2026')} · המשך המבוא משיעור {n(1)} · קריאה: Hull, פרק {n(1)}</div></div></div>
 <div class="lec-body">
 <div><h4>מה לומדים בשיעור</h4><ul class="learn">
 <li>אופציות: Call ו-Put, תזרים (Payoff), רווח (P&amp;L), נקודת איזון ומכפיל</li>
@@ -118,7 +118,7 @@ page = f'''<!doctype html>
 <li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
 </ul></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(64)} שקפים, {n(15)} תרגילי אקסל בתוך השקפים ו-{n(5)} תרגילים מסכמים, עם רמזים ופתרונות</span></span></a>
+<a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(72)} שקפים, {n(16)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(5)} תרגילים מסכמים, עם נוסחאות לצד כל שאלה</span></span></a>
 <a class="lk s" href="lectures/lecture-2/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
 <a class="lk x" href="materials/practice-2.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(7)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
 <a class="lk r" href="materials/practice-2-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
