@@ -122,7 +122,7 @@ page = f'''<!doctype html>
 <li>אופציה (Option): זכות בלי חובה, תמורת פרמיה</li>
 <li>ארבע פוזיציות: קונה וכותב Call, קונה וכותב Put</li>
 <li>תזרים (Payoff), רווח (P&amp;L) ונקודת איזון, בטבלה, בגרף ובאקסל</li>
-</ul><div class="rec" id="recording-2"><h4>🎥 הקלטת השיעור · {n('9.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div></div></div></div>
+</ul><div class="rec" id="recording-2"><h4>🎥 הקלטת השיעור · {n('9.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה בעיבוד</b>ותועלה בהמשך</div></div></div></div></div>
 <div><h4>חומרי השיעור</h4><div class="links">
 <a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(44)} שקפים, {n(14)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(3)} שאלות דיון</span></span></a>
 <a class="lk s" href="lectures/lecture-2/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
@@ -155,7 +155,7 @@ page = f'''<!doctype html>
 <li>השחקנים: מגדר (Hedger), ביטחונות (Margin), ספקולנט (Speculator) ומנוף</li>
 <li>השווקים: שיקגו, תל אביב ושוק מעבר לדלפק (OTC)</li>
 <li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
-</ul><div class="rec" id="recording-3"><h4>🎥 הקלטת השיעור · {n('16.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה תתווסף כאן</b>לאחר המפגש</div></div></div></div></div>
+</ul><div class="rec" id="recording-3"><h4>🎥 הקלטת השיעור · {n('16.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה בעיבוד</b>ותועלה בהמשך</div></div></div></div></div>
 <div><h4>חומרי השיעור</h4><div class="links">
 <a class="lk p" href="lectures/lecture-3/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(51)} שקפים, {n(9)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(3)} תרגילים מסכמים</span></span></a>
 <a class="lk s" href="lectures/lecture-3/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
