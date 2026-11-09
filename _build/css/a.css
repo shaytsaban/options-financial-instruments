@@ -1,0 +1,108 @@
+/* Lesson 2, from the title to a-draw: the recap of lesson 1, the route, and part 1 (option positions). */
+
+/* ---------- the recap is marked: a purple stripe, a purple kick, and a pill */
+#s-recap,#s-recap2,#x-warm,#m-warm{box-shadow:inset 0 8px 0 #6d4df2}
+#s-recap .kick,#s-recap2 .kick,#x-warm .kick,#m-warm .kick{color:#5b3fd6}
+#s-recap .kick:before,#s-recap2 .kick:before,#x-warm .kick:before,#m-warm .kick:before{background:#6d4df2}
+#s-recap:before,#s-recap2:before,#x-warm:before,#m-warm:before{content:'חזרה על מפגש 1';position:absolute;left:56px;top:22px;background:#6d4df2;color:#fff;font:800 16px/1 Heebo,'Segoe UI',Arial,sans-serif;padding:7px 15px;border-radius:999px}
+/* ...and the new material is marked in teal */
+#s-route:before{content:'חומר חדש · מפגש 2';position:absolute;left:56px;top:22px;background:#0f9d90;color:#fff;font:800 16px/1 Heebo,'Segoe UI',Arial,sans-serif;padding:7px 15px;border-radius:999px}
+#p-1 .pd-in:before{content:'מכאן חומר חדש · מפגש 2';display:inline-block;background:#7fe3d6;color:#0c1426;font:800 18px/1 Heebo,'Segoe UI',Arial,sans-serif;padding:8px 16px;border-radius:999px;margin-bottom:16px}
+
+/* ---------- the recap divider */
+#s-rc0 .kick{color:#c9b8ff}
+#s-rc0 .kick:before{background:#b9a6ff}
+#s-rc0 h2{font-size:58px;line-height:1.1;margin:4px 0 12px;color:#fff}
+#s-rc0 .rc0-q{font-size:24px;color:#c8d4f2;margin:0 0 22px;line-height:1.4;max-width:1060px}
+#s-rc0 .kick,#s-rc0 h2,#s-rc0 .rc0-q,#s-rc0 .pd-cols{position:relative;z-index:1}
+#s-rc0 .pd-box ul{font-size:22px;line-height:1.45}
+#s-rc0 .pd-box li{margin-bottom:6px}
+#s-rc0 .pd-box>b{color:#c9b8ff;font-size:20px}
+#s-rc0 .rc0-new{border-color:rgba(127,227,214,.35);background:rgba(127,227,214,.06)}
+#s-rc0 .rc0-new>b{color:#7fe3d6}
+#s-rc0 .rc0-bg{position:absolute;left:44px;top:40px;z-index:0;font-size:150px;font-weight:900;line-height:1;color:#b9a6ff;opacity:.12;pointer-events:none}
+
+/* ---------- s-recap: the terms table beside the key question */
+#s-recap .rc1{gap:18px}
+#s-recap .rc1-t{flex:1 1 0;min-width:0}
+#s-recap .rc1-s{flex:0 0 350px}
+#s-recap .rc1-tb{font-size:18.5px}
+#s-recap .rc1-tb th{padding:8px 10px}
+#s-recap .rc1-tb td{padding:7px 10px;line-height:1.3}
+#s-recap .rc1-tb td:first-child{width:180px;color:var(--navy2)}
+#s-recap .rc1-s .band{margin-top:0;font-size:20px}
+#s-recap .toon.meme{position:static;width:auto}
+
+/* ---------- s-recap2: Michal and Ron, row by row */
+#s-recap2 .rc2-q{padding:8px 18px;margin-bottom:8px}
+#s-recap2 .rc2-q p{font-size:19.5px;line-height:1.38}
+#s-recap2 .rc2-t{font-size:19px}
+#s-recap2 .rc2-t th{padding:7px 12px}
+#s-recap2 .rc2-t td{padding:5px 12px;line-height:1.28}
+#s-recap2 .rc2-t td:first-child{width:250px;background:#f6f3fd}
+#s-recap2 .rc2-t .gv{font-size:20px}
+#s-recap2 .rc2-t .gm{font-size:17px}
+#s-recap2 .rc2-b{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px;align-items:stretch}
+#s-recap2 .rc2-b .band{margin-top:0;font-size:19.5px}
+#s-recap2 .rc2-b .card{padding:9px 14px}
+#s-recap2 .rc2-b .ct{font-size:19px;margin-bottom:3px}
+#s-recap2 .rc2-b p{font-size:18.5px;line-height:1.35;margin:0 0 3px}
+#s-recap2 .rc2-b .rc2-s{color:var(--mut);font-size:17px}
+#s-recap2 .rc2-b code.xl{font-size:18px}
+#s-recap2 details.more{margin-top:4px}
+
+/* ---------- m-warm: the lesson 1 decision rule under the two questions */
+#m-warm .mc .q{font-size:20px}
+#m-warm .rc3w{margin-top:12px;padding:10px 16px}
+#m-warm .rc3w .ct{font-size:19px;margin-bottom:6px}
+#m-warm .rc3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#m-warm .rc3-c{border-radius:10px;padding:7px 12px;font-size:18px;line-height:1.35}
+#m-warm .rc3-c.add{background:#e3f6ea;border-right:5px solid #25a65f}
+#m-warm .rc3-c.no{background:#eef2ff;border-right:5px solid var(--navy2)}
+#m-warm .rc3-c.risk{background:#fde8e6;border-right:5px solid #e0454f}
+
+/* ---------- s-route: six parts in two even rows */
+#s-route .route.r7{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#s-route .route.r7 .rcard{min-height:178px;padding:14px 18px}
+#s-route .rcard b{font-size:23px}
+#s-route .rcard span{font-size:19.5px}
+#s-route .rcard em{font-size:18px}
+
+/* ---------- s-option: six small definitions in three columns */
+#s-option .opt-top{align-items:center;gap:14px}
+#s-option .opt-top>.def{flex:1 1 0;min-width:0}
+#s-option .opt-top .toon{position:static;flex:0 0 auto}
+#s-option .opt-top .toon .bub{margin-bottom:46px;max-width:230px}
+#s-option .opt-g{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px}
+
+/* ---------- the four positions: a story, a chart, and a table built price by price */
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .op-q{padding:9px 16px;margin-bottom:10px}
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .op-q p{font-size:19.5px;line-height:1.38}
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .qg{grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:14px}
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .rl{gap:6px}
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .op-t,:is(#s-lc2,#s-sc2,#s-lp2,#s-sp2) .op-e{font-size:18px}
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .op-t th,:is(#s-lc2,#s-sc2,#s-lp2,#s-sp2) .op-e th{padding:6px 10px}
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .op-t td,:is(#s-lc2,#s-sc2,#s-lp2,#s-sp2) .op-e td{padding:5px 10px;line-height:1.28}
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .op-t .gv{font-size:19.5px}
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .op-t .gm{font-size:16.5px}
+:is(#s-lc2,#s-sc2,#s-lp2,#s-sp2) .op-t .gv{display:inline}
+:is(#s-lc2,#s-sc2,#s-lp2,#s-sp2) .op-t .gi{font-size:17px;color:var(--mut)}
+:is(#s-lc2,#s-sc2,#s-lp2,#s-sp2) .op-t .gi .m{color:var(--mut);font-weight:500}
+:is(#s-lc1,#s-sc1,#s-lp1,#s-sp1) .op-t td:first-child,:is(#s-lc2,#s-sc2,#s-lp2,#s-sp2) .op-t td:first-child{width:62px}
+:is(#s-lc2,#s-sc2,#s-lp2,#s-sp2) .op-e td:first-child{white-space:nowrap;width:130px}
+:is(#s-lc2,#s-sc2,#s-lp2,#s-sp2) .op-e td:nth-child(2){white-space:nowrap;font-weight:800;color:var(--navy2)}
+:is(#s-lc1,#s-lc2,#s-sc1,#s-sc2,#s-lp1,#s-lp2,#s-sp1,#s-sp2) .op-r{background:#f4f1ff;border-right:5px solid #6d4df2;border-radius:10px;padding:6px 12px;font-size:18.5px;line-height:1.35}
+
+/* ---------- a-draw: the task beside a formula card */
+#a-draw .alay{grid-template-columns:minmax(0,1fr) 600px}
+#a-draw .tasktxt{font-size:19.5px;line-height:1.36}
+#a-draw .fbbar{font-size:18.5px}
+#a-draw .dr-fm{margin-top:10px;padding:9px 14px;background:#f4f1ff;border-right:5px solid #6d4df2}
+#a-draw .dr-fm p{font-size:17.5px;line-height:1.35;margin:0 0 4px}
+#a-draw .dr-fm .ct{font-size:19px;color:#4f33c9;margin-bottom:4px}
+#a-draw .dr-fm .dr-tip{color:var(--mut);margin:0}
+#a-draw .dr-l{min-width:0}
+#a-draw .dr-l .toon{position:static;margin-top:6px;justify-content:center}
+#a-draw .dr-l .toon svg{width:104px;height:104px;background:none;box-shadow:none;border-radius:0}
+#a-draw .dr-l .toon .bub{margin-bottom:50px;max-width:360px}
+#s-recap2 .rc2-b .band.rc2-z{font-size:20.5px;line-height:1.5;padding-top:14px}
