@@ -193,6 +193,7 @@ _SRC = [['צריכת הדלק הצפויה של Southwest ב-2026, והשפעה 
         ['גודל שוק ה-OTC העולמי: ערך נקוב ושווי שוק ברוטו', 'BIS: <span class="l">OTC derivatives statistics at end-June 2025</span>', 'חלק 3'],
         ['אופציות על ת״א 35: מכפיל 50, אירופאיות, סילוק כספי', 'ביזפורטל, 12.8.2026', 'חלקים 1 ו-3'],
         ['הקטנת המכפיל של אופציות ת״א 35', 'ביזפורטל, 2023', 'חלק 3'],
+        ['סדרות שבועיות של אופציות על ת״א 35, מ-2013', 'הודעת הבורסה בתל אביב, 29.5.2023', 'חלק 3'],
         ['חוזה WTI: 1,000 חביות לחוזה', 'CME Group: <span class="l">contract specifications</span>', 'חלקים 3 ו-4'],
         ['שנות ההקמה של CBOT ושל CBOE', '<span class="l">Wikipedia</span>', 'חלק 3'],
         ['הקריאה למפגש', '<span class="l">Hull, Options, Futures, and Other Derivatives, 11th ed., Pearson, 2022</span>', 'פרק 1']]

@@ -264,7 +264,7 @@ def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hint
     cfgd = dict(rows=rs, cols=cs, widths=widths, data={k: str(v) for k, v in data.items()}, targets=targets, solution=sol, headRows=head, inputs=[], hints=[TX(x) for x in (hints or ['קראו שוב את כותרת העמודה, וכתבו את החישוב במילים לפני הנוסחה.'])], remind=TX(remind or ''), partial=partial or targets[:1], values=values, done=TX(done))
     if not remind: cfgd.pop('remind')
     # rates and prices with a fraction show two decimals, as they are written in the question (3.60, not 3.6)
-    cfgd['fmt'] = {k: 'num2' for k, v in data.items() if isinstance(v, float) and not v.is_integer() and abs(v) < 1000}
+    cfgd['fmt'] = {k: 'num2' for k, v in data.items() if isinstance(v, float) and abs(v) < 1000}
     side = ''
     if chart:
         cfgd['chart'] = chart

@@ -14,7 +14,7 @@ HEAD = f'{COURSE} · קורס 123377 · מפגש {LESSON}' + (f' · {LMETA["date
 def render(s, total):
     k = s['kind']
     if k == 'title':
-        chips = [f'{NX} תרגילי אקסל בתוך השקפים', f'{NSV} תרגילים עם רמזים', f'{NMC} שאלות רב ברירה', LMETA['chip']]
+        chips = [f'{NX} תרגילי אקסל בתוך השקפים', (f'{NSV} תרגילים עם רמזים' if NSV != 1 else 'תרגיל פתור עם רמזים'), f'{NMC} שאלות רב ברירה', LMETA['chip']]
         return (f'<section class="slide dark s1 on" id="s-title" data-title="פתיחה">'
                 '<div class="orb" style="width:320px;height:320px;background:radial-gradient(circle at 30% 30%,#58e0cf,#0f9d90 60%,transparent 72%);left:-90px;top:-70px"></div>'
                 '<div class="orb" style="width:180px;height:180px;background:radial-gradient(circle at 30% 30%,#ffd37a,#e8960c 60%,transparent 72%);left:230px;bottom:90px;animation-delay:-3s"></div>'
@@ -48,7 +48,9 @@ slides_html = '\n'.join(render(s, TOTAL_PARTS) for s in SL)
 fonts = R('shell/fonts.css')
 # per-section styles: every file in css/ is added after deck.css, so sections can be styled without touching the shared sheet
 import glob
-EXTRA_CSS = ''.join(open(p, encoding='utf8').read() for p in sorted(glob.glob(os.path.join(H, 'css', '*.css'))))
+# slide ids repeat across lessons (h-1, s-home...), so each lesson loads only its own section files
+CSS_OF = {1: 'fgh', 2: 'abcde'}
+EXTRA_CSS = ''.join(open(p, encoding='utf8').read() for p in sorted(glob.glob(os.path.join(H, 'css', '*.css'))) if os.path.basename(p)[0] in CSS_OF[LESSON])
 base = R('shell/base.css')
 tail = R('shell/tail.html')
 gj = json.dumps(G, ensure_ascii=False)

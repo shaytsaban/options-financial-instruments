@@ -118,7 +118,7 @@ page = f'''<!doctype html>
 <li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
 </ul></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(76)} שקפים, {n(20)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(5)} תרגילים מסכמים, עם נוסחאות לצד כל שאלה</span></span></a>
+<a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(77)} שקפים, {n(20)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(5)} תרגילים מסכמים, עם נוסחאות לצד כל שאלה</span></span></a>
 <a class="lk s" href="lectures/lecture-2/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
 <a class="lk x" href="materials/practice-2.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(7)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
 <a class="lk r" href="materials/practice-2-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
