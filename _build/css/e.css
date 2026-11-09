@@ -1,0 +1,54 @@
+/* lesson 2, parts 5 and 6 (content_d.py): t-1 to t-6, s-sum, s-home, s-src */
+/* the math exercises: givens beside the formulas, each sub-question beside its solution row */
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .tasktxt{font-size:19.5px;line-height:1.36;padding:8px 14px;margin-bottom:8px}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:12px;align-items:stretch;margin-bottom:8px}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-giv{height:100%}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-giv th{font-size:17px;line-height:1.25;padding:6px 8px;text-align:center;vertical-align:middle}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-giv td{font-size:19px;font-weight:800;padding:6px 8px;text-align:center;border-left:1px solid var(--line)}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-giv td:last-child{border-left:0}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .sv-fm{margin:0;font-size:17.5px;line-height:1.4;padding:7px 12px}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);gap:12px;align-items:start}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .svps{grid-template-columns:1fr;gap:5px;margin:0}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .svsol{margin:0;gap:5px}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-hd{height:30px;display:flex;align-items:center;padding:0 12px;border-radius:8px;background:var(--navy2);color:#fff;font-size:17px;font-weight:800}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .e-sh{display:grid;grid-template-columns:148px minmax(0,1fr) 108px;gap:8px}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .svp{min-height:56px;font-size:18px;padding:4px 10px;line-height:1.3}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .svp input{width:112px;font-size:18px}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .svs{display:grid;grid-template-columns:148px minmax(0,1fr) 108px;gap:8px;align-items:center;min-height:56px;padding:4px 12px;font-size:17.5px;line-height:1.3;background:#fff;border-radius:10px}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .svs.on{background:#e6f5f3;box-shadow:inset -5px 0 0 #0f9d90}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-sv .svs:not(.on)>*{filter:blur(5px);opacity:.35;user-select:none}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-k{color:#1b2d55}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-f{display:flex;flex-direction:column;gap:2px;min-width:0}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-s{color:#2a3858}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-v{color:#0b7a6f;font-size:18.5px}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-foot{display:flex;gap:10px;align-items:stretch;margin-top:8px}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-foot .actbar{margin:0;flex:none;flex-wrap:nowrap}
+:is(#t-1,#t-2,#t-4,#t-5,#t-6) .e-foot .fbbar{margin:0;flex:1 1 0;min-width:0;min-height:42px;display:flex;align-items:center;flex-wrap:wrap;gap:0 4px}
+
+/* the summary: seven sentences, then the formulas of the meeting */
+#s-sum .steps.two{gap:8px}
+#s-sum .steps.two li{font-size:20px;padding:9px 14px}
+#s-sum .steps li:nth-child(7){grid-column:1/-1}
+#s-sum .e-fs{margin-top:10px;font-size:19px}
+#s-sum .e-fs th{text-align:center;padding:7px 8px;font-size:18px}
+#s-sum .e-fs th:first-child{background:var(--coral)}
+#s-sum .e-fs td{text-align:center;padding:6px 8px;border-left:1px solid var(--line)}
+#s-sum .e-fs td:first-child{text-align:right;white-space:nowrap}
+#s-sum .e-fs td:last-child{border-left:0}
+
+/* homework list beside its meme */
+#s-home .e-home{gap:18px;align-items:center}
+#s-home .e-home .steps{flex:1 1 0;min-width:0;gap:8px}
+#s-home .e-home .steps li{font-size:21.5px;padding:11px 16px}
+#s-home .band{margin-top:12px;font-size:20px}
+#s-home .e-side{flex:none;width:270px;display:flex;justify-content:center}
+#s-home .e-side .toon{position:static}
+
+/* sources as a table: fact, source, where */
+#s-src .e-src{font-size:18px}
+#s-src .e-src td{padding:7px 12px;line-height:1.3}
+#s-src .e-src td:nth-child(2){color:var(--ink2)}
+#s-src .e-src td:last-child{white-space:nowrap;font-weight:700}
+#s-src .e-src .l{direction:ltr;unicode-bidi:isolate}
+#s-src .e-src2{margin-top:12px}
+#s-src .e-src2 .src{font-size:18px;line-height:1.4}
