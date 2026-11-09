@@ -15,7 +15,7 @@ LMETA = {
  2: dict(date='9.11.2026', h1=('אבני הבניין:', 'אופציות, שחקנים ושווקים'), title='אופציות, שחקנים ושווקים',
          sub='Call ו-Put צעד אחר צעד, מגדרים וספקולנטים, הבורסות, ומקרה בוחן: גידור דלק בחברת תעופה.', chip='מקרה בוחן: דלק סילוני',
          cover='אופציות, מכפיל, אירופאית ואמריקאית, עסקת החלפה, שחקנים, בורסות ומקרה בוחן בגידור דלק.',
-         next_h='חוזים עתידיים', next_t='חוזה אקדמה מול חוזה עתידי, מנגנון הביטחונות, סוגי חוזים, וגידור מטבע אצל יצואן ישראלי. קריאה: Hull, פרק 2.')}[LESSON]
+         next_h='חוזים עתידיים', next_t='חוזה אקדמה מול חוזה עתידי, מנגנון הביטחונות לעומק, סוגי חוזים, וגידור מטבע אצל יצואן ישראלי. קריאה: Hull, פרק 2.')}[LESSON]
 SL = []            # every slide, in order
 CUR = [None]       # current part number
 NACT = [0]
@@ -263,6 +263,8 @@ def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hint
     NACT[0] += 1
     cfgd = dict(rows=rs, cols=cs, widths=widths, data={k: str(v) for k, v in data.items()}, targets=targets, solution=sol, headRows=head, inputs=[], hints=[TX(x) for x in (hints or ['קראו שוב את כותרת העמודה, וכתבו את החישוב במילים לפני הנוסחה.'])], remind=TX(remind or ''), partial=partial or targets[:1], values=values, done=TX(done))
     if not remind: cfgd.pop('remind')
+    # rates and prices with a fraction show two decimals, as they are written in the question (3.60, not 3.6)
+    cfgd['fmt'] = {k: 'num2' for k, v in data.items() if isinstance(v, float) and not v.is_integer() and abs(v) < 1000}
     side = ''
     if chart:
         cfgd['chart'] = chart

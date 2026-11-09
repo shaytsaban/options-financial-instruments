@@ -98,7 +98,7 @@ function mount(host,cfg){
  const W=cfg.widths||[];
  host.classList.add('xl');
  const pr=`<div class="xl-pr">${cfg.targets?`<button data-x="check" class="xl-go" title="בדיקת התאים הצהובים">✔ בדיקה</button>${cfg.hints?'<button data-x="hint">💡 רמז</button>':''}${cfg.remind?'<button data-x="remind">📐 תזכורת נוסחה</button>':''}${cfg.partial?'<button data-x="part">פתרון חלקי</button>':''}<button data-x="solve">פתרון מלא</button>`:''}<button data-x="reset" title="חזרה למצב ההתחלה">איפוס</button></div>`;
- host.innerHTML=`<div class="xl-tabs"><span class="xl-qat"><button data-x="undo" title="ביטול (Ctrl+Z)" aria-label="ביטול">↶</button><button data-x="redo" title="ביצוע מחדש (Ctrl+Y)" aria-label="ביצוע מחדש">↷</button></span><span class="xt">קובץ</span><span class="xt on">בית</span><span class="xt">הוספה</span><span class="xt">פריסת עמוד</span><span class="xt">נוסחאות</span><span class="xt">נתונים</span><span class="xt">סקירה</span><span class="xt">תצוגה</span><span class="xl-tt">חוברת1 · Excel</span></div>
+ host.innerHTML=`<div class="xl-tabs"><span class="xl-qat"><button data-x="undo" title="ביטול (Ctrl+Z)" aria-label="ביטול">↶</button><button data-x="redo" title="ביצוע מחדש (Ctrl+Y)" aria-label="ביצוע מחדש">↷</button></span><span class="xt">קובץ</span><span class="xt on" title="לחיצה מכווצת או פותחת את רצועת הכלים">בית</span><span class="xt">הוספה</span><span class="xt">פריסת עמוד</span><span class="xt">נוסחאות</span><span class="xt">נתונים</span><span class="xt">סקירה</span><span class="xt">תצוגה</span><span class="xl-tt">חוברת1 · Excel</span></div>
   <div class="xl-tools xl-ribbon">
    <div class="xg"><div class="xg-b"><button data-x="paste" class="big" title="הדבקה (Ctrl+V)">${ico('📋')}<small>הדבק</small></button><span class="col"><button data-x="cut" title="גזירה (Ctrl+X)">✂</button><button data-x="copy" title="העתקה (Ctrl+C)">⧉</button></span></div><div class="xg-n">לוח</div></div>
    <div class="xg"><div class="xg-b"><span class="col"><span class="row"><span class="xl-font" dir="ltr">Calibri</span><span class="xl-size">11</span></span><span class="row"><button data-x="bold" title="מודגש (Ctrl+B)"><b>B</b></button><button data-x="noop" title="נטוי"><i>I</i></button><button data-x="noop" title="קו תחתון"><u>U</u></button></span></span></div><div class="xg-n">גופן</div></div>
@@ -113,13 +113,14 @@ function mount(host,cfg){
  let chs=[],rhs=[];
  const grid=()=>{g.innerHTML=`<thead><tr><th class="xl-c0"></th>${Array.from({length:C},(_,c)=>`<th class="xl-ch" data-c="${c}" style="width:${W[c]||84}px">${colName(c)}</th>`).join('')}</tr></thead><tbody>${Array.from({length:R},(_,r)=>`<tr><th class="xl-rn" data-r="${r}">${r+1}</th>${Array.from({length:C},(_,c)=>`<td data-a="${addr(r,c)}"></td>`).join('')}</tr>`).join('')}</tbody>`;chs=[...g.querySelectorAll('th.xl-ch')];rhs=[...g.querySelectorAll('th.xl-rn')];};grid();
  /* like real Excel, the grid runs on past the exercise: extra rows and columns fill the free part of the slide, and the rest scrolls */
- const wrapEl=host.querySelector('.xl-wrap');
+ const wrapEl=host.querySelector('.xl-wrap');let ribbonSet=false;
  /* refit whenever the slide is shown or the fonts finish loading: the height follows the text above the sheet */
  function fit(){const slide=host.closest('.slide');if(!slide)return;const k=slide.getBoundingClientRect().width/1280;if(!k||!wrapEl.getBoundingClientRect().width)return;
   const ft=slide.querySelector('.ft');const bottom=(ft?ft.getBoundingClientRect().top:slide.getBoundingClientRect().bottom)/k;const top=wrapEl.getBoundingClientRect().top/k;
   const foot=host.querySelector('.xl-foot').getBoundingClientRect().height/k;const room=Math.floor(bottom-top-foot-12);
   const tr=g.querySelector('tbody tr');let rh=tr?tr.getBoundingClientRect().height/k:32;const head=g.querySelector('thead').getBoundingClientRect().height/k;
   if(room<head+rh*(cfg.rows+1)&&!host.classList.contains('tight')){host.classList.add('tight');rh=tr.getBoundingClientRect().height/k;}
+  if(room<head+rh*cfg.rows+2&&!host.classList.contains('xl-col')&&!ribbonSet){host.classList.add('xl-col');return fit();}
   if(Math.abs((parseFloat(wrapEl.style.height)||0)-room)>1)wrapEl.style.height=Math.max(120,room)+'px';
   const wantR=Math.min(99,Math.max(cfg.rows,Math.ceil((room-head)/rh)+6));const free=wrapEl.clientWidth-g.getBoundingClientRect().width/k;const wantC=Math.min(26,C+(free>4?Math.ceil(free/84)+1:0));
   if(wantR>R||wantC>C){R=Math.max(R,wantR);C=Math.max(C,wantC);S.rows=R;S.cols=C;grid();render();}}
@@ -267,7 +268,7 @@ function mount(host,cfg){
  bar.addEventListener('blur',()=>{if(editing&&editing.where==='bar')setTimeout(()=>{if(editing&&editing.where==='bar'&&document.activeElement!==bar)commit(0,0);},120);});
  function toggleF(){showF=!showF;const b=host.querySelector('[data-x="formulas"]');b&&b.classList.toggle('on',showF);render();}
  function toggleBold(){const on=!S.bold[addr(sel.r,sel.c)];push();eachSel(a=>{if(on)S.bold[a]=1;else delete S.bold[a];});render();}
- host.querySelector('.xl-tabs').addEventListener('click',e=>{const t=e.target.closest('.xt');if(t&&!t.classList.contains('on'))toastX('בתרגול עובדים בכרטיסייה ״בית״');});
+ host.querySelector('.xl-tabs').addEventListener('click',e=>{const t=e.target.closest('.xt');if(!t)return;if(!t.classList.contains('on')){toastX('בתרגול עובדים בכרטיסייה ״בית״');return;}ribbonSet=true;host.classList.toggle('xl-col');toastX(host.classList.contains('xl-col')?'רצועת הכלים כווצה. לחיצה על ״בית״ פותחת אותה':'רצועת הכלים פתוחה');fit();});
  host.addEventListener('mousedown',e=>{const b=e.target.closest('.xl-tools button,.xl-qat button,.xl-xv button,.xl-pr button');if(b&&editing)e.preventDefault();});
  const onBtn=e=>{const b=e.target.closest('.xl-tools button,.xl-qat button,.xl-xv button,.xl-pr button');if(!b)return;const x=b.dataset.x;
   if(x==='undo')undo();if(x==='redo')redo();if(x==='enter')commit(0,0);if(x==='cancel')cancel();
