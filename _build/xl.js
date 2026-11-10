@@ -105,7 +105,7 @@ function mount(host,cfg){
    <div class="xg"><div class="xg-b"><span class="col"><span class="row"><span class="xl-numf">כללי</span></span><span class="row"><button data-x="pct" title="סגנון אחוזים">%</button><button data-x="comma" title="סגנון מפריד אלפים" dir="ltr">000</button><button data-x="incd" title="הוספת מקום עשרוני" dir="ltr">.0<sup>+</sup></button><button data-x="decd" title="הפחתת מקום עשרוני" dir="ltr">.0<sup>−</sup></button></span></span></div><div class="xg-n">מספר</div></div>
    <div class="xg"><div class="xg-b"><span class="col"><button data-x="sum" title="סכום אוטומטי (Alt+=)">Σ סכום אוטומטי</button>${cfg.tools===false?'':'<button data-x="formulas" title="הצגת נוסחאות (Ctrl+`)">ƒx הצג נוסחאות</button>'}</span></div><div class="xg-n">עריכה</div></div>
    <span class="xl-msg"></span></div>
-  <div class="xl-top"><div class="xl-name" title="תיבת השם">A1</div><span class="xl-xv"><button data-x="cancel" title="ביטול (Esc)">✕</button><button data-x="enter" title="הזנה (Enter)">✓</button></span><div class="xl-fx">fx</div><div class="xl-barw"><div class="xl-lay"></div><input class="xl-bar" dir="auto" spellcheck="false" autocomplete="off"></div></div>
+  <div class="xl-top"><div class="xl-name" title="תיבת השם">A1</div><span class="xl-xv"><button data-x="cancel" title="ביטול (Esc)">✕</button><button data-x="enter" title="הזנה (Enter)">✓</button></span><div class="xl-fx">fx</div><div class="xl-barw"><div class="xl-lay"></div><input class="xl-bar" dir="ltr" spellcheck="false" autocomplete="off"></div></div>
   <div class="xl-wrap"><table class="xl-g" tabindex="0"></table></div>
   <div class="xl-foot"><span class="xl-sheet">גיליון1</span><span class="xl-plus">+</span><span class="xl-stat">מוכן</span></div>
   ${pr}${cfg.targets?'<div class="xl-fb"></div>':''}`;
@@ -152,10 +152,10 @@ function mount(host,cfg){
   const sR=r0(),eR=r1(),sC=c0(),eC=c1(),multi=sR!==eR||sC!==eC;
   g.querySelectorAll('td').forEach(el=>{const a=el.dataset.a;if(editing&&editing.where==='cell'&&editing.a===a)return;const p=parseAddr(a);
    const raw=S.raw[a];let d=display(S,a);if(showF&&raw&&raw[0]==='=')d={t:raw,n:false,f:true};const s=inSel(p.r,p.c);
-   el.className=(d.n?'n':'')+(d.f?' f':'')+(d.e?' e':'')+(s&&multi?' sel':'')+(s&&p.r===sR?' bt':'')+(s&&p.r===eR?' bb':'')+(s&&p.c===sC?' bs':'')+(s&&p.c===eC?' be':'')+(p.r===sel.r&&p.c===sel.c?' act':'')+(cfg.inputs&&cfg.inputs.includes(a)?' in':'')+(cfg.targets&&cfg.targets.includes(a)?' tg':'')+(marks[a]?' '+marks[a]:'')+(cfg.headRows&&cfg.headRows.includes(p.r+1)?' hd':'')+(S.bold[a]?' bo':'')+(CLIP&&CLIP.host===host&&CLIP.a===a?' cp':'');
+   el.className=(d.n?'n':'')+(d.f?' f':'')+(d.e?' e':'')+(s&&multi?' sel':'')+(s&&p.r===sR?' bt':'')+(s&&p.r===eR?' bb':'')+(s&&p.c===sC?' bs':'')+(s&&p.c===eC?' be':'')+(p.r===sel.r&&p.c===sel.c?' act':'')+(cfg.inputs&&cfg.inputs.includes(a)?' in':'')+(cfg.targets&&cfg.targets.includes(a)?' tg':'')+(marks[a]?' '+marks[a]:'')+(cfg.headRows&&cfg.headRows.includes(p.r+1)?' hd':'')+(S.bold[a]?' bo':'')+(CLIP&&CLIP.host===host&&p.r>=CLIP.r0&&p.r<CLIP.r0+CLIP.h&&p.c>=CLIP.c0&&p.c<CLIP.c0+CLIP.w?' cp':'');
    el.innerHTML=(d.n||d.f?`<span dir="ltr">${esc(d.t)}</span>`:esc(d.t))+(p.r===eR&&p.c===eC&&!editing?'<i class="xl-fh"></i>':'');});
   chs.forEach(h=>{const c=+h.dataset.c;h.classList.toggle('hs',c>=sC&&c<=eC);});rhs.forEach(h=>{const r=+h.dataset.r;h.classList.toggle('hs',r>=sR&&r<=eR);});
-  nameB.textContent=editing?addr(sel.r,sel.c):selName();if(!editing||editing.where!=='bar'){bar.value=S.raw[addr(sel.r,sel.c)]||'';paint(bar,barLay);}
+  nameB.textContent=editing?addr(sel.r,sel.c):selName();if(!editing||editing.where!=='bar'){bar.value=S.raw[addr(sel.r,sel.c)]||'';barDir();paint(bar,barLay);}
   status();if(cfg.onSelect)cfg.onSelect(selName());}
  /* ---- colored references: the formula text and the cells it points to share a color ---- */
  function refsOf(v){const out=[];if(!v||v[0]!=='=')return out;let m,k=0;REFRX.lastIndex=0;const seen={};
@@ -167,7 +167,9 @@ function mount(host,cfg){
  function paintRefs(v){refPaint.forEach(el=>{el.style.removeProperty('--rc');el.classList.remove('rf','rt','rb','rs','re');});refPaint=[];
   refsOf(v).forEach(x=>{const A=parseAddr(x.a),B=x.b?parseAddr(x.b):A;if(!A||!B)return;const a0=Math.min(A.r,B.r),a1=Math.max(A.r,B.r),b0=Math.min(A.c,B.c),b1=Math.max(A.c,B.c);
    for(let r=a0;r<=a1;r++)for(let c=b0;c<=b1;c++){if(r>=R||c>=C)continue;const el=td(addr(r,c));if(!el)continue;el.style.setProperty('--rc',x.col);el.classList.add('rf');if(r===a0)el.classList.add('rt');if(r===a1)el.classList.add('rb');if(c===b0)el.classList.add('rs');if(c===b1)el.classList.add('re');refPaint.push(el);}});}
- function onEditInput(){const inp=curInput();if(!inp)return;if(editing.where==='cell'){bar.value=inp.value;inp.style.width='';const w=Math.max(inp.parentElement.clientWidth,inp.scrollWidth+14);inp.style.width=w+'px';editing.lay.style.width=w+'px';paint(inp,editing.lay);}paint(bar,barLay);paintRefs(inp.value);status();}
+ /* a formula, a number or an empty box reads left to right; only Hebrew text reads right to left */
+ function barDir(){const v=bar.value,d=/[\u0590-\u05FF]/.test(v)&&!/^\s*[=+\-]/.test(v)?'rtl':'ltr';if(bar.dir!==d)bar.dir=d;}
+ function onEditInput(){const inp=curInput();if(!inp)return;if(editing.where==='cell'){bar.value=inp.value;inp.style.width='';const w=Math.max(inp.parentElement.clientWidth,inp.scrollWidth+14);inp.style.width=w+'px';editing.lay.style.width=w+'px';paint(inp,editing.lay);}barDir();paint(bar,barLay);paintRefs(inp.value);status();}
  function startEdit(initial,keep){if(editing)return;const a=addr(sel.r,sel.c);sel2={...sel};editing={a,where:'cell',orig:S.raw[a]||'',mode:keep?'edit':'enter'};point=null;const el=td(a);render();
   el.className+=' ed';el.innerHTML=`<div class="xl-lay"></div><input class="xl-in" dir="auto" spellcheck="false" autocomplete="off">`;const inp=el.querySelector('input');editing.lay=el.querySelector('.xl-lay');inp.value=keep?(S.raw[a]||''):initial;bar.value=inp.value;
   inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length);
@@ -200,14 +202,18 @@ function mount(host,cfg){
  function toastX(t){msg.textContent=t;clearTimeout(toastX.t);toastX.t=setTimeout(()=>{if(msg.textContent===t)msg.textContent='';},1800);}
  /* pointer: select, drag a range, insert a reference while writing a formula, or drag the fill handle */
  let drag=null;
+ let lastDown=null,dblAt=-1e9;
  g.addEventListener('pointerdown',e=>{const hc=e.target.closest('th');
+  /* the first press redraws the grid, so the browser's own dblclick may never arrive: two presses on the same cell count as one */
+  const twice=k=>{const now=e.timeStamp,hit=lastDown&&lastDown.k===k&&now-lastDown.t<450&&Math.abs(e.clientX-lastDown.x)<8&&Math.abs(e.clientY-lastDown.y)<8;lastDown=hit?null:{k,t:now,x:e.clientX,y:e.clientY};return hit;};
   if(hc&&!editing){e.preventDefault();if(hc.classList.contains('xl-ch')){const c=+hc.dataset.c;sel={r:0,c};sel2={r:R-1,c};}else if(hc.classList.contains('xl-rn')){const r=+hc.dataset.r;sel={r,c:0};sel2={r,c:C-1};}else{sel={r:0,c:0};sel2={r:R-1,c:C-1};}render();focusG();return;}
   const cell=e.target.closest('td');
-  if(e.target.classList.contains('xl-fh')){e.preventDefault();drag={k:'fill',b:blk(),to:null};try{g.setPointerCapture(e.pointerId);}catch(_){}return;}
+  if(e.target.classList.contains('xl-fh')){e.preventDefault();if(twice('fh')){fillDownAuto();return;}drag={k:'fill',b:blk(),to:null};try{g.setPointerCapture(e.pointerId);}catch(_){}return;}
   if(!cell)return;const p=parseAddr(cell.dataset.a);
   if(editing&&editing.where==='cell'&&editing.a===cell.dataset.a)return;
   if(editing&&(pointable()||point)){e.preventDefault();insertRef(cell.dataset.a,!!point&&!pointable());drag={k:'ref',a:cell.dataset.a};try{g.setPointerCapture(e.pointerId);}catch(_){}return;}
   if(editing)commit(0,0);
+  if(!e.shiftKey&&twice(cell.dataset.a)){e.preventDefault();sel={...p};sel2={...p};render();startEdit('',true);dblAt=e.timeStamp;return;}
   e.preventDefault();if(e.shiftKey){sel2={...p};}else{sel={...p};sel2={...p};}drag={k:'sel'};try{g.setPointerCapture(e.pointerId);}catch(_){}render();focusG();});
  g.addEventListener('pointermove',e=>{if(!drag)return;const el=document.elementFromPoint(e.clientX,e.clientY);const cell=el&&el.closest&&el.closest('td');if(!cell||!g.contains(cell))return;const p=parseAddr(cell.dataset.a);
   if(drag.k==='sel'){if(p.r!==sel2.r||p.c!==sel2.c){sel2=p;render();}}
@@ -228,15 +234,23 @@ function mount(host,cfg){
    const sr=to.v?b.r0+md(r-b.r0,h):r,sc=to.v?c:b.c0+md(c-b.c0,w);const src=addr(sr,sc),raw=S.raw[src],a=addr(r,c);
    S.set(a,raw==null?'':shift(raw,r-sr,c-sc));if(S.fmt[src])S.fmt[a]=S.fmt[src];else delete S.fmt[a];if(S.bold[src])S.bold[a]=1;else delete S.bold[a];}
   sel={r:to.r0,c:to.c0};sel2={r:to.r1,c:to.c1};render();toastX('הנוסחה שוכפלה, וההפניות התעדכנו בכל תא');if(cfg.onChange)cfg.onChange();}
- g.addEventListener('dblclick',e=>{const pt0=document.elementFromPoint(e.clientX,e.clientY);if(e.target.classList.contains('xl-fh')||pt0&&pt0.classList&&pt0.classList.contains('xl-fh')){const b=blk();
-   let last=b.r1;for(let r=b.r1+1;r<R;r++){const nb=[b.c0-1,b.c1+1].some(c=>c>=0&&c<C&&S.raw[addr(r,c)]!=null);if(nb)last=r;else break;}
-   if(last>b.r1)fill(b,{r0:b.r0,r1:last,c0:b.c0,c1:b.c1,v:1});return;}
+ function fillDownAuto(){const b=blk();let last=b.r1;for(let r=b.r1+1;r<R;r++){const nb=[b.c0-1,b.c1+1].some(c=>c>=0&&c<C&&S.raw[addr(r,c)]!=null);if(nb)last=r;else break;}
+  if(last>b.r1)fill(b,{r0:b.r0,r1:last,c0:b.c0,c1:b.c1,v:1});dblAt=performance.now();}
+ g.addEventListener('dblclick',e=>{if(Math.abs(e.timeStamp-dblAt)<700||editing)return;const pt0=document.elementFromPoint(e.clientX,e.clientY);if(e.target.classList.contains('xl-fh')||pt0&&pt0.classList&&pt0.classList.contains('xl-fh')){fillDownAuto();return;}
   const pt=document.elementFromPoint(e.clientX,e.clientY);const cell=e.target.closest('td')||(pt&&pt.closest&&pt.closest('td'));if(!cell||!g.contains(cell)||editing)return;sel=parseAddr(cell.dataset.a);sel2={...sel};startEdit('',true);});
  /* clipboard and formats */
- function copy(cut){CLIP={host,a:addr(sel.r,sel.c),raw:S.raw[addr(sel.r,sel.c)],r:sel.r,c:sel.c,fmt:S.fmt[addr(sel.r,sel.c)],bold:S.bold[addr(sel.r,sel.c)],cut};render();toastX(cut?'נגזר. סמנו תא, והדביקו ב-Ctrl+V':'הועתק. סמנו תא או טווח, והדביקו ב-Ctrl+V');}
- function paste(){if(!CLIP||CLIP.raw==null){toastX('אין מה להדביק. קודם העתיקו תא (Ctrl+C)');return;}push();
-  eachSel((a,r,c)=>{S.set(a,CLIP.cut?CLIP.raw:shift(CLIP.raw,r-CLIP.r,c-CLIP.c));if(CLIP.fmt)S.fmt[a]=CLIP.fmt;if(CLIP.bold)S.bold[a]=1;});
-  if(CLIP.cut&&CLIP.host===host&&!inSel(CLIP.r,CLIP.c)){S.set(CLIP.a,'');delete S.fmt[CLIP.a];delete S.bold[CLIP.a];CLIP=null;}render();if(cfg.onChange)cfg.onChange();}
+ /* the whole selected block is copied, cell by cell, with its formats */
+ function copy(cut){const b=blk();CLIP={host,r0:b.r0,c0:b.c0,h:b.r1-b.r0+1,w:b.c1-b.c0+1,cells:[],cut};
+  for(let r=b.r0;r<=b.r1;r++){const row=[];for(let c=b.c0;c<=b.c1;c++){const a=addr(r,c);row.push({raw:S.raw[a],fmt:S.fmt[a],bold:S.bold[a]});}CLIP.cells.push(row);}
+  try{navigator.clipboard&&navigator.clipboard.writeText(CLIP.cells.map(row=>row.map(x=>x.raw==null?'':x.raw).join('\t')).join('\n')).catch(()=>{});}catch(_){}
+  render();const n=CLIP.h*CLIP.w>1?` (${CLIP.h*CLIP.w} תאים)`:'';toastX(cut?'נגזר'+n+'. סמנו תא, והדביקו ב-Ctrl+V':'הועתק'+n+'. סמנו תא או טווח, והדביקו ב-Ctrl+V');}
+ /* one target cell: the block lands from it. A larger target: the block repeats over it, as in Excel. A cut block moves as it is */
+ function paste(){if(!CLIP||!CLIP.cells||CLIP.cells.every(row=>row.every(x=>x.raw==null))){toastX('אין מה להדביק. קודם העתיקו תא (Ctrl+C)');return;}push();
+  const b=blk(),th=Math.max(CLIP.h,b.r1-b.r0+1),tw=Math.max(CLIP.w,b.c1-b.c0+1),done={};
+  for(let i=0;i<th;i++)for(let j=0;j<tw;j++){const r=b.r0+i,c=b.c0+j;if(r>=R||c>=C)continue;const si=i%CLIP.h,sj=j%CLIP.w,src=CLIP.cells[si][sj],a=addr(r,c);done[a]=1;
+   S.set(a,src.raw==null?'':CLIP.cut?src.raw:shift(src.raw,r-(CLIP.r0+si),c-(CLIP.c0+sj)));if(src.fmt)S.fmt[a]=src.fmt;if(src.bold)S.bold[a]=1;}
+  if(CLIP.cut&&CLIP.host===host){for(let i=0;i<CLIP.h;i++)for(let j=0;j<CLIP.w;j++){const a=addr(CLIP.r0+i,CLIP.c0+j);if(done[a])continue;S.set(a,'');delete S.fmt[a];delete S.bold[a];}CLIP=null;}
+  sel={r:b.r0,c:b.c0};sel2={r:Math.min(R-1,b.r0+th-1),c:Math.min(C-1,b.c0+tw-1)};render();if(cfg.onChange)cfg.onChange();}
  function decs(a){const f=S.fmt[a]||'';const m=/^(pct|num)(\d)$/.exec(f);if(m)return [m[1],+m[2]];const t=display(S,a).t.replace(/[^\d.%]/g,'');const pc=f==='pct'||t.includes('%');const d=(t.split('.')[1]||'').replace('%','').length;return [pc?'pct':'num',d];}
  function fmtAll(fn){push();eachSel(a=>{const f=fn(a);if(f)S.fmt[a]=f;else delete S.fmt[a];});render();if(cfg.onChange)cfg.onChange();}
  function autoSum(){const c=sel.c;let r=sel.r-1,top=-1;while(r>=0&&typeof S.val[addr(r,c)]==='number'){top=r;r--;}
