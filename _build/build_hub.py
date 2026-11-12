@@ -13,7 +13,7 @@ css += '''
 .lec-body .recbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .lec-body .recph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#c9d5f2;font-size:17px;line-height:1.5;padding:20px}
 .lec-body .recph b{display:block;color:#fff;font-size:24px;margin-bottom:6px}
-.lec-body .recph b::before{content:'⏳ '}
+.lec-body .reclab{font-weight:700;color:var(--navy2);margin:12px 0 6px;font-size:.95em}.lec-body .recph b::before{content:'⏳ '}
 .lec-body .rec a.yt{display:inline-block;margin-top:8px;font-weight:700;font-size:15px;color:var(--navy2);text-decoration:underline}
 .contact{margin-top:14px;background:#fff7e0;border:2px solid #f0b429;border-radius:18px;padding:16px 24px;display:flex;gap:16px;align-items:center}
 .contact .ic{font-size:34px;flex:none}
@@ -125,7 +125,7 @@ page = f'''<!doctype html>
 <li>אופציה (Option): זכות בלי חובה, תמורת פרמיה</li>
 <li>ארבע פוזיציות: קונה וכותב Call, קונה וכותב Put</li>
 <li>תזרים (Payoff), רווח (P&amp;L) ונקודת איזון, בטבלה, בגרף ובאקסל</li>
-</ul><div class="rec" id="recording-2"><h4>🎥 הקלטת השיעור · {n('9.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה בעיבוד</b>ותועלה בהמשך</div></div></div></div></div>
+</ul><div class="rec" id="recording-2"><h4>🎥 הקלטת השיעור · {n('9.11.2026')}</h4><div class="reclab">חלק 1 מתוך 2</div><div class="recbox"><iframe src="https://www.youtube.com/embed/NTkaiieXm1Q" title="הקלטת שיעור 2, חלק 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="yt" href="https://youtu.be/NTkaiieXm1Q" target="_blank" rel="noopener">לצפייה ב-YouTube</a><div class="reclab">חלק 2 מתוך 2</div><div class="recbox"><div class="recph"><div><b>ההקלטה בעיבוד</b>ותועלה בהמשך</div></div></div></div></div>
 <div><h4>חומרי השיעור</h4><div class="links">
 <a class="lk p" href="lectures/lecture-2/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(44)} שקפים, {n(14)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(3)} שאלות דיון</span></span></a>
 <a class="lk s" href="lectures/lecture-2/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
