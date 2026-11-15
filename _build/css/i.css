@@ -109,9 +109,9 @@
 #s-tase .scr-r .news{padding:6px 12px;gap:2px}#s-tase .scr-r .news p{font-size:14.2px;line-height:1.32}#s-tase .scr-r .news>b{font-size:15.5px}
 /* trading terminal with flying callouts */
 .terms .tl-lead{font-size:17.5px;margin:0 0 6px}
-.term{position:relative;width:1152px;height:520px;background:#0b1220;border-radius:14px;overflow:hidden;color:#dbe4f8;font-size:14.5px;box-shadow:0 10px 30px rgba(15,27,51,.3);direction:ltr}
-.term *{box-sizing:border-box}
-.term .up{color:#3ddc84;font-style:normal}.term .tdn{color:#ff7b6b}.term .bid{color:#3ddc84}.term .ask{color:#ff9a8a}
+.tterm{position:relative;width:1152px;height:520px;background:#0b1220;border-radius:14px;overflow:hidden;color:#dbe4f8;font-size:14.5px;box-shadow:0 10px 30px rgba(15,27,51,.3);direction:ltr}
+.tterm *{box-sizing:border-box}
+.tterm .up{color:#3ddc84;font-style:normal}.tterm .tdn{color:#ff7b6b}.tterm .bid{color:#3ddc84}.tterm .ask{color:#ff9a8a}
 .t-bar{position:absolute;inset:0 0 auto 0;height:36px;background:#111b30;display:flex;align-items:center;gap:6px;padding:0 12px;direction:rtl;border-bottom:1px solid #1f2c47}
 .t-logo{font-weight:900;color:#ffd27a;margin-left:14px;letter-spacing:.3px}
 .t-tab{padding:8px 14px;color:#93a4c8;font-weight:600}.t-tab.on{color:#fff;border-bottom:3px solid #ff6a4d}
@@ -168,13 +168,13 @@
 @keyframes flyd{0%{opacity:0;transform:translateY(-120px) scale(.7)}100%{opacity:1;transform:none}}
 @keyframes flyr{0%{opacity:0;transform:translateX(-160px) scale(.7)}100%{opacity:1;transform:none}}
 @keyframes bobu{50%{transform:translateY(-5px)}}@keyframes bobd{50%{transform:translateY(5px)}}@keyframes bobr{50%{transform:translateX(5px)}}
-.term .fly.show:has(~ .fly.show){opacity:0!important;visibility:hidden;animation:none}
-.term .t-pos.show:has(~ .t-pos.show){display:none}
+.tterm .fly.show:has(~ .fly.show){opacity:0!important;visibility:hidden;animation:none}
+.tterm .t-pos.show:has(~ .t-pos.show){display:none}
 @media print{.fly{display:none}}
 .t-ps td,.t-f em{unicode-bidi:plaintext}
 .t-ok{top:364px;z-index:5;padding:6px 12px}
 .t-ps td{unicode-bidi:normal;direction:ltr}.t-ps td:first-child{direction:rtl}
 .t-pos .t-ps{table-layout:fixed}.t-pos .t-ps td{height:42px}
-.term:has(.t-acct.show) .t-tk{visibility:hidden}
+.tterm:has(.t-acct.show) .t-tk{visibility:hidden}
 .t-acct{min-height:262px}
 .t-ch td,.t-bk td{direction:ltr;unicode-bidi:isolate}

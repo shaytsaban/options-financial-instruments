@@ -184,7 +184,7 @@ def TERM(sid, title, h, lead, inner, flies, kick):
     if MODE == 'pdf':
         S(sid, title, h, f'<p>{TX(lead)}</p><ol>' + ''.join(f'<li>{TX(t)}</li>' for _, _, _, _, _, t in flies) + '</ol>', kick=kick)
         return
-    S(sid, title, h, f'<p class="lead tl-lead">{TX(lead)}</p><div class="term" dir="ltr">{inner}' + ''.join(FLY(i + 1, *f[1:]) if True else '' for i, f in enumerate(flies)) + '</div>', kick=kick, cls='terms')
+    S(sid, title, h, f'<p class="lead tl-lead">{TX(lead)}</p><div class="tterm" dir="ltr">{inner}' + ''.join(FLY(i + 1, *f[1:]) if True else '' for i, f in enumerate(flies)) + '</div>', kick=kick, cls='terms')
 
 
 def STOP(n):
