@@ -174,6 +174,19 @@ def CALL(n, num, text):
     return ST(n, f'<b>{num}</b><span>{TX(text)}</span>', cls='callo')
 
 
+def FLY(n, x, y, w, d, text):
+    """A flying callout over a trading terminal. d: the side the arrow leaves the bubble from (u, d, l, r). Only the newest one is visible."""
+    return f'<div class="st fly f-{d}" data-n="{n * 10}" style="left:{x}px;top:{y}px;width:{w}px"><b>{n}</b><span>{TX(text)}</span></div>'
+
+
+def TERM(sid, title, h, lead, inner, flies, kick):
+    """A trading terminal mock-up with flying explanations. In the PDF: the explanations as a numbered list."""
+    if MODE == 'pdf':
+        S(sid, title, h, f'<p>{TX(lead)}</p><ol>' + ''.join(f'<li>{TX(t)}</li>' for _, _, _, _, _, t in flies) + '</ol>', kick=kick)
+        return
+    S(sid, title, h, f'<p class="lead tl-lead">{TX(lead)}</p><div class="term" dir="ltr">{inner}' + ''.join(FLY(i + 1, *f[1:]) if True else '' for i, f in enumerate(flies)) + '</div>', kick=kick, cls='terms')
+
+
 def STOP(n):
     items, face, top, bot = _STOPS[n]
     S(f's-stop{n}', f'מה למדנו: חלק {n}', f'עצירה: מה למדנו בחלק {n}, במילים פשוטות',
