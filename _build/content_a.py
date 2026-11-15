@@ -5,7 +5,7 @@ import json, html as _html
 COURSE = 'אופציות ומכשירים פיננסיים'
 COURSE_FULL = 'אופציות ומכשירים פיננסיים מתוחכמים'
 LESSON = globals().get('LESSON', 1)
-TOTAL_PARTS = {1: 4, 2: 3, 3: 6}[LESSON]
+TOTAL_PARTS = {1: 4, 2: 3, 3: 7}[LESSON]
 # per lesson: deck title, subtitle, chips, cover line and the next meeting
 LMETA = {
  1: dict(date='2.11.2026', h1=('למה צריך', 'מכשירים מתוחכמים?'), title='למה צריך מכשירים מתוחכמים',
@@ -17,9 +17,9 @@ LMETA = {
          cover='אופציות רכש ומכר: קונה וכותב, תזרים, רווח ונקודת איזון, עם תרגול באקסל ושאלות דיון.',
          next_h='מכפיל, שחקנים ושווקים', next_t='מכפיל ונקודות מדד, אירופאית ואמריקאית, עסקת החלפה, מגדרים וספקולנטים, הבורסות ומקרה בוחן בגידור דלק.'),
  3: dict(date='16.11.2026', h1=('מכפיל, שחקנים', 'ושווקים'), title='מכפיל, שחקנים ושווקים',
-         sub='נקודות ומכפיל, אירופאית ואמריקאית, עסקת החלפה, מגדרים וספקולנטים, הבורסות, ומקרה בוחן: גידור דלק בחברת תעופה.', chip='מקרה בוחן: דלק סילוני',
+         sub='נקודות ומכפיל, אירופאית ואמריקאית, בורסה ושוק מעבר לדלפק, עסקת החלפה, ביטחונות ומחיר החוזה העתידי, מגדרים וספקולנטים, ומקרה בוחן: גידור דלק בחברת תעופה.', chip='מקרה בוחן: דלק סילוני',
          cover='מכפיל, אירופאית ואמריקאית, עסקת החלפה, שחקנים, בורסות ומקרה בוחן בגידור דלק.',
-         next_h='חוזים עתידיים', next_t='חוזה אקדמה מול חוזה עתידי, מנגנון הביטחונות לעומק, סוגי חוזים, וגידור מטבע אצל יצואן ישראלי. קריאה: Hull, פרק 2.')}[LESSON]
+         next_h='אסטרטגיות באופציות', next_t='משלבים אופציה עם הנכס, ואופציה עם אופציה: הגנה על תיק (Protective Put), הכנסה מפרמיה (Covered Call), צווארון (Collar), ומרווחים (Spreads). קריאה: Hull, פרק 12.')}[LESSON]
 SL = []            # every slide, in order
 CUR = [None]       # current part number
 NACT = [0]
@@ -228,9 +228,9 @@ def xl_eval(data, sol):
         if raw is None: return 0
         raw = str(raw)
         if raw.startswith('='):
-            e = raw[1:].replace('^', '**').replace('MAX', 'max').replace('MIN', 'min').replace('ABS', 'abs')
+            e = raw[1:].replace('^', '**').replace('MAX', 'max').replace('MIN', 'min').replace('ABS', 'abs').replace('IF(', '_IF(')
             e = _REF.sub(lambda m: f'({val(m.group(1) + m.group(2))})', e)
-            return eval(e)
+            return eval(e, {'_IF': lambda c, a, b=False: a if c else b, 'max': max, 'min': min, 'abs': abs})
         try: return float(raw.replace('%', '')) / (100 if '%' in raw else 1)
         except ValueError: return raw
     return {a: val(a) for a in sol}
@@ -242,7 +242,7 @@ def _fmtv(v):
     return f'$-{abs(v):,g}$'.replace('e+', 'e') if v < 0 else f'{v:,.10g}'
 
 
-def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hints=None, remind=None, partial=None, chart=None, values=False, show=None, done='', extra=''):
+def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hints=None, remind=None, partial=None, chart=None, values=False, show=None, done='', extra='', steps=None, kick=None, fmt=None):
     """A question with an embedded sheet. data: given cells; sol: target cell -> formula; chart: drawn from the student's cells."""
     vals = xl_eval(data, sol)
     targets = list(sol)
@@ -267,14 +267,17 @@ def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hint
     NACT[0] += 1
     cfgd = dict(rows=rs, cols=cs, widths=widths, data={k: str(v) for k, v in data.items()}, targets=targets, solution=sol, headRows=head, inputs=[], hints=[TX(x) for x in (hints or ['קראו שוב את כותרת העמודה, וכתבו את החישוב במילים לפני הנוסחה.'])], remind=TX(remind or ''), partial=partial or targets[:1], values=values, done=TX(done))
     if not remind: cfgd.pop('remind')
+    # a walkthrough: one step per calculation, each with its cells, its explanation and what every referenced cell means
+    if steps: cfgd['steps'] = [dict(cells=st[0] if isinstance(st[0], list) else [st[0]], text=TX(st[1]), items=[[a, TX(m)] for a, m in (st[2] if len(st) > 2 else [])]) for st in steps]
     # rates and prices with a fraction show two decimals, as they are written in the question (3.60, not 3.6)
     cfgd['fmt'] = {k: 'num2' for k, v in data.items() if isinstance(v, float) and abs(v) < 1000}
+    if fmt: cfgd['fmt'].update(fmt)
     side = ''
     if chart:
         cfgd['chart'] = chart
         side = f'<svg class="xlc" viewBox="0 0 {chart.get("W", 470)} {chart.get("H", 330)}" role="img" aria-label="תרשים"></svg>'
     body = f'<div class="act xlq" id="{sid}-x" data-cfg="{_cfg(cfgd)}"><div class="tasktxt">{TX(task)}</div><div class="xlrow{"" if chart else " solo"}"><div class="sheet"></div><div class="xlside">{side}</div></div>{extra}</div>'
-    S(sid, title, h, body, kick=f'חלק {CUR[0]} · אקסל בתוך השקף')
+    S(sid, title, h, body, kick=kick or f'חלק {CUR[0]} · אקסל בתוך השקף')
 
 
 def PCH(x, series, xt=None, yt=None, x0=None, x1=None, y0=-40, y1=40, xl='מחיר בפקיעה ($S_{T}$)'.replace('$', '').replace('_{T}', '_T'), yl='ש״ח'):
@@ -319,5 +322,5 @@ def RL(items, start=1):
 
 
 exec(R('content_g.py'))
-for _f in {1: ['content_b1.py', 'content_b1b.py', 'content_e1.py', 'content_e2.py'], 2: ['content_l2.py', 'content_b2a.py', 'content_x.py', 'content_d2.py'], 3: ['content_l3.py', 'content_x.py', 'content_b2b.py', 'content_c1.py', 'content_c2.py', 'content_d.py']}[LESSON]:
+for _f in {1: ['content_b1.py', 'content_b1b.py', 'content_e1.py', 'content_e2.py'], 2: ['content_l2.py', 'content_b2a.py', 'content_x.py', 'content_d2.py'], 3: ['content_l3.py', 'content_x.py', 'content_b2b.py', 'content_c2.py', 'content_c0.py', 'content_c1.py', 'content_c3.py', 'content_d.py']}[LESSON]:
     exec(R(_f))

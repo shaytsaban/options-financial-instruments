@@ -442,3 +442,112 @@ details.more .more-b{position:absolute;right:0;bottom:calc(100% + 6px);width:760
 .xl-fm{font-size:16.5px;line-height:1.3;padding:6px 10px}
 #h-2 .mc .q{font-size:18px;line-height:1.3}#h-2 .mc .o{padding-top:5px;padding-bottom:5px}
 #bar a#bHome{color:#c9d5f2;font-size:15px;padding:6px 12px;border-radius:9px;font-weight:600;text-decoration:none;white-space:nowrap}#bar a#bHome:hover{background:#18284a;color:#fff}
+/* ===== mini Excel, v2: compact Home ribbon, frozen headers, scrollbars, zoom, menus, guided steps ===== */
+.xl{position:relative;container-type:inline-size}
+.xl-ribbon{padding:2px 2px 0;overflow:hidden}
+.xl-ribbon .xg{padding:0 5px;justify-content:space-between}
+.xl-ribbon .xg-b{min-height:48px;gap:2px}
+.xl-ribbon .xg-n{font-size:11.5px;padding:1px 0 3px}
+.xl-ribbon button{font-size:14px;padding:2px 4px;min-height:22px;display:inline-flex;align-items:center;justify-content:center;gap:2px}
+.xl-ribbon .xs{width:16px;height:16px;flex:none;display:block}
+.xl-ribbon button.big{padding:2px 4px;gap:0}.xl-ribbon button.big .xs{width:26px;height:26px}.xl-ribbon button.big small{font-size:11.5px}
+.xl-ribbon small{font-size:11.5px;color:#323130;line-height:1}
+.xl-ribbon .row{gap:1px}.xl-ribbon .col{gap:2px}
+.xl-ribbon b,.xl-ribbon i,.xl-ribbon u{font-family:'Times New Roman',Georgia,serif;font-size:15px;width:12px;text-align:center}
+.xl-ribbon sup{font-size:9px;line-height:0}
+.xl-font{width:62px;font-size:12.5px;padding:2px 4px;overflow:hidden;white-space:nowrap}
+.xl-size{width:44px;height:22px;font:12.5px 'Segoe UI',sans-serif;border:1px solid #c8c6c4;border-radius:3px;background:#fff;color:#323130;padding:0 2px;cursor:pointer;margin-inline-start:2px}
+.xl-numf{width:78px;font-size:12.5px;padding:3px 5px}
+.xl-ribbon .ab{font:600 14px/1 'Segoe UI',sans-serif;padding:2px 3px}.xl-ribbon .ab.sm{font-size:12px}
+.xl-split{display:inline-flex;align-items:stretch;border:1px solid transparent;border-radius:4px}
+.xl-split:hover{border-color:#c8c6c4}
+.xl-split button{border-radius:3px}.xl-split button.dd{padding:2px 1px;font-size:9px;color:#605e5c;min-width:10px}
+.xl-ribbon .xg-al .xg-b{align-items:center}
+.xl-ribbon .xg-cells button{padding:2px 3px;justify-content:flex-start;min-width:52px}
+.xl-ribbon .xg-ed button{justify-content:flex-start;gap:4px}
+.xl-ribbon .sig{font:700 16px/1 'Segoe UI',sans-serif;color:#217346;width:14px;text-align:center}
+.xl-ribbon .fxi{font:italic 700 14px/1 Georgia,serif;color:#605e5c;width:14px;text-align:center}
+.xl-ribbon .xl-msg{font-size:14px;max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:clip}
+@container (max-width:690px){.xl-font{display:none}.xl-ribbon .xg{padding:0 3px}}
+@container (max-width:600px){.xl-ribbon .xg-cells small,.xl-ribbon .xg-ed small{display:none}.xl-ribbon .xg-cells button{min-width:0}.xl-numf{width:56px}}
+@container (max-width:520px){.xl-ribbon .xg-n{display:none}.xl-ribbon .xg-clip .big small{display:none}}
+/* frozen headers: the column letters and row numbers stay in place while the grid scrolls */
+.xl-g thead th{position:sticky;top:0;z-index:7}
+.xl-g tbody th.xl-rn{position:sticky;right:0;z-index:6}
+.xl-g thead th.xl-c0{right:0;z-index:8}
+.xl-g th{background-clip:padding-box}
+/* Excel-like scrollbars, always visible */
+.xl-wrap::-webkit-scrollbar{width:13px;height:13px;background:#f3f2f1}
+.xl-wrap::-webkit-scrollbar-thumb{background:#c2c0be;border-radius:7px;border:3px solid #f3f2f1}
+.xl-wrap::-webkit-scrollbar-thumb:hover{background:#8a8886}
+.xl-wrap::-webkit-scrollbar-corner{background:#f3f2f1}
+/* zoom control, bottom left as in Hebrew Excel */
+.xl-zoom{display:flex;align-items:center;gap:3px;margin-inline-start:10px;direction:ltr}
+.xl-zoom button{border:0;background:transparent;font:16px/1 'Segoe UI',sans-serif;color:#605e5c;width:18px;height:18px;padding:0;cursor:pointer;border-radius:3px}
+.xl-zoom button:hover{background:#e1dfdd;color:#217346}
+.xl-zr{width:90px;height:14px;accent-color:#605e5c;cursor:pointer;margin:0}
+.xl-zv{min-width:38px;text-align:left;font-size:12.5px;color:#323130}
+.xl-foot{gap:6px}
+/* per-cell looks */
+.xl-g td{background-clip:padding-box}
+.xl-g td.ed .xl-in{font-size:inherit}
+/* right-click menu and pickers */
+.xl-menu,.xl-pop{position:absolute;z-index:30;background:#fff;border:1px solid #c8c6c4;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.18);padding:4px 0;min-width:190px;font:14px/1 'Segoe UI',Rubik,Heebo,sans-serif;color:#323130;direction:rtl}
+.xl-menu[hidden],.xl-pop[hidden],.xl-stp[hidden]{display:none!important}
+.xl-menu button,.xl-pop button.pl{display:flex;align-items:center;gap:8px;width:100%;border:0;background:transparent;padding:6px 10px;font:inherit;color:inherit;cursor:pointer;text-align:right}
+.xl-menu button:hover,.xl-pop button.pl:hover{background:#e8f3ec}
+.xl-menu button.dim{color:#a19f9d}
+.xl-menu .mi{width:16px;height:16px;flex:none;display:inline-flex}.xl-menu .mi .xs,.xl-pop .xs{width:16px;height:16px}
+.xl-menu .ml{flex:1}.xl-menu .mk{color:#8a8886;font-size:12px}
+.xl-menu .sep{height:1px;background:#e1dfdd;margin:4px 0}
+.xl-pop{min-width:0;padding:6px}
+.xl-pop .pt{font-size:12.5px;color:#605e5c;padding:0 2px 5px}
+.xl-pop .sw{display:grid;grid-template-columns:repeat(5,20px);gap:4px;margin-bottom:4px}
+.xl-pop .sw button{width:20px;height:20px;border:1px solid #c8c6c4;border-radius:2px;cursor:pointer;padding:0}
+.xl-pop .sw button:hover{outline:2px solid #217346}
+.xl-pop button.pl{padding:5px 6px;font-size:13px}
+/* guided steps: the cells of the step and the cells it reads, each in its own reference color */
+.xl-g td.sr{background-image:linear-gradient(color-mix(in srgb,var(--sc) 15%,transparent),color-mix(in srgb,var(--sc) 15%,transparent))}
+.xl-g td.sr::after{content:'';position:absolute;inset:0;pointer-events:none;border:0 solid var(--sc)}
+.xl-g td.srt::after{border-top-width:3px}.xl-g td.srb::after{border-bottom-width:3px}.xl-g td.srr::after{border-right-width:3px}.xl-g td.srl::after{border-left-width:3px}
+.xl-g td.stg{background-color:#e3f6ea;box-shadow:inset 0 0 0 3px #217346}
+.xl-g td.typing{background:#fff;text-align:left;font-family:Consolas,'Courier New',monospace;color:#1b2d55;overflow:visible;z-index:4}
+.xl-typ{display:inline-block;background:#fff;padding-inline:2px;white-space:nowrap}
+.xl-typ::after{content:'';display:inline-block;width:2px;height:1em;background:#217346;margin-left:1px;vertical-align:-2px;animation:xlcaret .5s steps(1) infinite}
+@keyframes xlcaret{50%{opacity:0}}
+.xl-g td.xl-pop{animation:xlpop .9s ease-out}
+@keyframes xlpop{0%{background-color:#a7e3bd}100%{background-color:#e3f6ea}}
+.xl-pr .xl-stb{background:#fff7e0;border-color:#e0b450;color:#7a4b00}
+.xl-pr .xl-stb:hover{background:#ffefc2;border-color:#c48a00}
+.xl-stp{flex:0 1 auto!important;min-height:0;overflow:auto;background:#fff;border:1px solid #d9d2c3;border-right:5px solid #217346;border-radius:10px;padding:8px 12px;font:16.5px/1.35 Rubik,Heebo,sans-serif;color:#16213a}
+.xl-sh{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.xl-sh b{color:#217346;font-size:17px}
+.xl-dots{display:flex;gap:4px}.xl-dots i{width:9px;height:9px;border-radius:50%;background:#d2d0ce}.xl-dots i.done{background:#7fc59b}.xl-dots i.on{background:#217346;transform:scale(1.25)}
+.xl-stx{margin-bottom:6px}
+.xl-sf{display:flex;flex-direction:column;gap:3px;margin-bottom:6px}
+.xl-sf code{direction:ltr;unicode-bidi:isolate;text-align:left;display:block;background:#f3f2f1;border:1px solid #e1dfdd;border-radius:6px;padding:3px 8px;font:17px/1.3 Consolas,'Courier New',monospace;color:#323130}
+.xl-sa{color:#605e5c;font-weight:700;margin-right:6px}.xl-sa::after{content:':'}
+.xl-more{font-size:16.5px;color:#605e5c}
+.xl-si{list-style:none;margin:0 0 6px;padding:0;display:flex;flex-direction:column;gap:3px}
+.xl-si li{display:flex;align-items:center;gap:6px;font-size:16.5px}
+.xl-sw{width:12px;height:12px;border-radius:2px;flex:none}
+.xl-si code{font:700 16.5px Consolas,'Courier New',monospace;unicode-bidi:isolate}
+.xl-im{flex:1}
+.xl-si b{direction:ltr;unicode-bidi:isolate;background:#f3f2f1;border-radius:4px;padding:0 6px}
+.xl-sb{display:flex;gap:6px;flex-wrap:wrap}
+.xl-sb button{font:600 16.5px/1 Rubik,Heebo,sans-serif;padding:6px 11px;border-radius:7px;border:1px solid #c8c8c8;background:#fff;cursor:pointer;color:#16213a}
+.xl-sb button:hover{background:#e8f3ec;border-color:#217346}
+.xl-sb button.xl-go{background:#217346;color:#fff;border-color:#217346}
+.xl-sb button[disabled]{opacity:.45;cursor:default}
+.xlside.stp-on .toon,.xlside.stp-on .xl-fm{display:none}
+@media print{.xl-menu,.xl-pop,.xl-stp,.xl-zoom{display:none!important}.xl-wrap{overflow:hidden!important}.xl-g thead th,.xl-g tbody th.xl-rn{position:static}}
+.xl-bar:not(.ltr),.xl-in:not(.ltr){font-family:'Segoe UI',Rubik,Heebo,Arial,sans-serif}
+/* zoom: sizes follow --z, set by the slider */
+.xl-g td{font-size:calc(17px*var(--z,1));height:calc(32px*var(--z,1))}
+.xl.tight .xl-g td{height:calc(27px*var(--z,1))}
+.xl-g td.f{font-size:calc(16.5px*var(--z,1))}
+.xl-g th{font-size:calc(16.5px*var(--z,1));height:calc(26px*var(--z,1))}
+.xl-g th.xl-rn,.xl-g th.xl-c0{width:calc(34px*var(--z,1))}
+.xl-g td.ed .xl-lay{font-size:calc(17px*var(--z,1))}
+.xl-fh{width:calc(10px*var(--z,1));height:calc(10px*var(--z,1))}
+.xlside.stp-on svg.xlc{min-height:140px}

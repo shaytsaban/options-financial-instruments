@@ -2,7 +2,7 @@
 import os, re
 H = os.path.dirname(os.path.abspath(__file__))
 n = lambda s: f'<span class="n">{s}</span>'
-UP = [(4, 'חוזים עתידיים: הרעיון הבסיסי'), (5, 'חוזים עתידיים: יישומים עסקיים'), (6, 'אופציות: מושגי יסוד ואסטרטגיות הגנה'), (7, 'אסטרטגיות רווח ומסחר'), (8, 'עקרונות בתמחור'), (9, 'אופציות אירופאיות ואמריקאיות: מימוש מוקדם וחסמים'), (10, 'עסקאות החלפה (Swap)'), (11, 'מכשירים מורכבים'), (12, 'ניהול סיכונים ארגוני'), (13, 'כשלים מפורסמים, השוק הישראלי, וסיכום לקראת המבחן')]
+UP = [(4, 'אסטרטגיות באופציות: הגנה והכנסה (Protective Put, Covered Call, Collar)'), (5, 'אסטרטגיות רווח ומסחר: מרווחים ושילובים (Spreads, Straddle)'), (6, 'עקרונות בתמחור אופציות'), (7, 'אופציות אירופאיות ואמריקאיות: מימוש מוקדם וחסמים'), (8, 'עסקאות החלפה (Swap) לעומק'), (9, 'מכשירים מורכבים'), (10, 'ניהול סיכונים ארגוני'), (11, 'כשלים מפורסמים'), (12, 'השוק הישראלי'), (13, 'סיכום לקראת המבחן')]
 ups = ''.join(f'<li><span class="un">{n(i)}</span><span>{t}</span><em>בקרוב</em></li>' for i, t in UP)
 src = open(os.path.join(H, '..', '..', 'finance-for-managers', 'index.html'), encoding='utf8').read()
 css = re.search(r'<style>(.*?)</style>', src, re.S).group(1)
@@ -150,17 +150,18 @@ page = f'''<!doctype html>
 </div>
 </article>
 <article class="lec" id="lesson-3">
-<div class="lec-head"><div class="lec-n">3</div><div><h3>מכפיל, שחקנים ושווקים</h3><div class="sub">{n('16.11.2026')} · המשך משיעור {n(2)} · קריאה: Hull, פרק {n(1)}</div></div></div>
+<div class="lec-head"><div class="lec-n">3</div><div><h3>מכפיל, שחקנים ושווקים</h3><div class="sub">{n('16.11.2026')} · המשך משיעור {n(2)} · קריאה: Hull, פרקים {n(1)}, {n(2)} ו-{n(5)}</div></div></div>
 <div class="lec-body">
 <div><h4>מה לומדים בשיעור</h4><ul class="learn">
-<li>תזכורת קלה: ארבע הפוזיציות של מפגש 2</li>
-<li>נקודות של מדד, מכפיל, אירופאית ואמריקאית, ועסקת החלפה (Swap)</li>
-<li>השחקנים: מגדר (Hedger), ביטחונות (Margin), ספקולנט (Speculator) ומנוף</li>
-<li>השווקים: שיקגו, תל אביב ושוק מעבר לדלפק (OTC)</li>
-<li>מקרה בוחן: גידור דלק, בתרגילי אקסל</li>
+<li>תזכורת ממפגש 2 בתרשימי זרימה, וחימום באקסל</li>
+<li>מנקודות לשקלים: מדד, מכפיל, ומסך המסחר של אופציות ת״א 35</li>
+<li>היכן זה נסחר: בורסה, מסלקה, שוק מעבר לדלפק (OTC) ועסקת החלפה (Swap)</li>
+<li>חוזה עתידי בפועל: ביטחונות (Margin), החשבון היומי, מחיר החוזה וארביטראז׳</li>
+<li>השחקנים: מספר חוזים לגידור, ומנוף (Leverage) בחוזה ובאופציה</li>
+<li>מקרה בוחן: גידור דלק בחברת תעופה, בחמישה תרגילי אקסל</li>
 </ul><div class="rec" id="recording-3"><h4>🎥 הקלטת השיעור · {n('16.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה בעיבוד</b>ותועלה בהמשך</div></div></div></div></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-3/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(51)} שקפים, {n(9)} תרגילי אקסל בגיליון דמוי Excel, ו-{n(3)} תרגילים מסכמים</span></span></a>
+<a class="lk p" href="lectures/lecture-3/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(75)} שקפים, {n(24)} גיליונות Excel חיים עם פתרון שלב אחר שלב, מסכי מסחר וכתבות מהעיתונות</span></span></a>
 <a class="lk s" href="lectures/lecture-3/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
 <a class="lk x" href="materials/practice-3.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(4)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
 <a class="lk r" href="materials/practice-3-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>

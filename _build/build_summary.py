@@ -109,6 +109,23 @@ code.xl{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Cou
 .gl .th{font-weight:700;color:var(--navy);font-size:11.4pt}
 .gl small{font-weight:400;color:var(--mut);direction:ltr;unicode-bidi:isolate;margin-right:1.5mm;font-size:9.6pt}
 .gl p{margin:0 0 .3mm}
+
+/* lesson 3 flows, screens and press items */
+.pf{display:block;margin:4pt 0}.pf .col{display:inline-block;vertical-align:top;width:21.5%;margin-left:.8%}.pf .col.dec{width:30%}.pf .ar{display:none}
+.pf .nd,.pfx>div,.lc,.qc,.cn,.pn,.callo,.news,.stp .si,.c-h0s,.b-lane,.c-lane{border:.6pt solid #cfc7b6;border-radius:4pt;padding:3pt 5pt;margin:0 0 3pt;font-size:8.6pt;line-height:1.35}
+.pf .nh,.pfx .nh{display:block;font-size:7.6pt;color:#5d6a86}.pf .f{text-align:center;font-weight:700}.pf .en{font-weight:700;text-align:center}
+.pf .yn{font-weight:700;margin-left:3pt}.pf .br>div{margin-bottom:2pt}
+.pfx{display:block}.pfx>div{display:inline-block;vertical-align:top;width:31.5%;margin-left:1%}.pfx .story{background:#eef2ff}
+.lts,.qd,.newsrow,.c-m0,.b-g3{display:block}.lts .lc{display:inline-block;vertical-align:top;width:23%;margin-left:1%}.lt{font-size:14pt;font-weight:700;text-align:center}
+.qd .qc{display:inline-block;vertical-align:top;width:47.5%;margin-left:1%;text-align:center}
+.newsrow .news{display:inline-block;vertical-align:top;width:47.5%;margin-left:1%}.news small{display:block;color:#5d6a86;font-size:7.6pt}.news>b{display:block}.news p{margin:1pt 0}.news .nurl{font-size:6.6pt;color:#1f5fd6;word-break:break-all}
+.b-row .pn,.c-row .cn{display:inline-block;margin-left:3pt;text-align:center}.pn small,.cn small{display:block;font-size:7.4pt;color:#5d6a86}.po,.co{display:inline-block;font-weight:700;margin-left:3pt}
+.scr{border:.8pt solid #1b2d55;border-radius:4pt;padding:4pt;margin:3pt 0}.scr-h{font-size:8pt;font-weight:700}.scr-h span{margin-left:10pt}
+.scr-t{width:100%;border-collapse:collapse;font-size:8pt}.scr-t th,.scr-t td{border:.4pt solid #cfc7b6;padding:1.5pt 3pt;text-align:center}.scr-t tr.g th{background:#1b2d55;color:#fff}.scr-f{font-size:7pt;color:#5d6a86}
+.scr-2>div{display:inline-block;vertical-align:top;width:47%;margin-left:2%;font-size:8pt}.scr-2 div>div span{display:inline-block;min-width:60%}
+.callo>b,.stp .si>b,.c-h0s>b{display:inline-block;font-weight:700;margin-left:4pt}
+.tl,.c-msvg,.b-svg{width:100%;max-height:150pt}
+.meme,.toon{display:none}
 '''
 parts = {}
 for s in SL:
