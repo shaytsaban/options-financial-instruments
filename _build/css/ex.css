@@ -1,0 +1,35 @@
+/* clickable formula sheet, cell info line, key cards: lessons 3 and 4 */
+.xp{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:14px;align-items:stretch}
+.xp-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;align-content:start}
+.xp-grp{background:#fff;border-radius:14px;padding:6px 10px 7px;box-shadow:0 2px 0 #e6dfd0;border-inline-start:6px solid #1b2d55}
+.xp-grp.c1{border-color:#0f9d90}.xp-grp.c2{border-color:#6d4df2}.xp-grp.c3{border-color:#ff6a4d}.xp-grp.c4{border-color:#e8960c}.xp-grp.c5{border-color:#217346}.xp-grp.c6{border-color:#27447f}
+.xp-grp.wide{grid-column:1/-1}
+.xp-t{display:block;font-size:17px;color:#1b2d55;margin-bottom:3px}
+.xp-cs{display:flex;flex-wrap:wrap;gap:6px}
+.xp-c{font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:1px;background:#f4f1ea;border:1.5px solid #d9d2c3;border-radius:10px;padding:3px 9px;text-align:right;color:#16213a;transition:transform .12s,background .12s}
+.xp-c span{font-size:13.5px;font-weight:600;color:#5d6a86;line-height:1.15}.xp-c em{font-style:normal;font-size:16.5px;font-weight:700;line-height:1.25}.xp-c .m{font-size:16.5px}
+.xp-c:hover{background:#eaf6f4;transform:translateY(-1px)}.xp-c.on{background:#1b2d55;border-color:#1b2d55;color:#fff}.xp-c.on span{color:#c8d4f2}.xp-c.on .m{color:#fff}
+.xp-d{background:#1b2d55;color:#fff;border-radius:16px;padding:16px 18px;font-size:18.5px;line-height:1.42;min-height:300px}
+.xp-0{color:#c8d4f2;font-size:20px;line-height:1.5;margin-top:40px;text-align:center}
+.xp-h{display:block;font-size:22px;color:#7fe3d6}.xp-f{font-size:22px;font-weight:800;margin:4px 0 8px;color:#ffd37a}.xp-f .m{color:#ffd37a;font-size:22px}
+.xp-d .m{color:inherit}.xp-d p{margin:0 0 8px}
+.xp-e{background:rgba(255,255,255,.1);border-radius:10px;padding:7px 11px;margin-bottom:7px}
+.xp-l{background:#e8f3ec;color:#16213a;border-radius:10px;padding:7px 11px}.xp-l b{color:#217346}.xp-l .m{color:#16213a}
+.xp-e b{color:#ffd37a}
+/* the info line under a sheet */
+.xl-inf{margin-top:0;background:#eef3fb;border-inline-start:4px solid #27447f;border-radius:7px;padding:5px 10px;font:16px/1.4 Rubik,Heebo,sans-serif;color:#16213a;min-height:33px}
+.xl-inf>b{color:#27447f;margin-inline-end:4px}.xl-inf button{font:600 14.5px Rubik,Heebo,sans-serif;background:#fff;border:1px solid #27447f;color:#27447f;border-radius:6px;padding:1px 9px;cursor:pointer;margin-inline-start:6px}
+.xl-inf .how{display:block;margin-top:3px;color:#4a4130}.xl-inf .how[hidden]{display:none}
+/* key cards before a block of exercises */
+.kc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:8px}
+.kcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 2px 0 #e6dfd0;border-top:8px solid #0f9d90;font-size:22px;line-height:1.42;min-height:318px}
+.kcard.k1{border-color:#217346}.kcard.k2{border-color:#ff6a4d}
+.kh{display:block;font-size:24px;color:#1b2d55;margin-bottom:10px}
+.kcard p{margin:0 0 10px}.kcard .kf{direction:ltr;text-align:center;font-weight:800;font-size:25px;background:#f4f1ea;border-radius:10px;padding:8px 10px;margin:8px 0;unicode-bidi:isolate}
+.ktail{margin-top:16px;display:flex;gap:12px;align-items:center;background:#1b2d55;color:#fff;border-radius:16px;padding:12px 18px;font-size:20px}
+.ktail .kt{color:#7fe3d6;flex:none}.ktail span{flex:1;background:rgba(255,255,255,.1);border-radius:10px;padding:7px 12px;line-height:1.3}
+.ktail i{font-style:normal;font-weight:800;color:#ffd37a;margin-inline-end:8px}
+code.fxc{direction:ltr;unicode-bidi:isolate;display:inline-block;font:700 .86em 'Menlo','Courier New',monospace;background:#e8f3ec;color:#16213a;border-radius:6px;padding:1px 8px;white-space:nowrap}
+.xp-l code.fxc{background:#fff}
+#s-route .route.r2{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}#s-route .route.r2 .rcard{min-height:150px}
+.draftb{position:absolute;left:54px;top:54px;background:#ffd37a;color:#4a2d00;font-weight:900;font-size:30px;padding:8px 26px;border-radius:12px;transform:rotate(-6deg);box-shadow:0 6px 18px rgba(0,0,0,.3)}

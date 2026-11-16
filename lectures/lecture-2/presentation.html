@@ -838,6 +838,41 @@ details.more .more-b{position:absolute;right:0;bottom:calc(100% + 6px);width:760
 #h-1 .mc .q{font-size:18px;line-height:1.3}#h-1 .mc .o{padding-top:5px;padding-bottom:5px;font-size:18.5px}#h-1 .mc .w{font-size:17px}
 #s-sum ol.steps.two li{font-size:17px;line-height:1.35;padding-top:5px;padding-bottom:5px}
 #s-sum .e-fs td,#s-sum .e-fs th{font-size:15.5px;padding:5px 8px}
+/* clickable formula sheet, cell info line, key cards: lessons 3 and 4 */
+.xp{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:14px;align-items:stretch}
+.xp-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;align-content:start}
+.xp-grp{background:#fff;border-radius:14px;padding:6px 10px 7px;box-shadow:0 2px 0 #e6dfd0;border-inline-start:6px solid #1b2d55}
+.xp-grp.c1{border-color:#0f9d90}.xp-grp.c2{border-color:#6d4df2}.xp-grp.c3{border-color:#ff6a4d}.xp-grp.c4{border-color:#e8960c}.xp-grp.c5{border-color:#217346}.xp-grp.c6{border-color:#27447f}
+.xp-grp.wide{grid-column:1/-1}
+.xp-t{display:block;font-size:17px;color:#1b2d55;margin-bottom:3px}
+.xp-cs{display:flex;flex-wrap:wrap;gap:6px}
+.xp-c{font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:1px;background:#f4f1ea;border:1.5px solid #d9d2c3;border-radius:10px;padding:3px 9px;text-align:right;color:#16213a;transition:transform .12s,background .12s}
+.xp-c span{font-size:13.5px;font-weight:600;color:#5d6a86;line-height:1.15}.xp-c em{font-style:normal;font-size:16.5px;font-weight:700;line-height:1.25}.xp-c .m{font-size:16.5px}
+.xp-c:hover{background:#eaf6f4;transform:translateY(-1px)}.xp-c.on{background:#1b2d55;border-color:#1b2d55;color:#fff}.xp-c.on span{color:#c8d4f2}.xp-c.on .m{color:#fff}
+.xp-d{background:#1b2d55;color:#fff;border-radius:16px;padding:16px 18px;font-size:18.5px;line-height:1.42;min-height:300px}
+.xp-0{color:#c8d4f2;font-size:20px;line-height:1.5;margin-top:40px;text-align:center}
+.xp-h{display:block;font-size:22px;color:#7fe3d6}.xp-f{font-size:22px;font-weight:800;margin:4px 0 8px;color:#ffd37a}.xp-f .m{color:#ffd37a;font-size:22px}
+.xp-d .m{color:inherit}.xp-d p{margin:0 0 8px}
+.xp-e{background:rgba(255,255,255,.1);border-radius:10px;padding:7px 11px;margin-bottom:7px}
+.xp-l{background:#e8f3ec;color:#16213a;border-radius:10px;padding:7px 11px}.xp-l b{color:#217346}.xp-l .m{color:#16213a}
+.xp-e b{color:#ffd37a}
+/* the info line under a sheet */
+.xl-inf{margin-top:0;background:#eef3fb;border-inline-start:4px solid #27447f;border-radius:7px;padding:5px 10px;font:16px/1.4 Rubik,Heebo,sans-serif;color:#16213a;min-height:33px}
+.xl-inf>b{color:#27447f;margin-inline-end:4px}.xl-inf button{font:600 14.5px Rubik,Heebo,sans-serif;background:#fff;border:1px solid #27447f;color:#27447f;border-radius:6px;padding:1px 9px;cursor:pointer;margin-inline-start:6px}
+.xl-inf .how{display:block;margin-top:3px;color:#4a4130}.xl-inf .how[hidden]{display:none}
+/* key cards before a block of exercises */
+.kc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:8px}
+.kcard{background:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 2px 0 #e6dfd0;border-top:8px solid #0f9d90;font-size:22px;line-height:1.42;min-height:318px}
+.kcard.k1{border-color:#217346}.kcard.k2{border-color:#ff6a4d}
+.kh{display:block;font-size:24px;color:#1b2d55;margin-bottom:10px}
+.kcard p{margin:0 0 10px}.kcard .kf{direction:ltr;text-align:center;font-weight:800;font-size:25px;background:#f4f1ea;border-radius:10px;padding:8px 10px;margin:8px 0;unicode-bidi:isolate}
+.ktail{margin-top:16px;display:flex;gap:12px;align-items:center;background:#1b2d55;color:#fff;border-radius:16px;padding:12px 18px;font-size:20px}
+.ktail .kt{color:#7fe3d6;flex:none}.ktail span{flex:1;background:rgba(255,255,255,.1);border-radius:10px;padding:7px 12px;line-height:1.3}
+.ktail i{font-style:normal;font-weight:800;color:#ffd37a;margin-inline-end:8px}
+code.fxc{direction:ltr;unicode-bidi:isolate;display:inline-block;font:700 .86em 'Menlo','Courier New',monospace;background:#e8f3ec;color:#16213a;border-radius:6px;padding:1px 8px;white-space:nowrap}
+.xp-l code.fxc{background:#fff}
+#s-route .route.r2{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}#s-route .route.r2 .rcard{min-height:150px}
+.draftb{position:absolute;left:54px;top:54px;background:#ffd37a;color:#4a2d00;font-weight:900;font-size:30px;padding:8px 26px;border-radius:12px;transform:rotate(-6deg);box-shadow:0 6px 18px rgba(0,0,0,.3)}
 </style>
 </head>
 <body>
@@ -885,7 +920,7 @@ details.more .more-b{position:absolute;right:0;bottom:calc(100% + 6px);width:760
 <section class="slide " id="h-2" data-title="לבית: שאלות 4 עד 6"><div class="kick"><span>חלק <span class="n">3</span> · בדיקת הבנה</span></div><h2>שאלות לבית: <span class="n">4</span> עד <span class="n">6</span></h2><div class="mcrow n3"><div class="mc" data-a="1" id="h21"><div class="q">משקיעה מעריכה שמניה של חברת מזון, שנסחרת היום ב-<span class="n">47</span> ש״ח, תעלה בחודשים הקרובים. לכן היא קנתה אופציית רכש (Long Call) על המניה. מחיר המימוש (K) הוא <span class="n">50</span> ש״ח, והפרמיה (c) ששילמה היא <span class="n">6</span> ש״ח. באיזה מחיר מניה בפקיעה היא לא מרוויחה ולא מפסידה, כלומר מהי נקודת האיזון (Break-even)?</div><div class="rem"><b>📐 נוסחה:</b> Long Call: רווח = <span class="m" dir="ltr">max(S<sub>T</sub> − K, 0) − c</span>. בנקודת האיזון הרווח אפס, ולכן <span class="m" dir="ltr">S<sub>T</sub> = K + c</span>. מעליה יש רווח, ומתחתיה הפסד.</div><button class="o" data-i="0">א. <span class="n">6</span></button><button class="o" data-i="1">ב. <span class="n">56</span></button><button class="o" data-i="2">ג. <span class="n">50</span></button><button class="o" data-i="3">ד. <span class="n">44</span></button><div class="w"><b>הסבר:</b> רווח אפס: <span class="m" dir="ltr">S<sub>T</sub> − 50 − 6 = 0</span>, ולכן <span class="m" dir="ltr">S<sub>T</sub> = 56</span>.</div></div><div class="mc" data-a="2" id="h24"><div class="q">קרן השקעות כתבה (מכרה) אופציית רכש (Short Call) על מניה, במחיר מימוש (K) של <span class="n">50</span> ש״ח, וקיבלה פרמיה (c) של <span class="n">3</span> ש״ח. <b>נדרש:</b> מה ההפסד המרבי שהקרן עלולה לספוג?</div><div class="rem"><b>📐 נוסחה:</b> Short Call: רווח = <span class="m" dir="ltr">c − max(S<sub>T</sub> − K, 0)</span>.</div><button class="o" data-i="0">א. <span class="n">50</span> ש״ח</button><button class="o" data-i="1">ב. <span class="n">47</span> ש״ח</button><button class="o" data-i="2">ג. אין לו תקרה: ככל שהמניה עולה, ההפסד גדל</button><button class="o" data-i="3">ד. <span class="n">3</span> ש״ח</button><div class="w"><b>הסבר:</b> הכותב חייב למכור ב-<span class="n">50</span> גם אם המניה ב-<span class="n">200</span>. ההפסד גדל עם המחיר, בלי תקרה.</div></div><div class="mc" data-a="1" id="h25"><div class="q">משקיע קנה אופציית מכר (Long Put) על מניה, במחיר מימוש (K) של <span class="n">40</span> ש״ח ובפרמיה (p) של <span class="n">2.5</span> ש״ח. <b>נדרש:</b> מה הרווח המרבי האפשרי שלו?</div><div class="rem"><b>📐 נוסחה:</b> Long Put: רווח = <span class="m" dir="ltr">max(K − S<sub>T</sub>, 0) − p</span>.</div><button class="o" data-i="0">א. <span class="n">2.5</span> ש״ח</button><button class="o" data-i="1">ב. <span class="n">37.5</span> ש״ח, אם המניה צונחת לאפס</button><button class="o" data-i="2">ג. <span class="n">40</span> ש״ח</button><button class="o" data-i="3">ד. אין לו תקרה</button><div class="w"><b>הסבר:</b> <span class="m" dir="ltr">40 − 0 − 2.5 = 37.5</span>.</div></div></div></section>
 <section class="slide " id="s-home" data-title="מה עושים עד המפגש הבא"><div class="kick"><span>חלק <span class="n">3</span> · לבית</span></div><h2>מה עושים עד המפגש הבא</h2><ol class="steps"><li class="st " data-n="10"><span><b>אקסל בשקפים, לפי הסדר:</b> תרגיל <span class="n">1</span> (Long Call, רמה <span class="n">1</span>), תרגיל <span class="n">2</span> (Short Put, רמה <span class="n">1</span>), תרגיל <span class="n">3</span> (Long Put עם נקודת איזון, רמה <span class="n">2</span>), תרגיל <span class="n">4</span> (ארבע פוזיציות, רמה <span class="n">3</span>), תרגיל <span class="n">5</span> (חילוץ פרמיה, רמה <span class="n">4</span>).</span></li><li class="st " data-n="20"><span><b>שאלות דיון:</b> שלוש. כתבו תשובה של שלוש שורות לכל אחת, ורק אחר כך השוו לתשובה לדוגמה.</span></li><li class="st " data-n="30"><span><b>רב ברירה:</b> שש שאלות, בשני שקפי ״שאלות לבית״.</span></li><li class="st " data-n="40"><span><b>קובץ תרגול ב-Excel:</b> קובץ התרגול של שיעור <span class="n">2</span> שבאתר הקורס. קודם פותרים, ורק אחר כך משווים לקובץ הפתרונות.</span></li><li class="st " data-n="50"><span><b>קריאה:</b> Hull, פרק <span class="n">1</span> (מהדורה <span class="n">11</span>), החלקים על אופציות.</span></li></ol><div class="st band dg" data-n="60"><b>בדיקה עצמית:</b> אם פתרתם את תרגילי <span class="n">1</span> עד <span class="n">4</span> בלי רמז, והסברתם במילים מה מחשבת כל נוסחה, אתם מוכנים למפגש הבא. תרגיל <span class="n">5</span> הוא אתגר.</div></section>
 <section class="slide " id="s-src" data-title="מקורות"><div class="kick"><span>מקורות</span></div><h2>מקורות, ומה להמחשה בלבד</h2><table class="tbl2 "><tr><th>נושא במפגש</th><th>איפה לקרוא</th><th>מה תמצאו שם</th></tr><tr><td>מהי אופציה: Call ו-Put, קונה וכותב</td><td>Hull, פרק <span class="n">1</span></td><td>ההגדרות, ודוגמה של קונה Call וקונה Put</td></tr><tr><td>תזרים ורווח בפקיעה, נקודת איזון</td><td>Hull, פרק <span class="n">1</span></td><td>גרפים של רווח לכל אחת מארבע הפוזיציות</td></tr><tr><td>להרחבה: איך נסחרות אופציות</td><td>Hull, פרק <span class="n">10</span></td><td>מנגנון המסחר, ותנאי החוזים (נחזור אליו בהמשך הקורס)</td></tr></table><div class="row eq2 top" style="margin-top:12px"><div class="card"><b class="ct">הקריאה</b><p class="src"><span class="l">Hull, Options, Futures, and Other Derivatives, 11th ed., Pearson, 2022</span>.</p></div><div class="card"><b class="ct">מה להמחשה בלבד</b><p class="src">נועה, רון, מיכל, יואב, דנית ואורי, וכל המחירים, הפרמיות והמניות במפגש, הם דוגמאות. הם אינם מחירי שוק ואינם המלצה. אין באמור בשיעור ייעוץ השקעות.</p></div></div><div class="toon meme"><div class="mm-t">הסטודנט אחרי חמישה תרגילי בית</div><svg viewBox="0 0 120 120" dir="ltr" role="img" aria-hidden="true"><circle cx="58" cy="64" r="40" fill="#ffd37a"/><path d="M38 58q7 6 14 0M64 58q7 6 14 0" fill="none" stroke="#111" stroke-width="3.5" stroke-linecap="round"/><path d="M48 82q10 6 20 0" fill="none" stroke="#111" stroke-width="3.5" stroke-linecap="round"/><text x="84" y="34" font-size="30" font-weight="800" fill="#27447f">z</text><text x="100" y="16" font-size="26" font-weight="800" fill="#27447f">z</text></svg><div class="mm-b">חולם על MAX, ומתעורר עם נקודת איזון</div></div></section>
-<section class="slide dark s1" id="s-end" data-title="סיום"><div style="position:relative;max-width:980px;margin-top:110px"><div class="kick" style="color:#ffb199">סוף מפגש 2</div><h1 style="font-size:60px">במפגש הבא: <span style="color:#7fe3d6">מכפיל, שחקנים ושווקים</span></h1><p class="sub" style="font-size:25px;margin-top:20px;color:#c8d4f2;max-width:940px">מכפיל ונקודות מדד, אירופאית ואמריקאית, עסקת החלפה, מגדרים וספקולנטים, הבורסות ומקרה בוחן בגידור דלק.</p><p class="sub" style="font-size:22px;margin-top:26px;color:#c8d4f2">פניות רק במייל: <span dir="ltr">shay.tsaban@gmail.com</span>. חובה לרשום את שם המוסד ואת שם הקורס.</p></div></section>
+<section class="slide dark s1" id="s-end" data-title="סיום"><div style="position:relative;max-width:980px;margin-top:110px"><div class="kick" style="color:#ffb199">סוף מפגש 2</div><h1 style="font-size:60px">במפגש הבא: <span style="color:#7fe3d6">מנקודות לשקלים</span></h1><p class="sub" style="font-size:25px;margin-top:20px;color:#c8d4f2;max-width:940px">מדד, נקודה ומכפיל, אופציה אירופאית ואמריקאית, מסך המסחר וסוגי הפקודות.</p><p class="sub" style="font-size:22px;margin-top:26px;color:#c8d4f2">פניות רק במייל: <span dir="ltr">shay.tsaban@gmail.com</span>. חובה לרשום את שם המוסד ואת שם הקורס.</p></div></section>
 </div><!-- /stage -->
 
 <div id="bar" class="noprint">
@@ -1127,10 +1162,10 @@ function mount(host,cfg){
   <div class="xl-top"><div class="xl-name" title="תיבת השם">A1</div><span class="xl-xv"><button data-x="cancel" title="ביטול (Esc)">✕</button><button data-x="enter" title="הזנה (Enter)">✓</button></span><div class="xl-fx">fx</div><div class="xl-barw"><div class="xl-lay"></div><input class="xl-bar" dir="ltr" spellcheck="false" autocomplete="off"></div></div>
   <div class="xl-wrap"><table class="xl-g" tabindex="0"></table></div>
   <div class="xl-foot"><span class="xl-sheet">גיליון1</span><span class="xl-plus">+</span><span class="xl-stat">מוכן</span><span class="xl-zoom" dir="ltr"><button data-x="zout" title="הקטנת התצוגה">−</button><input class="xl-zr" type="range" min="70" max="160" step="10" value="100" aria-label="מרחק מתצוגה" title="מרחק מתצוגה"><button data-x="zin" title="הגדלת התצוגה">+</button><span class="xl-zv">100%</span></span></div>
-  <div class="xl-menu" hidden></div><div class="xl-pop" hidden></div>
+  ${cfg.info?'<div class="xl-inf"></div>':''}<div class="xl-menu" hidden></div><div class="xl-pop" hidden></div>
   ${pr}${cfg.steps&&cfg.steps.length?'<div class="xl-stp" hidden></div>':''}${cfg.targets?'<div class="xl-fb"></div>':''}`;
  const $h=s=>host.querySelector(s);
- const g=$h('.xl-g'),bar=$h('.xl-bar'),barLay=$h('.xl-lay'),nameB=$h('.xl-name'),msg=$h('.xl-msg'),fb=$h('.xl-fb'),stat=$h('.xl-stat'),menu=$h('.xl-menu'),pop=$h('.xl-pop'),stpEl=$h('.xl-stp'),sizeSel=$h('.xl-size'),numf=$h('.xl-numf'),zr=$h('.xl-zr'),zv=$h('.xl-zv');
+ const g=$h('.xl-g'),bar=$h('.xl-bar'),barLay=$h('.xl-lay'),nameB=$h('.xl-name'),msg=$h('.xl-msg'),fb=$h('.xl-fb'),stat=$h('.xl-stat'),menu=$h('.xl-menu'),pop=$h('.xl-pop'),stpEl=$h('.xl-stp'),infEl=$h('.xl-inf'),sizeSel=$h('.xl-size'),numf=$h('.xl-numf'),zr=$h('.xl-zr'),zv=$h('.xl-zv');
  const changed=()=>{if(cfg.onChange)cfg.onChange();};
  let chs=[],rhs=[],Z=1;
  const grid=()=>{g.innerHTML=`<thead><tr><th class="xl-c0" title="בחירת הכול (Ctrl+A)"></th>${Array.from({length:C},(_,c)=>`<th class="xl-ch" data-c="${c}" style="width:${Math.round((W[c]||84)*Z)}px">${colName(c)}</th>`).join('')}</tr></thead><tbody>${Array.from({length:R},(_,r)=>`<tr><th class="xl-rn" data-r="${r}">${r+1}</th>${Array.from({length:C},(_,c)=>`<td data-a="${addr(r,c)}"></td>`).join('')}</tr>`).join('')}</tbody>`;chs=[...g.querySelectorAll('th.xl-ch')];rhs=[...g.querySelectorAll('th.xl-rn')];};grid();
@@ -1174,7 +1209,11 @@ function mount(host,cfg){
  function status(){if(editing){stat.textContent=editing.mode==='edit'?'עריכה':'הזנה';return;}
   const nums=[];let cnt=0;eachSel(a=>{const v=S.val[a];if(v!=null&&v!=='')cnt++;if(typeof v==='number')nums.push(v);});
   if(cnt>1){const s=nums.reduce((x,y)=>x+y,0);stat.innerHTML=nums.length?`ממוצע: <span dir="ltr">${fmtStat(s/nums.length)}</span>&emsp;ספירה: <span dir="ltr">${cnt}</span>&emsp;סכום: <span dir="ltr">${fmtStat(s)}</span>`:`ספירה: <span dir="ltr">${cnt}</span>`;}
-  else stat.textContent='מוכן';}
+  else stat.textContent='מוכן';info();}
+ /* what the active cell stands for, and on request how it is computed */
+ function info(){if(!infEl)return;const a=addr(sel.r,sel.c),t=cfg.info[a];
+  if(!t){infEl.innerHTML='<b>💬 לחצו על תא</b> כדי לראות מה הוא מייצג, ואיך מחשבים אותו.';return;}
+  infEl.innerHTML=`<b dir="ltr">${a}</b> `+(typeof t==='string'?t:`${t.w} <button data-x="how">איך מחשבים?</button><span class="how" hidden>${t.h}</span>`);}
  const hasSide=(r,c,s)=>{const t=S.st[addr(r,c)];return !!(t&&t.bd&&t.bd.includes(s));};
  /* per-cell look: bold, italic, underline, size, alignment, fill, font color, borders */
  function cellCss(a,p){const s=S.st[a];let css='';
@@ -1365,6 +1404,7 @@ function mount(host,cfg){
   if(cfg.solution)cfg.solution=mapObj(cfg.solution,re);if(cfg.solFmt)cfg.solFmt=mapObj(cfg.solFmt);if(cfg.need&&typeof cfg.need==='object')cfg.need=mapObj(cfg.need);
   if(kind==='row'&&Array.isArray(cfg.headRows))cfg.headRows=cfg.headRows.map(r=>{const v=remapIdx(r-1,at,n);return v==null?null:v+1;}).filter(v=>v!=null);
   if(cfg.chart){const ch=JSON.parse(JSON.stringify(cfg.chart));const mr=p=>{if(!Array.isArray(p))return p;const f=mapCells(p[0]+':'+p[1],mapA,re);return f?f.split(':'):p;};ch.x=mr(ch.x);(ch.series||[]).forEach(s=>{s.y=mr(s.y);});cfg.chart=ch;}
+  if(cfg.info)cfg.info=mapObj(cfg.info);
   if(cfg.steps)cfg.steps=cfg.steps.map(st=>({...st,cells:mapCells(st.cells,mapA,re),items:(st.items||[]).map(([a,m])=>[mapA(a)||a,m]),...(st.formula?{formula:typeof st.formula==='object'?mapObj(st.formula,re):re(st.formula)}:{})}));
   if(n>0){if(kind==='row')setRC(R+n,C);else{W.splice(at,0,...Array(n).fill(W[at]||84));setRC(R,C+n);}}
   else if(kind==='col')W.splice(at,-n);
@@ -1483,6 +1523,7 @@ function mount(host,cfg){
   if(x==='sum'){if(editing)commit(0,0);autoSum();}
   if(x==='formulas')toggleF();
   if(x==='steps')openSteps();
+  if(x==='how'&&infEl){const h=infEl.querySelector('.how');if(h)h.hidden=!h.hidden;return;}
   if(x==='hint'&&fb){const i=hintN%cfg.hints.length;hintN++;fb.innerHTML=`<div class="xl-tip"><b>רמז ${i+1} מתוך ${cfg.hints.length}:</b> ${cfg.hints[i]}</div>`;}
   if(x==='remind'&&fb){fb.innerHTML=`<div class="xl-tip">${cfg.remind}</div>`;}
   if(x==='part'){push();cfg.partial.forEach(a=>{S.set(a,cfg.solution[a]);});render();if(fb)fb.innerHTML='<div class="xl-tip">השורה הראשונה מולאה. המשיכו מכאן: גררו את ידית המילוי או כתבו לבד. התחרטתם? Ctrl+Z.</div>';changed();}
@@ -1620,7 +1661,7 @@ $$('.xlq').forEach(b=>{const cfg=cfg0(b),host=$('.sheet',b),svg=$('svg.xlc',b);l
    if(pts.length&&!single){const [x,y]=pts[pts.length-1];p+=f.tx(f.X(x)-8,f.Y(y)+(se.dy||-10),se.lab,{a:'end',fill:se.c,w:800,fs:17});}});
   if(single&&c.series[0].lab)p+=f.tx(f.W-f.mr-4,f.mt+16,c.series[0].lab,{a:'end',fill:c.series[0].c,w:800,fs:16});
   svg.innerHTML=p;};
- cfg.onChange=draw;api=XL.mount(host,cfg);host.__api=api;const side=$('.xlside',b),prx=$('.xl-pr',host),fbx=$('.xl-fb',host);if(prx)side.insertBefore(prx,side.firstChild);const stx=$('.xl-stp',host);if(stx)side.insertBefore(stx,prx?prx.nextSibling:side.firstChild);if(cfg.remind){const fm=document.createElement('div');fm.className='xl-fm';fm.innerHTML='<b>📐 הנוסחאות לתרגיל</b><div>'+cfg.remind+'</div>';side.insertBefore(fm,side.firstChild);}if(fbx)side.appendChild(fbx);b.querySelectorAll('.toon').forEach(t=>side.appendChild(t));draw();
+ cfg.onChange=draw;api=XL.mount(host,cfg);host.__api=api;if(cfg.zoom)api.zoom(cfg.zoom);const side=$('.xlside',b),prx=$('.xl-pr',host),fbx=$('.xl-fb',host);if(prx)side.insertBefore(prx,side.firstChild);const stx=$('.xl-stp',host);if(stx)side.insertBefore(stx,prx?prx.nextSibling:side.firstChild);const inx=$('.xl-inf',host);if(inx){side.insertBefore(inx,stx?stx.nextSibling:(prx?prx.nextSibling:side.firstChild));inx.addEventListener('click',e=>{if(e.target.closest('[data-x="how"]')){const h=inx.querySelector('.how');if(h)h.hidden=!h.hidden;}});}if(cfg.remind){const fm=document.createElement('div');fm.className='xl-fm';fm.innerHTML='<b>📐 הנוסחאות לתרגיל</b><div>'+cfg.remind+'</div>';side.insertBefore(fm,side.firstChild);}if(fbx)side.appendChild(fbx);b.querySelectorAll('.toon').forEach(t=>side.appendChild(t));draw();
  const fitSide=()=>{const sl=b.closest('.slide');const k=sl.getBoundingClientRect().width/1280;if(!k||!side.getBoundingClientRect().width)return false;const ft=sl.querySelector('.ft');const bottom=(ft?ft.getBoundingClientRect().top:sl.getBoundingClientRect().bottom)/k;const hh=Math.floor(bottom-side.getBoundingClientRect().top/k-10);if(Math.abs((parseFloat(side.style.height)||0)-hh)>1)side.style.height=hh+'px';return true;};b.closest('.slide').addEventListener('shown',()=>{if(host.__api&&host.__api.fit)host.__api.fit();fitSide();});if(window.ResizeObserver)new ResizeObserver(()=>fitSide()).observe(b);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitSide);});
 
 /* ---------- worked exercise with hints, reminder, partial and full solution ---------- */
@@ -1653,6 +1694,11 @@ $$('.draw').forEach(b=>{const C=cfg(b),svg=$('svg',b),fb=$('.fbbar',b),tt=$('.ta
  b.__set=a=>{v=a.slice();paint();};b.__task=()=>k;load(0);});
 
 })();
+
+/* ===== clickable formula sheet: a click on a formula shows its meaning, an example and the Excel way ===== */
+document.querySelectorAll('.xp').forEach(xp=>{xp.addEventListener('click',e=>{const c=e.target.closest('.xp-c');if(!c)return;
+ xp.querySelectorAll('.xp-c').forEach(b=>b.classList.toggle('on',b===c));const z=xp.querySelector('.xp-0');if(z)z.hidden=true;
+ xp.querySelectorAll('.xp-x').forEach(x=>{x.hidden=x.dataset.i!==c.dataset.i;});});});
 
 })();
 </script>

@@ -8,17 +8,17 @@ LESSON = int(sys.argv[1]) if len(sys.argv) > 1 else 1
 exec(R('content_a.py'))
 
 SEC = 'סמסטר א׳ תשפ״ז'
-HEAD = f'{COURSE} · קורס 123377 · מפגש {LESSON}' + (f' · {LMETA["date"]}' if LMETA['date'] else '')
+HEAD = f'{COURSE} · קורס 123377 · מפגש {LESSON}' + (f' · {LMETA["date"]}' if LMETA['date'] else '') + (' · טיוטה' if LMETA.get('draft') else '')
 
 
 def render(s, total):
     k = s['kind']
     if k == 'title':
-        chips = [f'{NX} תרגילי אקסל בתוך השקפים', (f'{NSV} תרגילים עם רמזים' if NSV != 1 else 'תרגיל פתור עם רמזים'), f'{NMC} שאלות רב ברירה', LMETA['chip']]
+        chips = [c for n, c in [(NX, f'{NX} תרגילי אקסל בתוך השקפים'), (NSV, f'{NSV} תרגילים עם רמזים' if NSV != 1 else 'תרגיל פתור עם רמזים'), (NMC, f'{NMC} שאלות רב ברירה'), (1, LMETA['chip'])] if n]
         return (f'<section class="slide dark s1 on" id="s-title" data-title="פתיחה">'
                 '<div class="orb" style="width:320px;height:320px;background:radial-gradient(circle at 30% 30%,#58e0cf,#0f9d90 60%,transparent 72%);left:-90px;top:-70px"></div>'
                 '<div class="orb" style="width:180px;height:180px;background:radial-gradient(circle at 30% 30%,#ffd37a,#e8960c 60%,transparent 72%);left:230px;bottom:90px;animation-delay:-3s"></div>'
-                '<div style="position:absolute;right:70px;top:84px;width:960px">'
+                + ('<div class="draftb">טיוטה</div>' if LMETA.get('draft') else '') + '<div style="position:absolute;right:70px;top:84px;width:960px">'
                 f'<div class="kick" style="color:#ffb199"><span>{TX(HEAD)}</span></div>'
                 f'<h1><span>{LMETA["h1"][0]}</span> <span style="color:#7fe3d6">{LMETA["h1"][1]}</span></h1>'
                 '<p class="sub" style="margin-top:20px;font-size:27px;color:#c8d4f2">' + TX(LMETA['sub']) + '</p>'
@@ -49,12 +49,12 @@ fonts = R('shell/fonts.css')
 # per-section styles: every file in css/ is added after deck.css, so sections can be styled without touching the shared sheet
 import glob
 # slide ids repeat across lessons (h-1, s-home...), so each lesson loads only its own section files
-CSS_OF = {1: 'fgh', 2: 'ae', 3: 'bcdei'}
+CSS_OF = {1: 'fgh', 2: 'ae', 3: 'bcdeij', 4: 'beik'}
 EXTRA_CSS = ''.join(open(p, encoding='utf8').read() for p in sorted(glob.glob(os.path.join(H, 'css', '*.css'))) if os.path.basename(p)[0] in CSS_OF[LESSON])
 base = R('shell/base.css')
 tail = R('shell/tail.html')
 gj = json.dumps(G, ensure_ascii=False)
-js = f'const COURSE={json.dumps(COURSE, ensure_ascii=False)};const LESSON={LESSON};\nconst G={gj};\n' + R('deck.js') + '\n' + R('xl.js') + '\n' + R('act.js') + ('\n' + R('sim.js') if LESSON == 3 else '')
+js = f'const COURSE={json.dumps(COURSE, ensure_ascii=False)};const LESSON={LESSON};\nconst G={gj};\n' + R('deck.js') + '\n' + R('xl.js') + '\n' + R('act.js') + '\n' + R('xp.js') + ('\n' + R('sim.js') if LESSON == 3 else '')
 title = f'{COURSE} | שיעור {LESSON} | {LMETA["title"]}'
 html = (f'<!doctype html>\n<html lang="he" dir="rtl">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}</title>\n<style>\n'
         + fonts + base + R('deck.css') + EXTRA_CSS + '</style>\n</head>\n<body>\n<div class="stage" id="stage">\n' + slides_html + '\n' + tail

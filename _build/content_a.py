@@ -5,7 +5,7 @@ import json, html as _html
 COURSE = 'אופציות ומכשירים פיננסיים'
 COURSE_FULL = 'אופציות ומכשירים פיננסיים מתוחכמים'
 LESSON = globals().get('LESSON', 1)
-TOTAL_PARTS = {1: 4, 2: 3, 3: 7}[LESSON]
+TOTAL_PARTS = {1: 4, 2: 3, 3: 2, 4: 7}[LESSON]
 # per lesson: deck title, subtitle, chips, cover line and the next meeting
 LMETA = {
  1: dict(date='2.11.2026', h1=('למה צריך', 'מכשירים מתוחכמים?'), title='למה צריך מכשירים מתוחכמים',
@@ -15,11 +15,15 @@ LMETA = {
  2: dict(date='9.11.2026', h1=('אופציות:', 'זכות, פרמיה וארבע פוזיציות'), title='אופציות: ארבע פוזיציות',
          sub='Call ו-Put צעד אחר צעד: תזרים, רווח ונקודת איזון, לקונה ולכותב.', chip='ארבע פוזיציות באופציות',
          cover='אופציות רכש ומכר: קונה וכותב, תזרים, רווח ונקודת איזון, עם תרגול באקסל ושאלות דיון.',
-         next_h='מכפיל, שחקנים ושווקים', next_t='מכפיל ונקודות מדד, אירופאית ואמריקאית, עסקת החלפה, מגדרים וספקולנטים, הבורסות ומקרה בוחן בגידור דלק.'),
- 3: dict(date='16.11.2026', h1=('מכפיל, שחקנים', 'ושווקים'), title='מכפיל, שחקנים ושווקים',
-         sub='נקודות ומכפיל, אירופאית ואמריקאית, בורסה ושוק מעבר לדלפק, עסקת החלפה, ביטחונות ומחיר החוזה העתידי, מגדרים וספקולנטים, ומקרה בוחן: גידור דלק בחברת תעופה.', chip='מקרה בוחן: דלק סילוני',
-         cover='מכפיל, אירופאית ואמריקאית, עסקת החלפה, שחקנים, בורסות ומקרה בוחן בגידור דלק.',
-         next_h='אסטרטגיות באופציות', next_t='משלבים אופציה עם הנכס, ואופציה עם אופציה: הגנה על תיק (Protective Put), הכנסה מפרמיה (Covered Call), צווארון (Collar), ומרווחים (Spreads). קריאה: Hull, פרק 12.')}[LESSON]
+         next_h='מנקודות לשקלים', next_t='מדד, נקודה ומכפיל, אופציה אירופאית ואמריקאית, מסך המסחר וסוגי הפקודות.'),
+ 3: dict(date='16.11.2026', h1=('מנקודות לשקלים:', 'מכפיל ומסך המסחר'), title='מנקודות לשקלים: מכפיל ומסך המסחר',
+         sub='מדד, נקודה ומכפיל, אירופאית ואמריקאית, מסך המסחר, סוגי הפקודות וסימולטור מסחר.', chip='סימולטור מסחר באופציות',
+         cover='מדד, נקודה ומכפיל, אירופאית ואמריקאית, מסך המסחר וסוגי הפקודות, עם דף נוסחאות מסכם ותרגול עצמי.',
+         next_h='מפגש תרגול', next_t='חזרה ממוקדת על מפגשים 1 עד 3, ואחריה תרגילים בלבד, באקסל, מרמה 1 עד רמת בחינה: חשיפה וחוזה אקדמה, ארבע הפוזיציות, מכפיל ומסך המסחר.'),
+ 4: dict(date='23.11.2026', draft=True, h1=('מפגש תרגול:', 'מחשיפה ועד מסך המסחר'), title='מפגש תרגול',
+         sub='חזרה ממוקדת על מפגשים 1 עד 3, ואחריה תרגילים בלבד, באקסל, מרמה 1 ועד רמת בחינה.', chip='רמות קושי 1 עד 4',
+         cover='חזרה ממוקדת על מפגשים 1 עד 3, ותרגילים באקסל ברמות קושי עולות, עם ״מה למדנו״ בסוף כל חלק.',
+         next_h='זירות המסחר וחוזה עתידי בפועל', next_t='בורסה, מסלקה ושוק מעבר לדלפק (OTC), עסקת החלפה (Swap), ביטחונות (Margin) וההתחשבנות היומית, ואיך נקבע מחיר החוזה העתידי. קריאה: Hull, פרקים 2 ו-5.')}[LESSON]
 SL = []            # every slide, in order
 CUR = [None]       # current part number
 NACT = [0]
@@ -267,7 +271,19 @@ def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hint
     NACT[0] += 1
     cfgd = dict(rows=rs, cols=cs, widths=widths, data={k: str(v) for k, v in data.items()}, targets=targets, solution=sol, headRows=head, inputs=[], hints=[TX(x) for x in (hints or ['קראו שוב את כותרת העמודה, וכתבו את החישוב במילים לפני הנוסחה.'])], remind=TX(remind or ''), partial=partial or targets[:1], values=values, done=TX(done))
     if not remind: cfgd.pop('remind')
+    if XINFO and rs >= 12: cfgd['zoom'] = 0.9
     # a walkthrough: one step per calculation, each with its cells, its explanation and what every referenced cell means
+    if steps and XINFO:
+        inf = {}
+        for st in steps:
+            for a, m in (st[2] if len(st) > 2 else []): inf.setdefault(a, TX(m))
+        for st in steps:
+            for a in (st[0] if isinstance(st[0], list) else [st[0]]):
+                col, row = a[0], int(a[1:])
+                hd = next((data.get(f'{col}{r}') for r in sorted(head, reverse=True) if r < row and isinstance(data.get(f'{col}{r}'), str)), None) if col != 'A' else None
+                lab = hd or data.get(f'A{row}') or 'תא לחישוב'
+                inf[a] = dict(w=TX(f'תא צהוב. כאן מחשבים: {lab}.'), h=TX(st[1]))
+        cfgd['info'] = inf
     if steps: cfgd['steps'] = [dict(cells=st[0] if isinstance(st[0], list) else [st[0]], text=TX(st[1]), items=[[a, TX(m)] for a, m in (st[2] if len(st) > 2 else [])]) for st in steps]
     # rates and prices with a fraction show two decimals, as they are written in the question (3.60, not 3.6)
     cfgd['fmt'] = {k: 'num2' for k, v in data.items() if isinstance(v, float) and abs(v) < 1000}
@@ -278,6 +294,9 @@ def XLS(sid, title, h, task, data, sol, widths, head, rows=None, cols=None, hint
         side = f'<svg class="xlc" viewBox="0 0 {chart.get("W", 470)} {chart.get("H", 330)}" role="img" aria-label="תרשים"></svg>'
     body = f'<div class="act xlq" id="{sid}-x" data-cfg="{_cfg(cfgd)}"><div class="tasktxt">{TX(task)}</div><div class="xlrow{"" if chart else " solo"}"><div class="sheet"></div><div class="xlside">{side}</div></div>{extra}</div>'
     S(sid, title, h, body, kick=kick or f'חלק {CUR[0]} · אקסל בתוך השקף')
+
+
+XINFO = LESSON >= 4
 
 
 def PCH(x, series, xt=None, yt=None, x0=None, x1=None, y0=-40, y1=40, xl='מחיר בפקיעה ($S_{T}$)'.replace('$', '').replace('_{T}', '_T'), yl='ש״ח'):
@@ -322,5 +341,5 @@ def RL(items, start=1):
 
 
 exec(R('content_g.py'))
-for _f in {1: ['content_b1.py', 'content_b1b.py', 'content_e1.py', 'content_e2.py'], 2: ['content_l2.py', 'content_b2a.py', 'content_x.py', 'content_d2.py'], 3: ['content_l3.py', 'content_x.py', 'content_b2b.py', 'content_c2.py', 'content_c0.py', 'content_c1.py', 'content_c3.py', 'content_d.py']}[LESSON]:
+for _f in {1: ['content_b1.py', 'content_b1b.py', 'content_e1.py', 'content_e2.py'], 2: ['content_l2.py', 'content_b2a.py', 'content_x.py', 'content_d2.py'], 3: ['content_h.py', 'content_l3.py', 'content_x.py', 'content_b2b.py', 'content_l3end.py'], 4: ['content_h.py', 'content_l4.py']}[LESSON]:
     exec(R(_f))

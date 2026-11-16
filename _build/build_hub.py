@@ -2,7 +2,7 @@
 import os, re
 H = os.path.dirname(os.path.abspath(__file__))
 n = lambda s: f'<span class="n">{s}</span>'
-UP = [(4, 'אסטרטגיות באופציות: הגנה והכנסה'), (5, 'אסטרטגיות רווח ומסחר'), (6, 'עקרונות בתמחור'), (7, 'אופציות אירופאיות ואמריקאיות: מימוש מוקדם וחסמים'), (8, 'גידור סיכוני ריבית ומטבע: עסקאות החלפה (Swap) לעומק'), (9, 'מכשירים מורכבים'), (10, 'ניהול סיכונים ארגוני'), (11, 'כשלים מפורסמים'), (12, 'השוק הישראלי וקריירה'), (13, 'סיכום לקראת המבחן')]
+UP = [(5, 'זירות המסחר וחוזה עתידי בפועל'), (6, 'השחקנים: מגדרים, ספקולנטים ומקרה בוחן'), (7, 'אסטרטגיות באופציות'), (8, 'עקרונות בתמחור'), (9, 'אופציות אירופאיות ואמריקאיות: מימוש מוקדם וחסמים'), (10, 'גידור סיכוני ריבית ומטבע: עסקאות החלפה (Swap) לעומק'), (11, 'מכשירים מורכבים וניהול סיכונים ארגוני'), (12, 'כשלים מפורסמים, השוק הישראלי וקריירה'), (13, 'סיכום לקראת המבחן')]
 ups = ''.join(f'<li><span class="un">{n(i)}</span><span>{t}</span><em>בקרוב</em></li>' for i, t in UP)
 src = open(os.path.join(H, '..', '..', 'finance-for-managers', 'index.html'), encoding='utf8').read()
 css = re.search(r'<style>(.*?)</style>', src, re.S).group(1)
@@ -54,6 +54,7 @@ css += '''
 .hw-t td{padding:6px 10px;border-bottom:1px solid #eadfc6;vertical-align:top}
 .hw-t td:nth-child(2){white-space:nowrap;font-weight:700;color:#a86703}
 @media (max-width:760px){.hw-t{font-size:13.5px}.hw-t td,.hw-t th{padding:5px 6px}}
+.lec-head h3 .draft{display:inline-block;background:#ffd37a;color:#4a2d00;font-size:.6em;font-weight:800;border-radius:8px;padding:2px 12px;vertical-align:middle;margin-inline-start:8px}
 .ups em{margin-right:auto;font-style:normal;color:var(--mut);font-size:14px;font-weight:500}
 @media (max-width:760px){.solutions{flex-direction:column;padding:20px 18px}.solutions .btn2{margin-right:0;width:100%}.todo{margin:0 18px 22px;padding:14px 16px}.ups li{padding:10px 14px}}
 '''
@@ -146,28 +147,61 @@ page = f'''<!doctype html>
 <tr><td>שאלות רב ברירה 1 עד 6</td><td>1 עד 2</td><td>חישובי רווח, נקודת איזון, הפסד ורווח מרביים</td></tr>
 <tr><td>קובץ התרגול: שלושה גיליונות</td><td>1 עד 3</td><td>Long Call עם תרשים, Put וחילוץ, ארבע פוזיציות</td></tr>
 </table>
-<p class="hw-how">קריאה: Hull, פרק {n(1)}, החלקים על אופציות. מה שלא הספקנו במפגש 2 (מכפיל, אירופאית ואמריקאית, עסקת החלפה והלאה) עבר למפגש 3, ואין בו שיעורי בית כרגע.</p>
+<p class="hw-how">קריאה: Hull, פרק {n(1)}, החלקים על אופציות. מה שלא הספקנו במפגש 2 (מכפיל, אירופאית ואמריקאית) עבר למפגש 3.</p>
 </div>
 </article>
 <article class="lec" id="lesson-3">
-<div class="lec-head"><div class="lec-n">3</div><div><h3>מכפיל, שחקנים ושווקים</h3><div class="sub">{n('16.11.2026')} · המשך משיעור {n(2)} · קריאה: Hull, פרקים {n(1)}, {n(2)} ו-{n(5)}</div></div></div>
+<div class="lec-head"><div class="lec-n">3</div><div><h3>מנקודות לשקלים: מכפיל ומסך המסחר</h3><div class="sub">{n('16.11.2026')} · המשך משיעור {n(2)} · קריאה: Hull, פרקים {n(1)} ו-{n(10)}</div></div></div>
 <div class="lec-body">
 <div><h4>מה לומדים בשיעור</h4><ul class="learn">
 <li>תזכורת ממפגש 2 בתרשימי זרימה, וחימום באקסל</li>
-<li>מנקודות לשקלים: מדד, מכפיל, ומסך המסחר של אופציות ת״א 35</li>
-<li>היכן זה נסחר: בורסה, מסלקה, שוק מעבר לדלפק (OTC) ועסקת החלפה (Swap)</li>
-<li>חוזה עתידי בפועל: ביטחונות (Margin), החשבון היומי, מחיר החוזה וארביטראז׳</li>
-<li>השחקנים: מספר חוזים לגידור, ומנוף (Leverage) בחוזה ובאופציה</li>
-<li>מקרה בוחן: גידור דלק בחברת תעופה, בחמישה תרגילי אקסל</li>
+<li>מדד, נקודה ומכפיל (Multiplier): מנקודות לשקלים, בחוזה עתידי ובאופציה</li>
+<li>אופציה אירופאית ואמריקאית: מתי ניתן לממש, וערך זמן</li>
+<li>מסך המסחר של אופציות ת״א 35: ביקוש והיצע (Bid, Ask), ופקודות LMT, FOK ו-IOC</li>
+<li>סימולטור מסחר: קונים, כותבים, מזיזים את המדד ורואים את הרווח וההפסד</li>
+<li>דף נוסחאות מסכם של מפגשים 1 עד 3, ותרגול עצמי</li>
 </ul><div class="rec" id="recording-3"><h4>🎥 הקלטת השיעור · {n('16.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה בעיבוד</b>ותועלה בהמשך</div></div></div></div></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-3/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(78)} שקפים, {n(24)} גיליונות Excel חיים עם פתרון שלב אחר שלב, סימולטור מסחר וכתבות מהעיתונות</span></span></a>
+<a class="lk p" href="lectures/lecture-3/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(33)} שקפים, {n(10)} גיליונות Excel חיים עם פתרון שלב אחר שלב, סימולטור מסחר, כתבות מהעיתונות ודף נוסחאות לחיץ</span></span></a>
 <a class="lk s" href="lectures/lecture-3/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
-<a class="lk x" href="materials/practice-3.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(4)} גיליונות. ממלאים נוסחאות בתאים הצהובים</span></span></a>
-<a class="lk r" href="materials/practice-3-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ותרשימים. פותחים רק אחרי שפותרים</span></span></a>
+<a class="lk x" href="materials/practice-3.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול עצמי (Excel)</b><span class="d">{n(6)} גיליונות, על כל נושאי השיעור: נקודות לשקלים, Call ו-Put על מדד, ערך זמן, ספר פקודות ומרווח</span></span></a>
+<a class="lk r" href="materials/practice-3-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות, תרשימים ו״מה למדנו״ בכל גיליון. פותחים רק אחרי שפותרים</span></span></a>
 </div></div>
 </div>
+<div class="todo hw"><h4>📝 תרגול עצמי לשיעור {n(3)}</h4>
+<p class="hw-how">התרגילים נמצאים בסוף מצגת שיעור 3, בחלק ״תרגול עצמי״, ואפשר לפתור אותם בתוך השקפים. לחיצה על תא בגיליון מסבירה מה הוא מייצג.</p>
+<table class="hw-t"><tr><th>מה</th><th>רמה</th><th>מה מתרגלים</th></tr>
+<tr><td>שלוש שאלות רב ברירה</td><td>1 עד 2</td><td>מכפיל, אופציה אירופאית, פקודת FOK</td></tr>
+<tr><td>תרגול 1: Call על מדד</td><td>1</td><td>תזרים ורווח בנקודות, ורווח בשקלים</td></tr>
+<tr><td>תרגול 2: Put על מדד</td><td>2</td><td>נקודת איזון, ורווח בשקלים לחמש אופציות</td></tr>
+<tr><td>תרגול 3: לממש או למכור</td><td>2</td><td>ערך זמן באופציה אמריקאית</td></tr>
+<tr><td>תרגול 4: פקודה בכמה רמות מחיר</td><td>3</td><td>כמה מתבצע בכל מחיר, עלות ומחיר ממוצע</td></tr>
+<tr><td>סימולטור המסחר</td><td>התנסות</td><td>שמונה משימות שנבדקות אוטומטית</td></tr>
+<tr><td>קובץ התרגול: שישה גיליונות</td><td>1 עד 3</td><td>כל נושאי השיעור, עם קובץ פתרונות נפרד</td></tr>
+</table>
+<p class="hw-how">מה שלא הספקנו במפגש 3 (זירות המסחר, עסקת החלפה, חוזה עתידי בפועל, השחקנים ומקרה הבוחן) עבר למפגשים 5 ו-6, אחרי מפגש התרגול.</p>
+</div>
+</article>
+<article class="lec" id="lesson-4">
+<div class="lec-head"><div class="lec-n">4</div><div><h3>מפגש תרגול: מחשיפה ועד מסך המסחר <span class="draft">טיוטה</span></h3><div class="sub">{n('23.11.2026')} · תרגילים בלבד, על מפגשים {n(1)} עד {n(3)} · המערך עשוי להתעדכן עד המפגש</div></div></div>
+<div class="lec-body">
+<div><h4>מה עושים בשיעור</h4><ul class="learn">
+<li>חזרה ממוקדת: שלושה מפגשים בשלוש שורות, דף נוסחאות לחיץ ושיטת עבודה</li>
+<li>חשיפה וחוזה אקדמה (Forward): חשיפה נטו, יבואן מגדר, ושיעור הגידור</li>
+<li>קונה אופציה וכותב אופציה: ארבע הפוזיציות, נקודת איזון וסכום אפס</li>
+<li>מנקודות לשקלים, ומסך המסחר: מכפיל, ערך זמן, ופקודה בכמה רמות מחיר</li>
+<li>שלוש שאלות ברמת בחינה, שמשלבות כמה נושאים</li>
+<li>״מה למדנו״ בסוף כל חלק, וסיכום של חמש הטעויות הנפוצות</li>
+</ul></div>
+<div><h4>חומרי השיעור</h4><div class="links">
+<a class="lk p" href="lectures/lecture-4/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור (טיוטה)</b><span class="d">{n(46)} שקפים, {n(19)} גיליונות Excel חיים ברמות 1 עד 4, עם הסבר בלחיצה על כל תא ופתרון שלב אחר שלב, ו-{n(9)} שאלות רב ברירה</span></span></a>
+<a class="lk s" href="lectures/lecture-4/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF, טיוטה)</b><span class="d">החזרה הממוקדת, דף הנוסחאות, וכל התרגילים עם הפתרונות</span></span></a>
+<a class="lk x" href="materials/practice-4.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(10)} גיליונות, מרמה 1 עד רמה 4, על כל הנושאים של מפגשים 1 עד 3</span></span></a>
+<a class="lk r" href="materials/practice-4-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ו״מה למדנו״ בכל גיליון. פותחים רק אחרי שפותרים</span></span></a>
+<a class="lk x" href="materials/exam-practice-4.xlsx" download><span class="e">🎯</span><span><b>שאלות ברמת בחינה (Excel)</b><span class="d">{n(5)} שאלות משולבות, כ-{n(100)} דקות. פותרים עם שעון</span></span></a>
+<a class="lk r" href="materials/exam-practice-4-solutions.xlsx" download><span class="e">✅</span><span><b>פתרונות לשאלות ברמת בחינה (Excel)</b><span class="d">פותחים רק אחרי שפותרים את כל השאלה</span></span></a>
 </div></div>
+</div>
 </article>
 <h2 class="sec" style="margin-top:36px">השיעורים הבאים</h2>
 <ul class="ups">{ups}</ul>

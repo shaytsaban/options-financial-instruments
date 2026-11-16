@@ -155,10 +155,10 @@ function mount(host,cfg){
   <div class="xl-top"><div class="xl-name" title="תיבת השם">A1</div><span class="xl-xv"><button data-x="cancel" title="ביטול (Esc)">✕</button><button data-x="enter" title="הזנה (Enter)">✓</button></span><div class="xl-fx">fx</div><div class="xl-barw"><div class="xl-lay"></div><input class="xl-bar" dir="ltr" spellcheck="false" autocomplete="off"></div></div>
   <div class="xl-wrap"><table class="xl-g" tabindex="0"></table></div>
   <div class="xl-foot"><span class="xl-sheet">גיליון1</span><span class="xl-plus">+</span><span class="xl-stat">מוכן</span><span class="xl-zoom" dir="ltr"><button data-x="zout" title="הקטנת התצוגה">−</button><input class="xl-zr" type="range" min="70" max="160" step="10" value="100" aria-label="מרחק מתצוגה" title="מרחק מתצוגה"><button data-x="zin" title="הגדלת התצוגה">+</button><span class="xl-zv">100%</span></span></div>
-  <div class="xl-menu" hidden></div><div class="xl-pop" hidden></div>
+  ${cfg.info?'<div class="xl-inf"></div>':''}<div class="xl-menu" hidden></div><div class="xl-pop" hidden></div>
   ${pr}${cfg.steps&&cfg.steps.length?'<div class="xl-stp" hidden></div>':''}${cfg.targets?'<div class="xl-fb"></div>':''}`;
  const $h=s=>host.querySelector(s);
- const g=$h('.xl-g'),bar=$h('.xl-bar'),barLay=$h('.xl-lay'),nameB=$h('.xl-name'),msg=$h('.xl-msg'),fb=$h('.xl-fb'),stat=$h('.xl-stat'),menu=$h('.xl-menu'),pop=$h('.xl-pop'),stpEl=$h('.xl-stp'),sizeSel=$h('.xl-size'),numf=$h('.xl-numf'),zr=$h('.xl-zr'),zv=$h('.xl-zv');
+ const g=$h('.xl-g'),bar=$h('.xl-bar'),barLay=$h('.xl-lay'),nameB=$h('.xl-name'),msg=$h('.xl-msg'),fb=$h('.xl-fb'),stat=$h('.xl-stat'),menu=$h('.xl-menu'),pop=$h('.xl-pop'),stpEl=$h('.xl-stp'),infEl=$h('.xl-inf'),sizeSel=$h('.xl-size'),numf=$h('.xl-numf'),zr=$h('.xl-zr'),zv=$h('.xl-zv');
  const changed=()=>{if(cfg.onChange)cfg.onChange();};
  let chs=[],rhs=[],Z=1;
  const grid=()=>{g.innerHTML=`<thead><tr><th class="xl-c0" title="בחירת הכול (Ctrl+A)"></th>${Array.from({length:C},(_,c)=>`<th class="xl-ch" data-c="${c}" style="width:${Math.round((W[c]||84)*Z)}px">${colName(c)}</th>`).join('')}</tr></thead><tbody>${Array.from({length:R},(_,r)=>`<tr><th class="xl-rn" data-r="${r}">${r+1}</th>${Array.from({length:C},(_,c)=>`<td data-a="${addr(r,c)}"></td>`).join('')}</tr>`).join('')}</tbody>`;chs=[...g.querySelectorAll('th.xl-ch')];rhs=[...g.querySelectorAll('th.xl-rn')];};grid();
@@ -202,7 +202,11 @@ function mount(host,cfg){
  function status(){if(editing){stat.textContent=editing.mode==='edit'?'עריכה':'הזנה';return;}
   const nums=[];let cnt=0;eachSel(a=>{const v=S.val[a];if(v!=null&&v!=='')cnt++;if(typeof v==='number')nums.push(v);});
   if(cnt>1){const s=nums.reduce((x,y)=>x+y,0);stat.innerHTML=nums.length?`ממוצע: <span dir="ltr">${fmtStat(s/nums.length)}</span>&emsp;ספירה: <span dir="ltr">${cnt}</span>&emsp;סכום: <span dir="ltr">${fmtStat(s)}</span>`:`ספירה: <span dir="ltr">${cnt}</span>`;}
-  else stat.textContent='מוכן';}
+  else stat.textContent='מוכן';info();}
+ /* what the active cell stands for, and on request how it is computed */
+ function info(){if(!infEl)return;const a=addr(sel.r,sel.c),t=cfg.info[a];
+  if(!t){infEl.innerHTML='<b>💬 לחצו על תא</b> כדי לראות מה הוא מייצג, ואיך מחשבים אותו.';return;}
+  infEl.innerHTML=`<b dir="ltr">${a}</b> `+(typeof t==='string'?t:`${t.w} <button data-x="how">איך מחשבים?</button><span class="how" hidden>${t.h}</span>`);}
  const hasSide=(r,c,s)=>{const t=S.st[addr(r,c)];return !!(t&&t.bd&&t.bd.includes(s));};
  /* per-cell look: bold, italic, underline, size, alignment, fill, font color, borders */
  function cellCss(a,p){const s=S.st[a];let css='';
@@ -393,6 +397,7 @@ function mount(host,cfg){
   if(cfg.solution)cfg.solution=mapObj(cfg.solution,re);if(cfg.solFmt)cfg.solFmt=mapObj(cfg.solFmt);if(cfg.need&&typeof cfg.need==='object')cfg.need=mapObj(cfg.need);
   if(kind==='row'&&Array.isArray(cfg.headRows))cfg.headRows=cfg.headRows.map(r=>{const v=remapIdx(r-1,at,n);return v==null?null:v+1;}).filter(v=>v!=null);
   if(cfg.chart){const ch=JSON.parse(JSON.stringify(cfg.chart));const mr=p=>{if(!Array.isArray(p))return p;const f=mapCells(p[0]+':'+p[1],mapA,re);return f?f.split(':'):p;};ch.x=mr(ch.x);(ch.series||[]).forEach(s=>{s.y=mr(s.y);});cfg.chart=ch;}
+  if(cfg.info)cfg.info=mapObj(cfg.info);
   if(cfg.steps)cfg.steps=cfg.steps.map(st=>({...st,cells:mapCells(st.cells,mapA,re),items:(st.items||[]).map(([a,m])=>[mapA(a)||a,m]),...(st.formula?{formula:typeof st.formula==='object'?mapObj(st.formula,re):re(st.formula)}:{})}));
   if(n>0){if(kind==='row')setRC(R+n,C);else{W.splice(at,0,...Array(n).fill(W[at]||84));setRC(R,C+n);}}
   else if(kind==='col')W.splice(at,-n);
@@ -511,6 +516,7 @@ function mount(host,cfg){
   if(x==='sum'){if(editing)commit(0,0);autoSum();}
   if(x==='formulas')toggleF();
   if(x==='steps')openSteps();
+  if(x==='how'&&infEl){const h=infEl.querySelector('.how');if(h)h.hidden=!h.hidden;return;}
   if(x==='hint'&&fb){const i=hintN%cfg.hints.length;hintN++;fb.innerHTML=`<div class="xl-tip"><b>רמז ${i+1} מתוך ${cfg.hints.length}:</b> ${cfg.hints[i]}</div>`;}
   if(x==='remind'&&fb){fb.innerHTML=`<div class="xl-tip">${cfg.remind}</div>`;}
   if(x==='part'){push();cfg.partial.forEach(a=>{S.set(a,cfg.solution[a]);});render();if(fb)fb.innerHTML='<div class="xl-tip">השורה הראשונה מולאה. המשיכו מכאן: גררו את ידית המילוי או כתבו לבד. התחרטתם? Ctrl+Z.</div>';changed();}
