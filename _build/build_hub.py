@@ -160,7 +160,7 @@ page = f'''<!doctype html>
 <li>מסך המסחר של אופציות ת״א 35: ביקוש והיצע (Bid, Ask), ופקודות LMT, FOK ו-IOC</li>
 <li>סימולטור מסחר: קונים, כותבים, מזיזים את המדד ורואים את הרווח וההפסד</li>
 <li>דף נוסחאות מסכם של מפגשים 1 עד 3, ותרגול עצמי</li>
-</ul><div class="rec" id="recording-3"><h4>🎥 הקלטת השיעור · {n('16.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה בעיבוד</b>ותועלה בהמשך</div></div></div></div></div>
+</ul><div class="rec" id="recording-3"><h4>🎥 הקלטת השיעור · {n('16.11.2026')}</h4><div class="recbox"><iframe src="https://www.youtube.com/embed/FMhv7-Kr_OA" title="הקלטת שיעור 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="yt" href="https://youtu.be/FMhv7-Kr_OA" target="_blank" rel="noopener">לצפייה ב-YouTube</a></div></div>
 <div><h4>חומרי השיעור</h4><div class="links">
 <a class="lk p" href="lectures/lecture-3/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(33)} שקפים, {n(10)} גיליונות Excel חיים עם פתרון שלב אחר שלב, סימולטור מסחר, כתבות מהעיתונות ודף נוסחאות לחיץ</span></span></a>
 <a class="lk s" href="lectures/lecture-3/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">כל תוכן המצגת: הגדרות, פתרונות התרגילים ומילון מושגים</span></span></a>
