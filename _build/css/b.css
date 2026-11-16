@@ -38,7 +38,11 @@
 #s-euro .b-r2>.b-tv{flex:1 1 0}
 #s-euro .b-ok{color:#1a7f4b}
 #s-euro .b-no{color:#c4221f}
-#s-euro .b-tt td{padding:6px 10px}
+#s-euro .b-tt td{padding:4px 10px}
+#s-euro .b-geo{margin-top:8px;font-size:16.5px;line-height:1.3;padding:4px 14px;background:#eef3fb;border-inline-start:4px solid #1b2a52;border-radius:8px}
+#s-euro .qstem p{font-size:19px;line-height:1.3}
+#s-euro .b-r1,#s-euro .b-r2{margin-top:8px}
+#s-euro .b-r1 .card{padding:6px 14px}
 
 /* s-swap and s-swap2: a payment diagram with arrows */
 :is(#s-swap,#s-swap2) .b-fl{display:flex;align-items:center;gap:14px}
@@ -127,3 +131,7 @@
 #s-swap2 .b-rl .sp{font-size:17.5px;line-height:1.36}
 #s-compare .tbl2 td,#s-compare .tbl2 th{padding-top:7px;padding-bottom:7px}
 #s-pts .b-ff>div{font-size:15.6px;line-height:1.34;padding:6px 12px}#s-pts .b-ffc{padding:9px 16px;margin-top:9px}
+
+#s-euro .b-tt td{font-size:17px}
+#s-euro .b-r2>.b-allow{flex:1.5 1 0}
+#s-euro>.band{font-size:18.5px;padding:6px 16px;margin-top:8px}
