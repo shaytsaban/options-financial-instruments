@@ -30,7 +30,7 @@ HOWTO = ('select', 'rec', 'pick', 'selser', 'del')
 # ---------------------------------------------------------------- the source: content_l4.py
 def load_content():
     """Run content_l4.py with stand-ins for the deck helpers, and keep what EX and THEORY were called with."""
-    tree = ast.parse(open(os.path.join(H, 'content_l4.py'), encoding='utf-8').read())
+    tree = ast.parse('\n'.join(open(os.path.join(H, f), encoding='utf-8').read() for f in ('content_x4.py', 'content_l4.py', 'content_l5.py')))
     tree.body = [n for n in tree.body if not (isinstance(n, ast.FunctionDef) and n.name in ('QC', 'EX', 'THEORY', 'ANIM', 'MINI'))]
     exs, ths = {}, {}
 
@@ -53,7 +53,7 @@ def load_content():
     ns = NS(QC=QC, EX=EX, THEORY=THEORY, TX=lambda x: x, F=lambda x: x, MODE='deck', SL=[], CUR=[0], NACT=[0], re=re,
             ANIM=lambda *a, **k: {}, MINI=lambda *a, **k: None)
     exec(compile(tree, 'content_l4.py', 'exec'), ns)
-    return exs, ths, ns['_NEWS'], {n: t for n, t, *_ in ns['ROUTE4']}
+    return exs, ths, ns['_NEWS'], {1: 'יישום בסיסי', 2: 'חישובים וחילוצים', 3: 'הכותב', 4: 'כמה אופציות יחד', 5: 'נתונים חיים'}
 
 
 def clean(t):
@@ -121,21 +121,29 @@ SELF = [
     dict(name='נסו לבד 1', exs=['x1'], ops=one_option('x1', 14)),
     dict(name='נסו לבד 2', exs=['x2'], ops=[D('x2', [2, 3, 4, 5]), KV('x2', col('B', 8, 14), head='A7')]),
     dict(name='נסו לבד 3', exs=['x3'], ops=one_option('x3', 14)),
-    dict(name='נסו לבד 4', exs=['x4'], ops=[D('x4', [2, 3, 4, 5, 6]), T('x4', 'ABCD', 8, 9, 15, chart=['D'], title=T_TOTAL), KV('x4', side('x4', 'E'), head='D1')]),
     dict(name='תרגול 1', exs=['hp1'], ops=one_option('hp1', 12)),
     dict(name='תרגול 2', exs=['hp2'], ops=[D('hp2', [2, 3]), KV('hp2', col('B', 6, 11), head='A5')]),
     dict(name='תרגול 3', exs=['hp3'], ops=[D('hp3', [2, 3, 4, 5]), KV('hp3', col('B', 8, 14), head='A7')]),
     dict(name='תרגול 4', exs=['hp4'], ops=[D('hp4', [2, 3]), T('hp4', 'ABC', 5, 6, 13, chart=['B', 'C'], title=T_BOTH, more='רווח מרבי של הכותב: 4'), KV('hp4', side('hp4', 'F'), head='E1'), W('hp4', 3)]),
-    dict(name='תרגול 5', exs=['hp5'], ops=[D('hp5', [2, 3, 4]), T('hp5', 'ABCD', 6, 7, 15, chart=['D'], title=T_TOTAL), KV('hp5', side('hp5', 'E'), head='D1')]),
-    dict(name='תרגול 6', exs=['hp6'], ops=[D('hp6', [2, 3, 4, 5, 6]), KV('hp6', side('hp6', 'E'), head='D1'), T('hp6', 'ABCD', 8, 9, 11), W('hp6', 3)]),
+    dict(name='תרגול 5', exs=['hp7'], ops=[D('hp7', [2, 3]), SUB('סעיף א'), T('hp7', 'ABC', 5, 6, 7, over={'A5': 'תרחיש'}), SUB('סעיף ב'), T('hp7', 'EF', 5, 6, 12, chart=['F']), KV('hp7', ['B10', 'B11', 'B12'], head='A9'), W('hp7', 3)]),
+    dict(name='תרגול 6', exs=['hp8'], ops=[D('hp8', [2, 3, 4, 5]), KV('hp8', col('B', 8, 14), head='A7')]),
+]
+SELF5 = [
+    dict(name='נסו לבד', exs=['x4'], ops=[D('x4', [2, 3, 4, 5, 6]), T('x4', 'ABCD', 8, 9, 15, chart=['D'], title=T_TOTAL), KV('x4', side('x4', 'E'), head='D1')]),
+    dict(name='תרגול 1', exs=['hp5'], ops=[D('hp5', [2, 3, 4]), T('hp5', 'ABCD', 6, 7, 15, chart=['D'], title=T_TOTAL), KV('hp5', side('hp5', 'E'), head='D1')]),
+    dict(name='תרגול 2', exs=['hp6'], ops=[D('hp6', [2, 3, 4, 5, 6]), KV('hp6', side('hp6', 'E'), head='D1'), T('hp6', 'ABCD', 8, 9, 11), W('hp6', 3)]),
 ]
 for _s in CLASS: _s['title'] = f"{_s['name']}: {ROUTE[_s['part']]}"
-for _s in SELF: _s['title'] = EXS[_s['exs'][0]]['title']
-BOOKS = [dict(pr='exam-review-4.xlsx', so='exam-review-4-solutions.xlsx', sheets=CLASS, what=('קובץ השאלות של המפגש', 'פתרונות לשאלות המפגש')),
-         dict(pr='self-practice-4.xlsx', so='self-practice-4-solutions.xlsx', sheets=SELF, what=('קובץ התרגול העצמי', 'פתרונות לתרגול העצמי'))]
+for _s in SELF + SELF5: _s['title'] = EXS[_s['exs'][0]]['title']
+BOOKS = [dict(n=4, pr='exam-review-4.xlsx', so='exam-review-4-solutions.xlsx', sheets=CLASS[:3], what=('קובץ השאלות של המפגש', 'פתרונות לשאלות המפגש')),
+         dict(n=4, pr='self-practice-4.xlsx', so='self-practice-4-solutions.xlsx', sheets=SELF, what=('קובץ התרגול העצמי', 'פתרונות לתרגול העצמי')),
+         dict(n=5, pr='exam-review-5.xlsx', so='exam-review-5-solutions.xlsx', sheets=CLASS[3:], what=('קובץ השאלות של המפגש', 'פתרונות לשאלות המפגש')),
+         dict(n=5, pr='self-practice-5.xlsx', so='self-practice-5-solutions.xlsx', sheets=SELF5, what=('קובץ התרגול העצמי', 'פתרונות לתרגול העצמי'))]
 
 # key answers, typed by hand from the stories: (sheet, source question, source cell) -> value
 KEY = {
+    ('תרגול 5', 'hp7', 'C6'): -6.5, ('תרגול 5', 'hp7', 'C7'): 3.5, ('תרגול 5', 'hp7', 'B10'): 56.5, ('תרגול 5', 'hp7', 'B11'): 3.5, ('תרגול 5', 'hp7', 'B12'): -56.5, ('תרגול 5', 'hp7', 'F6'): -11.5,
+    ('תרגול 6', 'hp8', 'B8'): 3.94, ('תרגול 6', 'hp8', 'B10'): 10800, ('תרגול 6', 'hp8', 'B12'): 0.25, ('תרגול 6', 'hp8', 'B13'): 3.69, ('תרגול 6', 'hp8', 'B14'): -7200,
     ('שאלה 1', 'd1a', 'D6'): 11, ('שאלה 1', 'd1a', 'D7'): -4, ('שאלה 1', 'd1c', 'B6'): 81, ('שאלה 1', 'd1c', 'B7'): -4, ('שאלה 1', 'd1c', 'B10'): 81, ('שאלה 1', 'd1b', 'B6'): 16, ('שאלה 1', 'd1b', 'B14'): -4,
     ('שאלה 2', 'd2a', 'B7'): 5, ('שאלה 2', 'd2a', 'B11'): 75, ('שאלה 2', 'd2a', 'B12'): 63, ('שאלה 2', 'd2a', 'B13'): -3,
     ('שאלה 2', 'd2b', 'B8'): 2470, ('שאלה 2', 'd2b', 'B10'): 150, ('שאלה 2', 'd2b', 'B11'): 2320, ('שאלה 2', 'd2b', 'B12'): -9000,
@@ -147,14 +155,14 @@ KEY = {
     ('נסו לבד 1', 'x1', 'C6'): 9, ('נסו לבד 1', 'x1', 'C7'): -6, ('נסו לבד 1', 'x1', 'B10'): 131, ('נסו לבד 1', 'x1', 'B11'): -6,
     ('נסו לבד 2', 'x2', 'B8'): 3.65, ('נסו לבד 2', 'x2', 'B10'): 5600, ('נסו לבד 2', 'x2', 'B12'): 0.25, ('נסו לבד 2', 'x2', 'B13'): 3.90, ('נסו לבד 2', 'x2', 'B14'): -4000,
     ('נסו לבד 3', 'x3', 'C6'): -7, ('נסו לבד 3', 'x3', 'C7'): 3, ('נסו לבד 3', 'x3', 'B10'): 53, ('נסו לבד 3', 'x3', 'B11'): 3,
-    ('נסו לבד 4', 'x4', 'E2'): 87.5, ('נסו לבד 4', 'x4', 'E3'): 113.75, ('נסו לבד 4', 'x4', 'E4'): -7.5, ('נסו לבד 4', 'x4', 'B9'): 21.5,
+    ('נסו לבד', 'x4', 'E2'): 87.5, ('נסו לבד', 'x4', 'E3'): 113.75, ('נסו לבד', 'x4', 'E4'): -7.5, ('נסו לבד', 'x4', 'B9'): 21.5,
     ('תרגול 1', 'hp1', 'C6'): 6, ('תרגול 1', 'hp1', 'C7'): -2, ('תרגול 1', 'hp1', 'B10'): 44, ('תרגול 1', 'hp1', 'B11'): -2,
     ('תרגול 2', 'hp2', 'B7'): 5, ('תרגול 2', 'hp2', 'B9'): 56, ('תרגול 2', 'hp2', 'B10'): 66, ('תרגול 2', 'hp2', 'B11'): 66,
     ('תרגול 3', 'hp3', 'B8'): 2425, ('תרגול 3', 'hp3', 'B10'): 7000, ('תרגול 3', 'hp3', 'B12'): 150, ('תרגול 3', 'hp3', 'B13'): 2575, ('תרגול 3', 'hp3', 'B14'): -5000,
     ('תרגול 4', 'hp4', 'F2'): 84, ('תרגול 4', 'hp4', 'F3'): 4, ('תרגול 4', 'hp4', 'B13'): 16, ('תרגול 4', 'hp4', 'C13'): -16,
-    ('תרגול 5', 'hp5', 'E2'): 91, ('תרגול 5', 'hp5', 'E3'): 109, ('תרגול 5', 'hp5', 'E4'): -9, ('תרגול 5', 'hp5', 'D7'): 11,
-    ('תרגול 6', 'hp6', 'E2'): 30, ('תרגול 6', 'hp6', 'E3'): 18000, ('תרגול 6', 'hp6', 'E4'): 3.94, ('תרגול 6', 'hp6', 'D9'): 1182000, ('תרגול 6', 'hp6', 'C9'): 1197000, ('תרגול 6', 'hp6', 'D11'): 1242000,
-    ('תרגול 6', 'hp6', 'B9'): 1140000, ('תרגול 6', 'hp6', 'B11'): 1260000,
+    ('תרגול 1', 'hp5', 'E2'): 91, ('תרגול 1', 'hp5', 'E3'): 109, ('תרגול 1', 'hp5', 'E4'): -9, ('תרגול 1', 'hp5', 'D7'): 11,
+    ('תרגול 2', 'hp6', 'E2'): 30, ('תרגול 2', 'hp6', 'E3'): 18000, ('תרגול 2', 'hp6', 'E4'): 3.94, ('תרגול 2', 'hp6', 'D9'): 1182000, ('תרגול 2', 'hp6', 'C9'): 1197000, ('תרגול 2', 'hp6', 'D11'): 1242000,
+    ('תרגול 2', 'hp6', 'B9'): 1140000, ('תרגול 2', 'hp6', 'B11'): 1260000,
 }
 
 
@@ -441,7 +449,7 @@ def first_sheet(wb, book, solved):
             'קו עודף בתרשים: לוחצים עליו פעם אחת, ומקישים Delete.']
     body += (['בקובץ הזה: הנוסחאות בתאים הצהובים, התרשימים, והסבר קצר לכל שלב.', 'השוו לקובץ שלכם רק אחרי שפתרתם, נוסחה מול נוסחה (Ctrl+`).'] if solved
              else ['משווים לקובץ הפתרונות רק אחרי שסיימתם את כל השאלה.'])
-    lines = ['אופציות ומכשירים פיננסיים, מפגש 4, חזרה ברמת בחינה: ' + book['what'][solved], SUBLINE, ''] + body + [NOTE, '', 'השאלות:'] + [s['title'] if s['title'].startswith(s['name']) else f"{s['name']}: {s['title'].split(': ', 1)[-1]}" for s in book['sheets']]
+    lines = [f'אופציות ומכשירים פיננסיים, מפגש {book["n"]}, חזרה ברמת בחינה: ' + book['what'][solved], SUBLINE, ''] + body + [NOTE, '', 'השאלות:'] + [s['title'] if s['title'].startswith(s['name']) else f"{s['name']}: {s['title'].split(': ', 1)[-1]}" for s in book['sheets']]
     for i, t in enumerate(lines, 1):
         c = w.cell(i, 1, t); c.alignment = Alignment(horizontal='right', vertical='center', wrap_text=True, readingOrder=2)
         c.font = fnt(16 if i == 1 else 12, i == 1 or t == 'השאלות:', NAVY if i == 1 or t == 'השאלות:' else '16213A'); w.row_dimensions[i].height = 30 if i == 1 else RH * lines_of(t, 115)
@@ -511,7 +519,7 @@ def main():
                         assert ok, (nm, ex, src, v, k)
                 leftover = [(ex, i, s['text'][:40]) for ex in lay.sp['exs'] for i, s in enumerate(EXS[ex]['steps']) if (ex, i) not in lay.used and s['ex'].get('ch') not in HOWTO + ('mark',)]
                 if leftover and verbose: print('   step texts not used in', nm, leftover)
-            missing = [k for k in KEY if k[0] in names and not any(l.sp['name'] == k[0] and (k[1], k[2]) in [(e, s) for _, e, s in l.answers] for l in lays)]
+            missing = [k for k in KEY if any(sh['name'] == k[0] and k[1] in sh['exs'] for sh in book['sheets']) and not any(l.sp['name'] == k[0] and (k[1], k[2]) in [(e, s) for _, e, s in l.answers] for l in lays)]
             assert not missing, missing
             want = [sum(1 for o in s['ops'] if o['op'] in ('T', 'KV') and o['chart']) for s in book['sheets']]
             got = [len(FM[n]._charts) for n in names]
@@ -524,7 +532,7 @@ def main():
             assert not leak, leak
             print(book['so'], '| sheets', FM.sheetnames, '| formulas checked', nform, '| key answers', nkey, '| charts per sheet', got, '| rtl True | line charts only', lines_only)
             print('  ', book['pr'], ship(npr, os.path.join(OUT, book['pr'])), '|', book['so'], ship(rec, os.path.join(OUT, book['so'])))
-        assert all(any(k[0] == s['name'] for b in BOOKS for s in b['sheets']) for k in KEY)
+        assert all(any(k[0] == s['name'] and k[1] in s['exs'] for b in BOOKS for s in b['sheets']) for k in KEY)
     finally:
         shutil.rmtree(d, True)
 

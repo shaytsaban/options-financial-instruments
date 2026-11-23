@@ -91,3 +91,11 @@ Status: [ ] open, [x] done and verified on screen, [~] done, not yet verified.
 - [x] Lesson 3 recording embedded (FMhv7-Kr_OA)
 - [~] Workbooks in exam format (exam-review-4, self-practice-4, each with solutions): see the commit; recalculated in LibreOffice, not opened in Excel
 - [~] Multiplier: the deck states it in every question (TA-35: 50, dollar and euro: 10,000). His 2026B exam instructions say 100 for index options: he should decide which to print in the next exam
+
+## 2026-11-23, after class: lesson 4 stopped at slide 24
+- [x] Lesson 4 cut at slide 24 (end of part 3); slides 1 to 24 unchanged except the route slide, which now lists three parts
+- [x] Self practice inside the deck, after the last slide, only on parts 1 to 3: six interactive questions (two new: a Short Put, a Put on the euro)
+- [x] Excel files for that practice: self-practice-4 (nine sheets) and exam-review-4 (three class questions), each with solutions
+- [x] Summary PDF of lesson 4 rebuilt for the cut deck
+- [x] The rest (several options together, live data, "before you submit") moved to lesson 5: content_l5.py, marked "טיוטה משוערת", with its own workbooks and summary
+- [~] Syllabus: meeting 5 = rest of the review + trading venues; meeting 6 = futures in practice + players. My re-pace, for him to confirm
