@@ -1,6 +1,7 @@
 # Practice workbook and separate solutions workbook, from one spec. Run: python3 build_xlsx.py
 # practice: yellow cells are empty. solutions: the same cells hold live formulas, recalculated and checked with LibreOffice.
-# Books: 1, 2 (lessons 1-2, frozen), 3 (lesson 3 as taught), 4 (exercise session on lessons 1-3), 'exam' (exam-level questions).
+# Books: 1, 2 (lessons 1-2, frozen), 3 (lesson 3 as taught). Lesson 4 was rebuilt as an exam-level review: its workbooks come from build_xlsx4.py,
+# and the old books 4 and 'exam' below are parked (never built).
 # A finished file is replaced only when its content changed, so untouched books keep their bytes.
 import os, re, shutil, subprocess, sys, tempfile
 from openpyxl import Workbook, load_workbook
@@ -685,6 +686,7 @@ def ship(new, dst):
 CHK[1].update({('1 חשיפה', 'C14'): 50000, ('2 חשיפה נטו', 'E9'): 80000, ('2 חשיפה נטו', 'F10'): 'עלייה בדולר', ('2 חשיפה נטו', 'F11'): 'אף כיוון', ('3 חוזה אקדמה', 'D9'): -20000, ('3 חוזה אקדמה', 'F17'): 0,
                ('4 יבואן מגדר', 'D13'): 2760000, ('5 יצואן מגדר', 'D9'): 1065000, ('5 יצואן מגדר', 'D13'): 1065000, ('6 גידור עודף', 'D10'): 405000, ('6 גידור עודף', 'F14'): 45000})
 CHK[2].update({('1 Long Call', 'C17'): 16, ('1 Long Call', 'F5'): 109, ('2 Put וחילוץ', 'B10'): 5, ('2 Put וחילוץ', 'B12'): 56, ('3 ארבע פוזיציות', 'E10'): -24})
+for _old in (4, 'exam'): BOOKS.pop(_old)   # parked: practice-4 and exam-practice-4 are replaced by the files of build_xlsx4.py
 VERBOSE = '-q' not in sys.argv
 os.makedirs(OUT, exist_ok=True)
 d = tempfile.mkdtemp(dir=os.environ.get('TMPDIR'))
