@@ -14,3 +14,4 @@ Lesson 4 is an exercise session on lessons 1 to 3 (content_l4.py, draft).
 
 The _STOPS and ROUTE texts for old parts 2 to 5 are still in content_l3.py (_STOPS) for reuse.
 To rebuild a parked part: add a lesson entry in content_a.py (LMETA, TOTAL_PARTS, file list) and in build_deck.py (CSS_OF: c, d, i hold their styles).
+- content_l4_old.py: the first lesson 4 (exercise session on lessons 1 to 3, 19 sheets in levels 1 to 4). Replaced on 2026-11-23 by the exam-level review. Not loaded by any lesson.

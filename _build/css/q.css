@@ -1,0 +1,216 @@
+/* lesson 4: exam-level review. Question card + large sheet, floating step bubble, Insert > Recommended Charts, the Excel animation */
+.xes h2{font-size:33px;margin-bottom:8px}
+.xe{display:grid;grid-template-columns:366px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:10px 12px;align-items:start;position:relative}
+.xe .xlrow{display:contents}
+.xe .xe-q{grid-column:1;grid-row:1}
+.xe .xlside{grid-column:1;grid-row:2;gap:7px}
+.xe .sheet{grid-column:2;grid-row:1/span 2;min-width:0}
+.xe-q{background:#fff;border-radius:14px;border-right:6px solid var(--coral);box-shadow:0 2px 0 var(--line);padding:8px 13px 9px;font-size:17px;line-height:1.34}
+.xe-q p{margin:0 0 3px}
+.xq-tag{display:inline-block;background:#1b2d55;color:#fff;border-radius:8px;padding:1px 10px;font-size:16.5px;margin-bottom:5px}
+.xq-n{display:block;margin-top:5px;color:#b8391f;font-size:17px}
+.xq-r{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:2px}
+.xq-r li{padding:1px 7px;border-radius:8px;border:2px solid transparent;transition:background .3s,border-color .3s}
+.xq-r li>b{color:#1b2d55}
+.xq-r li.on{background:#fff4c2;border-color:#e8b400}
+.xq-t{border-collapse:collapse;margin:4px 0 2px;font-size:16.5px;width:100%}
+.xq-t th,.xq-t td{border:1px solid #d9d2c3;padding:1px 8px;text-align:center}.xq-t th{background:#f4f1ea;font-weight:700}
+.xe-go{margin-top:5px;background:#e8f3ec;border:1px dashed #217346;border-radius:9px;padding:4px 10px;font-weight:700;color:#185c37;font-size:16.5px}
+.xe.started .xe-go{visibility:hidden}
+.xe.dm .xl-pr,.xe.dm .xl-inf,.xe.dm .xl-fb{display:none!important}
+.dstep{display:none!important}
+.xe .xl-fm{font-size:17px;padding:7px 12px}
+.xe .xlside .xl-pr{gap:6px}
+.xq-anb{font:700 16.5px/1 Rubik,Heebo,sans-serif;padding:8px 12px;border-radius:9px;border:2px solid #6d4df2;background:#f1edff;color:#4326b8;cursor:pointer}
+.xq-anb:hover{background:#e2daff}
+.xq-need{margin-top:6px;background:#fff4e5;border-inline-start:4px solid #e8960c;border-radius:7px;padding:5px 10px;font-size:16.5px;line-height:1.4}
+.xq-need.ok{background:#e8f3ec;border-color:#217346;color:#185c37;font-weight:600}
+.xq-toast{position:absolute;left:50%;bottom:26px;transform:translate(-50%,10px);background:#16213a;color:#fff;border-radius:10px;padding:8px 16px;font-size:17px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:90;max-width:640px;text-align:center}
+.xq-toast.on{opacity:1;transform:translate(-50%,0)}
+.xl-g td.xl-wait{color:transparent!important}.xl-g td.xl-wait *{visibility:hidden}
+
+/* the floating bubble */
+.xq-bub{position:absolute;z-index:45;width:336px;background:#fff;border:2px solid #217346;border-radius:14px;box-shadow:0 10px 30px rgba(16,24,40,.28);transition:left .38s cubic-bezier(.3,.9,.3,1),top .38s cubic-bezier(.3,.9,.3,1);direction:rtl}
+.xq-bub[hidden]{display:none}
+.xq-bub .xl-stp{border:0!important;background:transparent;padding:9px 13px 8px;overflow:visible;max-height:none;font-size:17px;line-height:1.4}
+.xq-bub .xl-sh b{font-size:16.5px}.xq-bub .xl-stx{font-size:17.5px;margin-bottom:6px}
+.xq-bub .xl-si li,.xq-bub .xl-si code,.xq-bub .xl-more{font-size:16.5px}
+.xq-bub.demo .xl-sb{display:none}
+.xq-bub::before{content:'';position:absolute;width:16px;height:16px;background:#fff;border:2px solid #217346;transform:rotate(45deg)}
+.xq-bub.ar-r::before{right:-10px;top:calc(var(--ay,24px) - 8px);border-left:0;border-bottom:0}
+.xq-bub.ar-l::before{left:-10px;top:calc(var(--ay,24px) - 8px);border-right:0;border-top:0}
+.xq-bub.ar-t::before{top:-10px;left:calc(var(--ax,40px) - 8px);border-right:0;border-bottom:0}
+.xq-bub.ar-b::before{bottom:-10px;left:calc(var(--ax,40px) - 8px);border-left:0;border-top:0}
+.xq-bub.chs{border-color:#6d4df2}.xq-bub.chs::before{border-color:#6d4df2}.xq-bub.chs .xl-sh b{color:#4326b8}
+.xq-nav{display:flex;gap:6px;padding:0 13px 10px}
+.xq-nav button{font:700 16.5px/1 Rubik,Heebo,sans-serif;padding:7px 12px;border-radius:8px;border:1px solid #c8c8c8;background:#fff;cursor:pointer;color:#16213a}
+.xq-nav button.go{background:#217346;border-color:#217346;color:#fff;flex:1}
+.xq-nav button:hover{filter:brightness(.95)}
+
+/* the Insert ribbon, over the Home ribbon */
+.xl{position:relative}
+.xl-ins{display:none;position:absolute;top:30px;left:0;right:0;z-index:22;background:#f3f2f1;border-bottom:1px solid #d2d0ce;box-shadow:0 4px 10px rgba(0,0,0,.14);padding:4px 10px 2px;gap:6px;direction:rtl;font:13px/1.2 'Segoe UI',Rubik,Heebo,sans-serif;color:#323130;min-height:76px}
+.xl.xq-ins .xl-ins{display:flex}
+.xl-ins .xg{display:flex;flex-direction:column;justify-content:space-between;padding:0 10px;border-inline-end:1px solid #d2d0ce}
+.xl-ins .xg-b{display:flex;gap:6px;align-items:center;min-height:52px}
+.xl-ins .xg-n{text-align:center;font-size:12px;color:#605e5c;padding:2px 0}
+.xl-ins button{display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid transparent;background:transparent;border-radius:4px;padding:3px 6px;cursor:pointer;font:inherit;color:inherit}
+.xl-ins button small{font-size:12.5px;line-height:1.15}
+.xl-ins button:not([disabled]):hover{background:#e1dfdd;border-color:#c8c6c4}
+.xl-ins button[disabled]{opacity:.42;cursor:default}
+.xl-ins .ic{font-size:22px;line-height:1}
+.xl-ins .big{padding:3px 10px}
+.xl-ins .xg-ch{background:#fff8e1;border-radius:6px;border:1px solid #f0d58a}
+.xl-ins .mini{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.xl-ins .mini button{padding:3px 5px}
+.xl .xl-tabs .xt{cursor:pointer}
+
+/* the Insert Chart dialog */
+.xq-dlg{position:absolute;z-index:36;left:50%;top:38px;transform:translateX(-50%);width:640px;background:#fff;border:1px solid #8a8886;border-radius:8px;box-shadow:0 14px 40px rgba(0,0,0,.32);direction:rtl;font:14px/1.3 'Segoe UI',Rubik,Heebo,sans-serif;color:#323130;animation:dlgin .25s ease-out}
+@keyframes dlgin{from{opacity:0;transform:translateX(-50%) scale(.96)}to{opacity:1;transform:translateX(-50%)}}
+.dl-h{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;font-weight:600;font-size:15px;border-bottom:1px solid #edebe9}
+.dl-h button{border:0;background:transparent;font-size:15px;cursor:pointer;color:#605e5c}
+.dl-t{display:flex;gap:16px;padding:6px 14px 0;border-bottom:1px solid #edebe9;font-size:14px}
+.dl-t span{padding:3px 2px 6px;color:#605e5c}.dl-t span.on{color:#217346;font-weight:700;border-bottom:3px solid #217346}
+.dl-b{display:grid;grid-template-columns:176px minmax(0,1fr);gap:10px;padding:6px 10px}
+.dl-list{display:grid;gap:5px;align-content:start}
+.dl-th{display:block;width:100%;border:2px solid #e1dfdd;background:#fff;border-radius:5px;padding:2px 3px 3px;cursor:pointer;text-align:center}
+.dl-th svg{display:block;width:100%;height:42px}
+.dl-th span{display:block;font:600 13px/1.2 'Segoe UI',Rubik,Heebo,sans-serif;color:#323130}.dl-th span i{font-style:normal;color:#7a7775;font-weight:400;font-size:12px}
+.dl-th.on{border-color:#217346;background:#e8f3ec}
+.dl-main{display:flex;flex-direction:column;gap:5px;min-width:0}
+.dl-n{font-size:17px}.dl-n i{font-style:normal;font-weight:400;color:#605e5c;font-size:14px}
+.dl-pv{border:1px solid #e1dfdd;border-radius:4px;display:flex;justify-content:center;padding:2px}
+.dl-pv svg{max-width:100%;height:auto}
+.dl-d{font:15px/1.4 Rubik,Heebo,sans-serif;border-radius:6px;padding:5px 9px;background:#fff4e5;border-inline-start:4px solid #e8960c;color:#16213a}
+.dl-d.ok{background:#e8f3ec;border-color:#217346}
+.dl-f{display:flex;gap:8px;justify-content:flex-start;padding:7px 12px 9px;border-top:1px solid #edebe9;flex-direction:row-reverse}
+.dl-f button{font:14px 'Segoe UI',Rubik,Heebo,sans-serif;padding:5px 22px;border-radius:4px;border:1px solid #8a8886;background:#fff;cursor:pointer}
+.dl-f button.pri{background:#217346;border-color:#217346;color:#fff;font-weight:600}
+
+/* a chart object over the grid */
+.xq-ch{position:absolute;z-index:6;background:#fff;border:1px solid #b5b5b5;box-shadow:0 3px 10px rgba(0,0,0,.16);cursor:move;direction:ltr;outline:none;touch-action:none}
+.xq-ch:hover,.xq-ch:focus{border-color:#217346;box-shadow:0 0 0 1px #217346,0 3px 10px rgba(0,0,0,.16)}
+.xq-ch.new{animation:chin .7s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes chin{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+.xq-ch .ch-b svg{display:block}
+.xq-ch .cs,.xq-ch .lg{cursor:pointer}
+.xq-ch .cm{animation:cmin .6s ease-out both}
+@keyframes cmin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ch-t{position:absolute;left:4px;top:4px;display:flex;gap:3px}
+.ch-t button{width:25px;height:25px;border-radius:5px;border:1px solid #c8c6c4;background:#fff;cursor:pointer;font-size:14px;line-height:1;color:#217346;font-weight:700;padding:0}
+.ch-t button[data-c="del"]{color:#a4262c}
+.ch-t button:hover{background:#e8f3ec}
+.ch-m{position:absolute;left:4px;top:32px;background:#fff;border:1px solid #c8c6c4;border-radius:6px;box-shadow:0 6px 16px rgba(0,0,0,.2);padding:5px 9px;direction:rtl;display:grid;gap:3px;font:14px 'Segoe UI',Rubik,Heebo,sans-serif;z-index:3}
+.ch-m[hidden]{display:none}.ch-m label{display:flex;gap:6px;align-items:center;cursor:pointer;white-space:nowrap}
+.ch-ds{position:absolute;right:6px;top:4px;font:700 13.5px Rubik,Heebo,sans-serif;background:#a4262c;color:#fff;border:0;border-radius:6px;padding:5px 10px;cursor:pointer;direction:rtl}
+.ch-ds[hidden]{display:none}
+.ch-w{direction:rtl;background:#fff4e5;border-top:1px solid #f0c27a;padding:4px 8px;font:14px/1.35 Rubik,Heebo,sans-serif;color:#7a4b00}
+.ch-w[hidden]{display:none}
+.ch-e{direction:rtl;padding:30px;text-align:center;color:#605e5c;font:15px Rubik,Heebo,sans-serif}
+
+/* the Excel animation screen */
+.xq-an{position:absolute;inset:0;z-index:70;background:rgba(16,24,40,.94);border-radius:inherit;display:flex;flex-direction:column;padding:16px 26px 14px;gap:8px;animation:anin .3s ease-out}
+@keyframes anin{from{opacity:0}to{opacity:1}}
+.an-h{display:flex;align-items:center;gap:14px;color:#fff;font-size:21px}
+.an-h b{flex:none}.an-dots{display:flex;gap:6px;flex:1}
+.an-dots i{width:34px;height:7px;border-radius:4px;background:rgba(255,255,255,.3)}.an-dots i.done{background:#7fe3d6}.an-dots i.on{background:#ffd27a}
+.an-h button,.an-b button{font:700 17px/1 Rubik,Heebo,sans-serif;padding:8px 14px;border-radius:9px;border:1px solid #c8c8c8;background:#fff;cursor:pointer;color:#16213a}
+.an-s{position:relative;flex:1;min-height:0;background:#fff;border-radius:10px;overflow:hidden}
+.an-sheet{height:100%}
+.an-sheet .xl-wrap{height:392px}.an-sheet .xl-zoom{visibility:hidden}
+.an-sheet .xl-pr,.an-sheet .xl-fb{display:none!important}
+.an-cur{position:absolute;z-index:80;left:60%;top:70%;transition:left .75s cubic-bezier(.4,0,.2,1),top .75s cubic-bezier(.4,0,.2,1);pointer-events:none;margin:-3px 0 0 -5px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.an-cur i{position:absolute;left:-12px;top:-12px;width:34px;height:34px;border-radius:50%;border:3px solid #ff6a4d;opacity:0}
+.an-cur.ck i{animation:ck .55s ease-out}
+@keyframes ck{0%{opacity:.95;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
+.an-key{position:absolute;z-index:79;left:50%;bottom:22px;transform:translateX(-50%);background:#16213a;color:#fff;border-radius:10px;border-bottom:5px solid #000;padding:10px 26px;font:700 24px Consolas,'Courier New',monospace;animation:keyin .3s ease-out}
+.an-key[hidden]{display:none}
+@keyframes keyin{from{transform:translateX(-50%) translateY(-8px);opacity:0}to{transform:translateX(-50%);opacity:1}}
+.an-c{display:flex;gap:16px;align-items:center;background:#fff;border-radius:10px;padding:9px 16px;min-height:74px}
+.an-t{flex:1;font-size:19px;line-height:1.4}.an-t b{color:#4326b8}
+.an-b{display:flex;gap:6px;flex:none}.an-b button.go{background:#6d4df2;border-color:#6d4df2;color:#fff}
+
+/* the concise slide: process, mini formula sheet, tips */
+.mini-w{background:#1b2d55;border-radius:18px;padding:16px 20px 20px;margin-bottom:18px}
+.mini-t{display:block;font-size:19px;margin-bottom:9px;color:#1b2d55}
+.mini-w .mini-t{color:#7fe3d6}
+.wf{display:flex;gap:34px;flex-wrap:nowrap}
+.wf-s{position:relative;flex:1;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:14px 12px;color:#fff;font-size:21px;line-height:1.25;font-weight:600}
+.wf-s em{font-style:normal}
+.wf-s>b{flex:0 0 34px;height:34px;border-radius:50%;background:#ffd27a;color:#1b2d55;display:grid;place-items:center;font-size:18px}
+.wf-s:not(:last-child)::after{content:'';position:absolute;left:-27px;top:50%;width:14px;height:14px;border-left:4px solid #ffd27a;border-bottom:4px solid #ffd27a;transform:translateY(-50%) rotate(45deg)}
+.mini-w.show .wf-s{animation:wfin .5s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(var(--i)*.42s)}
+@keyframes wfin{from{opacity:0;transform:translateX(40px) scale(.85)}to{opacity:1;transform:none}}
+.mini-g{display:grid;grid-template-columns:1.12fr 1fr;gap:16px}
+.mini-c{background:#fff;border-radius:18px;padding:14px 18px;box-shadow:0 2px 0 #e6dfd0;border-top:8px solid #0f9d90}
+.mini-c.mt{border-top-color:#e8960c}
+.mf-r{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 14px;border-radius:10px;background:#f4f1ea;margin-bottom:8px;font-size:21px}
+.mf-r span{font-weight:700;color:#1b2d55}.mf-r em{font-style:normal;font-size:21px;font-weight:600}
+.mini-c ul{margin:0;padding-inline-start:22px;font-size:22px;line-height:1.5}.mini-c li{margin-bottom:12px}
+
+/* the theoretical item */
+.th-q{background:#fff;border-radius:14px;border-right:6px solid var(--coral);padding:13px 18px;font-size:23px;line-height:1.4;margin-bottom:16px;box-shadow:0 2px 0 var(--line)}
+.th-q b{display:block;color:#b8391f;font-size:17px}
+.th-g{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;align-items:start}
+.th-a{display:grid;gap:10px}
+.th-l{display:flex;gap:13px;align-items:flex-start;background:#fff;border-radius:14px;border:2px solid var(--line);padding:11px 15px}
+.th-l>b{flex:0 0 38px;height:38px;border-radius:50%;background:#217346;color:#fff;display:grid;place-items:center;font-size:19px}
+.th-l strong{display:block;color:#185c37;font-size:19px}.th-l>div>span{font-size:22.5px;line-height:1.42}.th-l{padding:14px 17px}
+.th-s{display:grid;gap:10px}
+.th-k{background:#eef3fb;border-radius:14px;padding:14px 16px;font-size:21px;line-height:1.42}
+.th-k>b{display:block;color:#27447f;margin-bottom:6px}
+.th-ch{display:flex;flex-wrap:wrap;gap:6px}.th-ch>span{background:#fff;border:1px solid #27447f;border-radius:999px;padding:3px 13px;font-size:19.5px;font-weight:600;color:#1b2d55}
+.th-k.trap{background:#ffeee9}.th-k.trap>b{color:#b8391f}
+.th-f{margin-top:12px;font-size:17.5px;color:#4a4130;background:#f4f1ea;border-radius:10px;padding:7px 14px}
+
+/* opening: the exam file */
+.exg{display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:start;margin-bottom:12px}
+.exw-in{background:#fff;border:1px solid #c8c6c4;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(16,24,40,.12)}
+.exw-b{padding:14px;display:grid;gap:10px;background:#fafafa}
+.exw-q,.exw-a{border-radius:8px;padding:14px 16px;display:grid;gap:3px}
+.exw-q{background:#eef3fb;border:2px dashed #27447f}.exw-a{background:#fff4c2;border:2px solid #e8b400;min-height:150px;align-content:start}
+.exw-q b,.exw-a b{font-size:21px;color:#1b2d55}.exw-q span,.exw-a span{font-size:18.5px}
+.exw-t{display:flex;gap:2px;background:#e1dfdd;padding:5px 8px 0;font:15px 'Segoe UI',Rubik,Heebo,sans-serif}
+.exw-t span{padding:4px 12px;background:#f3f2f1;border-radius:5px 5px 0 0;color:#605e5c;font-size:17px}.exw-t span.on{background:#fff;color:#217346;font-weight:700;border-bottom:3px solid #217346}
+.exf{display:grid;gap:10px}
+.exf-r{display:flex;gap:14px;align-items:center;background:#fff;border-radius:14px;padding:11px 15px;box-shadow:0 2px 0 #e6dfd0;font-size:20.5px;line-height:1.4}
+.exf-r>b{flex:0 0 44px;height:44px;border-radius:50%;background:#1b2d55;color:#fff;display:grid;place-items:center;font-size:21px}
+.exf-r.ok>b{background:#217346}.exf-r.later>b{background:#8a93aa}.exf-r strong{color:#1b2d55}
+#s-route .route.r6{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}#s-route .route.r6 .rcard{min-height:150px;padding:13px 16px}
+
+/* the press excerpt */
+.nw{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:start;margin-bottom:12px}
+.nw-c{background:#fffdf6;border:1px solid #d9d2c3;border-radius:6px;padding:16px 20px;box-shadow:0 6px 18px rgba(16,24,40,.1);font-size:21px;line-height:1.62}
+.nw-c p{margin:0}.nw-t{display:inline-block;font-size:16.5px;letter-spacing:.5px;color:#fff;background:#16213a;padding:1px 10px;border-radius:4px;margin-bottom:8px}
+.nw-c mark{border-radius:4px;padding:1px 2px;color:inherit}
+.nw-c .m1{background:#ffe1d9}.nw-c .m2{background:#d9eefb}.nw-c .m3{background:#dff3e6}.nw-c .m4{background:#efe5ff}
+.nw-s{display:grid;gap:9px}
+.nw-r{background:#fff;border-radius:12px;padding:9px 14px;border-inline-start:8px solid #ff6a4d;box-shadow:0 2px 0 #e6dfd0;font-size:19.5px;line-height:1.4}
+.nw-r b{display:block;font-size:18px}
+.nw-r.r1{border-color:#ff6a4d;background:#fff6f3}.nw-r.r2{border-color:#2b8fd0;background:#f3f9fd}.nw-r.r3{border-color:#217346;background:#f3faf5}.nw-r.r4{border-color:#6d4df2;background:#f8f5ff}
+.sum4 .m5 li{padding:9px 14px}.sum4 .m5 strong{font-size:21px}.sum4 .m5 span{font-size:19px}
+
+.xe .xl-pr button{font-size:15.5px;padding:7px 9px}.xe .xl-pr [data-x="part"]{display:none}
+.xe .xl-inf{position:absolute;left:10px;bottom:40px;z-index:8;max-width:470px;font-size:15.5px;padding:4px 10px;min-height:0;box-shadow:0 3px 10px rgba(16,24,40,.18);background:#eef3fb}
+
+.exs .exw-q,.exs .exw-a{padding:18px 20px}.exs .exw-a{min-height:210px}.exs .exw-q b,.exs .exw-a b{font-size:24px}.exs .exw-q span,.exs .exw-a span{font-size:21px}
+.exs .exf-r{font-size:22px;padding:15px 17px}.exs .exw-t span{font-size:18.5px;padding:6px 13px}
+.nws .nw-c{font-size:22.5px;line-height:1.68;padding:20px 24px}.nws .nw-r{font-size:21px;padding:12px 16px}.nws .nw-r b{font-size:19px}
+.sum4 .m5s{flex:0 0 270px;align-self:center}
+
+.xe .xl-fb{position:absolute;left:10px;top:150px;z-index:9;width:330px;margin:0!important}
+.xe .xl-fb:empty{display:none}
+.xe .xl-fb>div{box-shadow:0 6px 18px rgba(16,24,40,.22)}
+#s-route .route.r6 .rcard{min-height:176px}
+#s-home .card p{font-size:20px;line-height:1.45;margin:4px 0 0}
+.th-s .meme{margin:4px auto 0}
+
+#t5 .th-l{padding:10px 15px}#t5 .th-q{margin-bottom:12px;padding:10px 18px}#t5 .th-f{margin-top:9px}
+#s-route .route.r6 .rcard{min-height:200px}#s-route .route.r6 .rcard b{font-size:25px}#s-route .route.r6 .rcard span{font-size:20px}
+
+.ths .toon.meme{position:static!important;margin:6px auto 0;width:250px}
+.ths .toon.meme{width:auto!important;margin:0;padding:7px 12px 9px;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"s t" "s b";column-gap:12px;align-items:center;text-align:start}
+.ths .toon.meme svg{grid-area:s;width:74px;height:74px}.ths .toon.meme .mm-t{grid-area:t;font-size:17px}.ths .toon.meme .mm-b{grid-area:b;font-size:17.5px}
+.ths .th-k{padding:11px 15px}
+#t3 .th-l{padding:10px 15px}#t3 .th-q{font-size:21.5px;padding:10px 18px;margin-bottom:12px}

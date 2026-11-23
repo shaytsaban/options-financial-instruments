@@ -183,24 +183,36 @@ page = f'''<!doctype html>
 </div>
 </article>
 <article class="lec" id="lesson-4">
-<div class="lec-head"><div class="lec-n">4</div><div><h3>מפגש תרגול: מחשיפה ועד מסך המסחר <span class="draft">טיוטה</span></h3><div class="sub">{n('23.11.2026')} · תרגילים בלבד, על מפגשים {n(1)} עד {n(3)} · המערך עשוי להתעדכן עד המפגש</div></div></div>
+<div class="lec-head"><div class="lec-n">4</div><div><h3>חזרה ברמת בחינה: מהנתון ועד התרשים</h3><div class="sub">{n('23.11.2026')} · חמישה סגנונות שאלה מבחינת הסיום, על החומר של מפגשים {n(1)} עד {n(3)}</div></div></div>
 <div class="lec-body">
 <div><h4>מה עושים בשיעור</h4><ul class="learn">
-<li>חזרה ממוקדת: שלושה מפגשים בשלוש שורות, דף נוסחאות לחיץ ושיטת עבודה</li>
-<li>חשיפה וחוזה אקדמה (Forward): חשיפה נטו, יבואן מגדר, ושיעור הגידור</li>
-<li>קונה אופציה וכותב אופציה: ארבע הפוזיציות, נקודת איזון וסכום אפס</li>
-<li>מנקודות לשקלים, ומסך המסחר: מכפיל, ערך זמן, ופקודה בכמה רמות מחיר</li>
-<li>שלוש שאלות ברמת בחינה, שמשלבות כמה נושאים</li>
-<li>״מה למדנו״ בסוף כל חלק, וסיכום של חמש הטעויות הנפוצות</li>
+<li>יישום בסיסי של Call ו-Put: תרחישים, טבלת רווח והפסד, תרשים, נקודת איזון וקצוות</li>
+<li>חישובים וחילוצים: מהרווח אל המחיר, בנקודות ובשקלים, עם מכפיל ומספר חוזים</li>
+<li>הכותב (Short): אותה שאלה מהצד השני, ותרשים של שני הקווים</li>
+<li>כמה אופציות יחד, כתרגיל חישובי: טור לכל רכיב, טור מסכם, ושתי נקודות איזון</li>
+<li>נתונים חיים: קטע עיתונות, מגדר וספקולנט, Call מול חוזה אקדמה (Forward)</li>
+<li>בכל חלק: שקף עיקרים, פתרון בתוך ה-Excel קליק אחר קליק, הסעיף התיאורטי, שאלה לבד, ו״מה למדנו״</li>
 </ul></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-4/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור (טיוטה)</b><span class="d">{n(46)} שקפים, {n(19)} גיליונות Excel חיים ברמות 1 עד 4, עם הסבר בלחיצה על כל תא ופתרון שלב אחר שלב, ו-{n(9)} שאלות רב ברירה</span></span></a>
-<a class="lk s" href="lectures/lecture-4/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF, טיוטה)</b><span class="d">החזרה הממוקדת, דף הנוסחאות, וכל התרגילים עם הפתרונות</span></span></a>
-<a class="lk x" href="materials/practice-4.xlsx" download><span class="e">📊</span><span><b>קובץ תרגול (Excel)</b><span class="d">{n(10)} גיליונות, מרמה 1 עד רמה 4, על כל הנושאים של מפגשים 1 עד 3</span></span></a>
-<a class="lk r" href="materials/practice-4-solutions.xlsx" download><span class="e">✅</span><span><b>קובץ פתרונות (Excel)</b><span class="d">נוסחאות חיות ו״מה למדנו״ בכל גיליון. פותחים רק אחרי שפותרים</span></span></a>
-<a class="lk x" href="materials/exam-practice-4.xlsx" download><span class="e">🎯</span><span><b>שאלות ברמת בחינה (Excel)</b><span class="d">{n(5)} שאלות משולבות, כ-{n(100)} דקות. פותרים עם שעון</span></span></a>
-<a class="lk r" href="materials/exam-practice-4-solutions.xlsx" download><span class="e">✅</span><span><b>פתרונות לשאלות ברמת בחינה (Excel)</b><span class="d">פותחים רק אחרי שפותרים את כל השאלה</span></span></a>
-</div></div>
+<a class="lk p" href="lectures/lecture-4/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור</b><span class="d">{n(47)} שקפים, {n(21)} גיליונות Excel חיים עם פתרון שנבנה קליק אחר קליק, ״תרשימים מומלצים״ בתוך הגיליון, ו״הנפשה באקסל״ מטבלה לתרשים</span></span></a>
+<a class="lk s" href="lectures/lecture-4/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF)</b><span class="d">העיקרים, כל השאלות עם דרך הפתרון, והמענה לסעיפים התיאורטיים</span></span></a>
+<a class="lk x" href="materials/exam-review-4.xlsx" download><span class="e">📊</span><span><b>שאלות המפגש, במבנה הבחינה (Excel)</b><span class="d">גיליון לכל שאלה: השאלה בראש הגיליון, והפתרון מתחתיה</span></span></a>
+<a class="lk r" href="materials/exam-review-4-solutions.xlsx" download><span class="e">✅</span><span><b>פתרונות לשאלות המפגש (Excel)</b><span class="d">נוסחאות חיות, תרשימים, והמענה לסעיפים התיאורטיים</span></span></a>
+<a class="lk x" href="materials/self-practice-4.xlsx" download><span class="e">🎯</span><span><b>קובץ תרגול עצמי (Excel)</b><span class="d">{n(10)} שאלות בסגנון הבחינה. פותרים עם שעון: כ-{n(36)} דקות לשאלה</span></span></a>
+<a class="lk r" href="materials/self-practice-4-solutions.xlsx" download><span class="e">✅</span><span><b>פתרונות לתרגול העצמי (Excel)</b><span class="d">פותחים רק אחרי שפותרים את כל השאלה</span></span></a>
+</div><div class="rec" id="recording-4"><h4>🎥 הקלטת השיעור · {n('23.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה בעיבוד</b>ותועלה בהמשך</div></div></div></div></div>
+</div>
+<div class="todo hw"><h4>📝 תרגול עצמי לשיעור {n(4)}</h4>
+<p class="hw-how">התרגילים נמצאים אחרי השקף האחרון של מצגת שיעור 4, בחלק ״תרגול עצמי״. פותרים בתוך השקפים: ״שלב אחר שלב״ מציג פתרון מפורט, ו״🎬 הנפשה באקסל״ מראה איך בונים את התרשים.</p>
+<table class="hw-t"><tr><th>מה</th><th>סגנון</th><th>מה מתרגלים</th></tr>
+<tr><td>תרגול 1: רוכשת Call</td><td>שאלה 1</td><td>תרחישים, טבלה ותרשים, נקודת איזון והפסד מרבי</td></tr>
+<tr><td>תרגול 2: חילוץ ב-Put</td><td>שאלה 2</td><td>המחיר לרווח נתון, נקודת איזון ורווח מרבי</td></tr>
+<tr><td>תרגול 3: Call על מדד</td><td>שאלה 2</td><td>נקודות, מכפיל ומספר אופציות, יעד רווח בשקלים</td></tr>
+<tr><td>תרגול 4: הקונה והכותב</td><td>הכותב</td><td>טבלה משותפת ותרשים של שני קווים</td></tr>
+<tr><td>תרגול 5: Call ו-Put יחד</td><td>כמה אופציות</td><td>טור לכל רכיב, תרשים של הרווח הכולל, שתי נקודות איזון</td></tr>
+<tr><td>תרגול 6: יצואנית, Put מול Forward</td><td>שאלה 5</td><td>מספר אופציות, רצפה, השוואה בשלושה שערים, והמלצה</td></tr>
+<tr><td>קובץ התרגול העצמי: עשרה גיליונות</td><td>כל הסגנונות</td><td>השאלות האלה, וארבע שאלות ״נסו לבד״ מהמפגש, עם קובץ פתרונות נפרד</td></tr>
+</table>
 </div>
 </article>
 <h2 class="sec" style="margin-top:36px">השיעורים הבאים</h2>
@@ -211,6 +223,11 @@ page = f'''<!doctype html>
 </body>
 </html>
 '''
+# the lesson 4 workbooks are linked only once they exist in materials/
+if not os.path.exists(os.path.join(H, '..', 'materials', 'exam-review-4.xlsx')):
+    import re as _re
+    page = _re.sub(r'<a class="lk [xr]" href="materials/(?:exam-review|self-practice)-4[^\n]*\n', '', page)
+    page = page.replace('<tr><td>קובץ התרגול העצמי: עשרה גיליונות</td><td>כל הסגנונות</td><td>השאלות האלה, וארבע שאלות ״נסו לבד״ מהמפגש, עם קובץ פתרונות נפרד</td></tr>\n', '')
 assert '—' not in page and '־' not in page
 open(os.path.join(H, '..', 'index.html'), 'w', encoding='utf8').write(page)
 print('hub', len(page))

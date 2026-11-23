@@ -184,6 +184,7 @@ function mount(host,cfg){
  const focusG=()=>sink.focus({preventScroll:true});
  sink.addEventListener('input',()=>{const v=sink.value;sink.value='';if(!editing&&v)startEdit(v.trim()===''?'':v,false);});
  const td=a=>g.querySelector(`td[data-a="${a}"]`);
+ const waitS=new Set(),popS=new Set();
  let sel={r:0,c:0},sel2={r:0,c:0},editing=null,showF=false,marks={},hintN=0,refPaint=[],point=null,stepMark={},wt=null;
  /* ---- undo and redo: a snapshot of the whole sheet, its formats and its layout, before every change ---- */
  const hist=[],fut=[];
@@ -224,7 +225,7 @@ function mount(host,cfg){
   g.querySelectorAll('td').forEach(el=>{const a=el.dataset.a;if(editing&&editing.where==='cell'&&editing.a===a)return;const p=parseAddr(a);
    const raw=S.raw[a];let d=display(S,a);if(showF&&raw&&raw[0]==='=')d={t:raw,n:false,f:true};const s=inSel(p.r,p.c),st=S.st[a],m=stepMark[a];
    el.className=(d.n?'n':'')+(d.f?' f':'')+(d.e?' e':'')+(s&&multi?' sel':'')+(s&&p.r===sR?' bt':'')+(s&&p.r===eR?' bb':'')+(s&&p.c===sC?' bs':'')+(s&&p.c===eC?' be':'')+(p.r===sel.r&&p.c===sel.c?' act':'')+(cfg.inputs&&cfg.inputs.includes(a)?' in':'')+(cfg.targets&&cfg.targets.includes(a)?' tg':'')+(marks[a]?' '+marks[a]:'')+(cfg.headRows&&cfg.headRows.includes(p.r+1)?' hd':'')+(st&&st.b?' bo':'')+(CLIP&&CLIP.host===host&&p.r>=CLIP.r0&&p.r<CLIP.r0+CLIP.h&&p.c>=CLIP.c0&&p.c<CLIP.c0+CLIP.w?' cp':'')
-    +(m?(m.c?' sr'+(m.t?' srt':'')+(m.b?' srb':'')+(m.r?' srr':'')+(m.l?' srl':''):'')+(m.tg?' stg':''):'');
+    +(m?(m.c?' sr'+(m.t?' srt':'')+(m.b?' srb':'')+(m.r?' srr':'')+(m.l?' srl':''):'')+(m.tg?' stg':''):'')+(waitS.has(a)?' xl-wait':'')+(popS.has(a)?' xl-pop':'');
    const css=cellCss(a,p);if(el.getAttribute('style')!==css){if(css)el.setAttribute('style',css);else el.removeAttribute('style');}
    el.innerHTML=(d.n||d.f?`<span dir="ltr">${esc(d.t)}</span>`:esc(d.t))+(p.r===eR&&p.c===eC&&!editing?'<i class="xl-fh"></i>':'');});
   chs.forEach(h=>{const c=+h.dataset.c;h.classList.toggle('hs',c>=sC&&c<=eC);});rhs.forEach(h=>{const r=+h.dataset.r;h.classList.toggle('hs',r>=sR&&r<=eR);});
@@ -493,7 +494,7 @@ function mount(host,cfg){
  document.addEventListener('pointerdown',e=>{if(!host.contains(e.target)){closeMenu();closePop();}},true);
  sizeSel.addEventListener('mousedown',()=>{if(editing)commit(0,0);});
  sizeSel.addEventListener('change',()=>{setSize(+sizeSel.value);focusG();});
- host.querySelector('.xl-tabs').addEventListener('click',e=>{const t=e.target.closest('.xt');if(!t)return;if(!t.classList.contains('on')){toastX('בתרגול עובדים בכרטיסייה ״בית״');return;}ribbonSet=true;host.classList.toggle('xl-col');toastX(host.classList.contains('xl-col')?'רצועת הכלים כווצה. לחיצה על ״בית״ פותחת אותה':'רצועת הכלים פתוחה');fit();});
+ host.querySelector('.xl-tabs').addEventListener('click',e=>{const t=e.target.closest('.xt');if(!t)return;if(cfg.onTab&&cfg.onTab(t))return;if(!t.classList.contains('on')){toastX('בתרגול עובדים בכרטיסייה ״בית״');return;}ribbonSet=true;host.classList.toggle('xl-col');toastX(host.classList.contains('xl-col')?'רצועת הכלים כווצה. לחיצה על ״בית״ פותחת אותה':'רצועת הכלים פתוחה');fit();});
  const BTN='.xl-tools button,.xl-qat button,.xl-xv button,.xl-pr button,.xl-foot button';
  host.addEventListener('mousedown',e=>{const b=e.target.closest(BTN);if(b&&editing)e.preventDefault();});
  const onBtn=e=>{const b=e.target.closest(BTN);if(!b)return;const x=b.dataset.x;
@@ -555,8 +556,8 @@ function mount(host,cfg){
   const fresh=[];cfg.steps.forEach((st,k)=>{if(k>i)return;const cells=stepCells(st);cells.forEach(a=>{const f=stepFormula(st,a,cells);if(f==null)return;if(S.raw[a]!==f){S.set(a,f);if(k===i)fresh.push(a);}});});
   wt.i=i;const st=cfg.steps[i],cells=stepCells(st),col=stepColors(st,cells);markStep(st,cells,col);
   if(cells.length){const p=parseAddr(cells[0]),q=parseAddr(cells[cells.length-1]);grow(q.r,q.c);sel={...p};sel2={...q};}
-  render();if(cells.length)reveal(sel.r,sel.c);if(fwd&&fresh.length)typeIn(fresh);
-  const fl=cells.map(a=>[a,stepFormula(st,a,cells)]).filter(x=>x[1]!=null);
+  render();if(cells.length)reveal(sel.r,sel.c);waitS.clear();popS.clear();if(fwd&&fresh.length){typeIn(fresh.slice(0,1));if(fresh.length>1){const rest=fresh.slice(1);rest.forEach(x=>{waitS.add(x);const e=td(x);if(e)e.classList.add('xl-wait');});rest.forEach((x,k)=>{const t=setTimeout(()=>{waitS.delete(x);popS.add(x);const e2=td(x);if(e2){e2.classList.remove('xl-wait');e2.classList.add('xl-pop');}setTimeout(()=>popS.delete(x),700);},560+k*(rest.length>6?90:140));typT.push(t);});}}
+  const fl=cells.map(a=>[a,stepFormula(st,a,cells)]).filter(x=>x[1]!=null&&String(x[1])[0]==='=');
   const items=(st.items||[]).map(([a,m])=>{const k=String(a).replace(/\$/g,'').toUpperCase();const d=k.includes(':')?{t:''}:display(S,k);return `<li><span class="xl-sw" style="background:${col[k]}"></span><code dir="ltr" style="color:${col[k]}">${esc(k)}</code><span class="xl-im">${m}</span>${d.t!==''?`<b dir="ltr">${esc(d.t)}</b>`:''}</li>`;}).join('');
   stpEl.innerHTML=`<div class="xl-sh"><b>שלב ${i+1} מתוך ${N}</b><span class="xl-dots">${cfg.steps.map((_,k)=>`<i class="${k<i?'done':k===i?'on':''}"></i>`).join('')}</span></div>`
    +`<div class="xl-stx">${st.text||''}</div>`
@@ -566,7 +567,7 @@ function mount(host,cfg){
   changed();}
  function openSteps(){if(!stpEl||!cfg.steps||!cfg.steps.length)return;if(editing)cancel();
   if(!wt){push();wt={i:-1};}stpEl.hidden=false;if(stpEl.parentElement)stpEl.parentElement.classList.add('stp-on');goStep(Math.max(0,wt.i));}
- function closeSteps(){typT.forEach(clearInterval);typT=[];wt=null;stepMark={};if(stpEl){stpEl.hidden=true;stpEl.innerHTML='';if(stpEl.parentElement)stpEl.parentElement.classList.remove('stp-on');}}
+ function closeSteps(){typT.forEach(clearInterval);typT=[];waitS.clear();popS.clear();wt=null;stepMark={};if(stpEl){stpEl.hidden=true;stpEl.innerHTML='';if(stpEl.parentElement)stpEl.parentElement.classList.remove('stp-on');}}
  function finishSteps(){/* the last step leaves the sheet solved: any target no step wrote is filled from the solution, then checked */
   if(cfg.targets&&cfg.solution){cfg.targets.forEach(a=>{if(cfg.solution[a]!=null&&(S.raw[a]||'')!==cfg.solution[a])S.set(a,cfg.solution[a]);});Object.assign(S.fmt,cfg.solFmt||{});}
   closeSteps();render();if(cfg.targets)check(true);else changed();}
@@ -593,7 +594,7 @@ function mount(host,cfg){
  render();
  return {sheet:S,render,fit,select:(a)=>{const p=parseAddr(a);if(!p)return;grow(p.r,p.c);sel=p;sel2={...sel};render();reveal(p.r,p.c);},put:(a,v)=>{push();S.set(a,v);render();changed();},get:a=>S.val[a],raw:a=>S.raw[a],check,reset:()=>host.querySelector('[data-x="reset"]').click(),showFormulas:v=>{if(showF!==!!v)toggleF();},undo,redo,
   fmtSel:fn=>{eachSel(a=>{const f=fn(S.fmt[a]||'',S.val[a],display(S,a).t);if(f)S.fmt[a]=f;else delete S.fmt[a];});render();},
-  fmtAt:a=>S.fmt[a]||'',styleAt:a=>S.st[a]||{},active:()=>addr(sel.r,sel.c),onSel:fn=>{cfg.onSelect=fn;},
+  fmtAt:a=>S.fmt[a]||'',styleAt:a=>S.st[a]||{},active:()=>addr(sel.r,sel.c),selection:()=>({a:addr(Math.min(sel.r,sel2.r),Math.min(sel.c,sel2.c)),b:addr(Math.max(sel.r,sel2.r),Math.max(sel.c,sel2.c))}),td:a=>td(a),wrap:wrapEl,text:a=>display(S,a).t,onSel:fn=>{cfg.onSelect=fn;},
   selectRange:(a,b)=>{const p=parseAddr(a),q=parseAddr(b||a);if(!p||!q)return;sel=p;sel2=q;render();},
   insertRows:(at,n)=>restructure('row',at,n||1),deleteRows:(at,n)=>restructure('row',at,-(n||1)),insertCols:(at,n)=>restructure('col',at,n||1),deleteCols:(at,n)=>restructure('col',at,-(n||1)),
   zoom:z=>{if(z!=null)setZoom(z);return Z;},layout:()=>cfg,

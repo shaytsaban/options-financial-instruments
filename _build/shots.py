@@ -7,7 +7,7 @@ src = open(os.path.join(H, '..', 'lectures', f'lecture-{os.environ.get("LESSON",
 ids = sys.argv[2:] or re.findall(r'<section class="slide[^"]*" id="([^"]+)"', src)
 d = tempfile.mkdtemp(dir=os.environ.get('TMPDIR'))
 import atexit, shutil; atexit.register(shutil.rmtree, d, True)
-INJ = '''<style>*{transition:none!important;animation:none!important}</style><script>const D=window.__deck;const s=D.slides.find(x=>x.id===location.hash.slice(1));D.go(s.id);D.setAll(s,true);D.next&&0;s.querySelectorAll('.mc').forEach(m=>{m.classList.add('done');m.querySelectorAll('.o')[+m.dataset.a].classList.add('ok');});</script></body>'''
+INJ = '''<style>*{transition:none!important;animation:none!important}</style><script>const D=window.__deck;const s=D.slides.find(x=>x.id===location.hash.slice(1));D.go(s.id);D.setAll(s,true);s.dispatchEvent(new Event('step'));D.next&&0;s.querySelectorAll('.mc').forEach(m=>{m.classList.add('done');m.querySelectorAll('.o')[+m.dataset.a].classList.add('ok');});</script></body>'''
 p = os.path.join(d, 't.html')
 open(p, 'w', encoding='utf8').write(src.replace('</body>', INJ))
 all_ids = re.findall(r'<section class="slide[^"]*" id="([^"]+)"', src)

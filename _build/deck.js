@@ -23,13 +23,13 @@ $('#gwrap').innerHTML=gk.map(k=>`<button class="gitem" data-t="${k}">${G[k].h}<d
 $('#gpl').innerHTML=gk.map(k=>`<div class="gp"><b>${G[k].h}</b> (${G[k].en})<br>${G[k].p}<br>דוגמה: ${G[k].ex}</div>`).join('');
 
 /* ---------- navigation ---------- */
-function show(i,reveal){if(i<0||i>=slides.length)return;slides[cur].classList.remove('on');cur=i;slides[cur].classList.add('on');setAll(slides[cur],!!reveal);slides[cur].dispatchEvent(new Event('shown'));
+function show(i,reveal){if(i<0||i>=slides.length)return;slides[cur].classList.remove('on');cur=i;slides[cur].classList.add('on');setAll(slides[cur],!!reveal);slides[cur].dispatchEvent(new Event('shown'));slides[cur].dispatchEvent(new Event('step'));
  $('#cnt').textContent=(cur+1)+' / '+slides.length;$('#progi').style.width=((cur+1)/slides.length*100)+'%';
  try{history.replaceState(null,'','#'+slides[cur].id);}catch(e){}
  $$('.mcell').forEach((c,j)=>c.classList.toggle('cur',j===cur));stepInfo();}
 function go(id){const i=slides.findIndex(s=>s.id===id);if(i>=0){closeOverlays();show(i);}}
-function next(){const p=pending(slides[cur]);if(p.length){p[0].forEach(e=>e.classList.add('show'));stepInfo();return;}show(cur+1);}
-function prev(){const s=shown(slides[cur]);if(s.length){s[s.length-1].forEach(e=>e.classList.remove('show'));stepInfo();return;}show(cur-1,true);}
+function next(){const p=pending(slides[cur]);if(p.length){p[0].forEach(e=>e.classList.add('show'));stepInfo();slides[cur].dispatchEvent(new Event('step'));return;}show(cur+1);}
+function prev(){const s=shown(slides[cur]);if(s.length){s[s.length-1].forEach(e=>e.classList.remove('show'));stepInfo();slides[cur].dispatchEvent(new Event('step'));return;}show(cur-1,true);}
 $('#bNext').onclick=next;$('#bPrev').onclick=prev;
 $('#prog').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const f=(r.right-e.clientX)/r.width;show(Math.min(slides.length-1,Math.floor(f*slides.length)));};
 function closeOverlays(keepDrawer){$('#menu').classList.remove('open');$('#gloss').classList.remove('open');if(!keepDrawer)dr.classList.remove('open');}
