@@ -198,7 +198,7 @@ page = f'''<!doctype html>
 <a class="lk r" href="materials/exam-review-4-solutions.xlsx" download><span class="e">✅</span><span><b>פתרונות לשאלות המפגש (Excel)</b><span class="d">נוסחאות חיות, תרשימים, והמענה לסעיפים התיאורטיים</span></span></a>
 <a class="lk x" href="materials/self-practice-4.xlsx" download><span class="e">🎯</span><span><b>קובץ תרגול עצמי (Excel)</b><span class="d">{n(9)} שאלות בסגנון הבחינה, רק על מה שנפתר במפגש. כ-{n(36)} דקות לשאלה</span></span></a>
 <a class="lk r" href="materials/self-practice-4-solutions.xlsx" download><span class="e">✅</span><span><b>פתרונות לתרגול העצמי (Excel)</b><span class="d">פותחים רק אחרי שפותרים את כל השאלה</span></span></a>
-</div><div class="rec" id="recording-4"><h4>🎥 הקלטת השיעור · {n('23.11.2026')}</h4><div class="recbox"><div class="recph"><div><b>ההקלטה בעיבוד</b>ותועלה בהמשך</div></div></div></div></div>
+</div><div class="rec" id="recording-4"><h4>🎥 הקלטת השיעור · {n('23.11.2026')}</h4><div class="recbox"><iframe src="https://www.youtube.com/embed/WZCEIEwClEE" title="הקלטת שיעור 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="yt" href="https://youtu.be/WZCEIEwClEE" target="_blank" rel="noopener">לצפייה ב-YouTube</a></div></div>
 </div>
 <div class="todo hw"><h4>📝 תרגול עצמי לשיעור {n(4)}</h4>
 <p class="hw-how">התרגילים נמצאים אחרי השקף האחרון של מצגת שיעור 4, בחלק ״תרגול עצמי״, ועוסקים רק במה שנפתר במפגש. פותרים בתוך השקפים: ״שלב אחר שלב״ מציג פתרון מפורט, ו״🎬 הנפשה באקסל״ מראה איך בונים את התרשים.</p>
