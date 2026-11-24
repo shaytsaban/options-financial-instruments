@@ -1,0 +1,38 @@
+/* lesson 5 (content_l5.py, content_v5.py, content_l5h.py): the slides added on 2026-11-24. Every rule is scoped to one slide id. */
+/* s-route: five parts */
+#s-route .route.r5{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}#s-route .route.r5 .rcard{min-height:300px;padding:16px 16px}#s-route .route.r5 .rcard b{font-size:25px}#s-route .route.r5 .rcard span{font-size:20px;line-height:1.45}#s-route .band{margin-top:18px;font-size:20px}
+/* s-sum0: the principle, a worked number on the right, the lines on the left */
+#s-sum0 .p5r{gap:18px;align-items:stretch}
+#s-sum0 .p5r>.col:first-child{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:8px}
+#s-sum0 .p5r>.col:last-child{flex:0 0 560px}
+#s-sum0 .p5-defs{display:flex;gap:10px}
+#s-sum0 .p5-defs .def{flex:1 1 0;min-width:0;padding:9px 12px;margin:0}
+#s-sum0 .p5-defs .def .dn{font-size:19px}
+#s-sum0 .p5-defs .def p{font-size:17px;line-height:1.36;margin:2px 0 5px}
+#s-sum0 .p5-defs .def .demo{font-size:15.5px;line-height:1.36;padding:5px 9px}
+#s-sum0 .p5-q{margin:0;padding:9px 14px}#s-sum0 .p5-q p{font-size:19px;line-height:1.42;margin:0}
+#s-sum0 .p5-s{font-size:20px;padding:6px 14px;border-radius:8px;border-inline-start:6px solid #1f5fd6;background:#eef3fd}
+#s-sum0 .p5-s.c2{border-color:#e8960c;background:#fff4e0}
+#s-sum0 .p5-s.c3{border-color:#16213a;background:#eceef3}
+#s-sum0 .band{font-size:18.5px;padding:8px 14px;margin:0}
+#s-sum0 .p5-ch{height:100%;display:flex;align-items:center;justify-content:center;padding:10px}
+#s-sum0 .p5-svg{width:100%;height:auto}
+/* s-net: three definitions side by side */
+#s-net .p5n{gap:14px;align-items:stretch}
+#s-net .p5n>.def{flex:1 1 0;min-width:0;margin:0}
+#s-net .p5n>.def{padding:18px 20px}#s-net .p5n .def .dn{font-size:25px}
+#s-net .p5n .def p{font-size:22px;line-height:1.5}
+#s-net .p5n .def .demo{font-size:20.5px;line-height:1.55;padding:10px 14px}
+#s-net .band{font-size:21.5px;margin-top:16px;padding:12px 18px}
+/* s-q6: the full question, as in the exam */
+#s-q6 .q6{grid-template-columns:1.05fr 1fr}
+#s-q6 .nw-c{font-size:20.5px;line-height:1.6}
+#s-q6 .q6-d{margin-top:10px;font-size:17px}
+#s-q6 .q6-d .xq-t{margin-top:6px;font-size:17px}
+#s-q6 .q6-r{display:flex;flex-direction:column;gap:9px}
+#s-q6 .q6-r .xq-r{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+#s-q6 .q6-r .xq-r li{font-size:19.5px;line-height:1.45;background:#fff;border:1px solid #e4dccd;border-radius:8px;padding:7px 12px}
+#s-q6 .q6-r .band{font-size:19.5px;margin:0;padding:9px 14px}
+/* a-who: six rows */
+#a-who .stbl td{padding:6px 10px;font-size:19px}
+#s-sum0 .p5-svg{direction:ltr}

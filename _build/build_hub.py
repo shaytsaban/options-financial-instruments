@@ -215,21 +215,22 @@ page = f'''<!doctype html>
 </div>
 </article>
 <article class="lec" id="lesson-5">
-<div class="lec-head"><div class="lec-n">5</div><div><h3>המשך החזרה ברמת בחינה: כמה אופציות, ונתונים חיים <span class="draft">טיוטה משוערת</span></h3><div class="sub">{n('30.11.2026')} · שני הסגנונות שנשארו ממפגש {n(4)} · המערך עשוי להתעדכן עד המפגש</div></div></div>
+<div class="lec-head"><div class="lec-n">5</div><div><h3>המשך החזרה ברמת בחינה: כמה אופציות, נתונים חיים ושאלה מלאה <span class="draft">טיוטה משוערת</span></h3><div class="sub">{n('30.11.2026')} · שני הסגנונות שנשארו ממפגש {n(4)} · המערך עשוי להתעדכן עד המפגש</div></div></div>
 <div class="lec-body">
 <div><h4>מה עושים בשיעור</h4><ul class="learn">
 <li>תזכורת קצרה: שלושת הסגנונות של מפגש 4</li>
-<li>כמה אופציות יחד, כתרגיל חישובי: טור לכל רכיב, טור מסכם, תרשים של הרווח הכולל, ושתי נקודות איזון</li>
-<li>נתונים חיים: קטע עיתונות, מגדר וספקולנט, Call מול חוזה אקדמה (Forward), והמלצה מנומקת</li>
+<li>כמה אופציות יחד, כתרגיל חישובי: העיקרון (הקו הכולל הוא סכום של קווים), קונים בלבד, קונים וכותבים (פרמיה נטו ותקרה לרווח), וחילוץ על מדד</li>
+<li>נתונים חיים: קטע עיתונות, פעילות ״מגדר או ספקולנט?״, Call מול חוזה אקדמה (Forward), ואותו Put בידי מגדרת ובידי ספקולנט</li>
+<li>שאלה 5 מלאה, בתנאי בחינה: מהקטע, דרך טבלה ותרשים של שלוש חלופות, ועד ההמלצה</li>
 <li>״לפני שמגישים״: שש בדיקות</li>
-<li>בהמשך המפגש, לפי הזמן שיישאר: זירות המסחר</li>
+<li>בסוף המפגש, לפי הזמן: זירות המסחר (בורסה, מסלקה ושוק מעבר לדלפק)</li>
 </ul></div>
 <div><h4>חומרי השיעור</h4><div class="links">
-<a class="lk p" href="lectures/lecture-5/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור (טיוטה משוערת)</b><span class="d">{n(22)} שקפים, {n(7)} גיליונות Excel חיים עם פתרון שנבנה קליק אחר קליק</span></span></a>
+<a class="lk p" href="lectures/lecture-5/presentation.html"><span class="e">🖥️</span><span><b>מצגת השיעור (טיוטה משוערת)</b><span class="d">{n(48)} שקפים, {n(18)} גיליונות Excel חיים עם פתרון שנבנה קליק אחר קליק</span></span></a>
 <a class="lk s" href="lectures/lecture-5/summary.pdf"><span class="e">📄</span><span><b>סיכום השיעור (PDF, טיוטה משוערת)</b><span class="d">העיקרים, השאלות עם דרך הפתרון, והמענה לסעיף התיאורטי</span></span></a>
-<a class="lk x" href="materials/exam-review-5.xlsx" download><span class="e">📊</span><span><b>שאלות המפגש, במבנה הבחינה (Excel)</b><span class="d">שתי השאלות של המפגש: השאלה בראש הגיליון, והפתרון מתחתיה</span></span></a>
-<a class="lk r" href="materials/exam-review-5-solutions.xlsx" download><span class="e">✅</span><span><b>פתרונות לשאלות המפגש (Excel)</b><span class="d">נוסחאות חיות, תרשים, והמענה לסעיף התיאורטי</span></span></a>
-<a class="lk x" href="materials/self-practice-5.xlsx" download><span class="e">🎯</span><span><b>קובץ תרגול עצמי (Excel)</b><span class="d">{n(3)} שאלות בסגנון הבחינה, על שני הסגנונות של המפגש</span></span></a>
+<a class="lk x" href="materials/exam-review-5.xlsx" download><span class="e">📊</span><span><b>שאלות המפגש, במבנה הבחינה (Excel)</b><span class="d">שש השאלות של המפגש: השאלה בראש הגיליון, והפתרון מתחתיה</span></span></a>
+<a class="lk r" href="materials/exam-review-5-solutions.xlsx" download><span class="e">✅</span><span><b>פתרונות לשאלות המפגש (Excel)</b><span class="d">נוסחאות חיות, תרשימים, והמענה לסעיפים התיאורטיים</span></span></a>
+<a class="lk x" href="materials/self-practice-5.xlsx" download><span class="e">🎯</span><span><b>קובץ תרגול עצמי (Excel)</b><span class="d">{n(8)} שאלות בסגנון הבחינה: שלוש ״נסו לבד״ מהמפגש, וחמש לתרגול עצמי</span></span></a>
 <a class="lk r" href="materials/self-practice-5-solutions.xlsx" download><span class="e">✅</span><span><b>פתרונות לתרגול העצמי (Excel)</b><span class="d">פותחים רק אחרי שפותרים את כל השאלה</span></span></a>
 </div></div>
 </div>

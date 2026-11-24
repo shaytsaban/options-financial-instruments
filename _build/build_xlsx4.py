@@ -2,6 +2,7 @@
 # Run: python3 build_xlsx4.py
 #   exam-review-4.xlsx / exam-review-4-solutions.xlsx      the five questions solved in class (sub-slides merged per question)
 #   self-practice-4.xlsx / self-practice-4-solutions.xlsx  the four "try alone" questions and the six self-practice questions
+#   exam-review-5, self-practice-5 (and solutions): the same for lesson 5 (content_l5.py, content_l5h.py)
 # Every text, number and formula is read from content_l4.py (its EX and THEORY calls), so the workbooks follow the deck.
 # Only the layout is defined here: which source cell lands where. Formulas are translated to the new addresses.
 # The solutions are recalculated with LibreOffice and checked twice: against a Python evaluation of the source formulas,
@@ -30,7 +31,7 @@ HOWTO = ('select', 'rec', 'pick', 'selser', 'del')
 # ---------------------------------------------------------------- the source: content_l4.py
 def load_content():
     """Run content_l4.py with stand-ins for the deck helpers, and keep what EX and THEORY were called with."""
-    tree = ast.parse('\n'.join(open(os.path.join(H, f), encoding='utf-8').read() for f in ('content_x4.py', 'content_l4.py', 'content_l5.py')))
+    tree = ast.parse('\n'.join(open(os.path.join(H, f), encoding='utf-8').read() for f in ('content_x4.py', 'content_l4.py', 'content_l5.py', 'content_l5h.py')))
     tree.body = [n for n in tree.body if not (isinstance(n, ast.FunctionDef) and n.name in ('QC', 'EX', 'THEORY', 'ANIM', 'MINI'))]
     exs, ths = {}, {}
 
@@ -53,7 +54,7 @@ def load_content():
     ns = NS(QC=QC, EX=EX, THEORY=THEORY, TX=lambda x: x, F=lambda x: x, MODE='deck', SL=[], CUR=[0], NACT=[0], re=re,
             ANIM=lambda *a, **k: {}, MINI=lambda *a, **k: None)
     exec(compile(tree, 'content_l4.py', 'exec'), ns)
-    return exs, ths, ns['_NEWS'], {1: 'יישום בסיסי', 2: 'חישובים וחילוצים', 3: 'הכותב', 4: 'כמה אופציות יחד', 5: 'נתונים חיים'}
+    return exs, ths, {k: ns[k] for k in ('_NEWS', '_NEWS6')}, {1: 'יישום בסיסי', 2: 'חישובים וחילוצים', 3: 'הכותב'}
 
 
 def clean(t):
@@ -90,6 +91,7 @@ def SUB(text): return dict(op='SUB', text=text)
 def T(ex, cols, hdr, r0, r1, chart=None, over=None, title=None, more=None): return dict(op='T', ex=ex, cols=cols, hdr=hdr, r0=r0, r1=r1, chart=chart, over=over or {}, title=title, more=more)
 def KV(ex, targets, head=None, extra=(), chart=None): return dict(op='KV', ex=ex, targets=list(targets), head=head, extra=list(extra), chart=chart)   # chart: (question of the table, series, title), drawn beside the answers
 def TH(tid): return dict(op='TH', tid=tid)
+def WA(head, text): return dict(op='WA', head=head, text=text)   # an answer in words that no sheet step holds
 def W(ex, req, step=-1): return dict(op='W', ex=ex, req=req, step=step)
 def col(c, a, b): return [f'{c}{r}' for r in range(a, b + 1)]
 def side(ex, c):   # the answers a question keeps beside its table, in one column: read from the source, top to bottom
@@ -112,10 +114,23 @@ CLASS = [
               SEC('d2b'), KV('d2b', col('B', 8, 12))]),
     dict(name='שאלה 3', part=3, exs=['d3a', 'd3b'], theory='t3',
          ops=[D('d3a', [2, 3]), SEC('d3a'), T('d3a', 'ABC', 5, 6, 14, chart=['B', 'C'], title=T_BOTH), SEC('d3b'), KV('d3b', col('B', 6, 10), head='A5'), TH('t3')]),
-    dict(name='שאלה 4', part=4, exs=['d4a', 'd4b'],
+]
+T_THREE = 'רווח או הפסד למניה: שלוש חלופות'
+_A6 = 'קריאה ראשונה: החברה תזכה, והמניה תזנק. קריאה מנוגדת: החברה תפסיד, והמניה תצנח, כמו במכרז הקודם. שתיהן צופות תנועה חדה, וחלוקות רק על הכיוון. מגדרת: קרן הפנסיה, שמחזיקה במניה ומקטינה סיכון קיים. ספקולנטים: מי שמהמרים על הכיוון בלי להחזיק במניה.'
+CLASS5 = [
+    dict(name='שאלה 1', title='שאלה 1: כמה אופציות יחד, קונים בלבד', exs=['d4a', 'd4b'],
          ops=[D('d4a', [2, 3, 4, 5, 6]), SEC('d4a'), T('d4a', 'ABCD', 8, 9, 16), SEC('d4b'), KV('d4b', side('d4b', 'E'), chart=('d4a', ['D'], T_TOTAL))]),
-    dict(name='שאלה 5', part=5, exs=['d5a', 'd5b'], theory='t5', news=True, alias={('d5b', 'B5'): ('d5a', 'B10')},
+    dict(name='שאלה 2', title='שאלה 2: קונים וכותבים יחד', exs=['d4c', 'd4d'], theory='t4',
+         ops=[D('d4c', [2, 3, 4, 5]), SEC('d4c'), T('d4c', 'ABCD', 7, 8, 14), SEC('d4d'), KV('d4d', side('d4d', 'E'), chart=('d4c', ['D'], T_TOTAL)), TH('t4')]),
+    dict(name='שאלה 3', title='שאלה 3: חילוץ על מדד, קונים וכותבים', exs=['d4e'], ops=[D('d4e', [2, 3, 4, 5, 6, 7]), KV('d4e', col('B', 10, 17), head='A9')]),
+    dict(name='שאלה 4', title='שאלה 4: נתונים חיים, Call מול Forward', exs=['d5a', 'd5b'], theory='t5', news='_NEWS', alias={('d5b', 'B5'): ('d5a', 'B10')},
          ops=[D('d5a', [2, 3, 4, 5, 6]), D('d5b', [3]), SEC('d5a'), KV('d5a', col('B', 9, 13), extra=[0]), SEC('d5b'), T('d5b', 'ABCD', 7, 8, 10), TH('t5')]),
+    dict(name='שאלה 5', title='שאלה 5: אותו Put, שני אנשים', exs=['d5d'],
+         ops=[D('d5d', [2, 3, 4, 5, 6, 7]), KV('d5d', ['E2'], head='D1'), T('d5d', 'ABCDE', 9, 10, 14), KV('d5d', ['E3', 'E4'])]),
+    dict(name='שאלה 6', title='שאלה 6: שאלה מלאה, מהקטע ועד ההמלצה', exs=['d6a', 'd6b'], theory='t6', news='_NEWS6',
+         pre=('סעיף א', 'שתי הקריאות המנוגדות בקטע. מי בקטע מגדר, ומי ספקולנט?'),
+         ops=[D('d6a', [2, 3, 4, 5, 6, 7]), dict(op='BAND', text='סעיף א'), WA('שתי הקריאות המנוגדות בקטע, ומי מגדר ומי ספקולנט', _A6),
+              SEC('d6a'), KV('d6a', col('B', 10, 14), extra=[0]), SEC('d6b'), T('d6b', 'ABCD', 9, 10, 16, chart=['B', 'C', 'D'], title=T_THREE), KV('d6b', ['E2', 'E3', 'E4', 'E5'], head='D1'), TH('t6')]),
 ]
 SELF = [
     dict(name='נסו לבד 1', exs=['x1'], ops=one_option('x1', 14)),
@@ -129,15 +144,20 @@ SELF = [
     dict(name='תרגול 6', exs=['hp8'], ops=[D('hp8', [2, 3, 4, 5]), KV('hp8', col('B', 8, 14), head='A7')]),
 ]
 SELF5 = [
-    dict(name='נסו לבד', exs=['x4'], ops=[D('x4', [2, 3, 4, 5, 6]), T('x4', 'ABCD', 8, 9, 15, chart=['D'], title=T_TOTAL), KV('x4', side('x4', 'E'), head='D1')]),
+    dict(name='נסו לבד 1', exs=['x4'], ops=[D('x4', [2, 3, 4, 5, 6]), T('x4', 'ABCD', 8, 9, 15, chart=['D'], title=T_TOTAL), KV('x4', side('x4', 'E'), head='D1')]),
+    dict(name='נסו לבד 2', exs=['x4b'], ops=[D('x4b', [2, 3, 4, 5]), T('x4b', 'ABCD', 7, 8, 14, chart=['D'], title=T_TOTAL), KV('x4b', side('x4b', 'E'), head='D1')]),
+    dict(name='נסו לבד 3', exs=['x5'], ops=[D('x5', [2, 3, 4, 5, 6]), KV('x5', side('x5', 'E'), head='D1'), T('x5', 'ABCD', 8, 9, 11), W('x5', 3)]),
     dict(name='תרגול 1', exs=['hp5'], ops=[D('hp5', [2, 3, 4]), T('hp5', 'ABCD', 6, 7, 15, chart=['D'], title=T_TOTAL), KV('hp5', side('hp5', 'E'), head='D1')]),
-    dict(name='תרגול 2', exs=['hp6'], ops=[D('hp6', [2, 3, 4, 5, 6]), KV('hp6', side('hp6', 'E'), head='D1'), T('hp6', 'ABCD', 8, 9, 11), W('hp6', 3)]),
+    dict(name='תרגול 2', exs=['hp9'], ops=[D('hp9', [2, 3, 4, 5, 6]), T('hp9', 'ABCD', 8, 9, 15, chart=['D'], title=T_TOTAL), KV('hp9', side('hp9', 'E'), head='D1')]),
+    dict(name='תרגול 3', exs=['hp10'], ops=[D('hp10', [2, 3, 4, 5, 6, 7]), KV('hp10', col('B', 10, 18), head='A9')]),
+    dict(name='תרגול 4', exs=['hp6'], ops=[D('hp6', [2, 3, 4, 5, 6, 7, 8]), KV('hp6', ['E2', 'E3', 'E4', 'E5', 'E6'], head='D1'), T('hp6', 'ABCDE', 10, 11, 13), W('hp6', 4)]),
+    dict(name='תרגול 5', exs=['hp11'], ops=[D('hp11', [2, 3, 4, 5, 6, 7]), KV('hp11', ['E2', 'E3', 'E4', 'E5'], head='D1'), T('hp11', 'ABCD', 9, 10, 16, chart=['B', 'C', 'D'], title=T_THREE), W('hp11', 4)]),
 ]
 for _s in CLASS: _s['title'] = f"{_s['name']}: {ROUTE[_s['part']]}"
 for _s in SELF + SELF5: _s['title'] = EXS[_s['exs'][0]]['title']
-BOOKS = [dict(n=4, pr='exam-review-4.xlsx', so='exam-review-4-solutions.xlsx', sheets=CLASS[:3], what=('קובץ השאלות של המפגש', 'פתרונות לשאלות המפגש')),
+BOOKS = [dict(n=4, pr='exam-review-4.xlsx', so='exam-review-4-solutions.xlsx', sheets=CLASS, what=('קובץ השאלות של המפגש', 'פתרונות לשאלות המפגש')),
          dict(n=4, pr='self-practice-4.xlsx', so='self-practice-4-solutions.xlsx', sheets=SELF, what=('קובץ התרגול העצמי', 'פתרונות לתרגול העצמי')),
-         dict(n=5, pr='exam-review-5.xlsx', so='exam-review-5-solutions.xlsx', sheets=CLASS[3:], what=('קובץ השאלות של המפגש', 'פתרונות לשאלות המפגש')),
+         dict(n=5, pr='exam-review-5.xlsx', so='exam-review-5-solutions.xlsx', sheets=CLASS5, what=('קובץ השאלות של המפגש', 'פתרונות לשאלות המפגש')),
          dict(n=5, pr='self-practice-5.xlsx', so='self-practice-5-solutions.xlsx', sheets=SELF5, what=('קובץ התרגול העצמי', 'פתרונות לתרגול העצמי'))]
 
 # key answers, typed by hand from the stories: (sheet, source question, source cell) -> value
@@ -148,21 +168,36 @@ KEY = {
     ('שאלה 2', 'd2a', 'B7'): 5, ('שאלה 2', 'd2a', 'B11'): 75, ('שאלה 2', 'd2a', 'B12'): 63, ('שאלה 2', 'd2a', 'B13'): -3,
     ('שאלה 2', 'd2b', 'B8'): 2470, ('שאלה 2', 'd2b', 'B10'): 150, ('שאלה 2', 'd2b', 'B11'): 2320, ('שאלה 2', 'd2b', 'B12'): -9000,
     ('שאלה 3', 'd3b', 'B6'): 90, ('שאלה 3', 'd3b', 'B7'): 5, ('שאלה 3', 'd3b', 'B9'): -90, ('שאלה 3', 'd3a', 'B7'): 10, ('שאלה 3', 'd3a', 'C7'): -10, ('שאלה 3', 'd3a', 'C12'): 5,
-    ('שאלה 4', 'd4a', 'D10'): 31, ('שאלה 4', 'd4a', 'D13'): -9, ('שאלה 4', 'd4a', 'D16'): 16, ('שאלה 4', 'd4a', 'D9'): 51, ('שאלה 4', 'd4b', 'E2'): 85.5, ('שאלה 4', 'd4b', 'E3'): 114, ('שאלה 4', 'd4b', 'E4'): -9,
-    ('שאלה 5', 'd5a', 'B9'): 50, ('שאלה 5', 'd5a', 'B10'): 25000, ('שאלה 5', 'd5a', 'B11'): 3.65, ('שאלה 5', 'd5a', 'B12'): 1825000, ('שאלה 5', 'd5a', 'B13'): 0.05 / 3.60,
-    ('שאלה 5', 'd5b', 'B8'): 1700000, ('שאלה 5', 'd5b', 'C8'): 1810000, ('שאלה 5', 'd5b', 'D8'): 1725000, ('שאלה 5', 'd5b', 'B9'): 1800000, ('שאלה 5', 'd5b', 'C9'): 1810000, ('שאלה 5', 'd5b', 'D9'): 1825000,
-    ('שאלה 5', 'd5b', 'B10'): 1900000, ('שאלה 5', 'd5b', 'C10'): 1810000, ('שאלה 5', 'd5b', 'D10'): 1825000,
+    ('שאלה 1', 'd4a', 'D10'): 31, ('שאלה 1', 'd4a', 'D13'): -9, ('שאלה 1', 'd4a', 'D16'): 16, ('שאלה 1', 'd4a', 'D9'): 51, ('שאלה 1', 'd4b', 'E2'): 85.5, ('שאלה 1', 'd4b', 'E3'): 114, ('שאלה 1', 'd4b', 'E4'): -9,
+    ('שאלה 2', 'd4c', 'D8'): -2.5, ('שאלה 2', 'd4c', 'D9'): -2.5, ('שאלה 2', 'd4c', 'D11'): 2.5, ('שאלה 2', 'd4c', 'D14'): 7.5, ('שאלה 2', 'd4c', 'C14'): -9, ('שאלה 2', 'd4c', 'B14'): 16.5,
+    ('שאלה 2', 'd4d', 'E2'): 2.5, ('שאלה 2', 'd4d', 'E3'): -2.5, ('שאלה 2', 'd4d', 'E4'): 7.5, ('שאלה 2', 'd4d', 'E5'): 62.5,
+    ('שאלה 3', 'd4e', 'B10'): 28, ('שאלה 3', 'd4e', 'B11'): 7000, ('שאלה 3', 'd4e', 'B12'): 2628, ('שאלה 3', 'd4e', 'B13'): 72, ('שאלה 3', 'd4e', 'B14'): 18000, ('שאלה 3', 'd4e', 'B16'): 36, ('שאלה 3', 'd4e', 'B17'): 2664,
+    ('שאלה 4', 'd5a', 'B9'): 50, ('שאלה 4', 'd5a', 'B10'): 25000, ('שאלה 4', 'd5a', 'B11'): 3.65, ('שאלה 4', 'd5a', 'B12'): 1825000, ('שאלה 4', 'd5a', 'B13'): 0.05 / 3.60,
+    ('שאלה 4', 'd5b', 'B8'): 1700000, ('שאלה 4', 'd5b', 'C8'): 1810000, ('שאלה 4', 'd5b', 'D8'): 1725000, ('שאלה 4', 'd5b', 'B9'): 1800000, ('שאלה 4', 'd5b', 'C9'): 1810000, ('שאלה 4', 'd5b', 'D9'): 1825000,
+    ('שאלה 4', 'd5b', 'B10'): 1900000, ('שאלה 4', 'd5b', 'C10'): 1810000, ('שאלה 4', 'd5b', 'D10'): 1825000,
+    ('שאלה 5', 'd5d', 'E2'): 8000, ('שאלה 5', 'd5d', 'E3'): 712000, ('שאלה 5', 'd5d', 'E4'): 0.04 / 3.60, ('שאלה 5', 'd5d', 'C10'): 32000, ('שאלה 5', 'd5d', 'D10'): 712000, ('שאלה 5', 'd5d', 'D14'): 752000,
+    ('שאלה 5', 'd5d', 'E14'): -8000, ('שאלה 5', 'd5d', 'B10'): 680000, ('שאלה 5', 'd5d', 'C11'): 12000, ('שאלה 5', 'd5d', 'D11'): 712000,
+    ('שאלה 6', 'd6a', 'B10'): 2000, ('שאלה 6', 'd6a', 'B11'): 10000, ('שאלה 6', 'd6a', 'B12'): 95, ('שאלה 6', 'd6a', 'B13'): 190000, ('שאלה 6', 'd6a', 'B14'): 0.05,
+    ('שאלה 6', 'd6b', 'B10'): -30, ('שאלה 6', 'd6b', 'C10'): -5, ('שאלה 6', 'd6b', 'D10'): -12, ('שאלה 6', 'd6b', 'D13'): -2, ('שאלה 6', 'd6b', 'C16'): 25, ('שאלה 6', 'd6b', 'D16'): 28,
+    ('שאלה 6', 'd6b', 'E2'): -5, ('שאלה 6', 'd6b', 'E3'): -12, ('שאלה 6', 'd6b', 'E4'): -5, ('שאלה 6', 'd6b', 'E5'): -2,
     ('נסו לבד 1', 'x1', 'C6'): 9, ('נסו לבד 1', 'x1', 'C7'): -6, ('נסו לבד 1', 'x1', 'B10'): 131, ('נסו לבד 1', 'x1', 'B11'): -6,
     ('נסו לבד 2', 'x2', 'B8'): 3.65, ('נסו לבד 2', 'x2', 'B10'): 5600, ('נסו לבד 2', 'x2', 'B12'): 0.25, ('נסו לבד 2', 'x2', 'B13'): 3.90, ('נסו לבד 2', 'x2', 'B14'): -4000,
     ('נסו לבד 3', 'x3', 'C6'): -7, ('נסו לבד 3', 'x3', 'C7'): 3, ('נסו לבד 3', 'x3', 'B10'): 53, ('נסו לבד 3', 'x3', 'B11'): 3,
-    ('נסו לבד', 'x4', 'E2'): 87.5, ('נסו לבד', 'x4', 'E3'): 113.75, ('נסו לבד', 'x4', 'E4'): -7.5, ('נסו לבד', 'x4', 'B9'): 21.5,
+    ('נסו לבד 1', 'x4', 'E2'): 87.5, ('נסו לבד 1', 'x4', 'E3'): 113.75, ('נסו לבד 1', 'x4', 'E4'): -7.5, ('נסו לבד 1', 'x4', 'B9'): 21.5,
+    ('נסו לבד 2', 'x4b', 'E2'): 3.5, ('נסו לבד 2', 'x4b', 'E3'): -3.5, ('נסו לבד 2', 'x4b', 'E4'): 6.5, ('נסו לבד 2', 'x4b', 'E5'): 76.5, ('נסו לבד 2', 'x4b', 'D8'): 6.5, ('נסו לבד 2', 'x4b', 'D12'): -3.5,
+    ('נסו לבד 3', 'x5', 'E2'): 30, ('נסו לבד 3', 'x5', 'E3'): 18000, ('נסו לבד 3', 'x5', 'E4'): 3.94, ('נסו לבד 3', 'x5', 'D9'): 1182000, ('נסו לבד 3', 'x5', 'C9'): 1197000, ('נסו לבד 3', 'x5', 'D11'): 1242000,
+    ('נסו לבד 3', 'x5', 'B9'): 1140000, ('נסו לבד 3', 'x5', 'B11'): 1260000,
     ('תרגול 1', 'hp1', 'C6'): 6, ('תרגול 1', 'hp1', 'C7'): -2, ('תרגול 1', 'hp1', 'B10'): 44, ('תרגול 1', 'hp1', 'B11'): -2,
     ('תרגול 2', 'hp2', 'B7'): 5, ('תרגול 2', 'hp2', 'B9'): 56, ('תרגול 2', 'hp2', 'B10'): 66, ('תרגול 2', 'hp2', 'B11'): 66,
     ('תרגול 3', 'hp3', 'B8'): 2425, ('תרגול 3', 'hp3', 'B10'): 7000, ('תרגול 3', 'hp3', 'B12'): 150, ('תרגול 3', 'hp3', 'B13'): 2575, ('תרגול 3', 'hp3', 'B14'): -5000,
     ('תרגול 4', 'hp4', 'F2'): 84, ('תרגול 4', 'hp4', 'F3'): 4, ('תרגול 4', 'hp4', 'B13'): 16, ('תרגול 4', 'hp4', 'C13'): -16,
     ('תרגול 1', 'hp5', 'E2'): 91, ('תרגול 1', 'hp5', 'E3'): 109, ('תרגול 1', 'hp5', 'E4'): -9, ('תרגול 1', 'hp5', 'D7'): 11,
-    ('תרגול 2', 'hp6', 'E2'): 30, ('תרגול 2', 'hp6', 'E3'): 18000, ('תרגול 2', 'hp6', 'E4'): 3.94, ('תרגול 2', 'hp6', 'D9'): 1182000, ('תרגול 2', 'hp6', 'C9'): 1197000, ('תרגול 2', 'hp6', 'D11'): 1242000,
-    ('תרגול 2', 'hp6', 'B9'): 1140000, ('תרגול 2', 'hp6', 'B11'): 1260000,
+    ('תרגול 2', 'hp9', 'E2'): 1, ('תרגול 2', 'hp9', 'E3'): 41, ('תרגול 2', 'hp9', 'E4'): 4, ('תרגול 2', 'hp9', 'E5'): 49, ('תרגול 2', 'hp9', 'D9'): -1, ('תרגול 2', 'hp9', 'D11'): -1, ('תרגול 2', 'hp9', 'D12'): 4, ('תרגול 2', 'hp9', 'D15'): -11,
+    ('תרגול 3', 'hp10', 'B10'): 23, ('תרגול 3', 'hp10', 'B11'): 4600, ('תרגול 3', 'hp10', 'B12'): 2477, ('תרגול 3', 'hp10', 'B13'): 77, ('תרגול 3', 'hp10', 'B14'): 15400, ('תרגול 3', 'hp10', 'B16'): 40, ('תרגול 3', 'hp10', 'B17'): 2437, ('תרגול 3', 'hp10', 'B18'): -4600,
+    ('תרגול 4', 'hp6', 'E2'): 40, ('תרגול 4', 'hp6', 'E3'): 28000, ('תרגול 4', 'hp6', 'E4'): 12000, ('תרגול 4', 'hp6', 'E5'): 4.07, ('תרגול 4', 'hp6', 'E6'): 4.13, ('תרגול 4', 'hp6', 'D11'): 1588000, ('תרגול 4', 'hp6', 'E11'): 1572000,
+    ('תרגול 4', 'hp6', 'D13'): 1628000, ('תרגול 4', 'hp6', 'E13'): 1652000, ('תרגול 4', 'hp6', 'C11'): 1608000, ('תרגול 4', 'hp6', 'B13'): 1680000,
+    ('תרגול 5', 'hp11', 'E2'): 1250, ('תרגול 5', 'hp11', 'E3'): 500, ('תרגול 5', 'hp11', 'E4'): 47.5, ('תרגול 5', 'hp11', 'E5'): 44, ('תרגול 5', 'hp11', 'C10'): -2.5, ('תרגול 5', 'hp11', 'D10'): -6, ('תרגול 5', 'hp11', 'D13'): -1,
+    ('תרגול 5', 'hp11', 'C16'): 12.5, ('תרגול 5', 'hp11', 'D16'): 14,
 }
 
 
@@ -256,7 +291,7 @@ class Lay:
     def question(self):
         sp = self.sp; P = lambda t, bold=False: (self.wide(clean(t), QBL, fnt(12, bold, NAVY if bold else None), per=120), setattr(self, 'r', self.r + 1))
         self.band('השאלה')
-        if sp.get('news'): P('קטע עיתונות (פיקטיבי)', True); P(NEWS)
+        if sp.get('news'): P('קטע עיתונות (פיקטיבי)', True); P(NEWS[sp['news']])
         seen = []
         for i, ex in enumerate(sp['exs']):
             q = EXS[ex]['q']; new = [x for x in q['story'] if x not in seen]; seen += new
@@ -264,6 +299,7 @@ class Lay:
                 for x in new: P(x)
                 self.opts(q)
                 P('נדרש:', True)
+                if sp.get('pre'): P(sp['pre'][0], True); P(f'(1) {sp["pre"][1]}')
             if not self.single: P(q['tag'].split(' · ')[-1], True)
             if i:
                 for x in new: P(x)
@@ -411,6 +447,8 @@ class Lay:
             elif k == 'SUB': self.sub(o['text'])
             elif k == 'T': self.table(o)
             elif k == 'KV': self.kv(o)
+            elif k == 'BAND': self.band(o['text'])
+            elif k == 'WA': self.written(o['head'], [o['text']])
             elif k == 'TH':
                 self.band('הסעיף התיאורטי'); th = THS[o['tid']]
                 self.written(th['q'], [f'{a}: {b}' for a, b in th['lines']], rows=len(th['lines']), minh=30)

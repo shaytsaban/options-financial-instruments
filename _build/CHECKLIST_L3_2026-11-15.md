@@ -99,3 +99,11 @@ Status: [ ] open, [x] done and verified on screen, [~] done, not yet verified.
 - [x] Summary PDF of lesson 4 rebuilt for the cut deck
 - [x] The rest (several options together, live data, "before you submit") moved to lesson 5: content_l5.py, marked "טיוטה משוערת", with its own workbooks and summary
 - [~] Syllabus: meeting 5 = rest of the review + trading venues; meeting 6 = futures in practice + players. My re-pace, for him to confirm
+
+## 2026-11-24: lesson 5 widened ("תרחיב את כמות השקפים, התרגולים ועומק ההסברים בשיעור 5. לא בטוח שהחלק של זירות המסחר רלוונטי. תשאיר לסוף.")
+- [x] More slides: 22 to 48 (40 before the end slide).
+- [x] More exercises: 7 to 18 live sheets. New in class: buy and write together (table, chart, theory), try alone with a bought and a written Put, solving for the index level on a two-option position, "same Put, two people" (hedger and speculator in numbers), one full question 5 (press piece, choice of Put, table and chart of three alternatives, recommendation).
+- [x] Deeper explanations: principle slide with an animated chart (the total line is the sum of the lines), definitions with a demo for position, component, written component, net premium and a profit cap, a hedger or speculator sorting activity.
+- [x] Trading venues at the end: part 4, short, marked as outside the exam review; the swap stays parked for the swaps lesson.
+- [x] Self practice after the last slide: five questions; workbooks exam-review-5 (6 sheets) and self-practice-5 (8 sheets) with solutions.
+- [x] Still marked "טיוטה משוערת".
